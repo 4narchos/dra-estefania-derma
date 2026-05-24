@@ -31,12 +31,13 @@ const physicianSchema = {
   "description": description,
   "hasMap": "https://goo.gl/maps/...",
   "priceRange": "$$",
-  "openingHours": ["Mo-Fr 09:00-18:00", "Sa 09:00-13:00"],
   "paymentAccepted": ["Efectivo", "Tarjeta de crédito", "Tarjeta de débito"],
-  "areaServed": {
-    "@type": "City",
-    "name": "Mérida"
-  },
+  "areaServed": [
+    { "@type": "City", "name": "Mérida" },
+    { "@type": "City", "name": "Izamal" },
+    { "@type": "City", "name": "Valladolid" },
+    { "@type": "City", "name": "Vaca" }
+  ],
   "knowsLanguage": ["es", "en"],
   "sameAs": [
     "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan",
@@ -99,7 +100,7 @@ const localBusinessSchema = {
     "longitude": "-89.5926"
   },
   "hasMap": "https://goo.gl/maps/...",
-  "openingHours": ["Mo-Fr 09:00-18:00", "Sa 09:00-13:00"],
+  "openingHours": ["Tu 16:00-19:30", "We 10:00-15:00", "Fr 16:00-19:30"],
   "priceRange": "$$",
   "paymentAccepted": ["Efectivo", "Tarjeta de crédito", "Tarjeta de débito"],
   "areaServed": {
@@ -124,10 +125,10 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      "name": "¿Dónde queda el consultorio de la Dra. García Borges?",
+      "name": "¿En dónde atiende la Dra. García Borges?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "El consultorio Evoke Aging Journey & Dermatology está ubicado en C. 20 No. 251, Calle 10 15-local 9, Morelos Oriente, Mérida, Yucatán, CP 97130."
+        "text": "La Dra. García Borges atiende en 4 ubicaciones en Yucatán: (1) Evoke Aging Journey & Dermatology en Mérida — martes y viernes 4:00-7:30 p.m., miércoles 10:00 a.m.-3:00 p.m.; (2) Izamal — sábados (horarios variables); (3) Valladolid — sábados y domingos 10:00-16:00; (4) Vaca — sábados 9:30-16:00. Agenda tu cita por WhatsApp al 999 221 3021."
       }
     },
     {

@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const title = "Dra. Mariana Estefanía García Borges | Dermatóloga en Mérida";
-const description = "Dermatóloga especialista en Mérida, Yucatán. Tratamientos de acné, melasma, rejuvenecimiento facial, cuidado de piel para el clima de Yucatán. Agenda tu consulta.";
+const title = "Dra. Mariana Estefanía García Borges | Dermatóloga en Yucatán";
+const description = "Dermatóloga especialista en Mérida, Izamal, Valladolid y Vaca, Yucatán. Tratamientos de acné, melasma, rejuvenecimiento facial, cuidado de piel para el clima de Yucatán. Agenda tu consulta.";
 
 const whatsappNumber = "529992213021";
 const whatsappMessage = encodeURIComponent("Hola, vi su página web y quisiera agendar una consulta dermatológica.");
@@ -86,7 +86,7 @@ const education = [
         Dra. Mariana Estefanía<br />
         <span class="hero-accent">García Borges</span>
       </h1>
-      <p class="hero-subtitle">Dermatóloga en Mérida, Yucatán</p>
+      <p class="hero-subtitle">Dermatóloga en Mérida, Izamal, Valladolid y Vaca</p>
       <p class="hero-description">
         Especialista en dermatología clínica, estética y quirúrgica.
         Formación de vanguardia del Instituto Dermatológico de Jalisco (2026).
@@ -122,10 +122,29 @@ const education = [
         ))}
       </div>
       <div class="services-note">
-        <p>
-          <strong>Consultorio:</strong> Evoke Aging Journey & Dermatology<br />
-          C. 20 No. 251, Calle 10 15-local 9, Morelos Oriente, Mérida 97130
-        </p>
+        <h3 class="services-note-title">Consultorios de atención</h3>
+        <div class="locations-grid">
+          <div class="location-item">
+            <strong class="location-name">Evoke Aging Journey & Dermatology</strong>
+            <span class="location-city">Mérida</span>
+            <span class="location-hours">Martes y viernes 4:00–7:30 p.m.<br />Miércoles 10:00 a.m.–3:00 p.m.</span>
+          </div>
+          <div class="location-item">
+            <strong class="location-name">Consultorio Izamal</strong>
+            <span class="location-city">Izamal</span>
+            <span class="location-hours">Sábados<br />(horarios variables)</span>
+          </div>
+          <div class="location-item">
+            <strong class="location-name">Consultorio Valladolid</strong>
+            <span class="location-city">Valladolid</span>
+            <span class="location-hours">Sábados y domingos<br />10:00 a.m.–4:00 p.m.</span>
+          </div>
+          <div class="location-item">
+            <strong class="location-name">Consultorio Vaca</strong>
+            <span class="location-city">Vaca</span>
+            <span class="location-hours">Sábados<br />9:30 a.m.–4:00 p.m.</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -222,8 +241,13 @@ const education = [
           <div class="contact-item">
             <span class="contact-icon">📍</span>
             <div>
-              <strong>Dirección</strong>
-              <p>C. 20 No. 251, Calle 10 15-local 9<br />Morelos Oriente, Mérida 97130</p>
+              <strong>Ubicaciones</strong>
+              <div class="contact-locations">
+                <p><strong>Mérida</strong> — Evoke, C. 20 No. 251. Martes/viernes 4–7:30 p.m., miércoles 10 a.m.–3 p.m.</p>
+                <p><strong>Izamal</strong> — Sábados (horarios variables)</p>
+                <p><strong>Valladolid</strong> — Sábados y domingos 10 a.m.–4 p.m.</p>
+                <p><strong>Vaca</strong> — Sábados 9:30 a.m.–4 p.m.</p>
+              </div>
             </div>
           </div>
           <div class="contact-item">
@@ -483,10 +507,63 @@ const education = [
     }
 
     .services-note {
-      text-align: center;
-      color: var(--color-text-muted);
       padding-top: 2rem;
       border-top: 1px solid #e7e5e4;
+    }
+
+    .services-note-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--color-text);
+    }
+
+    .locations-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      max-width: 60rem;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 640px) {
+      .locations-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .locations-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .location-item {
+      background: var(--color-bg);
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      text-align: center;
+    }
+
+    .location-name {
+      font-size: 0.9375rem;
+      color: var(--color-text);
+    }
+
+    .location-city {
+      font-size: 0.875rem;
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    .location-hours {
+      font-size: 0.8125rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
     }
 
     /* Education Timeline */
@@ -646,6 +723,17 @@ const education = [
       margin-top: 1rem;
       color: var(--color-text-muted);
       font-size: 0.9375rem;
+    }
+
+    .contact-locations p {
+      color: var(--color-text-muted);
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+
+    .contact-locations p:last-child {
+      margin-bottom: 0;
     }
 
     /* Footer */
