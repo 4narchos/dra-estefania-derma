@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import { services } from "../data/services.js";
+import { getBaseUrl } from "../utils/baseUrl.js";
 
 const title = "Servicios Dermatológicos | Dra. Estefanía";
 const description = "Tratamientos dermatológicos personalizados en Mérida, Yucatán. Acné, melasma, rejuvenecimiento facial, Botox, peeling químico, Hydrafacial, depilación láser y dermatoscopía.";
@@ -44,7 +45,7 @@ const description = "Tratamientos dermatológicos personalizados en Mérida, Yuc
           Agenda una consulta de evaluación. Te ayudo a identificar la mejor opción para tu piel.
         </p>
         <a
-          href={`${import.meta.env.BASE_URL}contacto`}
+          href={`${getBaseUrl()}contacto`}
           class="btn btn-primary btn-large"
         >
           Agendar consulta

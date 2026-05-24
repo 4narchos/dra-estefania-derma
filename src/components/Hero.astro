@@ -1,6 +1,7 @@
 ---
 import { whatsappBaseUrl } from "../data/links.js";
-const base = import.meta.env.BASE_URL || "/";
+import { getBaseUrl } from "../utils/baseUrl.js";
+const base = getBaseUrl();
 
 const whatsappUrl = `${whatsappBaseUrl}&utm_source=web&utm_medium=hero_button&utm_campaign=inicio`;
 ---

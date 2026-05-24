@@ -3,6 +3,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import WhatsAppSticky from "../components/WhatsAppSticky.astro";
 import { faqs } from "../data/faq.js";
+import { getBaseUrl } from "../utils/baseUrl.js";
 
 interface Props {
   title: string;
@@ -24,9 +25,10 @@ const {
   pageSchema = "none",
 } = Astro.props;
 
-const baseUrl = import.meta.env.BASE_URL || "/";
+const baseUrl = getBaseUrl();
 const siteUrl = "https://4narchos.github.io/dra-estefania-derma";
-const canonicalUrl = `${siteUrl}${Astro.url.pathname.replace(baseUrl, "/")}`;
+const canonicalPath = Astro.url.pathname.replace(new RegExp(`^${baseUrl.replace(/\/$/, '')}/?`), '/') || '/';
+const canonicalUrl = `${siteUrl}${canonicalPath}`;
 const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/og-default.jpg`;
 
 // Schemas for each page type

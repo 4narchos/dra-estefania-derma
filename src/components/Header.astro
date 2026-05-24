@@ -1,6 +1,7 @@
 ---
 import { whatsappBaseUrl } from "../data/links.js";
-const base = import.meta.env.BASE_URL || "/";
+import { getBaseUrl } from "../utils/baseUrl.js";
+const base = getBaseUrl();
 
 const navLinks = [
   { label: "Inicio", href: `${base}` },
