@@ -45,10 +45,13 @@ Primera visita dermatológica, Botox / toxina botulínica, peeling, microdermoab
 - [ ] Mantener NAP (Nombre, Dirección, Teléfono) consistente entre sitio, Doctoralia y Google
 - [ ] Solicitar reseñas en Google desde consultorio
 
-### 2. Schema.org Physician + MedicalBusiness + FAQPage markup
+### 2. Schema.org Physician + MedicalBusiness + LocalBusiness + FAQPage markup
 - [x] Implementado en `src/layouts/Layout.astro` con JSON-LD
 - [x] Schema `Physician` con datos completos (dirección, teléfono, formación, especialidad)
-- [x] Schema `FAQPage` con preguntas estructuradas para AI search
+- [x] Schema `Physician` con `@id` y `sameAs` (Doctoralia, Instagram)
+- [x] Schema `Physician` con `medicalCondition` y `availableService` (botox, hydrafacial, etc.)
+- [x] Schema `LocalBusiness` + `MedicalBusiness` separado con `@id`, geo coordenadas, `employee` cross-reference
+- [x] Schema `FAQPage` expandido de 3 a 10 preguntas (acné, melasma, rosácea, queratosis pilar, alopecia, botox, hydrafacial, inglés)
 - [ ] Validar con [Google Rich Results Test](https://search.google.com/test/rich-results)
 
 ### 3. "Tu primer filtro no es Google, es ChatGPT" — optimizar para LLMs

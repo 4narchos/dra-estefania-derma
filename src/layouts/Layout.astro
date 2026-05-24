@@ -8,9 +8,13 @@ const { title, description = "Dra. Mariana Estefanía García Borges - Dermatól
 
 const siteUrl = "https://4narchos.github.io/dra-estefania-derma";
 
+const physicianId = `${siteUrl}/#physician`;
+const businessId = `${siteUrl}/#business`;
+
 const physicianSchema = {
   "@context": "https://schema.org",
   "@type": "Physician",
+  "@id": physicianId,
   "name": "Dra. Mariana Estefanía García Borges",
   "medicalSpecialty": "Dermatology",
   "address": {
@@ -34,6 +38,10 @@ const physicianSchema = {
     "name": "Mérida"
   },
   "knowsLanguage": ["es", "en"],
+  "sameAs": [
+    "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan",
+    "https://instagram.com/dra.estefaniaderma"
+  ],
   "alumniOf": [
     {
       "@type": "EducationalOrganization",
@@ -48,23 +56,63 @@ const physicianSchema = {
       "name": "Instituto Dermatológico de Jalisco / UDG"
     }
   ],
-  "worksFor": {
-    "@type": "MedicalBusiness",
-    "name": "Evoke Aging Journey & Dermatology",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "C. 20 No. 251, Calle 10 15-local 9, Morelos Oriente",
-      "addressLocality": "Mérida",
-      "addressRegion": "Yucatán",
-      "postalCode": "97130",
-      "addressCountry": "MX"
-    }
-  }
+  "worksFor": { "@id": businessId },
+  "medicalCondition": [
+    { "@type": "MedicalCondition", "name": "Acné" },
+    { "@type": "MedicalCondition", "name": "Melasma" },
+    { "@type": "MedicalCondition", "name": "Rosácea" },
+    { "@type": "MedicalCondition", "name": "Queratosis pilar" },
+    { "@type": "MedicalCondition", "name": "Alopecia" }
+  ],
+  "availableService": [
+    { "@type": "MedicalProcedure", "name": "Tratamiento de acné" },
+    { "@type": "MedicalProcedure", "name": "Tratamiento de melasma" },
+    { "@type": "MedicalProcedure", "name": "Aplicación de Botox / toxina botulínica" },
+    { "@type": "MedicalProcedure", "name": "Peeling químico" },
+    { "@type": "MedicalProcedure", "name": "Hydrafacial" },
+    { "@type": "MedicalProcedure", "name": "Depilación láser" },
+    { "@type": "MedicalProcedure", "name": "Dermatoscopía" },
+    { "@type": "MedicalProcedure", "name": "Biopsia cutánea" }
+  ]
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": ["MedicalBusiness", "LocalBusiness"],
+  "@id": businessId,
+  "name": "Evoke Aging Journey & Dermatology",
+  "description": "Consultorio de dermatología en Mérida, Yucatán. Atención personalizada por la Dra. Mariana Estefanía García Borges.",
+  "url": siteUrl,
+  "telephone": "+52-999-221-3021",
+  "image": `${siteUrl}/images/dra-estefania.jpg`,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "C. 20 No. 251, Calle 10 15-local 9, Morelos Oriente",
+    "addressLocality": "Mérida",
+    "addressRegion": "Yucatán",
+    "postalCode": "97130",
+    "addressCountry": "MX"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "20.9674",
+    "longitude": "-89.5926"
+  },
+  "hasMap": "https://goo.gl/maps/...",
+  "openingHours": ["Mo-Fr 09:00-18:00", "Sa 09:00-13:00"],
+  "priceRange": "$$",
+  "paymentAccepted": ["Efectivo", "Tarjeta de crédito", "Tarjeta de débito"],
+  "areaServed": {
+    "@type": "City",
+    "name": "Mérida"
+  },
+  "employee": { "@id": physicianId }
 };
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": `${siteUrl}/#faq`,
   "mainEntity": [
     {
       "@type": "Question",
@@ -88,6 +136,62 @@ const faqSchema = {
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "La primera consulta dermatológica con la Dra. García Borges tiene un costo accesible. Se recomienda contactar directamente por WhatsApp al 999 221 3021 para confirmar el precio actual y disponibilidad."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué es la queratosis pilar y cómo se trata en Mérida?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La queratosis pilar es una condición común donde la piel produce demasiada queratina, formando pequeños bultos ásperos. En el clima de Yucatán, la humedad puede agravarla. La Dra. García Borges ofrece tratamientos personalizados en Mérida para suavizar la textura de la piel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Es seguro ponerse Botox en Mérida?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, la aplicación de Botox (toxina botulínica) es segura cuando la realiza un dermatólogo especialista. La Dra. García Borges, recién graduada del Instituto Dermatológico de Jalisco (2026), aplica los protocolos más actualizados en su consultorio de Mérida."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo tratar el melasma en clima tropical como el de Yucatán?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El melasma se agrava con el sol intenso y la humedad del clima de Yucatán. El tratamiento incluye protector solar de amplio espectro, despigmentantes tópicos y procedimientos como peeling químico. La Dra. García Borges en Mérida diseña protocolos adaptados al clima local."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué dermatólogo en Mérida trata la alopecia o caída de cabello?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La Dra. Mariana Estefanía García Borges, dermatóloga en Mérida, ofrece evaluación y tratamiento para la alopecia y pérdida de cabello. El diagnóstico incluye dermatoscopía capilar para identificar la causa y definir el tratamiento adecuado."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿La rosácea empeora con el calor y la humedad de Mérida?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, el calor extremo, la humedad alta y los cambios bruscos de temperatura (aire acondicionado a calor exterior) pueden desencadenar brotes de rosácea. En Mérida, es clave un plan de cuidado adaptado al clima local, que la Dra. García Borges personaliza para cada paciente."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Dónde puedo hacerme un Hydrafacial en Mérida?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El Hydrafacial está disponible en el consultorio Evoke Aging Journey & Dermatology en Mérida, a cargo de la Dra. Mariana Estefanía García Borges. Es un tratamiento de limpieza facial profunda que hidrata y rejuvenece la piel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué dermatólogo en Mérida habla inglés?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La Dra. Mariana Estefanía García Borges atiende en español e inglés en su consultorio de dermatología en Mérida, Yucatán. Es ideal para pacientes locales y turistas de la Riviera Maya."
       }
     }
   ]
@@ -120,6 +224,7 @@ const faqSchema = {
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(physicianSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
     <title>{title}</title>
