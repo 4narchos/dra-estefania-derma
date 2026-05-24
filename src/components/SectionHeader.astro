@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  align?: "left" | "center";
+}
+
+const { title, subtitle, align = "center" } = Astro.props;
+---
+
+<div class:list={["section-header", align === "center" && "section-header--center"]}>
+  <h2 class="section-header-title">{title}</h2>
+  {subtitle && <p class="section-header-subtitle">{subtitle}</p>}
+</div>
+
+<style>
+  .section-header {
+    margin-bottom: var(--space-10);
+  }
+
+  .section-header--center {
+    text-align: center;
+  }
+
+  .section-header-title {
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+    color: var(--color-text-primary);
+    line-height: var(--leading-tight);
+    margin-bottom: var(--space-3);
+  }
+
+  @media (min-width: 768px) {
+    .section-header-title {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  .section-header-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    max-width: 36rem;
+    line-height: var(--leading-relaxed);
+  }
+
+  .section-header--center .section-header-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>

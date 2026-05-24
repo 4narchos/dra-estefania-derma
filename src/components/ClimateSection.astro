@@ -1,0 +1,84 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+
+const climateTopics = [
+  {
+    icon: "☀️",
+    title: "Melasma y manchas solares",
+    description: "El sol intenso de Yucatán puede agravar las manchas en la piel. Te ayudo a prevenir y tratar el melasma con protocolos adaptados a nuestra radiación UV.",
+  },
+  {
+    icon: "💧",
+    title: "Acné por humedad",
+    description: "La alta humedad de Mérida puede obstruir los poros y provocar brotes de acné. Descubre rutinas de cuidado específicas para el clima tropical.",
+  },
+  {
+    icon: "🏖️",
+    title: "Piel y playa",
+    description: "Protección solar adecuada para el clima peninsular. Desde la ciudad hasta la costa, tu piel necesita cuidados específicos.",
+  },
+];
+---
+
+<section class="climate" id="clima-yucatan">
+  <div class="container">
+    <SectionHeader
+      title="Dermatología para el clima de Yucatán"
+      subtitle="El calor, la humedad y el sol intenso de la península afectan tu piel de formas únicas. Aquí te explico cómo cuidarla."
+    />
+    <div class="climate-grid">
+      {climateTopics.map((topic) => (
+        <article class="climate-card">
+          <h3>{topic.icon} {topic.title}</h3>
+          <p>{topic.description}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .climate {
+    padding: var(--space-20) 0;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+  }
+
+  .climate-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .climate-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .climate-card {
+    background: var(--color-background);
+    padding: var(--space-8);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+  }
+
+  .climate-card h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-3);
+  }
+
+  .climate-card p {
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+  }
+</style>

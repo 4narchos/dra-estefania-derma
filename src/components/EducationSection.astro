@@ -1,0 +1,86 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+import { education } from "../data/education.js";
+---
+
+<section class="education" id="formacion">
+  <div class="container">
+    <SectionHeader
+      title="Formación académica"
+      subtitle="Protocolos actualizados y conocimiento de vanguardia para tu piel"
+    />
+    <div class="education-timeline">
+      {education.map((item) => (
+        <div class="timeline-item">
+          <div class="timeline-year">{item.year}</div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">{item.title}</h3>
+            <p class="timeline-institution">{item.institution}</p>
+            <p class="timeline-detail">{item.detail}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .education {
+    padding: var(--space-20) 0;
+    background: var(--color-background);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+  }
+
+  .education-timeline {
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-6);
+    padding: var(--space-6) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  @media (max-width: 640px) {
+    .timeline-item {
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+    }
+  }
+
+  .timeline-year {
+    font-weight: var(--weight-bold);
+    color: var(--color-primary);
+    font-size: var(--text-sm);
+    min-width: 8rem;
+  }
+
+  .timeline-title {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-1);
+  }
+
+  .timeline-institution {
+    color: var(--color-accent);
+    font-weight: var(--weight-medium);
+    margin-bottom: var(--space-1);
+    font-size: var(--text-sm);
+  }
+
+  .timeline-detail {
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+  }
+</style>

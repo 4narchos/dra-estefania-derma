@@ -1,0 +1,225 @@
+---
+import { whatsappBaseUrl } from "../data/links.js";
+const base = import.meta.env.BASE_URL || "/";
+
+const navLinks = [
+  { label: "Inicio", href: `${base}` },
+  { label: "Acerca", href: `${base}acerca` },
+  { label: "Servicios", href: `${base}servicios` },
+  { label: "Contacto", href: `${base}contacto` },
+];
+---
+
+<header class="site-header">
+  <nav class="nav-container" aria-label="Navegación principal">
+    <a href={base} class="nav-logo" aria-label="Dra. Estefanía Derma — Inicio">
+      <span class="nav-logo-icon">🌿</span>
+      <span class="nav-logo-text">Dra. Estefanía</span>
+    </a>
+
+    <button
+      class="nav-toggle"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="nav-menu"
+      type="button"
+    >
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+
+    <ul class="nav-menu" id="nav-menu" role="menubar">
+      {navLinks.map((link) => (
+        <li role="none">
+          <a href={link.href} class="nav-link" role="menuitem">{link.label}</a>
+        </li>
+      ))}
+      <li role="none">
+        <a
+          href={`${whatsappBaseUrl}&utm_source=web&utm_medium=header&utm_campaign=agendar`}
+          class="nav-cta"
+          role="menuitem"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Agendar
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text-primary);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-lg);
+    text-decoration: none;
+  }
+
+  .nav-logo:hover {
+    text-decoration: none;
+  }
+
+  .nav-logo-icon {
+    font-size: var(--text-xl);
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    list-style: none;
+  }
+
+  .nav-link {
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    padding: var(--space-2) 0;
+    position: relative;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus {
+    color: var(--color-text-primary);
+    text-decoration: none;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: width var(--transition-base);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-cta {
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+    padding: var(--space-2) var(--space-5);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+    transition: background var(--transition-fast);
+  }
+
+  .nav-cta:hover {
+    background: var(--color-primary-hover);
+    text-decoration: none;
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-2);
+  }
+
+  .nav-toggle-bar {
+    width: 22px;
+    height: 2px;
+    background: var(--color-text-primary);
+    border-radius: 1px;
+    transition: all 0.25s ease;
+  }
+
+  @media (max-width: 640px) {
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--color-background);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: var(--space-6);
+      gap: var(--space-2);
+      transform: translateX(100%);
+      transition: transform var(--transition-base);
+    }
+
+    .nav-menu.is-open {
+      transform: translateX(0);
+    }
+
+    .nav-menu li {
+      width: 100%;
+    }
+
+    .nav-link,
+    .nav-cta {
+      display: block;
+      width: 100%;
+      padding: var(--space-3) 0;
+      font-size: var(--text-base);
+    }
+
+    .nav-cta {
+      text-align: center;
+      margin-top: var(--space-4);
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const toggle = document.querySelector(".nav-toggle");
+    const menu = document.querySelector(".nav-menu");
+    if (!toggle || !menu) return;
+
+    toggle.addEventListener("click", () => {
+      const isOpen = menu.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      toggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+    });
+
+    menu.querySelectorAll(".nav-link, .nav-cta").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Abrir menú");
+      });
+    });
+  })();
+</script>

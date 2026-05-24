@@ -1,13 +1,35 @@
 ---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import WhatsAppSticky from "../components/WhatsAppSticky.astro";
+import { faqs } from "../data/faq.js";
+
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
+  showHeader?: boolean;
+  showFooter?: boolean;
+  showWhatsApp?: boolean;
+  pageSchema?: "home" | "about" | "services" | "contact" | "none";
 }
 
-const { title, description = "Dra. Mariana Estefanía García Borges - Dermatóloga en Mérida, Yucatán" } = Astro.props;
+const {
+  title,
+  description = "Dra. Mariana Estefanía García Borges - Dermatóloga en Mérida, Yucatán",
+  ogImage,
+  showHeader = true,
+  showFooter = true,
+  showWhatsApp = true,
+  pageSchema = "none",
+} = Astro.props;
 
+const baseUrl = import.meta.env.BASE_URL || "/";
 const siteUrl = "https://4narchos.github.io/dra-estefania-derma";
+const canonicalUrl = `${siteUrl}${Astro.url.pathname.replace(baseUrl, "/")}`;
+const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/og-default.jpg`;
 
+// Schemas for each page type
 const physicianId = `${siteUrl}/#physician`;
 const businessId = `${siteUrl}/#business`;
 
@@ -29,7 +51,6 @@ const physicianSchema = {
   "url": siteUrl,
   "image": `${siteUrl}/images/dra-estefania.jpg`,
   "description": description,
-  "hasMap": "https://goo.gl/maps/...",
   "priceRange": "$$",
   "paymentAccepted": ["Efectivo", "Tarjeta de crédito", "Tarjeta de débito"],
   "areaServed": [
@@ -44,18 +65,8 @@ const physicianSchema = {
     "https://instagram.com/dra.estefaniaderma"
   ],
   "alumniOf": [
-    {
-      "@type": "EducationalOrganization",
-      "name": "Universidad Autónoma de Yucatán",
-      "department": {
-        "@type": "Organization",
-        "name": "Medicina"
-      }
-    },
-    {
-      "@type": "EducationalOrganization",
-      "name": "Instituto Dermatológico de Jalisco / UDG"
-    }
+    { "@type": "EducationalOrganization", "name": "Universidad Autónoma de Yucatán" },
+    { "@type": "EducationalOrganization", "name": "Instituto Dermatológico de Jalisco / UDG" }
   ],
   "worksFor": { "@id": businessId },
   "medicalCondition": [
@@ -68,12 +79,11 @@ const physicianSchema = {
   "availableService": [
     { "@type": "MedicalProcedure", "name": "Tratamiento de acné" },
     { "@type": "MedicalProcedure", "name": "Tratamiento de melasma" },
-    { "@type": "MedicalProcedure", "name": "Aplicación de Botox / toxina botulínica" },
+    { "@type": "MedicalProcedure", "name": "Aplicación de Botox" },
     { "@type": "MedicalProcedure", "name": "Peeling químico" },
     { "@type": "MedicalProcedure", "name": "Hydrafacial" },
     { "@type": "MedicalProcedure", "name": "Depilación láser" },
-    { "@type": "MedicalProcedure", "name": "Dermatoscopía" },
-    { "@type": "MedicalProcedure", "name": "Biopsia cutánea" }
+    { "@type": "MedicalProcedure", "name": "Dermatoscopía" }
   ]
 };
 
@@ -82,7 +92,7 @@ const localBusinessSchema = {
   "@type": ["MedicalBusiness", "LocalBusiness"],
   "@id": businessId,
   "name": "Evoke Aging Journey & Dermatology",
-  "description": "Consultorio de dermatología en Mérida, Yucatán. Atención personalizada por la Dra. Mariana Estefanía García Borges.",
+  "description": "Consultorio de dermatología en Mérida, Yucatán.",
   "url": siteUrl,
   "telephone": "+52-999-221-3021",
   "image": `${siteUrl}/images/dra-estefania.jpg`,
@@ -99,14 +109,10 @@ const localBusinessSchema = {
     "latitude": "20.9674",
     "longitude": "-89.5926"
   },
-  "hasMap": "https://goo.gl/maps/...",
   "openingHours": ["Tu 16:00-19:30", "We 10:00-15:00", "Fr 16:00-19:30"],
   "priceRange": "$$",
   "paymentAccepted": ["Efectivo", "Tarjeta de crédito", "Tarjeta de débito"],
-  "areaServed": {
-    "@type": "City",
-    "name": "Mérida"
-  },
+  "areaServed": { "@type": "City", "name": "Mérida" },
   "employee": { "@id": physicianId }
 };
 
@@ -114,88 +120,28 @@ const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "@id": `${siteUrl}/#faq`,
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "¿Qué dermatóloga en Mérida atiende acné hormonal?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "La Dra. Mariana Estefanía García Borges es especialista en dermatología en Mérida, Yucatán, con formación reciente (2026) del Instituto Dermatológico de Jalisco. Atiende acné, melasma, y otras condiciones de piel agravadas por el clima de Yucatán."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿En dónde atiende la Dra. García Borges?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "La Dra. García Borges atiende en 4 ubicaciones en Yucatán: (1) Evoke Aging Journey & Dermatology en Mérida — martes y viernes 4:00-7:30 p.m., miércoles 10:00 a.m.-3:00 p.m.; (2) Izamal — sábados (horarios variables); (3) Valladolid — sábados y domingos 10:00-16:00; (4) Vaca — sábados 9:30-16:00. Agenda tu cita por WhatsApp al 999 221 3021."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Cuánto cuesta la primera consulta dermatológica en Mérida?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "La primera consulta dermatológica con la Dra. García Borges tiene un costo accesible. Se recomienda contactar directamente por WhatsApp al 999 221 3021 para confirmar el precio actual y disponibilidad."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Qué es la queratosis pilar y cómo se trata en Mérida?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "La queratosis pilar es una condición común donde la piel produce demasiada queratina, formando pequeños bultos ásperos. En el clima de Yucatán, la humedad puede agravarla. La Dra. García Borges ofrece tratamientos personalizados en Mérida para suavizar la textura de la piel."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Es seguro ponerse Botox en Mérida?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sí, la aplicación de Botox (toxina botulínica) es segura cuando la realiza un dermatólogo especialista. La Dra. García Borges, recién graduada del Instituto Dermatológico de Jalisco (2026), aplica los protocolos más actualizados en su consultorio de Mérida."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Cómo tratar el melasma en clima tropical como el de Yucatán?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "El melasma se agrava con el sol intenso y la humedad del clima de Yucatán. El tratamiento incluye protector solar de amplio espectro, despigmentantes tópicos y procedimientos como peeling químico. La Dra. García Borges en Mérida diseña protocolos adaptados al clima local."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Qué dermatólogo en Mérida trata la alopecia o caída de cabello?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "La Dra. Mariana Estefanía García Borges, dermatóloga en Mérida, ofrece evaluación y tratamiento para la alopecia y pérdida de cabello. El diagnóstico incluye dermatoscopía capilar para identificar la causa y definir el tratamiento adecuado."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿La rosácea empeora con el calor y la humedad de Mérida?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sí, el calor extremo, la humedad alta y los cambios bruscos de temperatura (aire acondicionado a calor exterior) pueden desencadenar brotes de rosácea. En Mérida, es clave un plan de cuidado adaptado al clima local, que la Dra. García Borges personaliza para cada paciente."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Dónde puedo hacerme un Hydrafacial en Mérida?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "El Hydrafacial está disponible en el consultorio Evoke Aging Journey & Dermatology en Mérida, a cargo de la Dra. Mariana Estefanía García Borges. Es un tratamiento de limpieza facial profunda que hidrata y rejuvenece la piel."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Qué dermatólogo en Mérida habla inglés?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "La Dra. Mariana Estefanía García Borges atiende en español e inglés en su consultorio de dermatología en Mérida, Yucatán. Es ideal para pacientes locales y turistas de la Riviera Maya."
-      }
-    }
-  ]
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+  }))
+};
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": title,
+  "description": description,
+  "url": canonicalUrl,
+  "mainEntity": physicianSchema
+};
+
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": title,
+  "description": description,
+  "url": canonicalUrl
 };
 ---
 
@@ -205,43 +151,51 @@ const faqSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#1a5f4a" />
+    <meta name="theme-color" content="#2D5E46" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={siteUrl} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:locale" content="es_MX" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
-    <!-- Preconnect for performance -->
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 
-    <!-- Schema.org JSON-LD -->
-    <script type="application/ld+json" set:html={JSON.stringify(physicianSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <!-- Schema.org -->
+    {pageSchema === "home" && (
+      <>
+        <script type="application/ld+json" set:html={JSON.stringify(physicianSchema)} />
+        <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+        <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+      </>
+    )}
+    {pageSchema === "about" && (
+      <script type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
+    )}
+    {pageSchema === "contact" && (
+      <script type="application/ld+json" set:html={JSON.stringify(contactSchema)} />
+    )}
 
     <title>{title}</title>
 
-    <style is:global>
-      :root {
-        --color-primary: #1a5f4a;
-        --color-primary-dark: #124a39;
-        --color-accent: #c9a96e;
-        --color-bg: #fafaf9;
-        --color-text: #1c1917;
-        --color-text-muted: #78716c;
-        --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        --font-serif: Georgia, 'Times New Roman', serif;
-      }
+    <link rel="stylesheet" href={`${baseUrl}styles/tokens.css`} />
 
+    <style is:global>
       *, *::before, *::after {
         box-sizing: border-box;
         margin: 0;
@@ -254,12 +208,19 @@ const faqSchema = {
       }
 
       body {
-        font-family: var(--font-sans);
-        color: var(--color-text);
-        background: var(--color-bg);
-        line-height: 1.6;
+        font-family: var(--font-body);
+        color: var(--color-text-primary);
+        background: var(--color-background);
+        line-height: var(--leading-normal);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      main {
+        flex: 1;
       }
 
       img {
@@ -269,12 +230,12 @@ const faqSchema = {
       }
 
       a {
-        color: var(--color-primary);
+        color: var(--color-accent);
         text-decoration: none;
       }
 
       a:hover {
-        text-decoration: underline;
+        text-decoration: none;
       }
 
       /* Reduced motion */
@@ -286,9 +247,75 @@ const faqSchema = {
           transition-duration: 0.01ms !important;
         }
       }
+
+      /* Selection */
+      ::selection {
+        background: rgba(45, 94, 70, 0.4);
+        color: var(--color-text-primary);
+      }
+
+      /* Focus visible */
+      :focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-3) var(--space-6);
+        border-radius: var(--radius-md);
+        font-weight: var(--weight-semibold);
+        font-size: var(--text-base);
+        transition: all var(--transition-fast);
+        cursor: pointer;
+        border: none;
+        text-decoration: none;
+      }
+
+      .btn:hover {
+        text-decoration: none;
+      }
+
+      .btn-primary {
+        background: var(--color-primary);
+        color: var(--color-text-on-primary);
+      }
+
+      .btn-primary:hover {
+        background: var(--color-primary-hover);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--color-accent);
+        border: 1px solid var(--color-border-strong);
+      }
+
+      .btn-secondary:hover {
+        background: rgba(216, 204, 155, 0.08);
+        border-color: var(--color-accent);
+      }
+
+      .btn-large {
+        padding: var(--space-4) var(--space-8);
+        font-size: var(--text-lg);
+      }
     </style>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <slot />
+    {showHeader && <Header />}
+    <main>
+      <slot />
+    </main>
+    {showFooter && <Footer />}
+    {showWhatsApp && <WhatsAppSticky />}
   </body>
 </html>

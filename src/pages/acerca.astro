@@ -1,0 +1,353 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { education } from "../data/education.js";
+import { locations } from "../data/locations.js";
+
+const title = "Acerca de la Dra. Estefanía | Formación y Trayectoria";
+const description = "Conoce la trayectoria académica y profesional de la Dra. Mariana Estefanía García Borges, dermatóloga formada en el Instituto Dermatológico de Jalisco.";
+
+const institutions = [
+  {
+    name: "Universidad Autónoma de Yucatán (UADY)",
+    role: "Médico Cirujano",
+    years: "2012 – 2019",
+  },
+  {
+    name: "Hospital Regional de Alta Especialidad de la Península / UNAM",
+    role: "Año de Medicina Interna",
+    years: "2022 – 2023",
+  },
+  {
+    name: "Instituto Dermatológico de Jalisco / UDG",
+    role: "Especialidad en Dermatología",
+    years: "2023 – 2026",
+  },
+];
+
+const certifications = [
+  { year: "2024", title: "Diplomado en Patología Ungueal", institution: "CILAD" },
+  { year: "2025", title: "Diplomado en Trilogía", institution: "CIAD" },
+  { year: "2026", title: "Diplomado en Dermatología Estética", institution: "CILAD" },
+];
+---
+
+<Layout title={title} description={description} pageSchema="about">
+  <section class="about-hero">
+    <div class="container">
+      <div class="about-intro">
+        <span class="about-badge">🌿 Dermatóloga</span>
+        <h1 class="about-title">Dra. Mariana Estefanía<br />García Borges</h1>
+        <p class="about-tagline">
+          Especialista en dermatología clínica, estética y quirúrgica. Formación de vanguardia del Instituto Dermatológico de Jalisco (2026).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-cv">
+    <div class="container">
+      <div class="cv-grid">
+        <div class="cv-column">
+          <SectionHeader title="Formación académica" align="left" />
+          <div class="cv-timeline">
+            {education.map((item) => (
+              <div class="cv-item">
+                <span class="cv-year">{item.year}</span>
+                <h3 class="cv-degree">{item.title}</h3>
+                <p class="cv-institution">{item.institution}</p>
+                <p class="cv-detail">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="cv-column">
+          <SectionHeader title="Instituciones" align="left" />
+          <div class="institution-list">
+            {institutions.map((inst) => (
+              <div class="institution-item">
+                <h4 class="institution-name">{inst.name}</h4>
+                <span class="institution-role">{inst.role}</span>
+                <span class="institution-years">{inst.years}</span>
+              </div>
+            ))}
+          </div>
+
+          <SectionHeader title="Certificaciones y diplomados" align="left" />
+          <div class="cert-list">
+            {certifications.map((cert) => (
+              <div class="cert-item">
+                <span class="cert-year">{cert.year}</span>
+                <span class="cert-title">{cert.title}</span>
+                <span class="cert-inst">{cert.institution}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-locations">
+    <div class="container">
+      <SectionHeader
+        title="Consultorios"
+        subtitle="Atención en 4 ubicaciones de Yucatán"
+      />
+      <div class="locations-grid">
+        {locations.map((loc) => (
+          <div class="location-card">
+            <span class="location-city-tag">{loc.city}</span>
+            <h3 class="location-name">{loc.name}</h3>
+            <p class="location-address">{loc.address}</p>
+            <p class="location-hours">{loc.hours}</p>
+            <a href={`tel:+52-${loc.phone.replace(/\s/g, "")}`} class="location-phone">
+              📞 {loc.phone}
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+  }
+
+  .about-hero {
+    padding: var(--space-20) 0 var(--space-12);
+    background: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .about-intro {
+    max-width: 48rem;
+  }
+
+  .about-badge {
+    display: inline-block;
+    background: var(--color-accent);
+    color: var(--color-text-on-accent);
+    padding: var(--space-1) var(--space-4);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    margin-bottom: var(--space-6);
+  }
+
+  .about-title {
+    font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-tight);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  .about-tagline {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    max-width: 36rem;
+  }
+
+  .about-cv {
+    padding: var(--space-20) 0;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cv-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-16);
+  }
+
+  @media (min-width: 1024px) {
+    .cv-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .cv-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .cv-item {
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cv-year {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .cv-degree {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    margin: var(--space-2) 0 var(--space-1);
+  }
+
+  .cv-institution {
+    color: var(--color-accent);
+    font-weight: var(--weight-medium);
+    font-size: var(--text-sm);
+  }
+
+  .cv-detail {
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    margin-top: var(--space-2);
+    line-height: var(--leading-relaxed);
+  }
+
+  .institution-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    margin-bottom: var(--space-12);
+  }
+
+  .institution-item {
+    padding: var(--space-5);
+    background: var(--color-background);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+  }
+
+  .institution-name {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-1);
+  }
+
+  .institution-role {
+    display: block;
+    color: var(--color-accent);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+  }
+
+  .institution-years {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+    margin-top: var(--space-1);
+  }
+
+  .cert-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .cert-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cert-year {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    color: var(--color-primary);
+    min-width: 3rem;
+  }
+
+  .cert-title {
+    font-weight: var(--weight-medium);
+    color: var(--color-text-primary);
+    font-size: var(--text-sm);
+  }
+
+  .cert-inst {
+    grid-column: 2;
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+  }
+
+  .about-locations {
+    padding: var(--space-20) 0;
+    background: var(--color-background);
+  }
+
+  .locations-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 640px) {
+    .locations-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .locations-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .location-card {
+    background: var(--color-surface);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .location-city-tag {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+  }
+
+  .location-name {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+  }
+
+  .location-address {
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .location-hours {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    line-height: var(--leading-normal);
+    white-space: pre-line;
+  }
+
+  .location-phone {
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    font-weight: var(--weight-medium);
+    margin-top: var(--space-2);
+  }
+
+  .location-phone:hover {
+    color: var(--color-accent-alt);
+  }
+</style>
