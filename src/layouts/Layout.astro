@@ -1,0 +1,188 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Dra. Mariana Estefanía García Borges - Dermatóloga en Mérida, Yucatán" } = Astro.props;
+
+const siteUrl = "https://4narchos.github.io/dra-estefania-derma";
+
+const physicianSchema = {
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  "name": "Dra. Mariana Estefanía García Borges",
+  "medicalSpecialty": "Dermatology",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "C. 20 No. 251, Calle 10 15-local 9, Morelos Oriente",
+    "addressLocality": "Mérida",
+    "addressRegion": "Yucatán",
+    "postalCode": "97130",
+    "addressCountry": "MX"
+  },
+  "telephone": "+52-999-221-3021",
+  "url": siteUrl,
+  "image": `${siteUrl}/images/dra-estefania.jpg`,
+  "description": description,
+  "hasMap": "https://goo.gl/maps/...",
+  "priceRange": "$$",
+  "openingHours": ["Mo-Fr 09:00-18:00", "Sa 09:00-13:00"],
+  "paymentAccepted": ["Efectivo", "Tarjeta de crédito", "Tarjeta de débito"],
+  "areaServed": {
+    "@type": "City",
+    "name": "Mérida"
+  },
+  "knowsLanguage": ["es", "en"],
+  "alumniOf": [
+    {
+      "@type": "EducationalOrganization",
+      "name": "Universidad Autónoma de Yucatán",
+      "department": {
+        "@type": "Organization",
+        "name": "Medicina"
+      }
+    },
+    {
+      "@type": "EducationalOrganization",
+      "name": "Instituto Dermatológico de Jalisco / UDG"
+    }
+  ],
+  "worksFor": {
+    "@type": "MedicalBusiness",
+    "name": "Evoke Aging Journey & Dermatology",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "C. 20 No. 251, Calle 10 15-local 9, Morelos Oriente",
+      "addressLocality": "Mérida",
+      "addressRegion": "Yucatán",
+      "postalCode": "97130",
+      "addressCountry": "MX"
+    }
+  }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué dermatóloga en Mérida atiende acné hormonal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La Dra. Mariana Estefanía García Borges es especialista en dermatología en Mérida, Yucatán, con formación reciente (2026) del Instituto Dermatológico de Jalisco. Atiende acné, melasma, y otras condiciones de piel agravadas por el clima de Yucatán."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Dónde queda el consultorio de la Dra. García Borges?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El consultorio Evoke Aging Journey & Dermatology está ubicado en C. 20 No. 251, Calle 10 15-local 9, Morelos Oriente, Mérida, Yucatán, CP 97130."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta la primera consulta dermatológica en Mérida?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La primera consulta dermatológica con la Dra. García Borges tiene un costo accesible. Se recomienda contactar directamente por WhatsApp al 999 221 3021 para confirmar el precio actual y disponibilidad."
+      }
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1a5f4a" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:locale" content="es_MX" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(physicianSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+    <title>{title}</title>
+
+    <style is:global>
+      :root {
+        --color-primary: #1a5f4a;
+        --color-primary-dark: #124a39;
+        --color-accent: #c9a96e;
+        --color-bg: #fafaf9;
+        --color-text: #1c1917;
+        --color-text-muted: #78716c;
+        --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-serif: Georgia, 'Times New Roman', serif;
+      }
+
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        color: var(--color-text);
+        background: var(--color-bg);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      a {
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

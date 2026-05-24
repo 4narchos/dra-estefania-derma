@@ -1,0 +1,705 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = "Dra. Mariana Estefanía García Borges | Dermatóloga en Mérida";
+const description = "Dermatóloga especialista en Mérida, Yucatán. Tratamientos de acné, melasma, rejuvenecimiento facial, cuidado de piel para el clima de Yucatán. Agenda tu consulta.";
+
+const whatsappNumber = "529992213021";
+const whatsappMessage = encodeURIComponent("Hola, vi su página web y quisiera agendar una consulta dermatológica.");
+const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${whatsappMessage}&utm_source=web&utm_medium=hero_button&utm_campaign=inicio`;
+
+const services = [
+  { name: "Tratamiento de acné", icon: "🌿" },
+  { name: "Melasma y manchas", icon: "☀️" },
+  { name: "Rejuvenecimiento facial", icon: "✨" },
+  { name: "Botox / Toxina botulínica", icon: "💉" },
+  { name: "Peeling químico", icon: "🧴" },
+  { name: "Hydrafacial", icon: "💧" },
+  { name: "Depilación láser", icon: "🎯" },
+  { name: "Dermatoscopía", icon: "🔍" },
+];
+
+const reviews = [
+  {
+    text: "Muy paciente, explicación con detalle, detenimiento en la revisión.",
+    author: "Paciente verificado",
+    treatment: "Primera consulta"
+  },
+  {
+    text: "Excelente atención, escucha las necesidades de cada paciente.",
+    author: "Paciente verificado",
+    treatment: "Tratamiento de acné"
+  },
+  {
+    text: "Dedicación durante la visita, explicaciones detalladas y puntualidad.",
+    author: "Paciente verificado",
+    treatment: "Consulta dermatológica"
+  },
+];
+
+const education = [
+  {
+    year: "2012 - 2019",
+    title: "Médico Cirujano",
+    institution: "Universidad Autónoma de Yucatán (UADY)",
+    detail: "Formación médica integral con enfoque en ciencias de la salud"
+  },
+  {
+    year: "2022 - 2023",
+    title: "Año de Medicina Interna",
+    institution: "Hospital Regional de Alta Especialidad de la Península / UNAM",
+    detail: "Rotación clínica en medicina interna con pacientes complejos"
+  },
+  {
+    year: "2023 - 2026",
+    title: "Especialidad en Dermatología",
+    institution: "Instituto Dermatológico de Jalisco / UDG",
+    detail: "Especialización de élite en dermatología clínica, estética y quirúrgica"
+  },
+  {
+    year: "2024",
+    title: "Diplomado en Patología Ungueal",
+    institution: "CILAD",
+    detail: "Especialización en diagnóstico y tratamiento de patologías de uñas"
+  },
+  {
+    year: "2025",
+    title: "Diplomado en Trilogía",
+    institution: "CIAD",
+    detail: "Formación avanzada en técnicas dermatológicas contemporáneas"
+  },
+  {
+    year: "2026 - Presente",
+    title: "Diplomado en Dermatología Estética",
+    institution: "CILAD",
+    detail: "Especialización en procedimientos estéticos dermatológicos de vanguardia"
+  }
+];
+---
+
+<Layout title={title} description={description}>
+  <!-- Hero Section -->
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <span class="hero-badge">Tu piel te habla. Yo te ayudo a entenderla.</span>
+      <h1 class="hero-title">
+        Dra. Mariana Estefanía<br />
+        <span class="hero-accent">García Borges</span>
+      </h1>
+      <p class="hero-subtitle">Dermatóloga en Mérida, Yucatán</p>
+      <p class="hero-description">
+        Especialista en dermatología clínica, estética y quirúrgica.
+        Formación de vanguardia del Instituto Dermatológico de Jalisco (2026).
+      </p>
+      <div class="hero-actions">
+        <a href={whatsappUrl} class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+          Agendar consulta por WhatsApp
+        </a>
+        <a href="#servicios" class="btn btn-secondary">Ver servicios</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <!-- Placeholder for doctor photo -->
+      <div class="hero-photo-placeholder">
+        <span>Foto Dra. Estefanía</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services" id="servicios">
+    <div class="container">
+      <h2 class="section-title">Servicios dermatológicos</h2>
+      <p class="section-subtitle">
+        Tratamientos personalizados para las condiciones de piel más comunes en el clima de Yucatán
+      </p>
+      <div class="services-grid">
+        {services.map(service => (
+          <div class="service-card">
+            <span class="service-icon">{service.icon}</span>
+            <h3 class="service-name">{service.name}</h3>
+          </div>
+        ))}
+      </div>
+      <div class="services-note">
+        <p>
+          <strong>Consultorio:</strong> Evoke Aging Journey & Dermatology<br />
+          C. 20 No. 251, Calle 10 15-local 9, Morelos Oriente, Mérida 97130
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education / Linaje Section -->
+  <section class="education" id="formacion">
+    <div class="container">
+      <h2 class="section-title">Formación académica</h2>
+      <p class="section-subtitle">
+        Protocolos actualizados y conocimiento de vanguardia para tu piel
+      </p>
+      <div class="education-timeline">
+        {education.map((item, index) => (
+          <div class="timeline-item" data-index={index}>
+            <div class="timeline-year">{item.year}</div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">{item.title}</h3>
+              <p class="timeline-institution">{item.institution}</p>
+              <p class="timeline-detail">{item.detail}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Yucatan Climate Section (Hyperlocal Content) -->
+  <section class="climate" id="clima-yucatan">
+    <div class="container">
+      <h2 class="section-title">Dermatología para el clima de Yucatán</h2>
+      <p class="section-subtitle">
+        El calor, la humedad y el sol intenso de la península afectan tu piel de formas únicas.
+        Aquí te explico cómo cuidarla.
+      </p>
+      <div class="climate-grid">
+        <article class="climate-card">
+          <h3>☀️ Melasma y manchas solares</h3>
+          <p>
+            El sol intenso de Yucatán puede agravar las manchas en la piel.
+            Te ayudo a prevenir y tratar el melasma con protocolos adaptados a nuestra radiación UV.
+          </p>
+        </article>
+        <article class="climate-card">
+          <h3>💧 Acné por humedad</h3>
+          <p>
+            La alta humedad de Mérida puede obstruir los poros y provocar brotes de acné.
+            Descubre rutinas de cuidado específicas para el clima tropical.
+          </p>
+        </article>
+        <article class="climate-card">
+          <h3>🏖️ Piel y playa</h3>
+          <p>
+            Protección solar adecuada para el clima peninsular.
+            Desde la ciudad hasta la costa, tu piel necesita cuidados específicos.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="reviews" id="opiniones">
+    <div class="container">
+      <h2 class="section-title">Lo que dicen los pacientes</h2>
+      <p class="section-subtitle">Opiniones verificadas de Doctoralia</p>
+      <div class="reviews-grid">
+        {reviews.map(review => (
+          <blockquote class="review-card">
+            <p class="review-text">"{review.text}"</p>
+            <footer class="review-footer">
+              <span class="review-author">{review.author}</span>
+              <span class="review-treatment">{review.treatment}</span>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+      <p class="reviews-link">
+        <a href="https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan" target="_blank" rel="noopener noreferrer">
+          Ver todas las opiniones en Doctoralia →
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact / CTA Section -->
+  <section class="contact" id="contacto">
+    <div class="container">
+      <h2 class="section-title">Agenda tu consulta</h2>
+      <p class="section-subtitle">
+        Primera consulta dermatológica disponible. Atención personalizada, solo pacientes privados.
+      </p>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div>
+              <strong>Dirección</strong>
+              <p>C. 20 No. 251, Calle 10 15-local 9<br />Morelos Oriente, Mérida 97130</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📞</span>
+            <div>
+              <strong>Teléfono / WhatsApp</strong>
+              <p>999 221 3021</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">💳</span>
+            <div>
+              <strong>Formas de pago</strong>
+              <p>Efectivo, tarjeta de crédito y débito</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">🌐</span>
+            <div>
+              <strong>Idiomas</strong>
+              <p>Español e inglés</p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-cta">
+          <a href={whatsappUrl} class="btn btn-primary btn-large" target="_blank" rel="noopener noreferrer">
+            Escribir por WhatsApp
+          </a>
+          <p class="contact-note">
+            Respuesta en horario de consulta. También puedes llamar al 999 221 3021.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">
+        © 2026 Dra. Mariana Estefanía García Borges. Todos los derechos reservados.
+      </p>
+      <p class="footer-credentials">
+        Cédula Profesional: 11742402 | Especialista en Dermatología
+      </p>
+      <p class="footer-social">
+        <a href="https://instagram.com/dra.estefaniaderma" target="_blank" rel="noopener noreferrer">
+          Instagram @dra.estefaniaderma
+        </a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Sticky Button -->
+  <a
+    href={whatsappUrl}
+    class="whatsapp-sticky"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contactar por WhatsApp"
+  >
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <style>
+    .container {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 4rem 1.5rem;
+      max-width: 72rem;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr 1fr;
+        padding: 6rem 1.5rem;
+      }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--color-accent);
+      color: var(--color-text);
+      padding: 0.375rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--color-text);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-accent {
+      color: var(--color-primary);
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .hero-description {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2rem;
+      max-width: 32rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .hero-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      max-width: 400px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.125rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.875rem 1.75rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-dark);
+      text-decoration: none;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-primary);
+      color: white;
+      text-decoration: none;
+    }
+
+    .btn-large {
+      padding: 1.125rem 2.5rem;
+      font-size: 1.125rem;
+    }
+
+    /* Sections */
+    .services,
+    .education,
+    .climate,
+    .reviews,
+    .contact {
+      padding: 4rem 0;
+    }
+
+    .services { background: white; }
+    .education { background: var(--color-bg); }
+    .climate { background: white; }
+    .reviews { background: var(--color-bg); }
+    .contact { background: white; }
+
+    .section-title {
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.75rem;
+      color: var(--color-text);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--color-text-muted);
+      font-size: 1.125rem;
+      max-width: 36rem;
+      margin: 0 auto 3rem;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 640px) {
+      .services-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .service-card {
+      background: var(--color-bg);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .service-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-name {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .services-note {
+      text-align: center;
+      color: var(--color-text-muted);
+      padding-top: 2rem;
+      border-top: 1px solid #e7e5e4;
+    }
+
+    /* Education Timeline */
+    .education-timeline {
+      max-width: 48rem;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid #e7e5e4;
+    }
+
+    .timeline-year {
+      font-weight: 700;
+      color: var(--color-primary);
+      font-size: 0.875rem;
+      min-width: 8rem;
+    }
+
+    .timeline-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-institution {
+      color: var(--color-primary);
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-detail {
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+    }
+
+    /* Climate Grid */
+    .climate-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .climate-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .climate-card {
+      background: var(--color-bg);
+      padding: 2rem;
+      border-radius: 0.75rem;
+    }
+
+    .climate-card h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .climate-card p {
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+    }
+
+    /* Reviews */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .reviews-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .review-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      border-left: 4px solid var(--color-accent);
+    }
+
+    .review-text {
+      font-style: italic;
+      color: var(--color-text);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .review-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .review-author {
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--color-primary);
+    }
+
+    .review-treatment {
+      font-size: 0.8125rem;
+      color: var(--color-text-muted);
+    }
+
+    .reviews-link {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid #e7e5e4;
+    }
+
+    .contact-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .contact-cta {
+      text-align: center;
+      padding: 2rem;
+      background: var(--color-bg);
+      border-radius: 1rem;
+    }
+
+    .contact-note {
+      margin-top: 1rem;
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--color-text);
+      color: #a8a29e;
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .footer-text {
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-credentials {
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-social a {
+      color: var(--color-accent);
+    }
+
+    .footer-social a:hover {
+      color: white;
+    }
+
+    /* WhatsApp Sticky */
+    .whatsapp-sticky {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 3.5rem;
+      height: 3.5rem;
+      background: #25d366;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 100;
+      transition: transform 0.2s ease;
+    }
+
+    .whatsapp-sticky:hover {
+      transform: scale(1.1);
+      text-decoration: none;
+    }
+
+    .whatsapp-sticky svg {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+  </style>
+</Layout>
