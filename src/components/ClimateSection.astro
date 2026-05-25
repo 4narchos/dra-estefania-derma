@@ -19,10 +19,10 @@ const climateTopics = [
 
 <section class="climate" id="clima-yucatan">
   <div class="container">
-    <SectionHeader
-      title="Dermatología para el clima de Yucatán"
-      subtitle="El calor, la humedad y el sol intenso de la península afectan tu piel de formas únicas. Aquí te explico cómo cuidarla."
-    />
+    <div class="climate-header">
+      <h2 class="climate-title">Dermatología para el clima de Yucatán</h2>
+      <p class="climate-subtitle">El calor, la humedad y el sol intenso de la península afectan tu piel de formas únicas. Aquí te explico cómo cuidarla.</p>
+    </div>
     <div class="climate-grid">
       {climateTopics.map((topic) => (
         <article class="climate-card">
@@ -37,14 +37,42 @@ const climateTopics = [
 <style>
   .climate {
     padding: var(--space-20) 0;
-    background: var(--color-surface);
-    border-top: 1px solid var(--color-border);
+    background: var(--color-charcoal);
+    border-top: 1px solid var(--color-border-inverse);
   }
 
   .container {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--space-6);
+  }
+
+  .climate-header {
+    margin-bottom: var(--space-10);
+    text-align: center;
+  }
+
+  .climate-title {
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+    color: var(--color-text-on-dark);
+    line-height: var(--leading-tight);
+    margin-bottom: var(--space-3);
+  }
+
+  @media (min-width: 768px) {
+    .climate-title {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  .climate-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 36rem;
+    line-height: var(--leading-relaxed);
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .climate-grid {
@@ -60,21 +88,21 @@ const climateTopics = [
   }
 
   .climate-card {
-    background: var(--color-background);
+    background: var(--color-midnight);
     padding: var(--space-8);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-inverse);
   }
 
   .climate-card h3 {
     font-size: var(--text-lg);
     font-weight: var(--weight-semibold);
-    color: var(--color-text-primary);
+    color: var(--color-text-on-dark);
     margin-bottom: var(--space-3);
   }
 
   .climate-card p {
-    color: var(--color-text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--text-sm);
     line-height: var(--leading-relaxed);
   }

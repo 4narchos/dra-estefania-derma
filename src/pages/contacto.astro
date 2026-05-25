@@ -75,16 +75,21 @@ const socialLinks = [
       <div class="contact-section">
         <h2 class="contact-section-title">Agendar consulta</h2>
 
-        <a href={whatsappUrl} class="contact-link contact-link--primary" target="_blank" rel="noopener noreferrer">
-          <span class="contact-link-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          </span>
-          <span class="contact-link-text">WhatsApp</span>
-        </a>
+        <div class="contact-whatsapp-row">
+          <a href={whatsappUrl} class="contact-link contact-link--primary contact-whatsapp-main" target="_blank" rel="noopener noreferrer">
+            <span class="contact-link-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </span>
+            <span class="contact-link-text">WhatsApp</span>
+          </a>
+          <button type="button" class="contact-toggle" aria-label="Ver más ubicaciones" aria-expanded="false">
+            <svg class="contact-toggle-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
 
-        <div class="contact-subgroup">
-          <p class="contact-subgroup-label">Otras ubicaciones</p>
-          <div class="contact-subgroup-buttons">
+        <div class="contact-dropdown" id="locations-dropdown">
+          <p class="contact-dropdown-label">Otras ubicaciones</p>
+          <div class="contact-dropdown-buttons">
             {locationLinks.map((loc) => (
               <a
                 href={loc.url}
@@ -110,6 +115,21 @@ const socialLinks = [
           <span class="contact-link-text">Doctoralia</span>
         </a>
       </div>
+
+      <script>
+        (function() {
+          const toggle = document.querySelector('.contact-toggle');
+          const dropdown = document.getElementById('locations-dropdown');
+          const icon = document.querySelector('.contact-toggle-icon');
+          if (!toggle || !dropdown) return;
+
+          toggle.addEventListener('click', function() {
+            const isOpen = dropdown.classList.toggle('is-open');
+            toggle.setAttribute('aria-expanded', String(isOpen));
+            icon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+          });
+        })();
+      </script>
 
       {/* Sección Redes */}
       <div class="contact-section">
@@ -294,19 +314,68 @@ const socialLinks = [
     flex: 1;
   }
 
-  .contact-subgroup {
+  .contact-whatsapp-row {
     display: flex;
-    flex-direction: column;
     gap: var(--space-2);
+    align-items: stretch;
   }
 
-  .contact-subgroup-label {
+  .contact-whatsapp-main {
+    flex: 1;
+  }
+
+  .contact-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+  }
+
+  .contact-toggle:hover {
+    background: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+  }
+
+  .contact-toggle-icon {
+    transition: transform var(--transition-fast);
+  }
+
+  .contact-dropdown {
+    display: none;
+    flex-direction: column;
+    gap: var(--space-2);
+    animation: dropdown-in 200ms ease;
+  }
+
+  .contact-dropdown.is-open {
+    display: flex;
+  }
+
+  @keyframes dropdown-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .contact-dropdown-label {
     font-size: var(--text-xs);
     color: var(--color-text-muted);
     text-align: center;
+    margin-top: var(--space-1);
   }
 
-  .contact-subgroup-buttons {
+  .contact-dropdown-buttons {
     display: flex;
     gap: var(--space-2);
   }
