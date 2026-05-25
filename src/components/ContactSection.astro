@@ -6,7 +6,6 @@ const whatsappUrl = `${whatsappBaseUrl}&utm_source=web&utm_medium=contact_sectio
 
 const contactItems = [
   {
-    icon: "📍",
     title: "Ubicaciones",
     content: [
       "Mérida — Evoke, C. 20 No. 251. Martes/viernes 4–7:30 p.m., miércoles 10 a.m.–3 p.m.",
@@ -16,17 +15,14 @@ const contactItems = [
     ],
   },
   {
-    icon: "📞",
     title: "Teléfono / WhatsApp",
     content: ["999 221 3021"],
   },
   {
-    icon: "💳",
     title: "Formas de pago",
     content: ["Efectivo, tarjeta de crédito y débito"],
   },
   {
-    icon: "🌐",
     title: "Idiomas",
     content: ["Español e inglés"],
   },
@@ -43,7 +39,6 @@ const contactItems = [
       <div class="contact-info">
         {contactItems.map((item) => (
           <div class="contact-item">
-            <span class="contact-icon">{item.icon}</span>
             <div>
               <strong>{item.title}</strong>
               <div class="contact-item-content">
@@ -94,16 +89,8 @@ const contactItems = [
   }
 
   .contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-4);
     padding: var(--space-4) 0;
     border-bottom: 1px solid var(--color-border);
-  }
-
-  .contact-icon {
-    font-size: var(--text-xl);
-    flex-shrink: 0;
   }
 
   .contact-item strong {

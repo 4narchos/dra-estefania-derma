@@ -3,17 +3,14 @@ import SectionHeader from "./SectionHeader.astro";
 
 const climateTopics = [
   {
-    icon: "☀️",
     title: "Melasma y manchas solares",
     description: "El sol intenso de Yucatán puede agravar las manchas en la piel. Te ayudo a prevenir y tratar el melasma con protocolos adaptados a nuestra radiación UV.",
   },
   {
-    icon: "💧",
     title: "Acné por humedad",
     description: "La alta humedad de Mérida puede obstruir los poros y provocar brotes de acné. Descubre rutinas de cuidado específicas para el clima tropical.",
   },
   {
-    icon: "🏖️",
     title: "Piel y playa",
     description: "Protección solar adecuada para el clima peninsular. Desde la ciudad hasta la costa, tu piel necesita cuidados específicos.",
   },
@@ -29,7 +26,7 @@ const climateTopics = [
     <div class="climate-grid">
       {climateTopics.map((topic) => (
         <article class="climate-card">
-          <h3>{topic.icon} {topic.title}</h3>
+          <h3>{topic.title}</h3>
           <p>{topic.description}</p>
         </article>
       ))}

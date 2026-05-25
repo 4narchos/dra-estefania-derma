@@ -3,18 +3,34 @@ import { whatsappBaseUrl } from "../data/links.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
 const base = getBaseUrl();
 
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = "/" } = Astro.props;
+
 const navLinks = [
-  { label: "Inicio", href: `${base}` },
-  { label: "Acerca", href: `${base}acerca` },
-  { label: "Servicios", href: `${base}servicios` },
-  { label: "Contacto", href: `${base}contacto` },
+  { label: "Inicio", href: `${base}`, path: `${base}` },
+  { label: "Acerca", href: `${base}acerca`, path: `${base}acerca` },
+  { label: "Servicios", href: `${base}servicios`, path: `${base}servicios` },
+  { label: "Contacto", href: `${base}contacto`, path: `${base}contacto` },
 ];
+
+function isActive(linkPath: string): boolean {
+  // Normalize paths for comparison
+  const normalizedCurrent = currentPath.replace(/\/$/, "").replace(new RegExp(`^${base.replace(/\/$/, "")}`), "") || "/";
+  const normalizedLink = linkPath.replace(/\/$/, "").replace(new RegExp(`^${base.replace(/\/$/, "")}`), "") || "/";
+
+  if (normalizedLink === "/") {
+    return normalizedCurrent === "/";
+  }
+  return normalizedCurrent.startsWith(normalizedLink);
+}
 ---
 
 <header class="site-header">
   <nav class="nav-container" aria-label="Navegación principal">
     <a href={base} class="nav-logo" aria-label="Dra. Estefanía Derma — Inicio">
-      <span class="nav-logo-icon">🌿</span>
       <span class="nav-logo-text">Dra. Estefanía</span>
     </a>
 
@@ -33,7 +49,14 @@ const navLinks = [
     <ul class="nav-menu" id="nav-menu" role="menubar">
       {navLinks.map((link) => (
         <li role="none">
-          <a href={link.href} class="nav-link" role="menuitem">{link.label}</a>
+          <a
+            href={link.href}
+            class:list={["nav-link", isActive(link.path) && "is-active"]}
+            role="menuitem"
+            aria-current={isActive(link.path) ? "page" : undefined}
+          >
+            {link.label}
+          </a>
         </li>
       ))}
       <li role="none">
@@ -122,8 +145,13 @@ const navLinks = [
     transition: width var(--transition-base);
   }
 
-  .nav-link:hover::after {
+  .nav-link:hover::after,
+  .nav-link.is-active::after {
     width: 100%;
+  }
+
+  .nav-link.is-active {
+    color: var(--color-text-primary);
   }
 
   .nav-cta {

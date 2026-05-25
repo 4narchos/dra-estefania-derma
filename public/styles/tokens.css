@@ -1,80 +1,75 @@
+/* Design Tokens — Dra. Estefanía Dermatología */
+/* Paleta: primary #2D5E46, accent #D8CC9B, light background */
+
 :root {
-  /* Palette - 5-colour system */
-  --color-arena: #D8CC9B;
+  /* ─── Colors ─── */
+  --color-primary: #2D5E46;
+  --color-primary-hover: #3a7a5a;
   --color-verde: #2D5E46;
-  --color-azul: #000C1E;
-  --color-gris: #3A3A3A;
-  --color-golden: #DACD96;
 
-  /* Semantic mapping */
-  --color-primary: var(--color-verde);
-  --color-primary-hover: #1e4732;
-  --color-background: var(--color-azul);
-  --color-surface: var(--color-gris);
-  --color-surface-elevated: #4a4a4a;
-  --color-accent: var(--color-arena);
-  --color-accent-alt: var(--color-golden);
+  --color-background: #FAF8F3;
+  --color-surface: #F0EBE0;
 
-  /* Text */
-  --color-text-primary: #f5f5f0;
-  --color-text-secondary: #a0a098;
-  --color-text-muted: #6b6b63;
+  --color-accent: #C4B896;
+  --color-accent-alt: #B8AA82;
+
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-strong: rgba(0, 0, 0, 0.15);
+
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #4a4a4a;
+  --color-text-muted: #8a8a8a;
   --color-text-on-primary: #ffffff;
   --color-text-on-accent: #1a1a1a;
 
-  /* Borders - subtle, no shadows */
-  --color-border: rgba(216, 204, 155, 0.12);
-  --color-border-strong: rgba(216, 204, 155, 0.25);
+  /* ─── Typography ─── */
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  /* Spacing - 4px base */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-10: 40px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-20: 80px;
-  --space-24: 96px;
+  /* ─── Font sizes ─── */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 1.875rem;  /* 30px */
+  --text-4xl: 2.25rem;   /* 36px */
+  --text-5xl: 3rem;      /* 48px */
 
-  /* Typography */
-  --font-body: "Inter", system-ui, -apple-system, sans-serif;
-  --font-heading: "Inter", system-ui, -apple-system, sans-serif;
-
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 2rem;
-  --text-4xl: 2.5rem;
-  --text-5xl: 3.5rem;
-
-  --leading-tight: 1.2;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.7;
-
-  --weight-normal: 400;
+  /* ─── Font weights ─── */
   --weight-medium: 500;
   --weight-semibold: 600;
   --weight-bold: 700;
 
-  /* Border radii - progressive */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-full: 9999px;
+  /* ─── Line heights ─── */
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
 
-  /* Layout */
-  --max-width: 1200px;
-  --header-height: 64px;
+  /* ─── Spacing (4px base) ─── */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
 
-  /* Transitions */
+  /* ─── Border radius ─── */
+  --radius-md: 0.5rem;   /* 8px  — buttons */
+  --radius-lg: 0.75rem;  /* 12px — cards */
+  --radius-full: 9999px; /* pills, badges, avatars */
+
+  /* ─── Transitions ─── */
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
+
+  /* ─── Layout ─── */
+  --max-width: 1200px;
+  --header-height: 64px;
 }

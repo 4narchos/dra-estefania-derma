@@ -232,7 +232,7 @@ const contactSchema = {
       }
 
       a {
-        color: var(--color-accent);
+        color: var(--color-primary);
         text-decoration: none;
       }
 
@@ -252,13 +252,13 @@ const contactSchema = {
 
       /* Selection */
       ::selection {
-        background: rgba(45, 94, 70, 0.4);
+        background: rgba(45, 94, 70, 0.2);
         color: var(--color-text-primary);
       }
 
       /* Focus visible */
       :focus-visible {
-        outline: 2px solid var(--color-accent);
+        outline: 2px solid var(--color-primary);
         outline-offset: 2px;
       }
 
@@ -292,13 +292,13 @@ const contactSchema = {
 
       .btn-secondary {
         background: transparent;
-        color: var(--color-accent);
+        color: var(--color-primary);
         border: 1px solid var(--color-border-strong);
       }
 
       .btn-secondary:hover {
-        background: rgba(216, 204, 155, 0.08);
-        border-color: var(--color-accent);
+        background: rgba(45, 94, 70, 0.06);
+        border-color: var(--color-primary);
       }
 
       .btn-large {
@@ -308,12 +308,12 @@ const contactSchema = {
     </style>
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    {showHeader && <Header />}
+    {showHeader && <Header currentPath={Astro.url.pathname} />}
     <main>
       <slot />
     </main>

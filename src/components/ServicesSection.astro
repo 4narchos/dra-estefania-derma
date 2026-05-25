@@ -14,7 +14,6 @@ import { getBaseUrl } from "../utils/baseUrl.js";
     <div class="services-grid">
       {services.map((service) => (
         <a href={`${getBaseUrl()}servicios`} class="service-card">
-          <span class="service-icon">{service.icon}</span>
           <h3 class="service-name">{service.name}</h3>
         </a>
       ))}
@@ -76,12 +75,6 @@ import { getBaseUrl } from "../utils/baseUrl.js";
     transform: translateY(-2px);
     border-color: var(--color-border-strong);
     text-decoration: none;
-  }
-
-  .service-icon {
-    font-size: var(--text-3xl);
-    display: block;
-    margin-bottom: var(--space-3);
   }
 
   .service-name {
