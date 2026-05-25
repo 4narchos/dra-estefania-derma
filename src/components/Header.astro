@@ -34,17 +34,28 @@ function isActive(linkPath: string): boolean {
       <span class="nav-logo-text">Dra. Estefanía</span>
     </a>
 
-    <button
-      class="nav-toggle"
-      aria-label="Abrir menú"
-      aria-expanded="false"
-      aria-controls="nav-menu"
-      type="button"
-    >
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-    </button>
+    <div class="nav-actions">
+      <a
+        href={`${whatsappBaseUrl}&utm_source=web&utm_medium=header&utm_campaign=agendar`}
+        class="nav-cta-mobile"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Agendar
+      </a>
+
+      <button
+        class="nav-toggle"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="nav-menu"
+        type="button"
+      >
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </div>
 
     <ul class="nav-menu" id="nav-menu" role="menubar">
       {navLinks.map((link) => (
@@ -154,6 +165,12 @@ function isActive(linkPath: string): boolean {
     color: var(--color-text-primary);
   }
 
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
   .nav-cta {
     background: var(--color-primary);
     color: var(--color-text-on-primary);
@@ -166,6 +183,24 @@ function isActive(linkPath: string): boolean {
   }
 
   .nav-cta:hover {
+    background: var(--color-primary-hover);
+    text-decoration: none;
+  }
+
+  .nav-cta-mobile {
+    display: none;
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+    transition: background var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .nav-cta-mobile:hover {
     background: var(--color-primary-hover);
     text-decoration: none;
   }
@@ -193,6 +228,10 @@ function isActive(linkPath: string): boolean {
       display: flex;
     }
 
+    .nav-cta-mobile {
+      display: inline-flex;
+    }
+
     .nav-menu {
       position: fixed;
       top: var(--header-height);
@@ -216,8 +255,7 @@ function isActive(linkPath: string): boolean {
       width: 100%;
     }
 
-    .nav-link,
-    .nav-cta {
+    .nav-link {
       display: block;
       width: 100%;
       padding: var(--space-3) 0;
@@ -225,8 +263,7 @@ function isActive(linkPath: string): boolean {
     }
 
     .nav-cta {
-      text-align: center;
-      margin-top: var(--space-4);
+      display: none;
     }
   }
 </style>
