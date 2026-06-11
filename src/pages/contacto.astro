@@ -47,8 +47,8 @@ const socialLinks = [
         </div>
         <h1 class="contact-name">Dra. Estefanía Borges</h1>
         <p class="contact-handle">@dra.estefaniaderma</p>
-        <p class="contact-bio">Dermatóloga en Yucatán</p>
-        <p class="contact-motto">Tu piel te habla, yo te ayudo a entenderla ✨</p>
+        <p class="contact-bio">Dermatóloga en Yucatán ✨</p>
+        <p class="contact-motto">Tu piel te habla. Yo te ayudo a entenderla 🍃.</p>
       </div>
 
       {/* Sección Profesional */}
@@ -68,10 +68,7 @@ const socialLinks = [
           target="_blank"
           rel="noopener noreferrer"
         >
-          <span class="contact-link-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#0073CF"/><path d="M9 7.5h3.5c2.5 0 4.5 2 4.5 4.5s-2 4.5-4.5 4.5H9V7.5z" fill="#fff"/></svg>
-          </span>
-          <span class="contact-link-text">Doctoralia</span>
+          <img src={`${base}images/doctoralia-logo.png`} alt="Doctoralia" class="contact-link-logo" loading="lazy" height="24" />
         </a>
       </div>
 
@@ -183,7 +180,7 @@ const socialLinks = [
 
   .contact-handle {
     font-size: var(--text-sm);
-    color: var(--color-primary);
+    color: #1D5A8F;
     font-weight: var(--weight-medium);
   }
 
@@ -267,6 +264,12 @@ const socialLinks = [
     flex-shrink: 0;
     display: flex;
     align-items: center;
+  }
+
+  .contact-link-logo {
+    height: 24px;
+    width: auto;
+    display: block;
   }
 
   .contact-social-grid {
