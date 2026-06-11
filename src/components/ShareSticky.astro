@@ -183,24 +183,26 @@ const shareText = 'Dra. Estefanía Borges — Dermatóloga en Yucatán';
 <style>
 .share-sticky {
     position: fixed;
-    top: var(--space-6);
+    top: 5rem;
     right: var(--space-6);
     z-index: 200;
-    width: 56px;
-    height: 56px;
-    background: #1D5A8F;
-    color: #fff;
-    border: none;
+    width: 40px;
+    height: 40px;
+    background: #F5F0E6;
+    color: #7A6F5B;
+    border: 1px solid #E8DFC8;
     border-radius: var(--radius-full);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
   }
 
   .share-sticky:hover {
     transform: scale(1.08);
+    background: #EDE6D6;
   }
 
   .share-sticky:focus-visible {
@@ -209,21 +211,21 @@ const shareText = 'Dra. Estefanía Borges — Dermatóloga en Yucatán';
   }
 
   .share-icon {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
   }
 
   @media (max-width: 640px) {
     .share-sticky {
-      width: 48px;
-      height: 48px;
-      top: var(--space-4);
+      width: 36px;
+      height: 36px;
+      top: 4.5rem;
       right: var(--space-4);
     }
 
     .share-icon {
-      width: 22px;
-      height: 22px;
+      width: 16px;
+      height: 16px;
     }
   }
 

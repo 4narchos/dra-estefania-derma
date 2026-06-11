@@ -30,8 +30,11 @@ function isActive(linkPath: string): boolean {
 
 <header class="site-header">
   <nav class="nav-container" aria-label="Navegación principal">
-    <a href={base} class="nav-logo" aria-label="Dra. Estefanía Derma — Inicio">
-      <span class="nav-logo-text">Dra. Estefanía</span>
+    <a href={base} class="nav-logo" aria-label="Dra. Mariana Estefanía García Borges — Dermatóloga — Inicio">
+      <span class="nav-logo-text">
+        <span class="nav-logo-name">Dra. Mariana Estefanía García Borges</span>
+        <span class="nav-logo-sub">Dermatóloga</span>
+      </span>
     </a>
 
     <div class="nav-actions">
@@ -120,6 +123,24 @@ function isActive(linkPath: string): boolean {
 
   .nav-logo-icon {
     font-size: var(--text-xl);
+  }
+
+  .nav-logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+    font-size: var(--text-sm);
+  }
+
+  .nav-logo-name {
+    font-weight: var(--weight-semibold);
+    white-space: nowrap;
+  }
+
+  .nav-logo-sub {
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+    font-weight: var(--weight-normal);
   }
 
   .nav-menu {
