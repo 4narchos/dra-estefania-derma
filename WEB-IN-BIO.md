@@ -57,7 +57,7 @@ Los scripts de `scripts/` no se ejecutan automáticamente en local. Solo corren 
 | Archivo | Propósito |
 |---------|-----------|
 | `scripts/prepare-web-in-bio.js` | Script que se ejecuta en CI para ocultar páginas y poner contacto como index |
-| `scripts/restore-pages.js` | Script de emergencia para revertir los cambios en local (si ejecutaste el anterior por accidente) |
+| `scripts/restore-pages.cjs` | Script de emergencia para revertir los cambios en local (si ejecutaste el anterior por accidente) |
 | `.github/workflows/deploy.yml` | Workflow modificado para ejecutar `prepare-web-in-bio.js` antes del build |
 | `src/pages/contacto.astro` | Página principal que se muestra en producción (copiada como `index.astro` en CI) |
 | `src/pages/index.astro` | Página de inicio completa (oculta en producción, visible en local) |
@@ -96,7 +96,7 @@ Si ya no vas a usar el modo web-in-bio nunca más:
 
 ```bash
 rm scripts/prepare-web-in-bio.js
-rm scripts/restore-pages.js
+rm scripts/restore-pages.cjs
 rm WEB-IN-BIO.md
 # Edita .github/workflows/deploy.yml para quitar el paso
 ```
@@ -110,7 +110,7 @@ Luego commit y push.
 No pasa nada. Corre el script de restauración:
 
 ```bash
-node scripts/restore-pages.js
+node scripts/restore-pages.cjs
 ```
 
 Esto devuelve `index.astro`, `acerca.astro` y `servicios.astro` a `src/pages/` y elimina la copia de `index.astro`.
