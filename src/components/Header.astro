@@ -92,7 +92,7 @@ function isActive(linkPath: string): boolean {
     z-index: 100;
     background: var(--color-background);
     border-bottom: 1px solid var(--color-border);
-    --header-height: 120px;
+    --header-height: 96px;
   }
 
   .nav-container {
@@ -232,7 +232,11 @@ function isActive(linkPath: string): boolean {
 
   @media (max-width: 640px) {
     .site-header {
-      --header-height: 84px;
+      --header-height: 64px;
+    }
+
+    .nav-logo-img {
+      max-width: 58vw;
     }
 
     .nav-toggle {
