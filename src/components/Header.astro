@@ -92,6 +92,7 @@ function isActive(linkPath: string): boolean {
     z-index: 100;
     background: var(--color-background);
     border-bottom: 1px solid var(--color-border);
+    --header-height: 120px;
   }
 
   .nav-container {
@@ -102,6 +103,7 @@ function isActive(linkPath: string): boolean {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: var(--space-4);
   }
 
   .nav-logo {
@@ -119,9 +121,9 @@ function isActive(linkPath: string): boolean {
   }
 
   .nav-logo-img {
-    max-height: 100%;
-    height: auto;
+    height: 100%;
     width: auto;
+    max-width: none;
     display: block;
     object-fit: contain;
     mix-blend-mode: multiply;
@@ -230,7 +232,7 @@ function isActive(linkPath: string): boolean {
 
   @media (max-width: 640px) {
     .site-header {
-      --header-height: 70px;
+      --header-height: 84px;
     }
 
     .nav-toggle {
