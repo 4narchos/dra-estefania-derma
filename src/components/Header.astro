@@ -98,17 +98,19 @@ function isActive(linkPath: string): boolean {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--space-4);
-    height: var(--header-height);
+    min-height: var(--header-height);
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
   .nav-logo {
+    height: 100%;
     display: flex;
     align-items: center;
-    gap: var(--space-2);
     text-decoration: none;
+    margin: 0;
+    padding: 0;
   }
 
   .nav-logo:hover {
@@ -116,9 +118,11 @@ function isActive(linkPath: string): boolean {
   }
 
   .nav-logo-img {
-    height: 44px;
+    height: 100%;
     width: auto;
     display: block;
+    object-fit: contain;
+    mix-blend-mode: multiply;
   }
 
   .nav-menu {
@@ -223,8 +227,8 @@ function isActive(linkPath: string): boolean {
   }
 
   @media (max-width: 640px) {
-    .nav-logo-img {
-      height: 32px;
+    .site-header {
+      --header-height: 72px;
     }
 
     .nav-toggle {
