@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://4narchos.github.io',
-  base: '/dra-estefania-derma',
+  site: 'https://estefaniaderma.mx',
   output: 'static',
 });

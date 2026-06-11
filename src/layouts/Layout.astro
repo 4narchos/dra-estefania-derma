@@ -26,7 +26,7 @@ const {
 } = Astro.props;
 
 const baseUrl = getBaseUrl();
-const siteUrl = "https://4narchos.github.io/dra-estefania-derma";
+const siteUrl = "https://estefaniaderma.mx";
 const canonicalPath = Astro.url.pathname.replace(new RegExp(`^${baseUrl.replace(/\/$/, '')}/?`), '/') || '/';
 const canonicalUrl = `${siteUrl}${canonicalPath}`;
 const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/og-default.jpg`;
