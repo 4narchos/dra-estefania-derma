@@ -42,6 +42,11 @@ function isActive(linkPath: string): boolean {
         rel="noopener noreferrer"
       >
         Agendar
+        <span class="inner-button">
+          <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </span>
       </a>
 
       <button
@@ -79,6 +84,11 @@ function isActive(linkPath: string): boolean {
           rel="noopener noreferrer"
         >
           Agendar
+          <span class="inner-button">
+            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
         </a>
       </li>
     </ul>
@@ -178,38 +188,99 @@ function isActive(linkPath: string): boolean {
     gap: var(--space-3);
   }
 
-  .nav-cta {
-    background: #000C1E;
-    color: #fff;
-    padding: var(--space-2) var(--space-5);
-    border-radius: var(--radius-md);
-    font-size: var(--text-lg);
-    font-weight: var(--weight-medium);
+  .nav-cta,
+  .nav-cta-mobile {
+    position: relative;
+    padding: 0.65rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(to bottom, #171717, #242424);
+    border-radius: 9999px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 1), 0 10px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #292929;
     text-decoration: none;
-    transition: background var(--transition-fast);
+    white-space: nowrap;
   }
 
-  .nav-cta:hover {
-    background: #00152E;
+  .nav-cta::before,
+  .nav-cta-mobile::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    background: linear-gradient(to bottom, #292929, #000000);
+    z-index: -1;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+    opacity: 1;
+  }
+
+  .nav-cta:hover,
+  .nav-cta-mobile:hover {
     text-decoration: none;
+  }
+
+  .nav-cta:active,
+  .nav-cta-mobile:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 1), 0 5px 10px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav-cta .inner-button,
+  .nav-cta-mobile .inner-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, #171717, #242424);
+    width: 32px;
+    height: 32px;
+    margin-left: 8px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 1);
+    border: 1px solid #252525;
+    transition: all 0.2s ease;
+  }
+
+  .nav-cta .inner-button::before,
+  .nav-cta-mobile .inner-button::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    background: linear-gradient(to bottom, #292929, #000000);
+    z-index: -1;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+    opacity: 1;
+  }
+
+  .nav-cta .inner-button .icon,
+  .nav-cta-mobile .inner-button .icon {
+    filter: drop-shadow(0 10px 20px rgba(26, 25, 25, 0.9))
+      drop-shadow(0 0 4px rgba(0, 0, 0, 1));
+    transition: all 0.4s ease-in-out;
+  }
+
+  .nav-cta:hover .inner-button .icon,
+  .nav-cta-mobile:hover .inner-button .icon {
+    filter: drop-shadow(0 10px 20px rgba(50, 50, 50, 1))
+      drop-shadow(0 0 20px rgba(2, 2, 2, 1));
+    transform: rotate(-35deg);
   }
 
   .nav-cta-mobile {
     display: none;
-    background: #000C1E;
-    color: #fff;
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius-md);
-    font-size: var(--text-lg);
-    font-weight: var(--weight-medium);
-    text-decoration: none;
-    transition: background var(--transition-fast);
-    white-space: nowrap;
-  }
-
-  .nav-cta-mobile:hover {
-    background: #00152E;
-    text-decoration: none;
   }
 
   .nav-toggle {
@@ -245,7 +316,6 @@ function isActive(linkPath: string): boolean {
 
     .nav-cta-mobile {
       display: inline-flex;
-      font-size: var(--text-sm);
     }
 
     .nav-menu {
