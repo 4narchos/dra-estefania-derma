@@ -73,7 +73,10 @@ const socialLinks = [
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={`${base}images/doctoralia-logo.png`} alt="Doctoralia" class="contact-link-logo" loading="lazy" height="24" />
+            <span class="contact-link-icon">
+              <img src={`${base}images/doctoralia-symbol.png`} alt="Doctoralia" class="contact-link-symbol" loading="lazy" width="26" height="26" />
+            </span>
+            <span class="contact-link-text">Doctoralia</span>
           </a>
         </div>
       </div>
@@ -304,9 +307,9 @@ const socialLinks = [
     align-items: center;
   }
 
-  .contact-link-logo {
-    height: 24px;
-    width: auto;
+  .contact-link-symbol {
+    width: 26px;
+    height: 26px;
     display: block;
   }
 
