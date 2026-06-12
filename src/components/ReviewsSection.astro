@@ -1,32 +1,42 @@
 ---
 import SectionHeader from "./SectionHeader.astro";
-import { reviews } from "../data/reviews.js";
 ---
 
 <section class="reviews" id="opiniones">
   <div class="container">
     <SectionHeader
-      title="Lo que dicen los pacientes"
-      subtitle="Opiniones verificadas de Doctoralia"
+      title="Opiniones de pacientes"
     />
-    <div class="reviews-grid">
-      {reviews.map((review) => (
-        <blockquote class="review-card">
-          <p class="review-text">"{review.text}"</p>
-          <footer class="review-footer">
-            <span class="review-author">{review.author}</span>
-            <span class="review-treatment">{review.treatment}</span>
-          </footer>
-        </blockquote>
-      ))}
-    </div>
-    <p class="reviews-link">
-      <a href="https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan" target="_blank" rel="noopener noreferrer">
-        Ver todas las opiniones en Doctoralia →
+    <div class="reviews-widget">
+      <a
+        id="zl-url"
+        class="zl-url"
+        href="https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan"
+        rel="nofollow"
+        data-zlw-doctor="mariana-estefania-garcia-borges-2"
+        data-zlw-type="big"
+        data-zlw-opinion="true"
+        data-zlw-hide-branding="true"
+        data-zlw-saas-only="true"
+        data-zlw-a11y-title="Widget de reserva de citas médicas"
+      >
+        Reserve una cita
       </a>
-    </p>
+    </div>
   </div>
 </section>
+
+<script>
+  !(function ($_x, _s, id) {
+    var js, fjs = $_x.getElementsByTagName(_s)[0];
+    if (!$_x.getElementById(id)) {
+      js = $_x.createElement(_s);
+      js.id = id;
+      js.src = "//platform.docplanner.com/js/widget.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }
+  })(document, "script", "zl-widget-s");
+</script>
 
 <style>
   .reviews {
@@ -41,63 +51,9 @@ import { reviews } from "../data/reviews.js";
     padding: 0 var(--space-6);
   }
 
-  .reviews-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-    margin-bottom: var(--space-6);
-  }
-
-  @media (min-width: 768px) {
-    .reviews-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .review-card {
-    background: var(--color-surface);
-    padding: var(--space-6);
-    border-radius: var(--radius-md);
-    border-left: 3px solid var(--color-accent);
-  }
-
-  .review-text {
-    font-style: italic;
-    color: var(--color-text-primary);
-    margin-bottom: var(--space-4);
-    line-height: var(--leading-relaxed);
-    font-size: var(--text-sm);
-  }
-
-  .review-footer {
+  .reviews-widget {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-  }
-
-  .review-author {
-    font-weight: var(--weight-semibold);
-    font-size: var(--text-sm);
-    color: var(--color-primary);
-  }
-
-  .review-treatment {
-    font-size: var(--text-xs);
-    color: var(--color-text-muted);
-  }
-
-  .reviews-link {
-    text-align: center;
+    justify-content: center;
     margin-top: var(--space-6);
-  }
-
-  .reviews-link a {
-    color: var(--color-accent);
-    font-weight: var(--weight-medium);
-    font-size: var(--text-sm);
-  }
-
-  .reviews-link a:hover {
-    color: var(--color-accent-alt);
   }
 </style>
