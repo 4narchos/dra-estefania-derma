@@ -4,39 +4,236 @@ import SectionHeader from "./SectionHeader.astro";
 
 <section class="reviews" id="opiniones">
   <div class="container">
-    <SectionHeader
-      title="Opiniones de pacientes"
-    />
-    <div class="reviews-widget">
+    <SectionHeader title="Opiniones de pacientes" />
+
+    <div class="reviews-header">
+      <h2 class="reviews-title">Opiniones</h2>
       <a
-        id="zl-url"
-        class="zl-url"
-        href="https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan"
-        rel="nofollow"
-        data-zlw-doctor="mariana-estefania-garcia-borges-2"
-        data-zlw-type="big"
-        data-zlw-opinion="true"
-        data-zlw-hide-branding="true"
-        data-zlw-saas-only="true"
-        data-zlw-a11y-title="Widget de reserva de citas médicas"
+        href="https://www.doctoralia.com.mx/anade-opinion/mariana-estefania-garcia-borges-2"
+        class="reviews-add-btn"
+        target="_blank"
+        rel="noopener noreferrer"
       >
-        Reserve una cita
+        Agregar tu opinión
       </a>
     </div>
+
+    <div class="reviews-summary">
+      <div class="reviews-rating">
+        <div class="reviews-stars" aria-label="5 de 5 estrellas">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+        </div>
+        <p class="reviews-count">8 opiniones</p>
+      </div>
+
+      <div class="reviews-tags">
+        <p class="reviews-tags-label">Lo más mencionado por los pacientes</p>
+        <ul class="reviews-tags-list" role="list">
+          <li class="reviews-tag">Dedicación durante la visita</li>
+          <li class="reviews-tag">Explicaciones detalladas</li>
+          <li class="reviews-tag">Puntualidad</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="reviews-list">
+      <article class="reviews-item">
+        <header class="reviews-item-header">
+          <span class="reviews-avatar">C</span>
+          <div class="reviews-item-meta">
+            <h3 class="reviews-author">Claudia Algalán</h3>
+            <span class="reviews-verified">Cita verificada</span>
+          </div>
+          <div class="reviews-item-stars" aria-label="5 estrellas">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          </div>
+        </header>
+        <blockquote class="reviews-text">
+          La atención de la Dra. Estefanía fue excelente de principio a fin. Es muy precisa y asertiva al momento de explicar el diagnóstico y tratamiento a seguir, así como para aclarar dudas.
+        </blockquote>
+        <footer class="reviews-item-footer">
+          <time datetime="2026-06-05">5 de junio de 2026</time>
+          <span>Evoke Aging Journey & Dermatology · Primera visita Dermatología</span>
+        </footer>
+      </article>
+
+      <article class="reviews-item">
+        <header class="reviews-item-header">
+          <span class="reviews-avatar">I</span>
+          <div class="reviews-item-meta">
+            <h3 class="reviews-author">Iriani Castillo</h3>
+            <span class="reviews-verified">Cita verificada</span>
+          </div>
+          <div class="reviews-item-stars" aria-label="5 estrellas">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          </div>
+        </header>
+        <blockquote class="reviews-text">
+          Muy paciente, explicación con detalle, detenimiento en la revisión
+        </blockquote>
+        <footer class="reviews-item-footer">
+          <time datetime="2026-05-20">20 de mayo de 2026</time>
+        </footer>
+      </article>
+
+      <article class="reviews-item">
+        <header class="reviews-item-header">
+          <span class="reviews-avatar">M</span>
+          <div class="reviews-item-meta">
+            <h3 class="reviews-author">Maricela Sosa</h3>
+            <span class="reviews-verified">Cita verificada</span>
+          </div>
+          <div class="reviews-item-stars" aria-label="5 estrellas">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          </div>
+        </header>
+        <blockquote class="reviews-text">
+          Una persona muy empática y amable, tiene mucho tacto a la hora de explicar.
+        </blockquote>
+        <footer class="reviews-item-footer">
+          <time datetime="2026-05-20">20 de mayo de 2026</time>
+        </footer>
+      </article>
+
+      <article class="reviews-item">
+        <header class="reviews-item-header">
+          <span class="reviews-avatar">D</span>
+          <div class="reviews-item-meta">
+            <h3 class="reviews-author">Diego Rodriguez Perez</h3>
+            <span class="reviews-verified">Cita verificada</span>
+          </div>
+          <div class="reviews-item-stars" aria-label="5 estrellas">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          </div>
+        </header>
+        <blockquote class="reviews-text">
+          Nos explicó muy bien el problema que había y fue muy amable.
+        </blockquote>
+        <footer class="reviews-item-footer">
+          <time datetime="2026-05-13">13 de mayo de 2026</time>
+        </footer>
+      </article>
+
+      <article class="reviews-item">
+        <header class="reviews-item-header">
+          <span class="reviews-avatar">N</span>
+          <div class="reviews-item-meta">
+            <h3 class="reviews-author">Nazly González</h3>
+            <span class="reviews-verified">Cita verificada</span>
+          </div>
+          <div class="reviews-item-stars" aria-label="5 estrellas">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          </div>
+        </header>
+        <blockquote class="reviews-text">
+          Excelente atención, escucha las necesidades de cada paciente, explica cada parte de la consulta para dejar todo claro de manera amable y profesional.
+        </blockquote>
+        <footer class="reviews-item-footer">
+          <time datetime="2026-05-08">8 de mayo de 2026</time>
+        </footer>
+      </article>
+
+      <article class="reviews-item">
+        <header class="reviews-item-header">
+          <span class="reviews-avatar">A</span>
+          <div class="reviews-item-meta">
+            <h3 class="reviews-author">Angel Chin</h3>
+            <span class="reviews-verified">Cita verificada</span>
+          </div>
+          <div class="reviews-item-stars" aria-label="5 estrellas">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          </div>
+        </header>
+        <blockquote class="reviews-text">
+          Todo excelente, atención personalizada y directa, carismática y empática.
+        </blockquote>
+        <footer class="reviews-item-footer">
+          <time datetime="2026-05-08">8 de mayo de 2026</time>
+        </footer>
+      </article>
+
+      <article class="reviews-item">
+        <header class="reviews-item-header">
+          <span class="reviews-avatar">M</span>
+          <div class="reviews-item-meta">
+            <h3 class="reviews-author">Mauri Cruz</h3>
+            <span class="reviews-verified">Cita verificada</span>
+          </div>
+          <div class="reviews-item-stars" aria-label="5 estrellas">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          </div>
+        </header>
+        <blockquote class="reviews-text">
+          Increíble doctora, muy comprensible y excelente explicación.
+        </blockquote>
+        <footer class="reviews-item-footer">
+          <time datetime="2026-05-06">6 de mayo de 2026</time>
+        </footer>
+      </article>
+
+      <article class="reviews-item">
+        <header class="reviews-item-header">
+          <span class="reviews-avatar">F</span>
+          <div class="reviews-item-meta">
+            <h3 class="reviews-author">FS</h3>
+            <span class="reviews-verified">Cita verificada</span>
+          </div>
+          <div class="reviews-item-stars" aria-label="5 estrellas">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          </div>
+        </header>
+        <blockquote class="reviews-text">
+          Excelente médico, desde el inicio hace todo muy ameno, da una explicación detallada del tratamiento que utilizará y muestra el porqué de ello. Sin duda me hizo sentir muy cómodo y sobre todo seguro para continuar mi tratamiento con ella.
+        </blockquote>
+        <footer class="reviews-item-footer">
+          <time datetime="2026-05-05">5 de mayo de 2026</time>
+        </footer>
+      </article>
+    </div>
+
+    <p class="reviews-source">
+      <a href="https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan" target="_blank" rel="noopener noreferrer">
+        Ver todas las opiniones en Doctoralia →
+      </a>
+    </p>
   </div>
 </section>
-
-<script>
-  !(function ($_x, _s, id) {
-    var js, fjs = $_x.getElementsByTagName(_s)[0];
-    if (!$_x.getElementById(id)) {
-      js = $_x.createElement(_s);
-      js.id = id;
-      js.src = "//platform.docplanner.com/js/widget.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }
-  })(document, "script", "zl-widget-s");
-</script>
 
 <style>
   .reviews {
@@ -51,9 +248,187 @@ import SectionHeader from "./SectionHeader.astro";
     padding: 0 var(--space-6);
   }
 
-  .reviews-widget {
+  .reviews-header {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-6);
+  }
+
+  .reviews-title {
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .reviews-add-btn {
+    background: #000C1E;
+    color: #fff;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: background var(--transition-fast);
+  }
+
+  .reviews-add-btn:hover {
+    background: #00152E;
+    text-decoration: none;
+  }
+
+  .reviews-summary {
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+
+  .reviews-rating {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .reviews-stars,
+  .reviews-item-stars {
+    display: flex;
+    gap: 2px;
+    color: #F5B800;
+  }
+
+  .reviews-stars svg,
+  .reviews-item-stars svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .reviews-item-stars svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .reviews-count {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .reviews-tags-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  .reviews-tags-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+  }
+
+  .reviews-tag {
+    font-size: var(--text-sm);
+    color: var(--color-text-primary);
+    background: #E8F4E8;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-sm);
+  }
+
+  .reviews-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .reviews-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .reviews-item {
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+  }
+
+  .reviews-item-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .reviews-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: var(--color-primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    margin-top: var(--space-6);
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    flex-shrink: 0;
+  }
+
+  .reviews-item-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .reviews-author {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .reviews-verified {
+    font-size: var(--text-xs);
+    color: #325C46;
+    font-weight: var(--weight-medium);
+  }
+
+  .reviews-text {
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
+    line-height: var(--leading-relaxed);
+    margin: 0 0 var(--space-4) 0;
+    padding: 0;
+    border: none;
+  }
+
+  .reviews-item-footer {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .reviews-source {
+    text-align: center;
+    margin-top: var(--space-8);
+  }
+
+  .reviews-source a {
+    color: var(--color-accent);
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+  }
+
+  .reviews-source a:hover {
+    text-decoration: underline;
   }
 </style>
