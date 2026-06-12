@@ -30,10 +30,6 @@ function isActive(linkPath: string): boolean {
 
 <header class="site-header">
   <nav class="nav-container" aria-label="Navegación principal">
-    <a href={base} class="nav-logo" aria-label="Dra. Estefanía Borges — Dermatóloga — Inicio">
-      <img src={`${base}images/header-logo-v2.png`} alt="Dra. Estefanía Borges — Dermatóloga" class="nav-logo-img" loading="eager" width="300" height="96" />
-    </a>
-
     <div class="nav-actions">
       <a
         href={`${whatsappBaseUrl}&utm_source=web&utm_medium=header&utm_campaign=agendar`}
@@ -110,29 +106,6 @@ function isActive(linkPath: string): boolean {
     align-items: center;
     justify-content: space-between;
     gap: var(--space-4);
-  }
-
-  .nav-logo {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    text-decoration: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav-logo:hover {
-    text-decoration: none;
-  }
-
-  .nav-logo-img {
-    height: 100%;
-    width: auto;
-    max-width: none;
-    display: block;
-    object-fit: contain;
-    mix-blend-mode: multiply;
   }
 
   .nav-menu {
@@ -247,10 +220,6 @@ function isActive(linkPath: string): boolean {
   @media (max-width: 640px) {
     .site-header {
       --header-height: 64px;
-    }
-
-    .nav-logo-img {
-      max-width: 58vw;
     }
 
     .nav-toggle {
