@@ -35,18 +35,22 @@ const socialLinks = [
   <section class="contact-page">
     <div class="contact-container">
       <div class="contact-profile">
-        <div class="contact-avatar">
-          <img
-            src={`${base}images/dra-estefania-dermatoscopio.jpg`}
-            alt="Dra. Mariana Estefanía García Borges"
-            class="contact-avatar-img"
-            loading="eager"
-            width="96"
-            height="96"
-          />
+        <div class="contact-profile-row">
+          <div class="contact-avatar">
+            <img
+              src={`${base}images/dra-estefania-dermatoscopio.jpg`}
+              alt="Dra. Mariana Estefanía García Borges"
+              class="contact-avatar-img"
+              loading="eager"
+              width="96"
+              height="96"
+            />
+          </div>
+          <div class="contact-info">
+            <h1 class="contact-name">Dra. Mariana Estefanía García Borges</h1>
+            <a href="https://instagram.com/dra.estefaniaderma" class="contact-handle" target="_blank" rel="noopener noreferrer">@dra.estefaniaderma</a>
+          </div>
         </div>
-        <h1 class="contact-name">Dra. Mariana Estefanía García Borges</h1>
-        <a href="https://instagram.com/dra.estefaniaderma" class="contact-handle" target="_blank" rel="noopener noreferrer">@dra.estefaniaderma</a>
         <p class="contact-bio">Dermatóloga en Yucatán 🧴</p>
         <p class="contact-motto">Tu piel te habla, yo te ayudo a entenderla ✨</p>
       </div>
@@ -150,9 +154,23 @@ const socialLinks = [
   .contact-profile {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     gap: var(--space-2);
+  }
+
+  .contact-profile-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    width: 100%;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
   }
 
   .contact-avatar {
@@ -164,8 +182,8 @@ const socialLinks = [
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: var(--space-3);
     overflow: hidden;
+    flex-shrink: 0;
   }
 
   .contact-avatar-img {
@@ -178,7 +196,8 @@ const socialLinks = [
     font-size: var(--text-xl);
     font-weight: var(--weight-bold);
     color: var(--color-text-primary);
-    text-align: center;
+    text-align: left;
+    line-height: 1.2;
   }
 
   .contact-handle {
