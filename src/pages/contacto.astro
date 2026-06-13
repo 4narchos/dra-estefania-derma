@@ -79,7 +79,7 @@ const socialLinks = [
 
         <div class="contact-profile-meta">
           <p class="contact-bio">Tu Dermatóloga en Yucatán&nbsp;🧴</p>
-          <p class="contact-motto">Tu piel te habla,<br />y yo te ayudo a entenderla&nbsp;✨</p>
+          <p class="contact-motto">Tu piel te habla, y yo te ayudo a entenderla&nbsp;✨</p>
         </div>
       </article>
 
@@ -340,6 +340,10 @@ const socialLinks = [
       width: 18px;
       height: 18px;
     }
+
+    .contact-motto {
+      font-size: 0.75rem;
+    }
   }
 
   .contact-handle {
@@ -364,9 +368,7 @@ const socialLinks = [
     font-style: italic;
     opacity: 0.85;
     margin-top: var(--space-1);
-    word-break: keep-all;
-    overflow-wrap: normal;
-    hyphens: none;
+    white-space: nowrap;
   }
 
   .contact-profile-meta {
