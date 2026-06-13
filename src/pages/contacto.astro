@@ -2,8 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import { whatsappBaseUrl } from "../data/links.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 
 const base = getBaseUrl();
+const vcardContent = readFileSync(
+  fileURLToPath(new URL("../../public/dra-estefania-derma.vcf", import.meta.url)),
+  "utf-8"
+);
 const title = "Contacto | Dra. Estefanía";
 const description = "Agenda tu consulta dermatológica con la Dra. Mariana Estefanía García Borges en Mérida, Yucatán. También disponible en Doctoralia.";
 
@@ -62,6 +68,7 @@ const socialLinks = [
               href={`${base}dra-estefania-derma.vcf`}
               class="contact-add-button"
               download="Agregar contacto.vcf"
+              data-vcard={vcardContent}
               aria-label="Agregar contacto"
               title="Agregar contacto"
             >
@@ -512,3 +519,39 @@ const socialLinks = [
     opacity: 0.7;
   }
 </style>
+
+<script>
+  (function () {
+    const addButton = document.querySelector('.contact-add-button');
+    if (!addButton) return;
+
+    addButton.addEventListener('click', async (event) => {
+      const vcard = addButton.dataset.vcard;
+      if (!vcard) return;
+
+      const file = new File([vcard], 'Agregar contacto.vcf', { type: 'text/vcard' });
+
+      if (
+        typeof navigator !== 'undefined' &&
+        navigator.share &&
+        navigator.canShare &&
+        navigator.canShare({ files: [file] })
+      ) {
+        event.preventDefault();
+        try {
+          await navigator.share({
+            files: [file],
+            title: 'Dra. Estefanía Derma',
+            text: 'Agregar contacto'
+          });
+        } catch (error) {
+          if (error.name !== 'AbortError') {
+            console.error('Error al compartir contacto:', error);
+          }
+        }
+      }
+      // Si el navegador no soporta Web Share API, se deja el comportamiento
+      // por defecto del enlace para descargar el archivo .vcf.
+    });
+  })();
+</script>
