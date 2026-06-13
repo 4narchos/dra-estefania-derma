@@ -57,6 +57,21 @@ const socialLinks = [
               <h1 class="contact-name">Dra. Mariana Estefanía García Borges</h1>
               <a href="https://instagram.com/dra.estefaniaderma" class="contact-handle" target="_blank" rel="noopener noreferrer">@dra.estefaniaderma</a>
             </div>
+
+            <a
+              href={`${base}dra-estefania-derma.vcf`}
+              class="contact-add-button"
+              download="Dra-Estefania-Derma.vcf"
+              aria-label="Agregar contacto"
+              title="Agregar contacto"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <line x1="19" x2="19" y1="8" y2="14"/>
+                <line x1="22" x2="16" y1="11" y2="11"/>
+              </svg>
+            </a>
           </div>
         </div>
 
@@ -212,6 +227,36 @@ const socialLinks = [
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-1);
+    min-width: 0;
+  }
+
+  .contact-add-button {
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background: #fff;
+    border: 1px solid #E6E3DB;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    flex-shrink: 0;
+  }
+
+  .contact-add-button:hover {
+    background: #F0EBE0;
+    border-color: #DACE97;
+    color: var(--color-text-primary);
+    transform: scale(1.05);
+  }
+
+  .contact-add-button svg {
+    width: 20px;
+    height: 20px;
+    display: block;
   }
 
   .contact-avatar {
@@ -283,6 +328,16 @@ const socialLinks = [
     .contact-name {
       font-size: 0.9375rem;
       line-height: 1.25;
+    }
+
+    .contact-add-button {
+      width: 36px;
+      height: 36px;
+    }
+
+    .contact-add-button svg {
+      width: 18px;
+      height: 18px;
     }
   }
 
