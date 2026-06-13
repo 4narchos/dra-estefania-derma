@@ -30,6 +30,11 @@ function isActive(linkPath: string): boolean {
 
 <header class="site-header">
   <nav class="nav-container" aria-label="Navegación principal">
+    <div class="nav-brand" aria-label="Logo">
+      <span class="nav-brand-desktop"></span>
+      <span class="nav-brand-mobile"></span>
+    </div>
+
     <div class="nav-actions">
       <a
         href={`${whatsappBaseUrl}&utm_source=web&utm_medium=header&utm_campaign=agendar`}
@@ -103,8 +108,27 @@ function isActive(linkPath: string): boolean {
     height: var(--header-height);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: var(--space-4);
+  }
+
+  .nav-brand {
+    display: inline-flex;
+    align-items: center;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .nav-brand-desktop {
+    display: block;
+    width: 138px;
+    height: 24px;
+  }
+
+  .nav-brand-mobile {
+    display: none;
+    width: 26px;
+    height: 24px;
   }
 
   .nav-menu {
@@ -112,6 +136,7 @@ function isActive(linkPath: string): boolean {
     align-items: center;
     gap: var(--space-6);
     list-style: none;
+    margin-left: auto;
   }
 
   .nav-link {
@@ -153,9 +178,10 @@ function isActive(linkPath: string): boolean {
   }
 
   .nav-actions {
-    display: flex;
+    display: none;
     align-items: center;
     gap: var(--space-3);
+    margin-left: auto;
   }
 
   .nav-cta,
@@ -221,6 +247,18 @@ function isActive(linkPath: string): boolean {
   }
 
   @media (max-width: 640px) {
+    .nav-brand-desktop {
+      display: none;
+    }
+
+    .nav-brand-mobile {
+      display: block;
+    }
+
+    .nav-actions {
+      display: flex;
+    }
+
     .nav-toggle {
       display: flex;
     }
