@@ -104,7 +104,18 @@ const shareText = 'Dra. Estefanía Borges — Dermatóloga en Yucatán';
       document.body.style.overflow = '';
     }
 
-    trigger.addEventListener('click', openModal);
+    trigger.addEventListener('click', function() {
+      const isMobile = window.matchMedia('(max-width: 640px)').matches;
+      if (isMobile && navigator.share) {
+        navigator.share({
+          title: document.title,
+          text: shareText,
+          url: shareUrl,
+        }).catch(() => {});
+      } else {
+        openModal();
+      }
+    });
     closeBtn.addEventListener('click', closeModal);
     overlay.addEventListener('click', function(e) {
       if (e.target === overlay) closeModal();
