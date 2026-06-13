@@ -46,6 +46,11 @@ const socialLinks = [
                 width="96"
                 height="96"
               />
+              <span class="contact-avatar-badge" aria-label="Perfil verificado" title="Perfil verificado">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10m6.03-13.47-8 8a.75.75 0 0 1-1.06 0l-3-3a.75.75 0 1 1 1.06-1.06l2.47 2.47 7.47-7.47a.75.75 0 1 1 1.06 1.06"></path>
+                </svg>
+              </span>
             </div>
             <div class="contact-info">
               <h1 class="contact-name">Dra. Mariana Estefanía García Borges</h1>
@@ -58,14 +63,15 @@ const socialLinks = [
 
         <div class="contact-profile-meta">
           <p class="contact-bio">Dermatóloga en Yucatán 🧴</p>
-          <p class="contact-motto">Tu piel te habla, yo te ayudo a entenderla ✨</p>
+          <p class="contact-motto">Tu piel te habla</p>
+          <p class="contact-motto">Y yo te ayudo a entenderla ✨</p>
         </div>
       </article>
 
       {/* Sección Profesional */}
       <article class="contact-panel">
         <div class="contact-section">
-          <h2 class="contact-section-title">Agendar consulta</h2>
+          <h2 class="contact-section-title">Agendar cita</h2>
 
           <div class="contact-links-row">
             <a href={whatsappUrl} class="contact-link contact-link--primary" target="_blank" rel="noopener noreferrer">
@@ -217,22 +223,45 @@ const socialLinks = [
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow: visible;
     flex-shrink: 0;
+    position: relative;
   }
 
   .contact-avatar-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: var(--radius-full);
+  }
+
+  .contact-avatar-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 28px;
+    height: 28px;
+    background: #2D5E46;
+    border: 2px solid #fff;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  }
+
+  .contact-avatar-badge svg {
+    width: 16px;
+    height: 16px;
   }
 
   .contact-name {
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
     font-weight: var(--weight-bold);
     color: var(--color-text-primary);
     text-align: left;
-    line-height: 1.2;
+    line-height: 1.25;
   }
 
   .contact-handle {
