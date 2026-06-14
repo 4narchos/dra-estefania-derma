@@ -353,18 +353,18 @@ function isActive(linkPath: string): boolean {
     border-radius: 0 999px 999px 0;
   }
 
-  .nav-cta-wrapper:hover .nav-cta-default {
+  .nav-cta-wrapper.is-split .nav-cta-default {
     opacity: 0;
     visibility: hidden;
-    transition-delay: 1s;
+    transition-delay: 0s;
   }
 
-  .nav-cta-wrapper:hover .nav-cta-half {
+  .nav-cta-wrapper.is-split .nav-cta-half {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
     transform: translateX(0);
-    transition-delay: 1s;
+    transition-delay: 0s;
   }
 
   .nav-cta-half:hover {
@@ -578,9 +578,11 @@ function isActive(linkPath: string): boolean {
       });
     });
 
+    const ctaWrapper = document.querySelector(".nav-cta-wrapper");
     const doctoraliaHalf = document.querySelector(".nav-cta-half--doctoralia");
     const dropdown = document.querySelector(".nav-cta-dropdown");
     let hideTimeout;
+    let splitTimeout;
 
     function loadDoctoraliaWidget() {
       if (document.getElementById("zl-widget-s")) return;
@@ -597,6 +599,24 @@ function isActive(linkPath: string): boolean {
       window.requestIdleCallback(() => loadDoctoraliaWidget(), { timeout: 5000 });
     } else {
       setTimeout(() => loadDoctoraliaWidget(), 3000);
+    }
+
+    if (ctaWrapper) {
+      const enterSplit = () => {
+        splitTimeout = setTimeout(() => {
+          ctaWrapper.classList.add("is-split");
+        }, 1000);
+      };
+
+      const leaveSplit = () => {
+        clearTimeout(splitTimeout);
+        ctaWrapper.classList.remove("is-split");
+      };
+
+      ctaWrapper.addEventListener("mouseenter", enterSplit);
+      ctaWrapper.addEventListener("mouseleave", leaveSplit);
+      ctaWrapper.addEventListener("focusin", enterSplit);
+      ctaWrapper.addEventListener("focusout", leaveSplit);
     }
 
     if (doctoraliaHalf && dropdown) {
