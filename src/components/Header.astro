@@ -96,8 +96,8 @@ function isActive(linkPath: string): boolean {
         class="nav-cta-default"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Agendar por WhatsApp"
-        title="Agendar por WhatsApp"
+        aria-label="Agendar cita por WhatsApp"
+        title="Agendar cita por WhatsApp"
       >
         <i aria-hidden="true" class="nav-cta-icon">
           <svg class="nav-cta-svg nav-cta-svg--default" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M6 3a1 1 0 0 1 2 0v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1zM5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9zm2 3.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0m4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 15a1 1 0 1 0 0 2 1 1 0 0 0 0-2m3 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
@@ -106,7 +106,7 @@ function isActive(linkPath: string): boolean {
             <path d="m21.854 2.147-10.94 10.939"/>
           </svg>
         </i>
-        <span>Agendar</span>
+        <span>Agendar cita</span>
       </a>
 
       <div id="nav-cta-dropdown" class="nav-cta-dropdown nav-cta-dropdown--widget">
@@ -253,10 +253,12 @@ function isActive(linkPath: string): boolean {
   }
 
   .nav-cta-default {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    width: 10rem;
     min-height: 2.75rem;
     padding: 0.625rem 1rem;
     background: #325C46;
@@ -282,6 +284,7 @@ function isActive(linkPath: string): boolean {
   }
 
   .nav-cta-wrapper.is-split .nav-cta-default span {
+    position: absolute;
     opacity: 0;
   }
 
