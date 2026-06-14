@@ -91,13 +91,20 @@ function isActive(linkPath: string): boolean {
     </ul>
 
     <div class="nav-cta-split">
+      <span class="nav-cta-default" aria-hidden="true">
+        <i aria-hidden="true" class="nav-cta-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M6 3a1 1 0 0 1 2 0v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1zM5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9zm2 3.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0m4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 15a1 1 0 1 0 0 2 1 1 0 0 0 0-2m3 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
+        </i>
+        <span>Agendar</span>
+      </span>
+
       <a
         href={`${whatsappBaseUrl}&utm_source=web&utm_medium=header&utm_campaign=agendar`}
         class="nav-cta-half nav-cta-half--whatsapp"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Agendar por WhatsApp"
-        title="Agendar por WhatsApp"
+        aria-label="Enviar mensaje"
+        title="Enviar mensaje"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/>
@@ -119,15 +126,7 @@ function isActive(linkPath: string): boolean {
       </button>
 
       <div id="nav-cta-dropdown" class="nav-cta-dropdown" hidden>
-        <a
-          href="https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan"
-          class="nav-cta-dropdown-link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src={`${base}images/doctoralia-symbol.png`} alt="" width="20" height="20" loading="lazy" />
-          <span>Agendar en Doctoralia</span>
-        </a>
+        <p class="nav-cta-dropdown-note">Widget de Doctoralia</p>
       </div>
     </div>
   </nav>
@@ -258,23 +257,47 @@ function isActive(linkPath: string): boolean {
     position: relative;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
     background: #325C46;
+    color: #fff;
     border-radius: 999px;
-    overflow: visible;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background var(--transition-fast);
   }
 
-  .nav-cta-half {
+  .nav-cta-split:hover {
+    background: transparent;
+  }
+
+  .nav-cta-default {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: nowrap;
+    transition: opacity var(--transition-fast);
+  }
+
+  .nav-cta-half {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 50%;
     min-height: 2.75rem;
-    padding: 0.625rem 0.875rem;
+    padding: 0.625rem;
     background: #325C46;
     color: #fff;
     border: none;
     cursor: pointer;
     text-decoration: none;
-    transition: background var(--transition-fast), transform var(--transition-fast);
+    transition: background var(--transition-fast);
   }
 
   .nav-cta-half svg {
@@ -292,28 +315,29 @@ function isActive(linkPath: string): boolean {
     border-radius: 0 999px 999px 0;
   }
 
+  .nav-cta-split:hover .nav-cta-default {
+    display: none;
+  }
+
+  .nav-cta-split:hover .nav-cta-half {
+    display: inline-flex;
+  }
+
   .nav-cta-half:hover {
     background: #264839;
-  }
-
-  .nav-cta-split:hover .nav-cta-half--doctoralia {
-    transform: translateX(-1px);
-  }
-
-  .nav-cta-split:hover .nav-cta-half--whatsapp {
-    transform: translateX(1px);
   }
 
   .nav-cta-dropdown {
     position: absolute;
     top: calc(100% + 0.5rem);
     right: 0;
-    min-width: 220px;
+    width: 320px;
+    max-width: calc(100vw - 2rem);
     background: #fff;
     border: 1px solid #E6E3DB;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    padding: 0.5rem;
+    padding: 1rem;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-4px);
@@ -328,28 +352,11 @@ function isActive(linkPath: string): boolean {
     transform: translateY(0);
   }
 
-  .nav-cta-dropdown-link {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    color: var(--color-text-primary);
-    text-decoration: none;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    transition: background var(--transition-fast);
-  }
-
-  .nav-cta-dropdown-link:hover {
-    background: #F0EBE0;
-  }
-
-  .nav-cta-dropdown-link img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    flex-shrink: 0;
+  .nav-cta-dropdown-note {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    text-align: center;
   }
 
   .nav-cta-mobile {
