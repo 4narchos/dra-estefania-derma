@@ -88,21 +88,19 @@ function isActive(linkPath: string): boolean {
           </a>
         </li>
       ))}
-      <li role="none">
-        <a
-          href={`${whatsappBaseUrl}&utm_source=web&utm_medium=header&utm_campaign=agendar`}
-          class="nav-cta"
-          role="menuitem"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <i aria-hidden="true" class="nav-cta-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M6 3a1 1 0 0 1 2 0v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1zM5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9zm2 3.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0m4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 15a1 1 0 1 0 0 2 1 1 0 0 0 0-2m3 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
-          </i>
-          <span>Agendar</span>
-        </a>
-      </li>
     </ul>
+
+    <a
+      href={`${whatsappBaseUrl}&utm_source=web&utm_medium=header&utm_campaign=agendar`}
+      class="nav-cta"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <i aria-hidden="true" class="nav-cta-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M6 3a1 1 0 0 1 2 0v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1zM5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9zm2 3.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0m4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 15a1 1 0 1 0 0 2 1 1 0 0 0 0-2m3 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
+      </i>
+      <span>Agendar</span>
+    </a>
   </nav>
 </header>
 
@@ -178,6 +176,7 @@ function isActive(linkPath: string): boolean {
     gap: var(--space-6);
     list-style: none;
     margin-left: auto;
+    margin-right: auto;
   }
 
   .nav-link {
