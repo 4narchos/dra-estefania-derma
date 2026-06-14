@@ -105,17 +105,17 @@ const socialLinks = [
               <span class="contact-link-text">WhatsApp</span>
             </a>
 
-            <a
-              href="https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan"
+            <button
+              type="button"
               class="contact-link contact-link--secondary"
-              target="_blank"
-              rel="noopener noreferrer"
+              data-doctoralia-trigger
+              aria-label="Agendar cita con Doctoralia"
             >
               <span class="contact-link-icon">
-                <img src={`${base}images/doctoralia-symbol.png`} alt="Doctoralia" class="contact-link-symbol" loading="lazy" width="26" height="26" />
+                <img src={`${base}images/doctoralia-symbol.png`} alt="" class="contact-link-symbol" loading="lazy" width="26" height="26" />
               </span>
               <span class="contact-link-text">Doctoralia</span>
-            </a>
+            </button>
           </div>
         </div>
       </article>
@@ -167,6 +167,33 @@ const socialLinks = [
         </div>
       </article>
 
+
+      {/* Modal del widget de Doctoralia */}
+      <div class="doctoralia-modal" id="doctoralia-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Agendar cita con Doctoralia">
+        <div class="doctoralia-modal-backdrop" data-doctoralia-close></div>
+        <div class="doctoralia-modal-content">
+          <button type="button" class="doctoralia-modal-close" aria-label="Cerrar" data-doctoralia-close>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 6 6 18"/>
+              <path d="m6 6 12 12"/>
+            </svg>
+          </button>
+          <div class="doctoralia-modal-body">
+            <a
+              id="zl-url"
+              class="zl-url"
+              href="https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan"
+              rel="nofollow"
+              data-zlw-doctor="mariana-estefania-garcia-borges-2"
+              data-zlw-type="big_with_calendar"
+              data-zlw-opinion="false"
+              data-zlw-hide-branding="true"
+              data-zlw-saas-only="true"
+              data-zlw-a11y-title="Widget de reserva de citas médicas"
+            >Reserve una cita</a>
+          </div>
+        </div>
+      </div>
 
       <footer class="contact-footer">
         <p>Dra. Mariana Estefanía García Borges</p>
@@ -539,4 +566,123 @@ const socialLinks = [
     margin-top: var(--space-1);
     opacity: 0.7;
   }
+
+  .doctoralia-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-fast), visibility var(--transition-fast);
+  }
+
+  .doctoralia-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .doctoralia-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .doctoralia-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    max-height: calc(100vh - 2rem);
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    overflow: auto;
+    padding: var(--space-6);
+    z-index: 1;
+  }
+
+  .doctoralia-modal-close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F0EBE0;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    color: var(--color-text-primary);
+    transition: background var(--transition-fast);
+  }
+
+  .doctoralia-modal-close:hover {
+    background: #E6E3DB;
+  }
+
+  .doctoralia-modal-body {
+    display: flex;
+    justify-content: center;
+  }
 </style>
+
+<script>
+  (function () {
+    const trigger = document.querySelector("[data-doctoralia-trigger]");
+    const modal = document.getElementById("doctoralia-modal");
+    const closeButtons = document.querySelectorAll("[data-doctoralia-close]");
+    let showTimeout;
+
+    function loadDoctoraliaWidget() {
+      if (document.getElementById("zl-widget-s")) return;
+      const script = document.createElement("script");
+      script.id = "zl-widget-s";
+      script.src = "https://platform.docplanner.com/js/widget.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+
+    if (trigger && modal) {
+      const openModal = () => {
+        clearTimeout(showTimeout);
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        loadDoctoraliaWidget();
+      };
+
+      const startHoverTimer = () => {
+        showTimeout = setTimeout(openModal, 1000);
+      };
+
+      const cancelHoverTimer = () => {
+        clearTimeout(showTimeout);
+      };
+
+      trigger.addEventListener("mouseenter", startHoverTimer);
+      trigger.addEventListener("mouseleave", cancelHoverTimer);
+      trigger.addEventListener("click", openModal);
+
+      closeButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          modal.classList.remove("is-open");
+          modal.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+        });
+      });
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.classList.remove("is-open");
+          modal.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+        }
+      });
+    }
+  })();
+</script>
