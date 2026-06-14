@@ -269,12 +269,28 @@ function isActive(linkPath: string): boolean {
     white-space: nowrap;
     text-decoration: none;
     cursor: pointer;
-    transition: background var(--transition-fast);
+    transition: background var(--transition-fast), width 0.25s ease, padding 0.25s ease, gap 0.25s ease;
   }
 
   .nav-cta-default:hover {
     background: #264839;
     text-decoration: none;
+  }
+
+  .nav-cta-default span {
+    transition: opacity 0.25s ease;
+  }
+
+  .nav-cta-wrapper.is-split .nav-cta-default {
+    width: 2.75rem;
+    padding: 0;
+    gap: 0;
+  }
+
+  .nav-cta-wrapper.is-split .nav-cta-default span {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
   }
 
   .nav-cta-icon {
