@@ -90,17 +90,46 @@ function isActive(linkPath: string): boolean {
       ))}
     </ul>
 
-    <a
-      href={`${whatsappBaseUrl}&utm_source=web&utm_medium=header&utm_campaign=agendar`}
-      class="nav-cta"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <i aria-hidden="true" class="nav-cta-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M6 3a1 1 0 0 1 2 0v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1zM5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9zm2 3.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0m4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 15a1 1 0 1 0 0 2 1 1 0 0 0 0-2m3 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
-      </i>
-      <span>Agendar</span>
-    </a>
+    <div class="nav-cta-split">
+      <a
+        href={`${whatsappBaseUrl}&utm_source=web&utm_medium=header&utm_campaign=agendar`}
+        class="nav-cta-half nav-cta-half--whatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Agendar por WhatsApp"
+        title="Agendar por WhatsApp"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/>
+          <path d="m21.854 2.147-10.94 10.939"/>
+        </svg>
+      </a>
+
+      <button
+        type="button"
+        class="nav-cta-half nav-cta-half--doctoralia"
+        aria-label="Agendar cita"
+        aria-expanded="false"
+        aria-controls="nav-cta-dropdown"
+        title="Agendar cita"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m6 9 6 6 6-6"/>
+        </svg>
+      </button>
+
+      <div id="nav-cta-dropdown" class="nav-cta-dropdown" hidden>
+        <a
+          href="https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan"
+          class="nav-cta-dropdown-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={`${base}images/doctoralia-symbol.png`} alt="" width="20" height="20" loading="lazy" />
+          <span>Agendar en Doctoralia</span>
+        </a>
+      </div>
+    </div>
   </nav>
 </header>
 
@@ -224,12 +253,107 @@ function isActive(linkPath: string): boolean {
     justify-self: end;
   }
 
-  .nav-cta {
+  .nav-cta-split {
     justify-self: end;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    background: #325C46;
+    border-radius: 999px;
+    overflow: visible;
   }
 
-  .nav-cta,
+  .nav-cta-half {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0.625rem 0.875rem;
+    background: #325C46;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .nav-cta-half svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+  }
+
+  .nav-cta-half--doctoralia {
+    border-radius: 999px 0 0 999px;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .nav-cta-half--whatsapp {
+    border-radius: 0 999px 999px 0;
+  }
+
+  .nav-cta-half:hover {
+    background: #264839;
+  }
+
+  .nav-cta-split:hover .nav-cta-half--doctoralia {
+    transform: translateX(-1px);
+  }
+
+  .nav-cta-split:hover .nav-cta-half--whatsapp {
+    transform: translateX(1px);
+  }
+
+  .nav-cta-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    min-width: 220px;
+    background: #fff;
+    border: 1px solid #E6E3DB;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+    z-index: 101;
+  }
+
+  .nav-cta-split:hover .nav-cta-dropdown,
+  .nav-cta-dropdown.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-cta-dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: background var(--transition-fast);
+  }
+
+  .nav-cta-dropdown-link:hover {
+    background: #F0EBE0;
+  }
+
+  .nav-cta-dropdown-link img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
   .nav-cta-mobile {
+    display: none;
     background: #325C46;
     color: #fff;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
@@ -238,7 +362,6 @@ function isActive(linkPath: string): boolean {
     line-height: 1.5;
     border: none;
     border-radius: 999px;
-    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
@@ -250,7 +373,6 @@ function isActive(linkPath: string): boolean {
     transition: background var(--transition-fast);
   }
 
-  .nav-cta:hover,
   .nav-cta-mobile:hover {
     background: #264839;
     text-decoration: none;
@@ -266,10 +388,6 @@ function isActive(linkPath: string): boolean {
   .nav-cta-icon svg {
     display: block;
     fill: currentColor;
-  }
-
-  .nav-cta-mobile {
-    display: none;
   }
 
   .nav-toggle {
@@ -357,7 +475,7 @@ function isActive(linkPath: string): boolean {
       font-size: var(--text-base);
     }
 
-    .nav-cta {
+    .nav-cta-split {
       display: none;
     }
   }
@@ -382,5 +500,27 @@ function isActive(linkPath: string): boolean {
         toggle.setAttribute("aria-label", "Abrir menú");
       });
     });
+
+    const doctoraliaHalf = document.querySelector(".nav-cta-half--doctoralia");
+    const dropdown = document.querySelector(".nav-cta-dropdown");
+    if (doctoraliaHalf && dropdown) {
+      doctoraliaHalf.addEventListener("click", () => {
+        dropdown.classList.toggle("is-open");
+        doctoraliaHalf.setAttribute(
+          "aria-expanded",
+          String(dropdown.classList.contains("is-open"))
+        );
+      });
+
+      document.addEventListener("click", (event) => {
+        if (
+          !doctoraliaHalf.contains(event.target) &&
+          !dropdown.contains(event.target)
+        ) {
+          dropdown.classList.remove("is-open");
+          doctoraliaHalf.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
   })();
 </script>
