@@ -253,11 +253,9 @@ function isActive(linkPath: string): boolean {
   }
 
   .nav-cta-default {
-    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
     width: 10rem;
     min-height: 2.75rem;
     padding: 0.625rem 1rem;
@@ -280,11 +278,17 @@ function isActive(linkPath: string): boolean {
   }
 
   .nav-cta-default span {
-    transition: opacity 0.25s ease;
+    max-width: 10rem;
+    margin-left: 0.5rem;
+    opacity: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: max-width 0.25s ease, opacity 0.25s ease, margin-left 0.25s ease;
   }
 
   .nav-cta-wrapper.is-split .nav-cta-default span {
-    position: absolute;
+    max-width: 0;
+    margin-left: 0;
     opacity: 0;
   }
 
@@ -298,25 +302,20 @@ function isActive(linkPath: string): boolean {
     height: 18px;
   }
 
-  .nav-cta-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 18px;
-    height: 18px;
+  .nav-cta-icon svg {
     display: block;
     fill: currentColor;
+  }
+
+  .nav-cta-default .nav-cta-svg {
+    position: absolute;
+    inset: 0;
     transition: opacity 0.25s ease, transform 0.25s ease;
   }
 
   .nav-cta-svg--hover {
     opacity: 0;
     transform: translateY(100%);
-  }
-
-  .nav-cta-svg--hover path {
-    fill: none;
-    stroke: currentColor;
   }
 
   .nav-cta-wrapper.is-split .nav-cta-svg--default {
@@ -364,30 +363,6 @@ function isActive(linkPath: string): boolean {
     pointer-events: auto;
   }
 
-  .nav-cta-dropdown-link {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    color: var(--color-text-primary);
-    text-decoration: none;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    transition: background var(--transition-fast);
-  }
-
-  .nav-cta-dropdown-link:hover {
-    background: #F0EBE0;
-  }
-
-  .nav-cta-dropdown-link img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    flex-shrink: 0;
-  }
-
   .nav-cta-mobile {
     display: none;
     background: #325C46;
@@ -412,18 +387,6 @@ function isActive(linkPath: string): boolean {
   .nav-cta-mobile:hover {
     background: #264839;
     text-decoration: none;
-  }
-
-  .nav-cta-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .nav-cta-icon svg {
-    display: block;
-    fill: currentColor;
   }
 
   .nav-toggle {
@@ -521,24 +484,22 @@ function isActive(linkPath: string): boolean {
   (function () {
     const toggle = document.querySelector(".nav-toggle");
     const menu = document.querySelector(".nav-menu");
-    if (!toggle || !menu) return;
 
-    toggle.addEventListener("click", () => {
-      const isOpen = menu.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(isOpen));
-      toggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
-    });
-
-    menu.querySelectorAll(".nav-link, .nav-cta").forEach((link) => {
-      link.addEventListener("click", () => {
-        menu.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-        toggle.setAttribute("aria-label", "Abrir menú");
+    if (toggle && menu) {
+      toggle.addEventListener("click", () => {
+        const isOpen = menu.classList.toggle("is-open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
+        toggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
       });
-    });
 
-    const ctaWrapper = document.querySelector(".nav-cta-wrapper");
-    let splitTimeout;
+      menu.querySelectorAll(".nav-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          menu.classList.remove("is-open");
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.setAttribute("aria-label", "Abrir menú");
+        });
+      });
+    }
 
     function loadDoctoraliaWidget() {
       if (document.getElementById("zl-widget-s")) return;
@@ -549,34 +510,28 @@ function isActive(linkPath: string): boolean {
       document.body.appendChild(script);
     }
 
-    // Carga diferida del widget: espera a que el navegador esté ocioso
-    // o, como máximo, 5 segundos después de la carga de la página.
     if ("requestIdleCallback" in window) {
       window.requestIdleCallback(() => loadDoctoraliaWidget(), { timeout: 5000 });
     } else {
       setTimeout(() => loadDoctoraliaWidget(), 3000);
     }
 
+    const ctaWrapper = document.querySelector(".nav-cta-wrapper");
     if (ctaWrapper) {
-      const enterSplit = () => {
-        clearTimeout(splitTimeout);
-        splitTimeout = setTimeout(() => {
-          ctaWrapper.classList.add("is-split");
-          loadDoctoraliaWidget();
-        }, 500);
+      let splitTimer;
+
+      const setSplit = (active) => {
+        clearTimeout(splitTimer);
+        splitTimer = setTimeout(() => {
+          ctaWrapper.classList.toggle("is-split", active);
+          if (active) loadDoctoraliaWidget();
+        }, active ? 500 : 150);
       };
 
-      const leaveSplit = () => {
-        clearTimeout(splitTimeout);
-        splitTimeout = setTimeout(() => {
-          ctaWrapper.classList.remove("is-split");
-        }, 150);
-      };
-
-      ctaWrapper.addEventListener("mouseenter", enterSplit);
-      ctaWrapper.addEventListener("mouseleave", leaveSplit);
-      ctaWrapper.addEventListener("focusin", enterSplit);
-      ctaWrapper.addEventListener("focusout", leaveSplit);
+      ctaWrapper.addEventListener("mouseenter", () => setSplit(true));
+      ctaWrapper.addEventListener("mouseleave", () => setSplit(false));
+      ctaWrapper.addEventListener("focusin", () => setSplit(true));
+      ctaWrapper.addEventListener("focusout", () => setSplit(false));
     }
   })();
 </script>
