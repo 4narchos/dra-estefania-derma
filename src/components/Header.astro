@@ -31,8 +31,31 @@ function isActive(linkPath: string): boolean {
 <header class="site-header">
   <nav class="nav-container" aria-label="Navegación principal">
     <div class="nav-brand" aria-label="Logo">
-      <span class="nav-brand-desktop"></span>
-      <span class="nav-brand-mobile"></span>
+      <a href={`${base}`} class="nav-brand-link nav-brand-link--desktop">
+        <img
+          src={`${base}images/logo-icon-desktop.png`}
+          alt=""
+          class="nav-brand-icon"
+          width="40"
+          height="40"
+          loading="eager"
+        />
+        <div class="nav-brand-text">
+          <span class="nav-brand-title">Dra. Estefanía Borges</span>
+          <span class="nav-brand-subtitle">DERMATÓLOGA</span>
+        </div>
+      </a>
+
+      <a href={`${base}`} class="nav-brand-link nav-brand-link--mobile">
+        <img
+          src={`${base}images/logo-icon-mobile.png`}
+          alt="Dra. Estefanía Borges"
+          class="nav-brand-icon"
+          width="24"
+          height="24"
+          loading="eager"
+        />
+      </a>
     </div>
 
     <div class="nav-actions">
@@ -115,20 +138,56 @@ function isActive(linkPath: string): boolean {
   .nav-brand {
     display: inline-flex;
     align-items: center;
-    height: 24px;
     flex-shrink: 0;
   }
 
-  .nav-brand-desktop {
-    display: block;
-    width: 138px;
-    height: 24px;
+  .nav-brand-link {
+    text-decoration: none;
+    color: inherit;
   }
 
-  .nav-brand-mobile {
+  .nav-brand-link--desktop {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .nav-brand-link--mobile {
     display: none;
-    width: 26px;
-    height: 24px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-brand-icon {
+    display: block;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .nav-brand-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .nav-brand-title {
+    font-family: 'Apple Chancery', 'Zapfino', cursive;
+    font-size: 1.125rem;
+    line-height: 1.1;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+  }
+
+  .nav-brand-subtitle {
+    font-family: 'Optima', 'Segoe UI', sans-serif;
+    font-weight: 700;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    line-height: 1;
   }
 
   .nav-menu {
@@ -247,12 +306,17 @@ function isActive(linkPath: string): boolean {
   }
 
   @media (max-width: 640px) {
-    .nav-brand-desktop {
+    .nav-brand-link--desktop {
       display: none;
     }
 
-    .nav-brand-mobile {
-      display: block;
+    .nav-brand-link--mobile {
+      display: flex;
+    }
+
+    .nav-brand-icon {
+      width: 24px;
+      height: 24px;
     }
 
     .nav-actions {
