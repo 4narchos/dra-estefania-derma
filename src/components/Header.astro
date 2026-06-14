@@ -99,14 +99,20 @@ function isActive(linkPath: string): boolean {
         aria-label="Agendar cita por WhatsApp"
         title="Agendar cita por WhatsApp"
       >
-        <i aria-hidden="true" class="nav-cta-icon">
-          <svg class="nav-cta-svg nav-cta-svg--default" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M6 3a1 1 0 0 1 2 0v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1zM5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9zm2 3.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0m4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 15a1 1 0 1 0 0 2 1 1 0 0 0 0-2m3 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
-          <svg class="nav-cta-svg nav-cta-svg--hover" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/>
-            <path d="m21.854 2.147-10.94 10.939"/>
-          </svg>
-        </i>
-        <span>Agendar</span>
+        <span class="nav-cta-face nav-cta-face--front">
+          <i aria-hidden="true" class="nav-cta-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M6 3a1 1 0 0 1 2 0v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1zM5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9zm2 3.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0m4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 15a1 1 0 1 0 0 2 1 1 0 0 0 0-2m3 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
+          </i>
+          Agendar
+        </span>
+        <span class="nav-cta-face nav-cta-face--back" aria-hidden="true">
+          <i aria-hidden="true" class="nav-cta-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/>
+              <path d="m21.854 2.147-10.94 10.939"/>
+            </svg>
+          </i>
+        </span>
       </a>
 
       <div id="nav-cta-dropdown" class="nav-cta-dropdown nav-cta-dropdown--widget">
@@ -250,46 +256,53 @@ function isActive(linkPath: string): boolean {
     justify-self: end;
     position: relative;
     display: inline-flex;
+    perspective: 800px;
   }
 
   .nav-cta-default {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    --cta-bg: #325C46;
+
+    position: relative;
+    display: inline-block;
     width: 10rem;
-    min-height: 2.75rem;
-    padding: 0.625rem 1rem;
-    background: #325C46;
+    height: 2.75rem;
     color: #fff;
     border-radius: 999px;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
     font-size: 1rem;
     font-weight: 600;
-    line-height: 1.5;
-    white-space: nowrap;
+    line-height: 1;
     text-decoration: none;
     cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease;
+  }
+
+  .nav-cta-wrapper:hover .nav-cta-default,
+  .nav-cta-wrapper.is-split .nav-cta-default {
+    --cta-bg: #264839;
+  }
+
+  .nav-cta-wrapper.is-split .nav-cta-default {
+    transform: rotateY(180deg);
+  }
+
+  .nav-cta-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    background: var(--cta-bg);
+    border-radius: 999px;
+    backface-visibility: hidden;
     transition: background var(--transition-fast);
   }
 
-  .nav-cta-default:hover {
-    background: #264839;
-    text-decoration: none;
-  }
-
-  .nav-cta-default span {
-    max-width: 10rem;
-    margin-left: 0.5rem;
-    opacity: 1;
-    overflow: hidden;
-    white-space: nowrap;
-    transition: max-width 0.25s ease, opacity 0.25s ease, margin-left 0.25s ease;
-  }
-
-  .nav-cta-wrapper.is-split .nav-cta-default span {
-    max-width: 0;
-    margin-left: 0;
-    opacity: 0;
+  .nav-cta-face--back {
+    transform: rotateY(180deg);
   }
 
   .nav-cta-icon {
@@ -305,27 +318,6 @@ function isActive(linkPath: string): boolean {
   .nav-cta-icon svg {
     display: block;
     fill: currentColor;
-  }
-
-  .nav-cta-default .nav-cta-svg {
-    position: absolute;
-    inset: 0;
-    transition: opacity 0.25s ease, transform 0.25s ease;
-  }
-
-  .nav-cta-svg--hover {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-
-  .nav-cta-wrapper.is-split .nav-cta-svg--default {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-
-  .nav-cta-wrapper.is-split .nav-cta-svg--hover {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   .nav-cta-dropdown {
