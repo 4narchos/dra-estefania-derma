@@ -91,48 +91,23 @@ function isActive(linkPath: string): boolean {
     </ul>
 
     <div class="nav-cta-wrapper">
-      <div class="nav-cta-split">
-        <a
-          href={`${whatsappBaseUrl}&utm_source=web&utm_medium=header&utm_campaign=agendar`}
-          class="nav-cta-default"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Agendar por WhatsApp"
-          title="Agendar por WhatsApp"
-        >
-          <i aria-hidden="true" class="nav-cta-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M6 3a1 1 0 0 1 2 0v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1zM5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9zm2 3.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0m4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 15a1 1 0 1 0 0 2 1 1 0 0 0 0-2m3 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
-          </i>
-          <span>Agendar</span>
-        </a>
-
-        <a
-          href={`${whatsappBaseUrl}&utm_source=web&utm_medium=header&utm_campaign=agendar`}
-          class="nav-cta-half nav-cta-half--whatsapp"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Enviar mensaje"
-          title="Enviar mensaje"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <a
+        href={`${whatsappBaseUrl}&utm_source=web&utm_medium=header&utm_campaign=agendar`}
+        class="nav-cta-default"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Agendar por WhatsApp"
+        title="Agendar por WhatsApp"
+      >
+        <i aria-hidden="true" class="nav-cta-icon">
+          <svg class="nav-cta-svg nav-cta-svg--default" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M6 3a1 1 0 0 1 2 0v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1zM5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9zm2 3.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0m4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 15a1 1 0 1 0 0 2 1 1 0 0 0 0-2m3 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
+          <svg class="nav-cta-svg nav-cta-svg--hover" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/>
             <path d="m21.854 2.147-10.94 10.939"/>
           </svg>
-        </a>
-
-        <button
-          type="button"
-          class="nav-cta-half nav-cta-half--doctoralia"
-          aria-label="Agendar cita"
-          aria-expanded="false"
-          aria-controls="nav-cta-dropdown"
-          title="Agendar cita"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="m6 9 6 6 6-6"/>
-          </svg>
-        </button>
-      </div>
+        </i>
+        <span>Agendar</span>
+      </a>
 
       <div id="nav-cta-dropdown" class="nav-cta-dropdown nav-cta-dropdown--widget">
         <a
@@ -277,97 +252,70 @@ function isActive(linkPath: string): boolean {
     display: inline-flex;
   }
 
-  .nav-cta-split {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 2.75rem;
-    background: #325C46;
-    color: #fff;
-    border-radius: 999px;
-    overflow: hidden;
-    cursor: pointer;
-  }
-
   .nav-cta-default {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    min-height: 2.75rem;
     padding: 0.625rem 1rem;
+    background: #325C46;
     color: #fff;
+    border-radius: 999px;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.5;
     white-space: nowrap;
     text-decoration: none;
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.25s, visibility 0.25s;
-    transition-delay: 0s;
-    position: relative;
-    z-index: 1;
+    cursor: pointer;
+    transition: background var(--transition-fast);
   }
 
-  .nav-cta-half {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 50%;
-    display: flex;
+  .nav-cta-default:hover {
+    background: #264839;
+    text-decoration: none;
+  }
+
+  .nav-cta-icon {
+    position: relative;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #325C46;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateX(var(--slide-offset, 0));
-    transition: opacity 0.25s, visibility 0.25s, transform 0.25s, background 0.25s;
-    transition-delay: 0s;
-    z-index: 2;
-  }
-
-  .nav-cta-half svg {
-    display: block;
+    flex-shrink: 0;
     width: 18px;
     height: 18px;
   }
 
-  .nav-cta-half--doctoralia {
-    --slide-offset: -100%;
+  .nav-cta-svg {
+    position: absolute;
+    top: 0;
     left: 0;
-    border-radius: 999px 0 0 999px;
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    width: 18px;
+    height: 18px;
+    display: block;
+    fill: currentColor;
+    transition: opacity 0.25s ease, transform 0.25s ease;
   }
 
-  .nav-cta-half--whatsapp {
-    --slide-offset: 100%;
-    right: 0;
-    border-radius: 0 999px 999px 0;
-  }
-
-  .nav-cta-wrapper.is-split .nav-cta-default {
+  .nav-cta-svg--hover {
     opacity: 0;
-    visibility: hidden;
-    transition-delay: 0s;
+    transform: translateY(100%);
   }
 
-  .nav-cta-wrapper.is-split .nav-cta-half {
+  .nav-cta-svg--hover path {
+    fill: none;
+    stroke: currentColor;
+  }
+
+  .nav-cta-wrapper.is-split .nav-cta-svg--default {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  .nav-cta-wrapper.is-split .nav-cta-svg--hover {
     opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateX(0);
-    transition-delay: 0s;
-  }
-
-  .nav-cta-half:hover {
-    background: #264839;
+    transform: translateY(0);
   }
 
   .nav-cta-dropdown {
@@ -397,7 +345,8 @@ function isActive(linkPath: string): boolean {
     overflow: visible;
   }
 
-  .nav-cta-dropdown.is-open {
+  .nav-cta-dropdown.is-open,
+  .nav-cta-wrapper.is-split .nav-cta-dropdown {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -578,9 +527,6 @@ function isActive(linkPath: string): boolean {
     });
 
     const ctaWrapper = document.querySelector(".nav-cta-wrapper");
-    const doctoraliaHalf = document.querySelector(".nav-cta-half--doctoralia");
-    const dropdown = document.querySelector(".nav-cta-dropdown");
-    let hideTimeout;
     let splitTimeout;
 
     function loadDoctoraliaWidget() {
@@ -602,63 +548,24 @@ function isActive(linkPath: string): boolean {
 
     if (ctaWrapper) {
       const enterSplit = () => {
+        clearTimeout(splitTimeout);
         splitTimeout = setTimeout(() => {
           ctaWrapper.classList.add("is-split");
-        }, 1000);
+          loadDoctoraliaWidget();
+        }, 500);
       };
 
       const leaveSplit = () => {
         clearTimeout(splitTimeout);
-        ctaWrapper.classList.remove("is-split");
+        splitTimeout = setTimeout(() => {
+          ctaWrapper.classList.remove("is-split");
+        }, 150);
       };
 
       ctaWrapper.addEventListener("mouseenter", enterSplit);
       ctaWrapper.addEventListener("mouseleave", leaveSplit);
       ctaWrapper.addEventListener("focusin", enterSplit);
       ctaWrapper.addEventListener("focusout", leaveSplit);
-    }
-
-    if (doctoraliaHalf && dropdown) {
-      const showDropdown = () => {
-        clearTimeout(hideTimeout);
-        dropdown.classList.add("is-open");
-        doctoraliaHalf.setAttribute("aria-expanded", "true");
-        loadDoctoraliaWidget();
-      };
-
-      const hideDropdown = () => {
-        hideTimeout = setTimeout(() => {
-          dropdown.classList.remove("is-open");
-          doctoraliaHalf.setAttribute("aria-expanded", "false");
-        }, 150);
-      };
-
-      doctoraliaHalf.addEventListener("mouseenter", showDropdown);
-      doctoraliaHalf.addEventListener("mouseleave", hideDropdown);
-      doctoraliaHalf.addEventListener("focus", showDropdown);
-      doctoraliaHalf.addEventListener("blur", hideDropdown);
-
-      doctoraliaHalf.addEventListener("click", () => {
-        dropdown.classList.toggle("is-open");
-        doctoraliaHalf.setAttribute(
-          "aria-expanded",
-          String(dropdown.classList.contains("is-open"))
-        );
-        loadDoctoraliaWidget();
-      });
-
-      dropdown.addEventListener("mouseenter", showDropdown);
-      dropdown.addEventListener("mouseleave", hideDropdown);
-
-      document.addEventListener("click", (event) => {
-        if (
-          !doctoraliaHalf.contains(event.target) &&
-          !dropdown.contains(event.target)
-        ) {
-          dropdown.classList.remove("is-open");
-          doctoraliaHalf.setAttribute("aria-expanded", "false");
-        }
-      });
     }
   })();
 </script>
