@@ -128,7 +128,15 @@ function isActive(linkPath: string): boolean {
       </div>
 
       <div id="nav-cta-dropdown" class="nav-cta-dropdown">
-        <p class="nav-cta-dropdown-note">Widget de Doctoralia</p>
+        <a
+          href="https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan"
+          class="nav-cta-dropdown-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={`${base}images/doctoralia-symbol.png`} alt="" width="20" height="20" loading="lazy" />
+          <span>Agendar en Doctoralia</span>
+        </a>
       </div>
     </div>
   </nav>
@@ -358,7 +366,6 @@ function isActive(linkPath: string): boolean {
     pointer-events: none;
   }
 
-  .nav-cta-wrapper:hover .nav-cta-dropdown,
   .nav-cta-dropdown.is-open {
     opacity: 1;
     visibility: visible;
@@ -366,11 +373,28 @@ function isActive(linkPath: string): boolean {
     pointer-events: auto;
   }
 
-  .nav-cta-dropdown-note {
-    margin: 0;
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
-    text-align: center;
+  .nav-cta-dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: background var(--transition-fast);
+  }
+
+  .nav-cta-dropdown-link:hover {
+    background: #F0EBE0;
+  }
+
+  .nav-cta-dropdown-link img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
   }
 
   .nav-cta-mobile {
@@ -524,7 +548,27 @@ function isActive(linkPath: string): boolean {
 
     const doctoraliaHalf = document.querySelector(".nav-cta-half--doctoralia");
     const dropdown = document.querySelector(".nav-cta-dropdown");
+    let hideTimeout;
+
     if (doctoraliaHalf && dropdown) {
+      const showDropdown = () => {
+        clearTimeout(hideTimeout);
+        dropdown.classList.add("is-open");
+        doctoraliaHalf.setAttribute("aria-expanded", "true");
+      };
+
+      const hideDropdown = () => {
+        hideTimeout = setTimeout(() => {
+          dropdown.classList.remove("is-open");
+          doctoraliaHalf.setAttribute("aria-expanded", "false");
+        }, 150);
+      };
+
+      doctoraliaHalf.addEventListener("mouseenter", showDropdown);
+      doctoraliaHalf.addEventListener("mouseleave", hideDropdown);
+      doctoraliaHalf.addEventListener("focus", showDropdown);
+      doctoraliaHalf.addEventListener("blur", hideDropdown);
+
       doctoraliaHalf.addEventListener("click", () => {
         dropdown.classList.toggle("is-open");
         doctoraliaHalf.setAttribute(
@@ -532,6 +576,9 @@ function isActive(linkPath: string): boolean {
           String(dropdown.classList.contains("is-open"))
         );
       });
+
+      dropdown.addEventListener("mouseenter", showDropdown);
+      dropdown.addEventListener("mouseleave", hideDropdown);
 
       document.addEventListener("click", (event) => {
         if (
