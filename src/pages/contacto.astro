@@ -190,7 +190,7 @@ const socialLinks = [
               data-zlw-hide-branding="true"
               data-zlw-saas-only="true"
               data-zlw-a11y-title="Widget de reserva de citas médicas"
-            >Reserve una cita</a>
+            ></a>
           </div>
         </div>
       </div>
@@ -626,8 +626,21 @@ const socialLinks = [
   }
 
   .doctoralia-modal-body {
+    position: relative;
     display: flex;
+    align-items: center;
     justify-content: center;
+    min-height: 200px;
+  }
+
+  .doctoralia-modal-body .zl-url:empty::before {
+    content: "Cargando calendario…";
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+  }
+
+  .doctoralia-modal-body .zl-url {
+    text-decoration: none;
   }
 </style>
 
