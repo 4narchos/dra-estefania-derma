@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://estefaniaderma.mx/sitemap-index.xml

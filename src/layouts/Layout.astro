@@ -174,6 +174,7 @@ const contactSchema = {
     <meta property="og:locale" content="es_MX" />
     <meta property="og:site_name" content="Dra. Estefanía Borges" />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:secure_url" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={ogImageAlt} />
@@ -181,6 +182,8 @@ const contactSchema = {
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:domain" content="estefaniaderma.mx" />
+    <meta name="twitter:url" content={canonicalUrl} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
