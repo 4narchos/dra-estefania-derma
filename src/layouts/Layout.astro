@@ -10,6 +10,7 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   showHeader?: boolean;
   showFooter?: boolean;
   showWhatsApp?: boolean;
@@ -21,6 +22,7 @@ const {
   title,
   description = "Dra. Estefanía Borges - Dermatóloga en Mérida, Yucatán",
   ogImage,
+  ogImageAlt = "Dra. Estefanía Borges - Dermatóloga en Mérida, Yucatán",
   showHeader = true,
   showFooter = true,
   showWhatsApp = true,
@@ -33,6 +35,8 @@ const siteUrl = "https://estefaniaderma.mx";
 const canonicalPath = Astro.url.pathname.replace(new RegExp(`^${baseUrl.replace(/\/$/, '')}/?`), '/') || '/';
 const canonicalUrl = `${siteUrl}${canonicalPath}`;
 const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/og-default.jpg`;
+const ogImageExt = ogImageUrl.split('.').pop()?.toLowerCase() || 'jpg';
+const ogImageType = ogImageExt === 'png' ? 'image/png' : ogImageExt === 'webp' ? 'image/webp' : 'image/jpeg';
 
 // Schemas for each page type
 const physicianId = `${siteUrl}/#physician`;
@@ -172,12 +176,15 @@ const contactSchema = {
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta property="og:image:type" content={ogImageType} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
 
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
