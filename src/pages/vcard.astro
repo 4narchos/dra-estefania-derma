@@ -1,0 +1,41 @@
+---
+const vcfUrl = "/dra-estefania-derma.vcf";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Agregar contacto · Dra. Estefanía Borges</title>
+    <meta http-equiv="refresh" content={`0; url=${vcfUrl}`} />
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background: #f9f8f5;
+        color: #4a4a4a;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        text-align: center;
+      }
+      a {
+        color: #325c46;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>Abriendo tarjeta de contacto…</p>
+      <p>
+        <a href={vcfUrl} download="Agregar contacto.vcf">
+          Si no se abre automáticamente, toca aquí.
+        </a>
+      </p>
+    </div>
+  </body>
+</html>
