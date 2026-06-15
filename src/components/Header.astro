@@ -8,6 +8,7 @@ interface Props {
 }
 
 const { currentPath = "/" } = Astro.props;
+const isContactPage = currentPath.replace(/\/$/, "") === `${base}contacto`;
 
 const navLinks = [
   { label: "Inicio", href: `${base}`, path: `${base}` },
@@ -115,20 +116,22 @@ function isActive(linkPath: string): boolean {
         </span>
       </a>
 
-      <div id="nav-cta-dropdown" class="nav-cta-dropdown nav-cta-dropdown--widget">
-        <a
-          id="zl-url"
-          class="zl-url"
-          href="https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan"
-          rel="nofollow"
-          data-zlw-doctor="mariana-estefania-garcia-borges-2"
-          data-zlw-type="big_with_calendar"
-          data-zlw-opinion="false"
-          data-zlw-hide-branding="true"
-          data-zlw-saas-only="true"
-          data-zlw-a11y-title="Widget de reserva de citas médicas"
-        >Reserve una cita</a>
-      </div>
+      {!isContactPage && (
+        <div id="nav-cta-dropdown" class="nav-cta-dropdown nav-cta-dropdown--widget">
+          <a
+            id="zl-url"
+            class="zl-url"
+            href="https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan"
+            rel="nofollow"
+            data-zlw-doctor="mariana-estefania-garcia-borges-2"
+            data-zlw-type="big_with_calendar"
+            data-zlw-opinion="false"
+            data-zlw-hide-branding="true"
+            data-zlw-saas-only="true"
+            data-zlw-a11y-title="Widget de reserva de citas médicas"
+          ></a>
+        </div>
+      )}
     </div>
   </nav>
 </header>
@@ -357,6 +360,19 @@ function isActive(linkPath: string): boolean {
     overflow: visible;
   }
 
+  .nav-cta-dropdown--widget .zl-url:empty::before {
+    content: "Cargando calendario…";
+    display: block;
+    padding: 1rem;
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    text-align: center;
+  }
+
+  .nav-cta-dropdown--widget .zl-url {
+    text-decoration: none;
+  }
+
   .nav-cta-dropdown.is-open,
   .nav-cta-wrapper.is-split .nav-cta-dropdown {
     opacity: 1;
@@ -512,10 +528,13 @@ function isActive(linkPath: string): boolean {
       document.body.appendChild(script);
     }
 
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(() => loadDoctoraliaWidget(), { timeout: 5000 });
-    } else {
-      setTimeout(() => loadDoctoraliaWidget(), 3000);
+    const doctoraliaDropdown = document.getElementById("nav-cta-dropdown");
+    if (doctoraliaDropdown) {
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(() => loadDoctoraliaWidget(), { timeout: 5000 });
+      } else {
+        setTimeout(() => loadDoctoraliaWidget(), 3000);
+      }
     }
 
     const ctaWrapper = document.querySelector(".nav-cta-wrapper");
@@ -526,7 +545,7 @@ function isActive(linkPath: string): boolean {
         clearTimeout(splitTimer);
         splitTimer = setTimeout(() => {
           ctaWrapper.classList.toggle("is-split", active);
-          if (active) loadDoctoraliaWidget();
+          if (active && doctoraliaDropdown) loadDoctoraliaWidget();
         }, active ? 500 : 150);
       };
 
