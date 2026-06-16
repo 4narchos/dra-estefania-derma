@@ -88,7 +88,7 @@ const socialLinks = [
         <hr class="contact-panel-divider" />
 
         <div class="contact-profile-meta">
-          <p class="contact-bio">Tu Dermatóloga en Yucatán&nbsp;🧴</p>
+          <a href="https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7" class="contact-bio" target="_blank" rel="noopener noreferrer">Dermatóloga en Mérida&nbsp;🧴</a>
           <p class="contact-motto">Tu piel te habla, y yo te ayudo a entenderla&nbsp;✨</p>
         </div>
       </article>
@@ -118,19 +118,6 @@ const socialLinks = [
               <span class="contact-link-text">Doctoralia</span>
             </button>
           </div>
-        </div>
-      </article>
-
-      {/* Sección Ubicación */}
-      <article class="contact-panel">
-        <div class="contact-section">
-          <h2 class="contact-section-title">Ubicación</h2>
-          <MapWidget
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8098.894030569736!2d-89.59418694315481!3d21.020613550273655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f56779bac8f87d1%3A0x2bc4da0bb4d62d7c!2sDra.%20Estefania%20Borges%20Dermat%C3%B3loga!5e0!3m2!1ses-419!2smx!4v1781652609779!5m2!1ses-419!2smx"
-            title="Ubicación del consultorio de la Dra. Estefanía Borges"
-            address="C. 20 No. 251, Calle 10 15-local 9, Morelos Oriente, 97130 Mérida, Yuc."
-            googleMapsUrl="https://maps.google.com/?q=Dra.+Estefania+Borges+Dermat%C3%B3loga"
-          />
         </div>
       </article>
 
@@ -178,6 +165,17 @@ const socialLinks = [
             )
           ))}
         </div>
+        </div>
+      </article>
+
+      {/* Sección Ubicación */}
+      <article class="contact-panel">
+        <div class="contact-section">
+          <h2 class="contact-section-title">Ubicación</h2>
+          <MapWidget
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8098.894030569736!2d-89.59418694315481!3d21.020613550273655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f56779bac8f87d1%3A0x2bc4da0bb4d62d7c!2sDra.%20Estefania%20Borges%20Dermat%C3%B3loga!5e0!3m2!1ses-419!2smx!4v1781652609779!5m2!1ses-419!2smx"
+            title="Ubicación del consultorio de la Dra. Estefanía Borges"
+          />
         </div>
       </article>
 
@@ -421,8 +419,16 @@ const socialLinks = [
   }
 
   .contact-bio {
+    display: inline-block;
     font-size: var(--text-sm);
     color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .contact-bio:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
   }
 
   .contact-motto {
