@@ -35,6 +35,10 @@ const siteUrl = "https://estefaniaderma.mx";
 const canonicalPath = Astro.url.pathname.replace(new RegExp(`^${baseUrl.replace(/\/$/, '')}/?`), '/') || '/';
 const canonicalUrl = `${siteUrl}${canonicalPath}`;
 const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/og-default-v3.jpg`;
+
+// Global Open Graph metadata: same preview for every page
+const globalOgTitle = "Dermatóloga en Mérida · Tu piel te habla, y yo te ayudo a entenderla ✨";
+const globalOgDescription = "Enfermedades de la piel, el pelo y las uñas, dermatología estética y cirugía dermatológica menor";
 const ogImageExt = ogImageUrl.split('.').pop()?.toLowerCase() || 'jpg';
 const ogImageType = ogImageExt === 'png' ? 'image/png' : ogImageExt === 'webp' ? 'image/webp' : 'image/jpeg';
 
@@ -167,8 +171,8 @@ const contactSchema = {
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph -->
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={globalOgTitle} />
+    <meta property="og:description" content={globalOgDescription} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:locale" content="es_MX" />
@@ -184,8 +188,8 @@ const contactSchema = {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:domain" content="estefaniaderma.mx" />
     <meta name="twitter:url" content={canonicalUrl} />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={globalOgTitle} />
+    <meta name="twitter:description" content={globalOgDescription} />
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
 
