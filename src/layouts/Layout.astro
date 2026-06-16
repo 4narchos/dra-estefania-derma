@@ -34,7 +34,7 @@ const baseUrl = getBaseUrl();
 const siteUrl = "https://estefaniaderma.mx";
 const canonicalPath = Astro.url.pathname.replace(new RegExp(`^${baseUrl.replace(/\/$/, '')}/?`), '/') || '/';
 const canonicalUrl = `${siteUrl}${canonicalPath}`;
-const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/og-default-v2.png`;
+const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/og-default-v3.jpg`;
 const ogImageExt = ogImageUrl.split('.').pop()?.toLowerCase() || 'jpg';
 const ogImageType = ogImageExt === 'png' ? 'image/png' : ogImageExt === 'webp' ? 'image/webp' : 'image/jpeg';
 
