@@ -62,32 +62,73 @@ const socialLinks = [
                 </svg>
               </a>
             </div>
+
             <div class="contact-info">
-              <a href="https://share.google/HfPkNGvUKMkqxHdiu" class="contact-name" target="_blank" rel="noopener noreferrer">Dra. Mariana Estefanía García Borges</a>
-              <a href="https://instagram.com/dra.estefaniaderma" class="contact-handle" target="_blank" rel="noopener noreferrer">@dra.estefaniaderma</a>
+              <a
+                href="https://www.google.com/search?sca_esv=2c94d3a4052cfca1&rlz=1C5CHFA_enMX1149MX1149&sxsrf=AHTn8zovA_qL9Jm72_a6yjeSuPRQnFCK0g:1751989652746&q=Dra.+Mariana+Estefan%C3%ADa+Garc%C3%ADa+Borges&ludocid=12786569407629589657&sa=X&ved=2ahUKEwjRhJ_QiaWNAxV0R2wGHetFI0UQ6BN6BAgaEAI&biw=1391&bih=736&dpr=2"
+                class="contact-name"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>Dra. Mariana Estefanía García Borges</span>
+                <svg class="contact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m9 18 6-6-6-6"/>
+                </svg>
+              </a>
+
+              <a
+                href="https://www.instagram.com/dermaestefaniaborges/"
+                class="contact-handle"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg class="contact-handle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                </svg>
+                <span>@dermaestefaniaborges</span>
+                <svg class="contact-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15,3 21,3 21,9"/>
+                  <line x1="10" x2="21" y1="14" y2="3"/>
+                </svg>
+              </a>
             </div>
 
-            <a
-              href={`${base}dra-estefania-derma.vcf`}
+            <button
+              type="button"
               class="contact-add-button"
-              download="Agregar contacto.vcf"
-              aria-label="Agregar contacto"
-              title="Agregar contacto"
+              onclick="downloadVCard()"
+              aria-label="Guardar contacto"
+              title="Guardar contacto"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
                 <circle cx="9" cy="7" r="4"/>
                 <line x1="19" x2="19" y1="8" y2="14"/>
                 <line x1="22" x2="16" y1="11" y2="11"/>
               </svg>
-            </a>
+              <span class="contact-add-button-label">Guardar</span>
+            </button>
           </div>
         </div>
 
         <hr class="contact-panel-divider" />
 
         <div class="contact-profile-meta">
-          <a href="https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7" class="contact-bio" target="_blank" rel="noopener noreferrer">Dermatóloga en Mérida&nbsp;🧴</a>
+          <a href="https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7" class="contact-bio" target="_blank" rel="noopener noreferrer">
+            <svg class="contact-bio-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>Dermatóloga en Mérida&nbsp;🧴</span>
+            <svg class="contact-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15,3 21,3 21,9"/>
+              <line x1="10" x2="21" y1="14" y2="3"/>
+            </svg>
+          </a>
           <p class="contact-motto">Tu piel te habla, y yo te ayudo a entenderla&nbsp;✨</p>
         </div>
       </article>
@@ -262,21 +303,27 @@ const socialLinks = [
     align-items: flex-start;
     gap: var(--space-1);
     min-width: 0;
+    flex: 1 1 auto;
   }
 
   .contact-add-button {
-    width: 40px;
-    height: 40px;
     margin-left: auto;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--radius-full);
+    gap: var(--space-1);
+    padding: var(--space-2) var(--space-3);
+    border-radius: 999px;
     background: #fff;
     border: 1px solid #E6E3DB;
     color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    line-height: 1;
     text-decoration: none;
-    transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
     flex-shrink: 0;
   }
 
@@ -284,13 +331,24 @@ const socialLinks = [
     background: #F0EBE0;
     border-color: #DACE97;
     color: var(--color-text-primary);
-    transform: scale(1.05);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .contact-add-button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   }
 
   .contact-add-button svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     display: block;
+    flex-shrink: 0;
+  }
+
+  .contact-add-button-label {
+    display: inline;
   }
 
   .contact-avatar {
@@ -309,11 +367,17 @@ const socialLinks = [
     border: 2px solid var(--color-border-strong);
     overflow: hidden;
     text-decoration: none;
-    transition: transform var(--transition-fast);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    box-shadow: 0 0 0 0 rgba(45, 94, 70, 0);
   }
 
   .contact-avatar-link:hover {
-    transform: scale(1.03);
+    transform: scale(1.04);
+    box-shadow: 0 0 0 3px rgba(45, 94, 70, 0.15);
+  }
+
+  .contact-avatar-link:active {
+    transform: scale(0.98);
   }
 
   .contact-avatar-img {
@@ -336,11 +400,12 @@ const socialLinks = [
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
     text-decoration: none;
     cursor: pointer;
-    transition: transform var(--transition-fast);
+    transition: transform var(--transition-fast), filter var(--transition-fast);
   }
 
   .contact-avatar-badge:hover {
-    transform: translateX(-50%) scale(1.08);
+    transform: translateX(-50%) scale(1.12);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
   }
 
   .contact-avatar-badge svg {
@@ -361,7 +426,9 @@ const socialLinks = [
   }
 
   .contact-name {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
     font-size: var(--text-xl);
     font-weight: var(--weight-bold);
     color: var(--color-text-primary);
@@ -375,6 +442,16 @@ const socialLinks = [
     color: var(--color-primary);
   }
 
+  .contact-name:hover .contact-chevron {
+    transform: translateX(2px);
+  }
+
+  .contact-chevron {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform var(--transition-fast);
+  }
+
   @media (max-width: 640px) {
     .contact-page {
       padding-top: var(--space-4);
@@ -386,13 +463,16 @@ const socialLinks = [
     }
 
     .contact-add-button {
-      width: 36px;
-      height: 36px;
+      padding: var(--space-1) var(--space-2);
     }
 
     .contact-add-button svg {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
+    }
+
+    .contact-add-button-label {
+      display: none;
     }
 
     .contact-motto {
@@ -401,18 +481,41 @@ const socialLinks = [
   }
 
   .contact-handle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
     font-size: var(--text-sm);
     color: #1D5A8F;
     font-weight: var(--weight-medium);
     text-decoration: none;
+    padding: 2px 0;
+    border-radius: 4px;
+    transition: color var(--transition-fast), background var(--transition-fast);
   }
 
   .contact-handle:hover {
+    color: #14496F;
     text-decoration: underline;
   }
 
+  .contact-handle:hover .contact-external-icon {
+    transform: translate(1px, -1px);
+  }
+
+  .contact-handle-icon,
+  .contact-external-icon {
+    flex-shrink: 0;
+    transition: transform var(--transition-fast);
+  }
+
+  .contact-external-icon {
+    color: var(--color-text-muted);
+  }
+
   .contact-bio {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
     font-size: var(--text-sm);
     color: var(--color-text-secondary);
     text-decoration: none;
@@ -422,6 +525,15 @@ const socialLinks = [
   .contact-bio:hover {
     color: var(--color-primary);
     text-decoration: underline;
+  }
+
+  .contact-bio:hover .contact-external-icon {
+    transform: translate(1px, -1px);
+  }
+
+  .contact-bio-icon {
+    color: var(--color-primary);
+    flex-shrink: 0;
   }
 
   .contact-motto {
@@ -712,4 +824,32 @@ const socialLinks = [
       });
     }
   })();
+</script>
+
+<script is:inline>
+  function downloadVCard() {
+    const vCard = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "N:García Borges;Mariana Estefanía;;;",
+      "FN:Dra. Mariana Estefanía García Borges",
+      "TITLE:Dermatóloga",
+      "ORG:Evoke Aging Journey & Dermatology",
+      "TEL;TYPE=CELL:+529992213021",
+      "ADR;TYPE=WORK:;;C. 20 251-Local 9;Mérida;Yucatán;97130;México",
+      "URL:https://estefaniaderma.mx",
+      "URL;TYPE=Instagram:https://www.instagram.com/dermaestefaniaborges/",
+      "END:VCARD"
+    ].join("\r\n");
+
+    const blob = new Blob([vCard], { type: "text/vcard;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "Dra-Mariana-Estefania-Garcia-Borges.vcf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
 </script>
