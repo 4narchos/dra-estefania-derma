@@ -34,19 +34,13 @@ function isActive(linkPath: string): boolean {
     <div class="nav-brand" aria-label="Logo">
       <a href={`${base}`} class="nav-brand-link">
         <img
-          src={`${base}images/logo-icon-desktop.png`}
-          srcset={`${base}images/logo-icon-mobile.png 96w, ${base}images/logo-icon-desktop.png 160w`}
-          sizes="(max-width: 640px) 32px, 40px"
-          alt=""
-          class="nav-brand-icon"
-          width="40"
+          src={`${base}images/header banner.png`}
+          alt="Dra. Estefanía Borges - Dermatóloga"
+          class="nav-brand-banner"
+          width="120"
           height="40"
           loading="eager"
         />
-        <div class="nav-brand-text">
-          <span class="nav-brand-title">Dra. Estefanía Borges</span>
-          <span class="nav-brand-subtitle">DERMATÓLOGA</span>
-        </div>
       </a>
     </div>
 
@@ -141,7 +135,7 @@ function isActive(linkPath: string): boolean {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: #DACE97;
+    background: #ECE4DB;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
 
@@ -163,44 +157,18 @@ function isActive(linkPath: string): boolean {
     justify-self: start;
   }
 
-  .nav-brand-link {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .nav-brand-icon {
+  .nav-brand-banner {
     display: block;
-    width: 40px;
+    width: 120px;
     height: 40px;
     object-fit: contain;
   }
 
-  .nav-brand-text {
+  .nav-brand-link {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 2px;
-  }
-
-  .nav-brand-title {
-    font-family: 'Apple Chancery', 'Zapfino', cursive;
-    font-size: 1.25rem;
-    line-height: 1.1;
-    color: var(--color-text-primary);
-    white-space: nowrap;
-  }
-
-  .nav-brand-subtitle {
-    font-family: 'Optima', 'Segoe UI', sans-serif;
-    font-weight: 700;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    color: var(--color-text-secondary);
-    text-transform: uppercase;
-    line-height: 1;
+    text-decoration: none;
+    color: inherit;
   }
 
   .nav-menu {
@@ -435,18 +403,9 @@ function isActive(linkPath: string): boolean {
       gap: 4px;
     }
 
-    .nav-brand-icon {
-      width: 32px;
+    .nav-brand-banner {
+      width: 96px;
       height: 32px;
-    }
-
-    .nav-brand-title {
-      font-size: 0.5rem;
-    }
-
-    .nav-brand-subtitle {
-      font-size: 0.5rem;
-      letter-spacing: 0.06em;
     }
 
     .nav-actions {
