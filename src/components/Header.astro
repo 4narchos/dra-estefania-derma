@@ -47,8 +47,8 @@ function isActive(linkPath: string): boolean {
           src={`${base}images/EB banner logo.png`}
           alt="Dra. Estefanía Borges - Dermatóloga"
           class="nav-brand-icon"
-          width="32"
-          height="32"
+          width="64"
+          height="64"
           loading="eager"
         />
       </a>
@@ -421,12 +421,15 @@ function isActive(linkPath: string): boolean {
 
     .nav-brand-link--mobile {
       display: flex;
+      align-items: center;
+      justify-content: center;
+      height: var(--header-height);
     }
 
-    .nav-brand-icon {
+    .nav-brand-link--mobile .nav-brand-icon {
       display: block;
-      width: 32px;
-      height: 32px;
+      width: 64px;
+      height: 64px;
       object-fit: contain;
     }
 
