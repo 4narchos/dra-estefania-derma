@@ -32,17 +32,7 @@ function isActive(linkPath: string): boolean {
 <header class="site-header">
   <nav class="nav-container" aria-label="Navegación principal">
     <div class="nav-brand" aria-label="Logo">
-      <a href={`${base}`} class="nav-brand-link nav-brand-link--desktop">
-        <img
-          src={`${base}images/header banner.png`}
-          alt="Dra. Estefanía Borges - Dermatóloga"
-          class="nav-brand-banner"
-          width="900"
-          height="300"
-          loading="eager"
-        />
-      </a>
-      <a href={`${base}`} class="nav-brand-link nav-brand-link--mobile">
+      <a href={`${base}`} class="nav-brand-link">
         <img
           src={`${base}images/header banner.png`}
           alt="Dra. Estefanía Borges - Dermatóloga"
@@ -172,11 +162,6 @@ function isActive(linkPath: string): boolean {
     width: 192px;
     height: auto;
     object-fit: contain;
-  }
-
-  .nav-brand-link--mobile,
-  .nav-brand-icon {
-    display: none;
   }
 
   .nav-brand-link {
@@ -416,23 +401,14 @@ function isActive(linkPath: string): boolean {
       gap: var(--space-2);
     }
 
-    .nav-brand-link--desktop {
-      display: none;
+    .site-header {
+      border-bottom: none;
     }
 
-    .nav-brand-link--mobile {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: var(--header-height);
-    }
-
-    .nav-brand-link--mobile .nav-brand-banner {
-      display: block;
+    .nav-brand-banner {
       width: auto;
       max-width: 120px;
       height: 40px;
-      object-fit: contain;
     }
 
     .nav-actions {
