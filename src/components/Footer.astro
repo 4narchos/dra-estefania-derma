@@ -33,8 +33,25 @@ const googleMapsUrl = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
 <footer class="site-footer">
   <div class="footer-container">
     <div class="footer-grid">
-      {/* Contacto: CTA, teléfono, WhatsApp, horarios, dirección y mapa */}
+      {/* Ubicación: dirección + mapa */}
+      <div class="footer-block footer-block--location">
+        <h3 class="footer-block-title">Ubicación</h3>
+        <a
+          href={googleMapsUrl}
+          class="footer-contact-link footer-contact-link--address"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {mainLocation.address}
+        </a>
+        <div class="footer-map">
+          <MapWidget src={googleMapsSrc} title="Ubicación del consultorio" compact />
+        </div>
+      </div>
+
+      {/* Contacto: CTA, teléfono, WhatsApp y horarios */}
       <div class="footer-block footer-block--contact">
+        <h3 class="footer-block-title">Contacto</h3>
         <a
           href={`${whatsappBaseUrl}&utm_source=web&utm_medium=footer&utm_campaign=agendar`}
           class="footer-cta"
@@ -61,17 +78,6 @@ const googleMapsUrl = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
           </li>
         </ul>
         <p class="footer-hours">{mainLocation.hours.replace(/\n/g, " · ")}</p>
-        <a
-          href={googleMapsUrl}
-          class="footer-contact-link footer-contact-link--address"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {mainLocation.address}
-        </a>
-        <div class="footer-map">
-          <MapWidget src={googleMapsSrc} title="Ubicación del consultorio" compact />
-        </div>
       </div>
 
       {/* Navegación */}
@@ -154,7 +160,7 @@ const googleMapsUrl = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
 
   @media (min-width: 1024px) {
     .footer-grid {
-      grid-template-columns: 1.25fr 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       gap: var(--space-8);
       align-items: start;
     }
@@ -166,25 +172,20 @@ const googleMapsUrl = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
     gap: var(--space-4);
   }
 
-  .footer-block--contact {
+.footer-block {
     align-items: center;
     text-align: center;
   }
 
   @media (min-width: 640px) {
-    .footer-block--contact {
+    .footer-block {
       align-items: flex-start;
       text-align: left;
     }
   }
 
   @media (max-width: 639px) {
-    .footer-grid > .footer-block:not(.footer-block--contact) {
-      align-items: center;
-      text-align: center;
-    }
-
-    .footer-grid > .footer-block:not(.footer-block--contact) .footer-link-list {
+    .footer-block .footer-link-list {
       align-items: center;
     }
   }
