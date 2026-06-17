@@ -361,6 +361,7 @@ const socialLinks = [
     filter: drop-shadow(0 0 0 #F4D03F);
     z-index: -5;
     pointer-events: none;
+    opacity: 0;
   }
 
   .contact-add-button .star-1 {
@@ -403,6 +404,15 @@ const socialLinks = [
     left: 50%;
     width: 5px;
     transition: all 0.8s ease;
+  }
+
+  .contact-add-button:hover .star-1,
+  .contact-add-button:hover .star-2,
+  .contact-add-button:hover .star-3,
+  .contact-add-button:hover .star-4,
+  .contact-add-button:hover .star-5,
+  .contact-add-button:hover .star-6 {
+    opacity: 1;
   }
 
   .contact-add-button:hover .star-1 {
