@@ -44,7 +44,7 @@ function isActive(linkPath: string): boolean {
       </a>
       <a href={`${base}`} class="nav-brand-link nav-brand-link--mobile">
         <img
-          src={`${base}images/logo-icon-mobile.png`}
+          src={`${base}images/EB banner logo.png`}
           alt="Dra. Estefanía Borges - Dermatóloga"
           class="nav-brand-icon"
           width="32"
@@ -53,6 +53,18 @@ function isActive(linkPath: string): boolean {
         />
       </a>
     </div>
+
+    <a
+      href={`${whatsappBaseUrl}&utm_source=web&utm_medium=header&utm_campaign=agendar`}
+      class="nav-cta-mobile"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <i aria-hidden="true" class="nav-cta-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M6 3a1 1 0 0 1 2 0v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1zM5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9zm2 3.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0m4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 15a1 1 0 1 0 0 2 1 1 0 0 0 0-2m3 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
+      </i>
+      <span>Agendar</span>
+    </a>
 
     <div class="nav-actions">
       <button
@@ -67,18 +79,6 @@ function isActive(linkPath: string): boolean {
         <span class="nav-toggle-bar"></span>
       </button>
     </div>
-
-    <a
-      href={`${whatsappBaseUrl}&utm_source=web&utm_medium=header&utm_campaign=agendar`}
-      class="nav-cta-mobile"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <i aria-hidden="true" class="nav-cta-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M6 3a1 1 0 0 1 2 0v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1zM5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9zm2 3.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0m4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 15a1 1 0 1 0 0 2 1 1 0 0 0 0-2m3 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
-      </i>
-      <span>Agendar</span>
-    </a>
 
     <ul class="nav-menu" id="nav-menu" role="menubar">
       {navLinks.map((link) => (
