@@ -4,6 +4,7 @@ import Footer from "../components/Footer.astro";
 import WhatsAppSticky from "../components/WhatsAppSticky.astro";
 import ShareSticky from "../components/ShareSticky.astro";
 import { faqs } from "../data/faq.js";
+import { services } from "../data/services.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
 
 interface Props {
@@ -156,6 +157,22 @@ const contactSchema = {
   "description": description,
   "url": canonicalUrl
 };
+
+const servicesListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "@id": `${siteUrl}/servicios/#services`,
+  "itemListElement": services.map((service, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "item": {
+      "@type": "MedicalProcedure",
+      "name": service.name,
+      "description": service.description,
+      "url": `${siteUrl}/servicios/#${service.slug}`
+    }
+  }))
+};
 ---
 
 <!doctype html>
@@ -203,7 +220,7 @@ const contactSchema = {
     <link rel="prefetch" href="https://platform.docplanner.com/js/widget.js" as="script" />
 
     <!-- Schema.org -->
-    {(pageSchema === "home" || pageSchema === "contact") && (
+    {(pageSchema === "home" || pageSchema === "about" || pageSchema === "services" || pageSchema === "contact") && (
       <>
         <script type="application/ld+json" set:html={JSON.stringify(physicianSchema)} />
         <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
@@ -214,6 +231,9 @@ const contactSchema = {
     )}
     {pageSchema === "about" && (
       <script type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
+    )}
+    {pageSchema === "services" && (
+      <script type="application/ld+json" set:html={JSON.stringify(servicesListSchema)} />
     )}
     {pageSchema === "contact" && (
       <script type="application/ld+json" set:html={JSON.stringify(contactSchema)} />
