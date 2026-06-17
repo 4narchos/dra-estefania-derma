@@ -119,8 +119,8 @@ const localBusinessSchema = {
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": "20.9674",
-    "longitude": "-89.5926"
+    "latitude": "21.020613550273655",
+    "longitude": "-89.59418694315481"
   },
   "openingHours": ["Tu 16:00-19:30", "We 10:00-15:00", "Fr 16:00-19:30"],
   "priceRange": "$$",
@@ -203,12 +203,14 @@ const contactSchema = {
     <link rel="prefetch" href="https://platform.docplanner.com/js/widget.js" as="script" />
 
     <!-- Schema.org -->
-    {pageSchema === "home" && (
+    {(pageSchema === "home" || pageSchema === "contact") && (
       <>
         <script type="application/ld+json" set:html={JSON.stringify(physicianSchema)} />
         <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
-        <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
       </>
+    )}
+    {pageSchema === "home" && (
+      <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
     )}
     {pageSchema === "about" && (
       <script type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
