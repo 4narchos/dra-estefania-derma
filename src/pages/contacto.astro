@@ -65,7 +65,7 @@ const socialLinks = [
 
             <div class="contact-info">
               <a
-                href="https://www.google.com/search?sca_esv=2c94d3a4052cfca1&rlz=1C5CHFA_enMX1149MX1149&sxsrf=AHTn8zovA_qL9Jm72_a6yjeSuPRQnFCK0g:1751989652746&q=Dra.+Mariana+Estefan%C3%ADa+Garc%C3%ADa+Borges&ludocid=12786569407629589657&sa=X&ved=2ahUKEwjRhJ_QiaWNAxV0R2wGHetFI0UQ6BN6BAgaEAI&biw=1391&bih=736&dpr=2"
+                href="https://share.google/HfPkNGvUKMkqxHdiu"
                 class="contact-name"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -77,17 +77,12 @@ const socialLinks = [
               </a>
 
               <a
-                href="https://www.instagram.com/dermaestefaniaborges/"
+                href="https://www.instagram.com/dra.estefaniaderma/"
                 class="contact-handle"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <svg class="contact-handle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-                </svg>
-                <span>@dermaestefaniaborges</span>
+                <span>@dra.estefaniaderma</span>
                 <svg class="contact-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
                   <polyline points="15,3 21,3 21,9"/>
@@ -95,13 +90,15 @@ const socialLinks = [
                 </svg>
               </a>
             </div>
+          </div>
 
+          <div class="contact-actions">
             <button
               type="button"
               class="contact-add-button"
               onclick="downloadVCard()"
-              aria-label="Guardar contacto"
-              title="Guardar contacto"
+              aria-label="Agregar contacto"
+              title="Agregar contacto"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
@@ -109,7 +106,7 @@ const socialLinks = [
                 <line x1="19" x2="19" y1="8" y2="14"/>
                 <line x1="22" x2="16" y1="11" y2="11"/>
               </svg>
-              <span class="contact-add-button-label">Guardar</span>
+              <span class="contact-add-button-label">Agregar</span>
             </button>
           </div>
         </div>
@@ -306,8 +303,15 @@ const socialLinks = [
     flex: 1 1 auto;
   }
 
+  .contact-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    width: 100%;
+    padding-left: calc(96px + var(--space-4));
+  }
+
   .contact-add-button {
-    margin-left: auto;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -429,6 +433,7 @@ const socialLinks = [
     display: inline-flex;
     align-items: center;
     gap: var(--space-1);
+    max-width: 100%;
     font-size: var(--text-xl);
     font-weight: var(--weight-bold);
     color: var(--color-text-primary);
@@ -436,6 +441,10 @@ const socialLinks = [
     line-height: 1.2;
     text-decoration: none;
     transition: color var(--transition-fast);
+  }
+
+  .contact-name span {
+    white-space: normal;
   }
 
   .contact-name:hover {
@@ -460,6 +469,10 @@ const socialLinks = [
     .contact-name {
       font-size: 0.9375rem;
       line-height: 1.25;
+    }
+
+    .contact-actions {
+      padding-left: calc(80px + var(--space-3));
     }
 
     .contact-add-button {
@@ -502,14 +515,10 @@ const socialLinks = [
     transform: translate(1px, -1px);
   }
 
-  .contact-handle-icon,
   .contact-external-icon {
     flex-shrink: 0;
-    transition: transform var(--transition-fast);
-  }
-
-  .contact-external-icon {
     color: var(--color-text-muted);
+    transition: transform var(--transition-fast);
   }
 
   .contact-bio {
