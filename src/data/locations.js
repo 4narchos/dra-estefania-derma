@@ -2,8 +2,8 @@ export const locations = [
   {
     name: "Evoke Aging Journey & Dermatology",
     city: "Mérida",
-    address: "C. 20 No. 251, Calle 10 15-local 9, Morelos Oriente, Mérida 97130",
-    hours: "Martes y viernes 4:00–7:30 p.m.\nMiércoles 10:00 a.m.–3:00 p.m.",
+    address: "C. 20 251-Local 9, entre 10 y 15, Fraccionamiento Altabrisa, 97130 Mérida, Yuc.",
+    hours: "Lunes a domingo\n9:00 a.m.–7:00 p.m.",
     phone: "999 221 3021",
   },
   {
