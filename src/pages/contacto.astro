@@ -89,23 +89,23 @@ const socialLinks = [
                   <line x1="10" x2="21" y1="14" y2="3"/>
                 </svg>
               </a>
-            </div>
 
-            <button
-              type="button"
-              class="contact-add-button"
-              onclick="downloadVCard()"
-              aria-label="Agregar contacto"
-              title="Agregar contacto"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <line x1="19" x2="19" y1="8" y2="14"/>
-                <line x1="22" x2="16" y1="11" y2="11"/>
-              </svg>
-              <span class="contact-add-button-label">Agregar</span>
-            </button>
+              <button
+                type="button"
+                class="contact-add-button"
+                onclick="downloadVCard()"
+                aria-label="Agregar contacto"
+                title="Agregar contacto"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <line x1="19" x2="19" y1="8" y2="14"/>
+                  <line x1="22" x2="16" y1="11" y2="11"/>
+                </svg>
+                <span class="contact-add-button-label">Agregar</span>
+              </button>
+            </div>
           </div>
 
         <hr class="contact-panel-divider" />
@@ -296,13 +296,12 @@ const socialLinks = [
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--space-1);
+    gap: var(--space-2);
     min-width: 0;
     flex: 1 1 auto;
   }
 
   .contact-add-button {
-    margin-left: auto;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -347,8 +346,8 @@ const socialLinks = [
   }
 
   .contact-avatar {
-    width: 96px;
-    height: 96px;
+    width: 120px;
+    height: 120px;
     flex-shrink: 0;
     position: relative;
   }
@@ -384,11 +383,11 @@ const socialLinks = [
 
   .contact-avatar-badge {
     position: absolute;
-    bottom: -12px;
+    bottom: -14px;
     left: 50%;
     transform: translateX(-50%);
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -404,8 +403,8 @@ const socialLinks = [
   }
 
   .contact-avatar-badge svg {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     display: block;
     animation: badge-pulse 2.2s ease-in-out infinite;
     transform-origin: center;
@@ -456,6 +455,22 @@ const socialLinks = [
     .contact-name {
       font-size: 0.9375rem;
       line-height: 1.25;
+    }
+
+    .contact-avatar {
+      width: 96px;
+      height: 96px;
+    }
+
+    .contact-avatar-badge {
+      bottom: -12px;
+      width: 24px;
+      height: 24px;
+    }
+
+    .contact-avatar-badge svg {
+      width: 24px;
+      height: 24px;
     }
 
     .contact-add-button {
