@@ -1,7 +1,13 @@
 ---
+import MapWidget from "./MapWidget.astro";
 import { whatsappBaseUrl } from "../data/links.js";
+import { locations } from "../data/locations.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
+
 const base = getBaseUrl();
+const currentYear = new Date().getFullYear();
+
+const mainLocation = locations[0];
 
 const navLinks = [
   { label: "Inicio", href: `${base}` },
@@ -14,51 +20,108 @@ const socialLinks = [
   { label: "Instagram", href: "https://instagram.com/dra.estefaniaderma" },
   { label: "Doctoralia", href: "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan" },
 ];
+
+const credentialLink = {
+  label: "Consejo Mexicano de Dermatología",
+  href: "https://www.consejomexicanodermatologia.org.mx/miembros/dermatologia/item/dra-mariana-estefania-garcia-borges?category_id=23",
+};
+
+const googleMapsSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8098.894030569736!2d-89.59418694315481!3d21.020613550273655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f56779bac8f87d1%3A0x2bc4da0bb4d62d7c!2sDra.%20Estefania%20Borges%20Dermat%C3%B3loga!5e0!3m2!1ses-419!2smx!4v1781652609779!5m2!1ses-419!2smx";
 ---
 
 <footer class="site-footer">
   <div class="footer-container">
-    <div class="footer-brand">
-      <span class="footer-brand-name">Dra. Mariana Estefanía García Borges</span>
-      <span class="footer-brand-tagline">Dermatóloga · Mérida, Yucatán</span>
-    </div>
-
-    <nav class="footer-nav" aria-label="Navegación del pie">
-      <div class="footer-nav-group">
-        <h4 class="footer-nav-title">Navegación</h4>
-        <ul class="footer-nav-list">
-          {navLinks.map((link) => (
-            <li><a href={link.href}>{link.label}</a></li>
-          ))}
-        </ul>
+    <div class="footer-grid">
+      {/* Marca + CTA */}
+      <div class="footer-block">
+        <div class="footer-brand">
+          <span class="footer-brand-name">Dra. Mariana Estefanía García Borges</span>
+          <span class="footer-brand-tagline">Dermatóloga · Mérida, Yucatán</span>
+        </div>
+        <a
+          href={`${whatsappBaseUrl}&utm_source=web&utm_medium=footer&utm_campaign=agendar`}
+          class="footer-cta"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Agendar cita
+        </a>
+        <p class="footer-hours">{mainLocation.hours.replace(/\n/g, " · ")}</p>
       </div>
 
-      <div class="footer-nav-group">
-        <h4 class="footer-nav-title">Contacto</h4>
-        <ul class="footer-nav-list">
+      {/* Contacto directo */}
+      <div class="footer-block">
+        <h3 class="footer-block-title">Contacto</h3>
+        <address class="footer-contact">
+          <a
+            href={`${whatsappBaseUrl}&utm_source=web&utm_medium=footer&utm_campaign=agendar`}
+            class="footer-contact-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WhatsApp
+          </a>
+          <a href={`tel:+52-${mainLocation.phone.replace(/\s/g, "")}`} class="footer-contact-link">
+            {mainLocation.phone}
+          </a>
+          <a
+            href="https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7"
+            class="footer-contact-link footer-contact-link--address"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {mainLocation.address}
+          </a>
+        </address>
+      </div>
+
+      {/* Navegación + credenciales */}
+      <div class="footer-block">
+        <h3 class="footer-block-title">Navegación</h3>
+        <nav aria-label="Navegación del pie">
+          <ul class="footer-link-list">
+            {navLinks.map((link) => (
+              <li><a href={link.href} class="footer-link">{link.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+
+        <h3 class="footer-block-title footer-block-title--secondary">Credenciales</h3>
+        <ul class="footer-link-list">
           <li>
-            <a href={`${whatsappBaseUrl}&utm_source=web&utm_medium=footer&utm_campaign=agendar`} target="_blank" rel="noopener noreferrer">
-              WhatsApp
+            <a href={credentialLink.href} class="footer-link" target="_blank" rel="noopener noreferrer">
+              {credentialLink.label}
             </a>
           </li>
-          <li><a href={`tel:+52-999-221-3021`}>Teléfono</a></li>
         </ul>
-      </div>
 
-      <div class="footer-nav-group">
-        <h4 class="footer-nav-title">Redes</h4>
-        <ul class="footer-nav-list">
+        <h3 class="footer-block-title footer-block-title--secondary">Redes</h3>
+        <ul class="footer-link-list footer-link-list--inline">
           {socialLinks.map((link) => (
-            <li><a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a></li>
+            <li>
+              <a href={link.href} class="footer-link" target="_blank" rel="noopener noreferrer">
+                {link.label}
+              </a>
+            </li>
           ))}
         </ul>
       </div>
-    </nav>
+
+      {/* Mapa */}
+      <div class="footer-block footer-block--map">
+        <h3 class="footer-block-title">Ubicación</h3>
+        <MapWidget src={googleMapsSrc} title="Ubicación del consultorio" compact />
+      </div>
+    </div>
 
     <div class="footer-bottom">
-      <p class="footer-copyright">
-        &copy; {new Date().getFullYear()} Dra. Mariana Estefanía García Borges. Todos los derechos reservados.
-      </p>
+      <div class="footer-legal">
+        <a href={`${base}aviso-de-privacidad`} class="footer-legal-link">Aviso de privacidad</a>
+        <span class="footer-legal-separator" aria-hidden="true">·</span>
+        <span class="footer-copyright">
+          &copy; {currentYear} Dra. Mariana Estefanía García Borges. Todos los derechos reservados.
+        </span>
+      </div>
       <p class="footer-disclaimer">
         La información de este sitio no sustituye una consulta médica personalizada.
       </p>
@@ -79,12 +142,37 @@ const socialLinks = [
     padding: 0 var(--space-4);
   }
 
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    margin-bottom: var(--space-12);
+  }
+
+  @media (min-width: 640px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: 1.25fr 1fr 1fr 1fr;
+      gap: var(--space-8);
+      align-items: start;
+    }
+  }
+
+  .footer-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
   .footer-brand {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-bottom: var(--space-12);
     gap: var(--space-2);
   }
 
@@ -92,6 +180,7 @@ const socialLinks = [
     font-size: var(--text-xl);
     font-weight: var(--weight-semibold);
     color: var(--color-text-on-dark);
+    line-height: 1.2;
   }
 
   .footer-brand-tagline {
@@ -99,64 +188,151 @@ const socialLinks = [
     color: var(--color-text-muted);
   }
 
-  .footer-nav {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-8);
-    margin-bottom: var(--space-12);
+  .footer-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-full);
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: background var(--transition-fast);
   }
 
-  @media (max-width: 640px) {
-    .footer-nav {
-      grid-template-columns: 1fr;
-      gap: var(--space-6);
-      text-align: center;
-    }
+  .footer-cta:hover {
+    background: var(--color-primary-hover);
   }
 
-  .footer-nav-title {
+  .footer-hours {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-normal);
+    white-space: pre-line;
+  }
+
+  .footer-block-title {
     font-size: var(--text-xs);
     font-weight: var(--weight-semibold);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-accent);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-2);
   }
 
-  .footer-nav-list {
+  .footer-block-title--secondary {
+    margin-top: var(--space-4);
+  }
+
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    font-style: normal;
+  }
+
+  .footer-contact-link {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    line-height: var(--leading-normal);
+  }
+
+  .footer-contact-link:hover {
+    color: var(--color-text-on-dark);
+  }
+
+  .footer-contact-link--address {
+    margin-top: var(--space-1);
+  }
+
+  .footer-link-list {
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
   }
 
-  .footer-nav-list a {
+  .footer-link-list--inline {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .footer-link {
     color: var(--color-text-muted);
     font-size: var(--text-sm);
     text-decoration: none;
     transition: color var(--transition-fast);
   }
 
-  .footer-nav-list a:hover {
+  .footer-link:hover {
     color: var(--color-text-on-dark);
-    text-decoration: none;
+  }
+
+  .footer-block--map {
+    min-width: 0;
   }
 
   .footer-bottom {
-    text-align: center;
     padding-top: var(--space-8);
     border-top: 1px solid var(--color-border-inverse);
+    text-align: center;
+  }
+
+  .footer-legal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  @media (min-width: 640px) {
+    .footer-legal {
+      flex-direction: row;
+      justify-content: center;
+      gap: var(--space-2);
+    }
+  }
+
+  .footer-legal-link {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-legal-link:hover {
+    color: var(--color-text-on-dark);
+  }
+
+  .footer-legal-separator {
+    color: var(--color-text-muted);
+    opacity: 0.5;
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .footer-legal-separator {
+      display: inline;
+    }
   }
 
   .footer-copyright {
     font-size: var(--text-sm);
     color: var(--color-text-muted);
-    margin-bottom: var(--space-2);
   }
 
   .footer-disclaimer {
     font-size: var(--text-xs);
     color: var(--color-text-muted);
     opacity: 0.7;
+    max-width: 48rem;
+    margin: 0 auto;
   }
 </style>

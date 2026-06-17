@@ -1,0 +1,158 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const title = "Aviso de Privacidad | Dra. Estefanía Borges";
+const description = "Aviso de privacidad del consultorio de dermatología de la Dra. Mariana Estefanía García Borges en Mérida, Yucatán.";
+---
+
+<Layout title={title} description={description} pageSchema="none">
+  <section class="privacy-hero">
+    <div class="container">
+      <h1 class="privacy-title">Aviso de Privacidad</h1>
+      <p class="privacy-updated">Última actualización: {new Date().toLocaleDateString("es-MX", { year: "numeric", month: "long", day: "numeric" })}</p>
+    </div>
+  </section>
+
+  <section class="privacy-content">
+    <div class="container">
+      <div class="privacy-body">
+        <p>
+          La Dra. Mariana Estefanía García Borges, con domicilio en C. 20 No. 251, Calle 10 15-local 9,
+          Morelos Oriente, 97130 Mérida, Yucatán, es responsable del tratamiento de los datos personales
+          que nos proporcione.
+        </p>
+
+        <h2>Datos personales que recabamos</h2>
+        <p>
+          Para la prestación de nuestros servicios médicos podemos recabar datos personales como:
+          nombre completo, fecha de nacimiento, teléfono, correo electrónico, dirección, historial clínico,
+          motivo de consulta y datos de pago.
+        </p>
+
+        <h2>Finalidades del tratamiento</h2>
+        <p>Utilizamos sus datos personales para las siguientes finalidades:</p>
+        <ul>
+          <li>Agendar citas y confirmarlas.</li>
+          <li>Brindar atención médica dermatológica.</li>
+          <li>Elaborar historial clínico y expediente médico.</li>
+          <li>Emitir recetas, estudios y notas médicas.</li>
+          <li>Contactarlo para seguimiento de tratamientos.</li>
+          <li>Facturación de los servicios prestados.</li>
+        </ul>
+
+        <h2>Datos sensibles</h2>
+        <p>
+          Recabamos datos personales sensibles relacionados con su salud, historial médico, condiciones
+          dermatológicas y tratamientos. Dichos datos son tratados con estricta confidencialidad y bajo
+          medidas de seguridad adecuadas, conforme a la Ley General de Salud y la Ley Federal de Protección
+          de Datos Personales en Posesión de los Particulares.
+        </p>
+
+        <h2>Derechos ARCO</h2>
+        <p>
+          Usted tiene derecho a conocer qué datos personales tenemos de usted, para qué los utilizamos y
+          las condiciones del uso que les damos (Acceso). Asimismo, es su derecho solicitar la corrección de
+          su información personal en caso de que esté desactualizada, sea inexacta o incompleta
+          (Rectificación); que la eliminemos de nuestros registros o bases de datos cuando considere que la
+          misma no está siendo utilizada adecuadamente (Cancelación); así como oponerse al uso de sus datos
+          personales para fines específicos (Oposición). Estos derechos se conocen como derechos ARCO.
+        </p>
+
+        <h2>Cómo ejercer sus derechos ARCO</h2>
+        <p>
+          Para ejercer cualquiera de los derechos ARCO, puede enviar una solicitud al correo electrónico
+          <a href="mailto:contacto@estefaniaderma.mx">contacto@estefaniaderma.mx</a> o comunicarse al
+          teléfono <a href="tel:+52-999-221-3021">999 221 3021</a>. Su solicitud debe incluir nombre
+          completo, copia de identificación oficial, descripción clara del derecho que desea ejercer y
+          datos de contacto para notificarle la respuesta.
+        </p>
+
+        <h2>Transferencia de datos</h2>
+        <p>
+          Sus datos personales no serán transferidos a terceros sin su consentimiento, salvo en los casos
+          previstos por la Ley Federal de Protección de Datos Personales en Posesión de los Particulares.
+        </p>
+
+        <h2>Cambios al aviso de privacidad</h2>
+        <p>
+          Nos reservamos el derecho de efectuar en cualquier momento modificaciones o actualizaciones al
+          presente aviso de privacidad. dichas modificaciones estarán disponibles en nuestro sitio web
+          <a href="https://estefaniaderma.mx/aviso-de-privacidad">estefaniaderma.mx/aviso-de-privacidad</a>.
+        </p>
+
+        <h2>Contacto</h2>
+        <p>
+          Si tiene alguna duda sobre este aviso de privacidad, puede contactarnos a través de WhatsApp al
+          <a href="https://api.whatsapp.com/send?phone=529992213021" target="_blank" rel="noopener noreferrer">999 221 3021</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+  }
+
+  .privacy-hero {
+    padding: var(--space-20) 0 var(--space-8);
+    background: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .privacy-title {
+    font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+    font-weight: var(--weight-bold);
+    color: var(--color-text-primary);
+    line-height: var(--leading-tight);
+    margin-bottom: var(--space-4);
+  }
+
+  .privacy-updated {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .privacy-content {
+    padding: var(--space-12) 0 var(--space-20);
+    background: var(--color-surface);
+  }
+
+  .privacy-body {
+    max-width: 48rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .privacy-body h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    margin-top: var(--space-4);
+  }
+
+  .privacy-body p,
+  .privacy-body li {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .privacy-body ul {
+    list-style: disc;
+    padding-left: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .privacy-body a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+</style>
