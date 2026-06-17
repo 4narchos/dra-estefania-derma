@@ -33,22 +33,9 @@ const googleMapsUrl = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
 <footer class="site-footer">
   <div class="footer-container">
     <div class="footer-grid">
-      {/* CTA + horarios */}
-      <div class="footer-block footer-block--cta">
-        <a
-          href={`${whatsappBaseUrl}&utm_source=web&utm_medium=footer&utm_campaign=agendar`}
-          class="footer-cta"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Agendar cita
-        </a>
-        <p class="footer-hours">{mainLocation.hours.replace(/\n/g, " · ")}</p>
-      </div>
-
-      {/* Contacto: dirección + mapa */}
-      <div class="footer-block footer-block--contact">
-        <h3 class="footer-block-title">Contacto</h3>
+      {/* Ubicación: dirección + mapa + contacto */}
+      <div class="footer-block footer-block--location">
+        <h3 class="footer-block-title">Ubicación</h3>
         <address class="footer-contact">
           <a
             href={googleMapsUrl}
@@ -73,6 +60,19 @@ const googleMapsUrl = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
         <div class="footer-map">
           <MapWidget src={googleMapsSrc} title="Ubicación del consultorio" compact />
         </div>
+      </div>
+
+      {/* CTA + horarios */}
+      <div class="footer-block footer-block--cta">
+        <a
+          href={`${whatsappBaseUrl}&utm_source=web&utm_medium=footer&utm_campaign=agendar`}
+          class="footer-cta"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Agendar cita
+        </a>
+        <p class="footer-hours">{mainLocation.hours.replace(/\n/g, " · ")}</p>
       </div>
 
       {/* Navegación */}
@@ -155,7 +155,7 @@ const googleMapsUrl = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
 
   @media (min-width: 1024px) {
     .footer-grid {
-      grid-template-columns: 1fr 1.25fr 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       gap: var(--space-8);
       align-items: start;
     }
