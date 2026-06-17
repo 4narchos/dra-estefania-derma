@@ -37,18 +37,18 @@ function isActive(linkPath: string): boolean {
           src={`${base}images/header banner.png`}
           alt="Dra. Estefanía Borges - Dermatóloga"
           class="nav-brand-banner"
-          width="192"
-          height="64"
+          width="900"
+          height="300"
           loading="eager"
         />
       </a>
       <a href={`${base}`} class="nav-brand-link nav-brand-link--mobile">
         <img
-          src={`${base}images/EB banner logo.png`}
+          src={`${base}images/header banner.png`}
           alt="Dra. Estefanía Borges - Dermatóloga"
-          class="nav-brand-icon"
-          width="64"
-          height="64"
+          class="nav-brand-banner"
+          width="900"
+          height="300"
           loading="eager"
         />
       </a>
@@ -170,7 +170,7 @@ function isActive(linkPath: string): boolean {
   .nav-brand-banner {
     display: block;
     width: 192px;
-    height: 64px;
+    height: auto;
     object-fit: contain;
   }
 
@@ -427,10 +427,11 @@ function isActive(linkPath: string): boolean {
       height: var(--header-height);
     }
 
-    .nav-brand-link--mobile .nav-brand-icon {
+    .nav-brand-link--mobile .nav-brand-banner {
       display: block;
-      width: 64px;
-      height: 64px;
+      width: auto;
+      max-width: 120px;
+      height: 40px;
       object-fit: contain;
     }
 
