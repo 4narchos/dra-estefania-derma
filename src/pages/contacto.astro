@@ -129,7 +129,10 @@ const socialLinks = [
               <line x1="10" x2="21" y1="14" y2="3"/>
             </svg>
           </a>
-          <p class="contact-motto">Tu piel te habla, y yo te ayudo a entenderla&nbsp;✨</p>
+          <p class="contact-motto">Debajo de tu piel te habla, yo te ayudo a entenderla.</p>
+          <button type="button" class="contact-read-more" data-intro-open aria-haspopup="dialog">
+            Ver más
+          </button>
         </div>
       </article>
 
@@ -232,6 +235,34 @@ const socialLinks = [
               data-zlw-saas-only="true"
               data-zlw-a11y-title="Widget de reserva de citas médicas"
             ></a>
+          </div>
+        </div>
+      </div>
+
+      {/* Modal de introducción / Ver más */}
+      <div class="intro-modal" id="intro-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Conoce a la Dra. Estefanía Borges">
+        <div class="intro-modal-backdrop" data-intro-close></div>
+        <div class="intro-modal-content">
+          <button type="button" class="intro-modal-close" aria-label="Cerrar" data-intro-close>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 6 6 18"/>
+              <path d="m6 6 12 12"/>
+            </svg>
+          </button>
+          <div class="intro-modal-body">
+            <p class="intro-modal-lead">Tu piel te habla y yo te ayudo a entenderla.</p>
+            <div class="intro-modal-text">
+              <p>¡Hola!<br>Soy la Dra. Estefanía Borges, dermatóloga egresada del Instituto Dermatológico de Jalisco, uno de los centros dermatológicos más importantes del país.</p>
+              <p>Estoy certificada por el Consejo Mexicano de Dermatología y cuento con diplomados en tricología, enfermedades de las uñas y dermatología estética por el Colegio Ibero-Latinoamericano de Dermatología.</p>
+              <p>Mi práctica profesional prioriza tu salud y tu estética con resultados seguros y naturales.<br>
+              Atiendo a mujeres, hombres y niños con problemas en la piel, el pelo o las uñas, como acné, manchas en la piel, caída del cabello, caspa, dermatitis seborreica, arrugas y envejecimiento de la piel.<br>
+              Realizo procedimientos de dermatología cosmética como aplicación de bótox, bioestimulantes (Sculptra, NCTF), peelings, microneedling y mucho más.</p>
+              <p>Mi consulta integra la evidencia científica y mi experiencia con tus valores, preferencias y expectativas.</p>
+              <p>Escucho tu historia y lo que te preocupa. Te reviso a detalle para encontrar lo que no se ve a simple vista. Llego a la raíz de tu problema y elaboro un plan de tratamiento efectivo y realista, diseñado especialmente para ti.<br>
+              Te explico con detalle todo sobre tu padecimiento y me aseguro de escuchar y resolver todas tus dudas.</p>
+              <p>Al terminar la consulta tendrás total claridad.</p>
+              <p class="intro-modal-closing">Gracias por confiar su piel en mis manos.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -667,7 +698,29 @@ const socialLinks = [
     font-style: italic;
     opacity: 0.85;
     margin-top: var(--space-1);
-    white-space: nowrap;
+  }
+
+  .contact-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: 0;
+    margin-top: var(--space-2);
+    background: transparent;
+    border: none;
+    color: var(--color-primary);
+    font-family: inherit;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+  }
+
+  .contact-read-more:hover,
+  .contact-read-more:focus {
+    color: var(--color-text-primary);
   }
 
   .contact-profile-meta {
@@ -894,6 +947,96 @@ const socialLinks = [
     text-decoration: none;
   }
 
+  .intro-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-fast), visibility var(--transition-fast);
+  }
+
+  .intro-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .intro-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .intro-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 680px;
+    max-height: calc(100vh - 2rem);
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    overflow: auto;
+    padding: var(--space-8) var(--space-6);
+    z-index: 1;
+  }
+
+  .intro-modal-close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F0EBE0;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    color: var(--color-text-primary);
+    transition: background var(--transition-fast);
+    z-index: 10;
+  }
+
+  .intro-modal-close:hover {
+    background: #E6E3DB;
+  }
+
+  .intro-modal-body {
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .intro-modal-lead {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(var(--text-xl), 4vw, var(--text-3xl));
+    font-weight: 600;
+    color: var(--color-primary);
+    line-height: var(--leading-tight);
+    margin-bottom: var(--space-6);
+  }
+
+  .intro-modal-text p {
+    margin-bottom: var(--space-4);
+  }
+
+  .intro-modal-closing {
+    font-weight: var(--weight-medium);
+    color: var(--color-text-primary);
+    margin-top: var(--space-6);
+    margin-bottom: 0;
+  }
+
+  @media (min-width: 641px) {
+    .intro-modal-content {
+      padding: var(--space-10) var(--space-8);
+    }
+  }
+
   @media (min-width: 641px) {
     .contact-page {
       padding: var(--space-12) var(--space-6);
@@ -1019,6 +1162,46 @@ const socialLinks = [
         }
       });
     }
+  })();
+</script>
+
+<script>
+  (function () {
+    const openBtn = document.querySelector("[data-intro-open]");
+    const modal = document.getElementById("intro-modal");
+    const closeTriggers = document.querySelectorAll("[data-intro-close]");
+
+    if (!openBtn || !modal) return;
+
+    const openModal = () => {
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      modal.querySelector(".intro-modal-close")?.focus();
+    };
+
+    const closeModal = () => {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      openBtn.focus();
+    };
+
+    openBtn.addEventListener("click", openModal);
+
+    closeTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", closeModal);
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) {
+        closeModal();
+      }
+    });
   })();
 </script>
 
