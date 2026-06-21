@@ -132,7 +132,7 @@ const socialLinks = [
 
           <div class="contact-bio-preview">
             <div class="contact-bio-preview-text">
-              <p><strong><em>Tu piel te habla y yo te ayudo a entenderla&nbsp;✨</em></strong></p>
+              <p class="contact-motto-shimmer"><strong><em>Tu piel te habla y yo te ayudo a entenderla&nbsp;✨</em></strong></p>
               <p>¡Hola! <br>Soy la <em>Dra. Estefanía Borges</em>, <strong>dermatóloga</strong> egresada del <em>Instituto Dermatológico de Jalisco</em>, uno de los centros dermatológicos <em>más importantes del país</em>. ...</p>
             </div>
             <button type="button" class="contact-read-more" data-intro-open aria-haspopup="dialog">
@@ -766,6 +766,32 @@ const socialLinks = [
     margin-bottom: 0;
   }
 
+  .contact-motto-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--color-text-secondary) 0%,
+      var(--color-text-secondary) 35%,
+      #6e9f9c 50%,
+      var(--color-text-secondary) 65%,
+      var(--color-text-secondary) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: motto-shimmer 3s infinite linear;
+  }
+
+  @keyframes motto-shimmer {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: -100% 0;
+    }
+  }
+
   .lema-headline {
     font-family: 'Junicode', Georgia, serif;
     font-size: clamp(var(--text-lg), 4vw, var(--text-2xl));
@@ -837,15 +863,15 @@ const socialLinks = [
   .intro-modal.is-open .lema-line--1 .lema-word:nth-child(4) { animation-delay: 0.26s; }
 
   .intro-modal.is-open .lema-line--2 .lema-word {
-    animation: lema-fade-up 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    animation: lema-fade-up 0.25s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
   }
 
-  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(1) { animation-delay: 0.90s; }
-  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(2) { animation-delay: 1.05s; }
-  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(3) { animation-delay: 1.20s; }
-  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(4) { animation-delay: 1.35s; }
-  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(5) { animation-delay: 1.50s; }
-  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(6) { animation-delay: 1.65s; }
+  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(1) { animation-delay: 0.50s; }
+  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(2) { animation-delay: 0.58s; }
+  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(3) { animation-delay: 0.66s; }
+  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(4) { animation-delay: 0.74s; }
+  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(5) { animation-delay: 0.82s; }
+  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(6) { animation-delay: 0.90s; }
 
   @keyframes lema-fade-up {
     from {
@@ -1168,11 +1194,11 @@ const socialLinks = [
     animation: intro-text-fade 0.4s ease-out forwards;
   }
 
-  .intro-modal.is-open .intro-modal-text p:not(.lema-headline--modal):nth-of-type(2) { animation-delay: 1.80s; }
-  .intro-modal.is-open .intro-modal-text p:not(.lema-headline--modal):nth-of-type(3) { animation-delay: 1.90s; }
-  .intro-modal.is-open .intro-modal-text p:not(.lema-headline--modal):nth-of-type(4) { animation-delay: 2.00s; }
-  .intro-modal.is-open .intro-modal-text p:not(.lema-headline--modal):nth-of-type(5) { animation-delay: 2.10s; }
-  .intro-modal.is-open .intro-modal-text p.intro-modal-closing { animation-delay: 2.20s; }
+  .intro-modal.is-open .intro-modal-text p:not(.lema-headline--modal):nth-of-type(2) { animation-delay: 2.40s; }
+  .intro-modal.is-open .intro-modal-text p:not(.lema-headline--modal):nth-of-type(3) { animation-delay: 2.50s; }
+  .intro-modal.is-open .intro-modal-text p:not(.lema-headline--modal):nth-of-type(4) { animation-delay: 2.60s; }
+  .intro-modal.is-open .intro-modal-text p:not(.lema-headline--modal):nth-of-type(5) { animation-delay: 2.70s; }
+  .intro-modal.is-open .intro-modal-text p.intro-modal-closing { animation-delay: 2.80s; }
 
   @keyframes intro-text-fade {
     from {
