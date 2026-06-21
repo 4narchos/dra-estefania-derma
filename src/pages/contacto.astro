@@ -132,7 +132,19 @@ const socialLinks = [
 
           <div class="contact-bio-preview">
             <div class="contact-bio-preview-text">
-              <p><strong><em>Tu piel te habla y yo te ayudo a entenderla&nbsp;✨</em></strong></p>
+              <p class="lema-headline">
+                <span class="lema-word">Tu</span>
+                <span class="lema-word lema-accent">piel</span>
+                <span class="lema-word">te</span>
+                <span class="lema-word">habla</span>
+                <span class="lema-word">y</span>
+                <span class="lema-word">yo</span>
+                <span class="lema-word">te</span>
+                <span class="lema-word">ayudo</span>
+                <span class="lema-word">a</span>
+                <span class="lema-word lema-accent">entenderla</span>
+                <span class="lema-word">✨</span>
+              </p>
               <p>¡Hola! <br>Soy la <em>Dra. Estefanía Borges</em>, <strong>dermatóloga</strong> egresada del <em>Instituto Dermatológico de Jalisco</em>, uno de los centros dermatológicos <em>más importantes del país</em>. ...</p>
             </div>
             <button type="button" class="contact-read-more" data-intro-open aria-haspopup="dialog">
@@ -257,7 +269,19 @@ const socialLinks = [
           </button>
           <div class="intro-modal-body">
             <div class="intro-modal-text">
-              <p><strong><em>Tu piel te habla y yo te ayudo a entenderla.</em></strong></p>
+              <p class="lema-headline lema-headline--modal">
+                <span class="lema-word">Tu</span>
+                <span class="lema-word lema-accent">piel</span>
+                <span class="lema-word">te</span>
+                <span class="lema-word">habla</span>
+                <span class="lema-word">y</span>
+                <span class="lema-word">yo</span>
+                <span class="lema-word">te</span>
+                <span class="lema-word">ayudo</span>
+                <span class="lema-word">a</span>
+                <span class="lema-word lema-accent">entenderla</span>
+                <span class="lema-word">✨</span>
+              </p>
               <p>¡Hola!<br>
               Soy la <em>Dra. Estefanía Borges</em>, <strong>dermatóloga</strong> egresada del <em>Instituto Dermatológico de Jalisco</em>, uno de los centros dermatológicos <em>más importantes del país</em>.<br>
               Estoy <strong>certificada</strong> por el <em>Consejo Mexicano de Dermatología</em> y cuento con <strong>diplomados</strong> en <strong>tricología</strong>, enfermedades de las <strong>uñas</strong> y dermatología <strong>estética</strong> por el <em>Colegio Ibero-Latinoamericano de Dermatología.</em></p>
@@ -749,6 +773,75 @@ const socialLinks = [
 
   .contact-bio-preview-text p:last-child {
     margin-bottom: 0;
+  }
+
+  .lema-headline {
+    font-family: 'Rubik', sans-serif;
+    font-size: clamp(var(--text-lg), 4vw, var(--text-2xl));
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--color-text-primary);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35em;
+    margin: 0 0 var(--space-3);
+  }
+
+  .lema-headline--modal {
+    font-size: clamp(var(--text-xl), 5vw, var(--text-3xl));
+    margin-bottom: var(--space-6);
+    justify-content: center;
+  }
+
+  .lema-word {
+    display: inline-block;
+    transform: translateY(0);
+    opacity: 1;
+    filter: blur(0);
+    transition: color var(--transition-fast);
+  }
+
+  .lema-accent {
+    color: #6e9f9c;
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  @keyframes lema-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+      filter: blur(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  .intro-modal.is-open .lema-headline--modal .lema-word {
+    opacity: 0;
+    animation: lema-reveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .intro-modal.is-open .lema-headline--modal .lema-word:nth-child(1) { animation-delay: 0.05s; }
+  .intro-modal.is-open .lema-headline--modal .lema-word:nth-child(2) { animation-delay: 0.1s; }
+  .intro-modal.is-open .lema-headline--modal .lema-word:nth-child(3) { animation-delay: 0.15s; }
+  .intro-modal.is-open .lema-headline--modal .lema-word:nth-child(4) { animation-delay: 0.2s; }
+  .intro-modal.is-open .lema-headline--modal .lema-word:nth-child(5) { animation-delay: 0.25s; }
+  .intro-modal.is-open .lema-headline--modal .lema-word:nth-child(6) { animation-delay: 0.3s; }
+  .intro-modal.is-open .lema-headline--modal .lema-word:nth-child(7) { animation-delay: 0.35s; }
+  .intro-modal.is-open .lema-headline--modal .lema-word:nth-child(8) { animation-delay: 0.4s; }
+  .intro-modal.is-open .lema-headline--modal .lema-word:nth-child(9) { animation-delay: 0.45s; }
+  .intro-modal.is-open .lema-headline--modal .lema-word:nth-child(10) { animation-delay: 0.5s; }
+  .intro-modal.is-open .lema-headline--modal .lema-word:nth-child(11) { animation-delay: 0.55s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intro-modal.is-open .lema-headline--modal .lema-word {
+      animation: none;
+      opacity: 1;
+    }
   }
 
   .contact-profile-meta {
