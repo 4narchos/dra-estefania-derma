@@ -129,10 +129,16 @@ const socialLinks = [
               <line x1="10" x2="21" y1="14" y2="3"/>
             </svg>
           </a>
-          <p class="contact-motto">Tu piel te habla, y yo te ayudo a entenderla&nbsp;✨</p>
-          <button type="button" class="contact-read-more" data-intro-open aria-haspopup="dialog">
-            Ver más
-          </button>
+
+          <div class="contact-bio-preview">
+            <div class="contact-bio-preview-text">
+              <p><strong><em>Tu piel te habla y yo te ayudo a entenderla.</em></strong></p>
+              <p>¡Hola! <br>Soy la <em>Dra. Estefanía Borges</em>, <strong>dermatóloga</strong> egresada del <em>Instituto Dermatológico de Jalisco</em>, uno de los centros dermatológicos <em>más importantes del país</em>. ...</p>
+            </div>
+            <button type="button" class="contact-read-more" data-intro-open aria-haspopup="dialog">
+              ver más <span class="sr-only">Sobre mí</span>
+            </button>
+          </div>
         </div>
       </article>
 
@@ -722,6 +728,27 @@ const socialLinks = [
   .contact-read-more:hover,
   .contact-read-more:focus {
     color: var(--color-text-primary);
+  }
+
+  .contact-bio-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .contact-bio-preview-text {
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+  }
+
+  .contact-bio-preview-text p {
+    margin: 0 0 var(--space-2);
+  }
+
+  .contact-bio-preview-text p:last-child {
+    margin-bottom: 0;
   }
 
   .contact-profile-meta {
