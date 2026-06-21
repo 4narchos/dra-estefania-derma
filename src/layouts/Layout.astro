@@ -355,9 +355,26 @@ const servicesListSchema = {
     </style>
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <style is:global>
+      @font-face {
+        font-family: 'Junicode';
+        src: url('/fonts/junicode/JunicodeVF-Roman.woff2') format('woff2');
+        font-weight: 300 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Junicode';
+        src: url('/fonts/junicode/JunicodeVF-Italic.woff2') format('woff2');
+        font-weight: 300 700;
+        font-style: italic;
+        font-display: swap;
+      }
+    </style>
   </head>
   <body>
     {showHeader && <Header currentPath={Astro.url.pathname} />}
