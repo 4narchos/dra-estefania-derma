@@ -151,11 +151,8 @@ const socialLinks = [
           <div class="contact-bio-preview">
             <div class="contact-bio-preview-text">
               <p><strong><em>Tu piel te habla y yo te ayudo a <span class="magic-sparkles">entenderla&nbsp;✨<span class="sparkle s1" aria-hidden="true">✦</span><span class="sparkle s2" aria-hidden="true">✦</span><span class="sparkle s3" aria-hidden="true">✦</span><span class="sparkle s4" aria-hidden="true">✦</span></span></em></strong></p>
-              <p>¡Hola! Soy la <em>Dra. Estefanía Borges</em>, <strong>dermatóloga</strong> egresada del <em>Instituto Dermatológico de Jalisco</em>, uno de los centros dermatológicos <em>más importantes del país</em>. ...</p>
+              <p>¡Hola! Soy la <em>Dra. Estefanía Borges</em>, <strong>dermatóloga</strong> egresada del <em>Instituto Dermatológico de Jalisco</em>, uno de los centros dermatológicos <em>más importantes del país</em>.<span aria-hidden="true">... </span><button type="button" class="contact-read-more" data-intro-open aria-haspopup="dialog">ver más</button></p>
             </div>
-            <button type="button" class="contact-read-more" data-intro-open aria-haspopup="dialog">
-              ver más
-            </button>
           </div>
         </div>
       </article>
@@ -790,7 +787,6 @@ const socialLinks = [
     align-items: center;
     gap: var(--space-1);
     padding: 0;
-    margin-top: var(--space-2);
     background: transparent;
     border: none;
     color: var(--color-primary);
@@ -799,6 +795,7 @@ const socialLinks = [
     font-weight: var(--weight-medium);
     text-decoration: underline;
     text-underline-offset: 3px;
+    vertical-align: baseline;
     cursor: pointer;
     transition: color var(--transition-fast);
   }
