@@ -1,9 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import MapWidget from "../components/MapWidget.astro";
 import { whatsappBaseUrl } from "../data/links.js";
+import { locations } from "../data/locations.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
 
 const base = getBaseUrl();
+const mainLocation = locations[0];
+const googleMapsUrl = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
+const googleMapsSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8098.894030569736!2d-89.59418694315481!3d21.020613550273655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f56779bac8f87d1%3A0x2bc4da0bb4d62d7c!2sDra.%20Estefania%20Borges%20Dermat%C3%B3loga!5e0!3m2!1ses-419!2smx!4v1781652609779!5m2!1ses-419!2smx";
 const title = "Dermatóloga en Mérida · Tu piel te habla, y yo te ayudo a entenderla ✨";
 const description = "Enfermedades de la piel, el pelo y las uñas, dermatología estética y cirugía dermatológica menor";
 
@@ -117,18 +122,24 @@ const socialLinks = [
         <hr class="contact-panel-divider" />
 
         <div class="contact-profile-meta">
-          <a href="https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7" class="contact-bio" target="_blank" rel="noopener noreferrer">
+          <button type="button" class="contact-bio" data-location-toggle aria-expanded="false">
             <svg class="contact-bio-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
               <circle cx="12" cy="10" r="3"/>
             </svg>
             <span>Dermatóloga en Mérida&nbsp;🧴</span>
-            <svg class="contact-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-              <polyline points="15,3 21,3 21,9"/>
-              <line x1="10" x2="21" y1="14" y2="3"/>
+            <svg class="contact-chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
             </svg>
-          </a>
+          </button>
+          <div class="contact-location-panel">
+            <a href={googleMapsUrl} class="contact-location-address" target="_blank" rel="noopener noreferrer">
+              {mainLocation.address}
+            </a>
+            <div class="contact-location-map">
+              <MapWidget src={googleMapsSrc} title="Ubicación del consultorio" compact />
+            </div>
+          </div>
 
           <div class="contact-bio-preview">
             <div class="contact-bio-preview-text">
@@ -694,24 +705,67 @@ const socialLinks = [
     display: inline-flex;
     align-items: center;
     gap: var(--space-1);
+    width: 100%;
+    padding: 0;
     font-size: var(--text-sm);
+    font-family: inherit;
     color: var(--color-text-secondary);
     text-decoration: none;
+    text-align: left;
+    background: transparent;
+    border: none;
+    cursor: pointer;
     transition: color var(--transition-fast);
   }
 
   .contact-bio:hover {
     color: var(--color-primary);
-    text-decoration: underline;
-  }
-
-  .contact-bio:hover .contact-external-icon {
-    transform: translate(1px, -1px);
   }
 
   .contact-bio-icon {
     color: var(--color-primary);
     flex-shrink: 0;
+  }
+
+  .contact-chevron-icon {
+    flex-shrink: 0;
+    margin-left: auto;
+    color: var(--color-text-muted);
+    transition: transform var(--transition-fast);
+  }
+
+  .contact-bio[aria-expanded="true"] .contact-chevron-icon {
+    transform: rotate(180deg);
+  }
+
+  .contact-location-panel {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.25s ease;
+  }
+
+  .contact-location-panel.is-open {
+    max-height: 400px;
+    opacity: 1;
+  }
+
+  .contact-location-address {
+    display: block;
+    margin-top: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    line-height: var(--leading-relaxed);
+  }
+
+  .contact-location-address:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .contact-location-map {
+    margin-top: var(--space-3);
   }
 
   .contact-motto {
@@ -1409,6 +1463,19 @@ const socialLinks = [
       if (e.key === "Escape" && modal.classList.contains("is-open")) {
         closeModal();
       }
+    });
+  })();
+</script>
+
+<script is:inline>
+  (function () {
+    const toggle = document.querySelector("[data-location-toggle]");
+    const panel = toggle?.nextElementSibling;
+    if (!toggle || !panel) return;
+
+    toggle.addEventListener("click", () => {
+      const isOpen = panel.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(isOpen));
     });
   })();
 </script>
