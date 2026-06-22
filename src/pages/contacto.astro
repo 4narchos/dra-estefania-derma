@@ -767,45 +767,28 @@ const socialLinks = [
   }
 
   .contact-motto-shimmer {
-    position: relative;
-    display: inline-block;
-    color: var(--color-text-secondary);
-  }
-
-  .contact-motto-shimmer::after {
-    content: '';
-    position: absolute;
-    inset: -0.1em -0.35em;
     background: linear-gradient(
-      110deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.75) 42%,
-      rgba(212, 175, 55, 0.35) 50%,
-      rgba(255, 255, 255, 0.75) 58%,
-      transparent 70%
+      90deg,
+      var(--color-text-secondary) 0%,
+      var(--color-text-secondary) 35%,
+      #D4AF37 50%,
+      var(--color-text-secondary) 65%,
+      var(--color-text-secondary) 100%
     );
-    mix-blend-mode: overlay;
-    transform: translateX(-130%);
-    opacity: 0;
-    pointer-events: none;
-    border-radius: 0.25em;
-    animation: motto-sheen 5s ease-in-out infinite;
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: motto-shimmer 3s infinite linear;
   }
 
-  @keyframes motto-sheen {
-    0%, 100% {
-      transform: translateX(-130%);
-      opacity: 0;
-    }
-    35% {
-      opacity: 0.75;
-    }
-    65% {
-      opacity: 0.75;
+  @keyframes motto-shimmer {
+    0% {
+      background-position: 100% 0;
     }
     100% {
-      transform: translateX(130%);
-      opacity: 0;
+      background-position: -100% 0;
     }
   }
 
