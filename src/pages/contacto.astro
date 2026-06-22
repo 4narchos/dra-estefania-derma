@@ -856,22 +856,10 @@ const socialLinks = [
     font-weight: 500;
   }
 
-  @keyframes lema-reveal {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-      filter: blur(8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
-  }
 
   .intro-modal.is-open:not(.has-animated) .lema-headline--modal .lema-word {
     opacity: 0;
-    animation: lema-reveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: lema-blur-in 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
   }
 
   .intro-modal.is-open:not(.has-animated) .lema-line--1 .lema-word:nth-child(1) { animation-delay: 0.05s; }
