@@ -119,9 +119,7 @@ const socialLinks = [
             </div>
           </div>
 
-        <hr class="contact-panel-divider" />
-
-        <div class="contact-profile-meta">
+        <div class="contact-location">
           <button type="button" class="contact-bio" data-location-toggle aria-expanded="false">
             <svg class="contact-bio-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
@@ -140,11 +138,15 @@ const socialLinks = [
               <MapWidget src={googleMapsSrc} title="Ubicación del consultorio" compact />
             </div>
           </div>
+        </div>
 
+        <hr class="contact-panel-divider" />
+
+        <div class="contact-profile-meta">
           <div class="contact-bio-preview">
             <div class="contact-bio-preview-text">
               <p><strong><em>Tu piel te habla y yo te ayudo a <span class="magic-sparkles">entenderla&nbsp;✨<span class="sparkle s1" aria-hidden="true">✦</span><span class="sparkle s2" aria-hidden="true">✦</span><span class="sparkle s3" aria-hidden="true">✦</span><span class="sparkle s4" aria-hidden="true">✦</span></span></em></strong></p>
-              <p>¡Hola! <br>Soy la <em>Dra. Estefanía Borges</em>, <strong>dermatóloga</strong> egresada del <em>Instituto Dermatológico de Jalisco</em>, uno de los centros dermatológicos <em>más importantes del país</em>. ...</p>
+              <p>¡Hola! Soy la <em>Dra. Estefanía Borges</em>, <strong>dermatóloga</strong> egresada del <em>Instituto Dermatológico de Jalisco</em>, uno de los centros dermatológicos <em>más importantes del país</em>. ...</p>
             </div>
             <button type="button" class="contact-read-more" data-intro-open aria-haspopup="dialog">
               ver más
@@ -729,12 +731,12 @@ const socialLinks = [
 
   .contact-chevron-icon {
     flex-shrink: 0;
-    margin-left: auto;
     color: var(--color-text-muted);
     transition: transform var(--transition-fast);
   }
 
-  .contact-bio[aria-expanded="true"] .contact-chevron-icon {
+  .contact-bio[aria-expanded="true"] .contact-chevron-icon,
+  .contact-location:hover .contact-chevron-icon {
     transform: rotate(180deg);
   }
 
@@ -745,6 +747,7 @@ const socialLinks = [
     transition: max-height 0.35s ease, opacity 0.25s ease;
   }
 
+  .contact-location:hover .contact-location-panel,
   .contact-location-panel.is-open {
     max-height: 400px;
     opacity: 1;
