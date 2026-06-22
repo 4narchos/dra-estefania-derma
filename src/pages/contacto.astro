@@ -767,28 +767,45 @@ const socialLinks = [
   }
 
   .contact-motto-shimmer {
-    background: linear-gradient(
-      90deg,
-      var(--color-text-secondary) 0%,
-      var(--color-text-secondary) 35%,
-      #D4AF37 50%,
-      var(--color-text-secondary) 65%,
-      var(--color-text-secondary) 100%
-    );
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    animation: motto-shimmer 3s infinite linear;
+    position: relative;
+    display: inline-block;
+    color: var(--color-text-secondary);
   }
 
-  @keyframes motto-shimmer {
-    0% {
-      background-position: 100% 0;
+  .contact-motto-shimmer::after {
+    content: '';
+    position: absolute;
+    inset: -0.1em -0.35em;
+    background: linear-gradient(
+      110deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.75) 42%,
+      rgba(212, 175, 55, 0.35) 50%,
+      rgba(255, 255, 255, 0.75) 58%,
+      transparent 70%
+    );
+    mix-blend-mode: overlay;
+    transform: translateX(-130%);
+    opacity: 0;
+    pointer-events: none;
+    border-radius: 0.25em;
+    animation: motto-sheen 5s ease-in-out infinite;
+  }
+
+  @keyframes motto-sheen {
+    0%, 100% {
+      transform: translateX(-130%);
+      opacity: 0;
+    }
+    35% {
+      opacity: 0.75;
+    }
+    65% {
+      opacity: 0.75;
     }
     100% {
-      background-position: -100% 0;
+      transform: translateX(130%);
+      opacity: 0;
     }
   }
 
@@ -863,7 +880,7 @@ const socialLinks = [
   .intro-modal.is-open .lema-line--1 .lema-word:nth-child(4) { animation-delay: 0.26s; }
 
   .intro-modal.is-open .lema-line--2 .lema-word {
-    animation: lema-fade-up 0.25s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    animation: lema-blur-in 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
   }
 
   .intro-modal.is-open .lema-line--2 .lema-word:nth-child(1) { animation-delay: 1.10s; }
@@ -873,16 +890,16 @@ const socialLinks = [
   .intro-modal.is-open .lema-line--2 .lema-word:nth-child(5) { animation-delay: 1.42s; }
   .intro-modal.is-open .lema-line--2 .lema-word:nth-child(6) { animation-delay: 1.50s; }
 
-  @keyframes lema-fade-up {
+  @keyframes lema-blur-in {
     from {
-      opacity: 0.001;
-      transform: translateY(20px);
-      filter: blur(4px);
+      opacity: 0;
+      filter: blur(10px);
+      transform: scale(1.02);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
       filter: blur(0);
+      transform: scale(1);
     }
   }
 
@@ -1156,6 +1173,17 @@ const socialLinks = [
     overflow-x: hidden;
     padding: var(--space-8) var(--space-6);
     z-index: 1;
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .intro-modal:not(.has-opened) .intro-modal-content {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+
+  .intro-modal.is-open .intro-modal-content {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 
   .intro-modal-close {
@@ -1365,6 +1393,9 @@ const socialLinks = [
       modal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
       modal.querySelector(".intro-modal-close")?.focus();
+      if (!modal.classList.contains("has-opened")) {
+        setTimeout(() => modal.classList.add("has-opened"), 600);
+      }
     };
 
     const closeModal = () => {
