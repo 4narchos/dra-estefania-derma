@@ -1423,14 +1423,7 @@ const socialLinks = [
     const isInAppBrowser = /Instagram|FB_IAB|FBAN|FBIOS|FBBV/i.test(ua);
 
     if (isInAppBrowser) {
-      const file = new File([blob], "Dra-Mariana-Estefania-Garcia-Borges.vcf", { type: "text/vcard" });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator.share({ files: [file], title: "Dra. Mariana Estefanía García Borges" }).catch(() => {
-          window.open("/Dra-Mariana-Estefania-Garcia-Borges.vcf", "_blank");
-        });
-      } else {
-        window.open("/Dra-Mariana-Estefania-Garcia-Borges.vcf", "_blank");
-      }
+      window.open("/Dra-Mariana-Estefania-Garcia-Borges.vcf", "_blank");
       return;
     }
 
