@@ -826,6 +826,13 @@ const socialLinks = [
     margin-bottom: 0;
   }
 
+  @media (max-width: 640px) {
+    .contact-bio-preview-text > p:nth-child(1) > strong:nth-child(1) {
+      white-space: nowrap;
+      font-size: clamp(0.7rem, 3.6vw, var(--text-sm));
+    }
+  }
+
   .magic-sparkles {
     position: relative;
     display: inline-block;
