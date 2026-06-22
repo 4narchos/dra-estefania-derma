@@ -735,8 +735,7 @@ const socialLinks = [
     transition: transform var(--transition-fast);
   }
 
-  .contact-bio[aria-expanded="true"] .contact-chevron-icon,
-  .contact-location:hover .contact-chevron-icon {
+  .contact-bio[aria-expanded="true"] .contact-chevron-icon {
     transform: rotate(180deg);
   }
 
@@ -747,7 +746,6 @@ const socialLinks = [
     transition: max-height 0.35s ease, opacity 0.25s ease;
   }
 
-  .contact-location:hover .contact-location-panel,
   .contact-location-panel.is-open {
     max-height: 400px;
     opacity: 1;
@@ -1472,13 +1470,32 @@ const socialLinks = [
 
 <script is:inline>
   (function () {
+    const location = document.querySelector(".contact-location");
     const toggle = document.querySelector("[data-location-toggle]");
     const panel = toggle?.nextElementSibling;
-    if (!toggle || !panel) return;
+    if (!location || !toggle || !panel) return;
 
-    toggle.addEventListener("click", () => {
-      const isOpen = panel.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(isOpen));
+    const open = () => {
+      panel.classList.add("is-open");
+      toggle.setAttribute("aria-expanded", "true");
+    };
+
+    const close = () => {
+      panel.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    };
+
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (panel.classList.contains("is-open")) {
+        close();
+      } else {
+        open();
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!location.contains(e.target)) close();
     });
   })();
 </script>
