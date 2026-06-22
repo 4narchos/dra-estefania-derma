@@ -869,26 +869,26 @@ const socialLinks = [
     }
   }
 
-  .intro-modal.is-open .lema-headline--modal .lema-word {
+  .intro-modal.is-open:not(.has-animated) .lema-headline--modal .lema-word {
     opacity: 0;
     animation: lema-reveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
-  .intro-modal.is-open .lema-line--1 .lema-word:nth-child(1) { animation-delay: 0.05s; }
-  .intro-modal.is-open .lema-line--1 .lema-word:nth-child(2) { animation-delay: 0.12s; }
-  .intro-modal.is-open .lema-line--1 .lema-word:nth-child(3) { animation-delay: 0.19s; }
-  .intro-modal.is-open .lema-line--1 .lema-word:nth-child(4) { animation-delay: 0.26s; }
+  .intro-modal.is-open:not(.has-animated) .lema-line--1 .lema-word:nth-child(1) { animation-delay: 0.05s; }
+  .intro-modal.is-open:not(.has-animated) .lema-line--1 .lema-word:nth-child(2) { animation-delay: 0.12s; }
+  .intro-modal.is-open:not(.has-animated) .lema-line--1 .lema-word:nth-child(3) { animation-delay: 0.19s; }
+  .intro-modal.is-open:not(.has-animated) .lema-line--1 .lema-word:nth-child(4) { animation-delay: 0.26s; }
 
-  .intro-modal.is-open .lema-line--2 .lema-word {
+  .intro-modal.is-open:not(.has-animated) .lema-line--2 .lema-word {
     animation: lema-blur-in 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
   }
 
-  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(1) { animation-delay: 1.10s; }
-  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(2) { animation-delay: 1.18s; }
-  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(3) { animation-delay: 1.26s; }
-  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(4) { animation-delay: 1.34s; }
-  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(5) { animation-delay: 1.42s; }
-  .intro-modal.is-open .lema-line--2 .lema-word:nth-child(6) { animation-delay: 1.50s; }
+  .intro-modal.is-open:not(.has-animated) .lema-line--2 .lema-word:nth-child(1) { animation-delay: 1.10s; }
+  .intro-modal.is-open:not(.has-animated) .lema-line--2 .lema-word:nth-child(2) { animation-delay: 1.18s; }
+  .intro-modal.is-open:not(.has-animated) .lema-line--2 .lema-word:nth-child(3) { animation-delay: 1.26s; }
+  .intro-modal.is-open:not(.has-animated) .lema-line--2 .lema-word:nth-child(4) { animation-delay: 1.34s; }
+  .intro-modal.is-open:not(.has-animated) .lema-line--2 .lema-word:nth-child(5) { animation-delay: 1.42s; }
+  .intro-modal.is-open:not(.has-animated) .lema-line--2 .lema-word:nth-child(6) { animation-delay: 1.50s; }
 
   @keyframes lema-blur-in {
     from {
@@ -910,6 +910,7 @@ const socialLinks = [
       opacity: 1;
     }
   }
+
 
 
 
@@ -1217,16 +1218,20 @@ const socialLinks = [
     margin-bottom: var(--space-4);
   }
 
-  .intro-modal.is-open .intro-modal-text p:not(.lema-headline--modal) {
+  .intro-modal.is-open:not(.has-animated) .intro-modal-text p:not(.lema-headline--modal) {
     opacity: 0;
     animation: intro-text-fade 0.4s ease-out forwards;
   }
 
-  .intro-modal.is-open .intro-modal-text p:not(.lema-headline--modal):nth-of-type(2) { animation-delay: 2.00s; }
-  .intro-modal.is-open .intro-modal-text p:not(.lema-headline--modal):nth-of-type(3) { animation-delay: 2.10s; }
-  .intro-modal.is-open .intro-modal-text p:not(.lema-headline--modal):nth-of-type(4) { animation-delay: 2.20s; }
-  .intro-modal.is-open .intro-modal-text p:not(.lema-headline--modal):nth-of-type(5) { animation-delay: 2.30s; }
-  .intro-modal.is-open .intro-modal-text p.intro-modal-closing { animation-delay: 2.40s; }
+  .intro-modal.is-open:not(.has-animated) .intro-modal-text p:not(.lema-headline--modal):nth-of-type(2) { animation-delay: 2.00s; }
+  .intro-modal.is-open:not(.has-animated) .intro-modal-text p:not(.lema-headline--modal):nth-of-type(3) { animation-delay: 2.10s; }
+  .intro-modal.is-open:not(.has-animated) .intro-modal-text p:not(.lema-headline--modal):nth-of-type(4) { animation-delay: 2.20s; }
+  .intro-modal.is-open:not(.has-animated) .intro-modal-text p:not(.lema-headline--modal):nth-of-type(5) { animation-delay: 2.30s; }
+  .intro-modal.is-open:not(.has-animated) .intro-modal-text p.intro-modal-closing { animation-delay: 2.40s; }
+
+  .intro-modal.has-animated .intro-modal-text p:not(.lema-headline--modal) {
+    opacity: 1;
+  }
 
   @keyframes intro-text-fade {
     from {
@@ -1395,6 +1400,9 @@ const socialLinks = [
       modal.querySelector(".intro-modal-close")?.focus();
       if (!modal.classList.contains("has-opened")) {
         setTimeout(() => modal.classList.add("has-opened"), 600);
+      }
+      if (!modal.classList.contains("has-animated")) {
+        setTimeout(() => modal.classList.add("has-animated"), 3000);
       }
     };
 
