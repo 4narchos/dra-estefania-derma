@@ -1537,9 +1537,16 @@ const socialLinks = [
     const isInAppBrowser = /Instagram|FB_IAB|FBAN|FBIOS|FBBV/i.test(ua);
 
     if (isInAppBrowser) {
-      const file = new File([blob], "Dra-Mariana-Estefania-Garcia-Borges.vcf", { type: "text/vcard" });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator.share({ files: [file], title: "Dra. Mariana Estefanía García Borges" });
+      const vcardUrl = "https://estefaniaderma.mx/vcard";
+      const isIOS = /iPhone|iPad|iPod/i.test(ua);
+      const isAndroid = /Android/i.test(ua);
+
+      if (isIOS) {
+        window.location.href = `x-safari-${vcardUrl}`;
+      } else if (isAndroid) {
+        window.location.href = `intent:${vcardUrl}#Intent;scheme=https;package=com.android.chrome;end`;
+      } else {
+        window.open(vcardUrl, "_blank");
       }
       return;
     }
