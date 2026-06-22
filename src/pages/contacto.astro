@@ -132,7 +132,7 @@ const socialLinks = [
 
           <div class="contact-bio-preview">
             <div class="contact-bio-preview-text">
-              <p class="contact-motto-shimmer"><strong><em>Tu piel te habla y yo te ayudo a entenderla&nbsp;✨</em></strong></p>
+              <p><strong><em>Tu piel te habla y yo te ayudo a <span class="magic-sparkles">entenderla&nbsp;✨<span class="sparkle s1" aria-hidden="true">✦</span><span class="sparkle s2" aria-hidden="true">✦</span><span class="sparkle s3" aria-hidden="true">✦</span><span class="sparkle s4" aria-hidden="true">✦</span></span></em></strong></p>
               <p>¡Hola! <br>Soy la <em>Dra. Estefanía Borges</em>, <strong>dermatóloga</strong> egresada del <em>Instituto Dermatológico de Jalisco</em>, uno de los centros dermatológicos <em>más importantes del país</em>. ...</p>
             </div>
             <button type="button" class="contact-read-more" data-intro-open aria-haspopup="dialog">
@@ -766,29 +766,40 @@ const socialLinks = [
     margin-bottom: 0;
   }
 
-  .contact-motto-shimmer {
-    background: linear-gradient(
-      90deg,
-      var(--color-text-secondary) 0%,
-      var(--color-text-secondary) 35%,
-      #D4AF37 50%,
-      var(--color-text-secondary) 65%,
-      var(--color-text-secondary) 100%
-    );
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    animation: motto-shimmer 3s infinite linear;
+  .magic-sparkles {
+    position: relative;
+    display: inline-block;
+    color: inherit;
   }
 
-  @keyframes motto-shimmer {
-    0% {
-      background-position: 100% 0;
+  .magic-sparkles .sparkle {
+    position: absolute;
+    color: #D4AF37;
+    font-size: 0.55em;
+    line-height: 1;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+    animation: sparkle-pop 2s ease-in-out infinite;
+  }
+
+  .magic-sparkles .sparkle.s1 { top: -0.35em; left: -0.25em; animation-delay: 0s; }
+  .magic-sparkles .sparkle.s2 { top: -0.45em; right: -0.15em; animation-delay: 0.5s; }
+  .magic-sparkles .sparkle.s3 { bottom: -0.35em; left: 25%; animation-delay: 1s; }
+  .magic-sparkles .sparkle.s4 { bottom: -0.25em; right: 5%; animation-delay: 1.5s; }
+
+  @keyframes sparkle-pop {
+    0%, 100% {
+      opacity: 0;
+      transform: scale(0) rotate(0deg);
     }
-    100% {
-      background-position: -100% 0;
+    40% {
+      opacity: 1;
+      transform: scale(1) rotate(25deg);
+    }
+    70% {
+      opacity: 0.6;
+      transform: scale(0.8) rotate(-10deg);
     }
   }
 
