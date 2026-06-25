@@ -2,6 +2,7 @@
 import MapWidget from "./MapWidget.astro";
 import { whatsappBaseUrl } from "../data/links.js";
 import { locations } from "../data/locations.js";
+import { socialLinks } from "../data/socialLinks.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
 
 const base = getBaseUrl();
@@ -16,10 +17,7 @@ const navLinks = [
   { label: "Contacto", href: `${base}contacto` },
 ];
 
-const socialLinks = [
-  { label: "Instagram", href: "https://instagram.com/dra.estefaniaderma" },
-  { label: "Doctoralia", href: "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan" },
-];
+
 
 const credentialLink = {
   label: "Consejo Mexicano de Dermatología",
@@ -105,10 +103,10 @@ const googleMapsUrl = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
 
         <h3 class="footer-block-title footer-block-title--secondary">Redes</h3>
         <ul class="footer-link-list footer-link-list--inline">
-          {socialLinks.map((link) => (
+          {socialLinks.filter((link) => link.active).map((link) => (
             <li>
-              <a href={link.href} class="footer-link" target="_blank" rel="noopener noreferrer">
-                {link.label}
+              <a href={link.url} class="footer-link" target="_blank" rel="noopener noreferrer">
+                {link.name}
               </a>
             </li>
           ))}

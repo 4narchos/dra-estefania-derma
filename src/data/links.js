@@ -1,3 +1,7 @@
+import { socialLinks } from "./socialLinks.js";
+
+const instagramLink = socialLinks.find((s) => s.icon === "instagram");
+
 export const whatsappNumber = "529992213021";
 
 export const whatsappMessage = encodeURIComponent(
@@ -38,10 +42,10 @@ export const links = [
   },
   {
     title: "Instagram",
-    url: "https://instagram.com/dra.estefaniaderma",
+    url: instagramLink?.url || "https://instagram.com/dra.estefaniaderma",
     icon: "📸",
     category: linkCategories.SOCIAL,
-    description: "@dra.estefaniaderma",
+    description: instagramLink?.handle || "@dra.estefaniaderma",
   },
   {
     title: "Perfil profesional",

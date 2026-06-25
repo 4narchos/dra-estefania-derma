@@ -5,6 +5,7 @@ import WhatsAppSticky from "../components/WhatsAppSticky.astro";
 import ShareSticky from "../components/ShareSticky.astro";
 import { faqs } from "../data/faq.js";
 import { services } from "../data/services.js";
+import { socialLinks } from "../data/socialLinks.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
 
 interface Props {
@@ -76,7 +77,7 @@ const physicianSchema = {
   "knowsLanguage": ["es", "en"],
   "sameAs": [
     "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan",
-    "https://instagram.com/dra.estefaniaderma"
+    ...socialLinks.filter((link) => link.active).map((link) => link.url)
   ],
   "alumniOf": [
     { "@type": "EducationalOrganization", "name": "Universidad Autónoma de Yucatán" },
