@@ -826,7 +826,8 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
     transition: transform var(--transition-fast);
   }
 
-  .contact-bio[aria-expanded="true"] .contact-chevron-icon {
+  .contact-bio[aria-expanded="true"] .contact-chevron-icon,
+  .contact-location:hover .contact-chevron-icon {
     transform: rotate(180deg);
   }
 
@@ -840,6 +841,14 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
   .contact-location-panel.is-open {
     max-height: 400px;
     opacity: 1;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .contact-location:hover .contact-location-panel {
+      max-height: 400px;
+      opacity: 1;
+      transition-delay: 0.5s;
+    }
   }
 
   .contact-location-address {
