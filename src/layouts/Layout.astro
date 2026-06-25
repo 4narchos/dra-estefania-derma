@@ -21,7 +21,7 @@ interface Props {
 
 const {
   title,
-  description = "Dra. Estefanía Borges - Dermatóloga en Mérida, Yucatán",
+  description = "Dra. Estefanía Borges, dermatóloga certificada en Mérida. Atención de piel, pelo y uñas, dermatología estética y cirugía menor. Agenda tu consulta.",
   ogImage,
   ogImageAlt = "Dra. Estefanía Borges - Dermatóloga en Mérida, Yucatán",
   showHeader = true,
@@ -39,7 +39,7 @@ const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/og-defa
 
 // Global Open Graph metadata: same preview for every page
 const globalOgTitle = "Dermatóloga en Mérida · Tu piel te habla, y yo te ayudo a entenderla ✨";
-const globalOgDescription = "Enfermedades de la piel, el pelo y las uñas, dermatología estética y cirugía dermatológica menor";
+const globalOgDescription = "Dra. Estefanía Borges, dermatóloga certificada en Mérida. Atención de piel, pelo y uñas, dermatología estética y cirugía menor.";
 const ogImageExt = ogImageUrl.split('.').pop()?.toLowerCase() || 'jpg';
 const ogImageType = ogImageExt === 'png' ? 'image/png' : ogImageExt === 'webp' ? 'image/webp' : 'image/jpeg';
 
