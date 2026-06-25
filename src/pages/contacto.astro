@@ -64,14 +64,17 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
               </a>
 
               <div class="contact-handle-tooltip">
-                <a
-                  href={instagramLink?.url}
+                <button
+                  type="button"
                   class="contact-handle"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  aria-label="Ver redes sociales"
+                  aria-expanded="false"
                 >
                   <span>@dra.estefaniaderma</span>
-                </a>
+                  <svg class="contact-handle-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"/>
+                  </svg>
+                </button>
                 <div class="contact-handle-icons">
                   {socialLinks.map((social) => (
                     <a
@@ -682,18 +685,34 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
     display: inline-flex;
     align-items: center;
     gap: var(--space-1);
-    font-size: var(--text-sm);
-    color: #1D5A8F;
-    font-weight: var(--weight-medium);
-    text-decoration: none;
     padding: 2px 0;
+    font-size: var(--text-sm);
+    font-family: inherit;
+    font-weight: var(--weight-medium);
+    color: #1D5A8F;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    background: transparent;
+    border: none;
     border-radius: 4px;
+    cursor: pointer;
     transition: color var(--transition-fast), background var(--transition-fast);
   }
 
-  .contact-handle:hover {
+  .contact-handle:hover,
+  .contact-handle-tooltip:hover .contact-handle {
     color: #14496F;
-    text-decoration: underline;
+  }
+
+  .contact-handle-chevron {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform var(--transition-fast);
+  }
+
+  .contact-handle-tooltip:hover .contact-handle-chevron,
+  .contact-handle-tooltip.is-open .contact-handle-chevron {
+    transform: rotate(180deg);
   }
 
   .contact-handle-tooltip {
@@ -703,12 +722,12 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
 
   .contact-handle-icons {
     position: absolute;
-    top: calc(100% + 6px);
+    top: 100%;
     left: 50%;
     transform: translateX(-50%) scale(0.85);
     display: flex;
     gap: var(--space-2);
-    padding: var(--space-2);
+    padding: 6px var(--space-2) var(--space-2);
     background: #fff;
     border-radius: 999px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
@@ -719,7 +738,8 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
     z-index: 10;
   }
 
-  .contact-handle-tooltip:hover .contact-handle-icons {
+  .contact-handle-tooltip:hover .contact-handle-icons,
+  .contact-handle-tooltip.is-open .contact-handle-icons {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) scale(1);
@@ -1574,6 +1594,37 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
 
     document.addEventListener("click", (e) => {
       if (!location.contains(e.target)) close();
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    const tooltip = document.querySelector(".contact-handle-tooltip");
+    const handle = tooltip?.querySelector(".contact-handle");
+    if (!tooltip || !handle) return;
+
+    const open = () => {
+      tooltip.classList.add("is-open");
+      handle.setAttribute("aria-expanded", "true");
+    };
+
+    const close = () => {
+      tooltip.classList.remove("is-open");
+      handle.setAttribute("aria-expanded", "false");
+    };
+
+    handle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (tooltip.classList.contains("is-open")) {
+        close();
+      } else {
+        open();
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!tooltip.contains(e.target)) close();
     });
   })();
 </script>
