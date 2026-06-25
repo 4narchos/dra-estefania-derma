@@ -684,8 +684,11 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
   .contact-handle {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-1);
-    padding: 2px 0;
+    width: 100%;
+    padding: 2px var(--space-1);
+    margin: 0 calc(var(--space-1) * -1);
     font-size: var(--text-sm);
     font-family: inherit;
     font-weight: var(--weight-medium);
@@ -717,15 +720,22 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
 
   .contact-handle-tooltip {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .contact-handle-icons {
     position: absolute;
     top: 100%;
-    left: 50%;
-    transform: translateX(-50%) scale(0.85);
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-width: max-content;
+    transform: scale(0.85);
+    transform-origin: top center;
     display: flex;
+    justify-content: center;
     gap: var(--space-2);
     padding: 6px var(--space-2) var(--space-2);
     background: #fff;
@@ -742,7 +752,7 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
   .contact-handle-tooltip.is-open .contact-handle-icons {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) scale(1);
+    transform: scale(1);
     pointer-events: auto;
   }
 
