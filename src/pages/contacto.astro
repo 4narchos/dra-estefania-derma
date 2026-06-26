@@ -70,12 +70,12 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
                   aria-label="Ver redes sociales"
                   aria-expanded="false"
                 >
-                  <span>@dra.estefaniaderma</span>
-                  <svg class="contact-handle-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M9 17H7A5 5 0 0 1 7 7h2"/>
-                    <path d="M15 7h2a5 5 0 1 1 0 10h-2"/>
-                    <line x1="8" x2="16" y1="12" y2="12"/>
+                  <svg class="contact-handle-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <title>Link icon</title>
+                    <path d="m9.726 5.123 1.228-1.228a6.47 6.47 0 0 1 9.15 9.152l-1.227 1.227m-4.603 4.603-1.228 1.228a6.47 6.47 0 0 1-9.15-9.152l1.227-1.227"/>
+                    <line x1="8.471" x2="15.529" y1="15.529" y2="8.471"/>
                   </svg>
+                  <span>@dra.estefaniaderma</span>
                 </button>
                 <div class="contact-handle-icons">
                   {socialLinks.map((social) => (
@@ -713,10 +713,9 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
 
   .contact-handle-chevron {
     flex-shrink: 0;
-    width: 11px;
-    height: 11px;
+    width: 1em;
+    height: 1em;
     color: currentColor;
-    opacity: 0.75;
     transition: transform var(--transition-fast);
   }
 
