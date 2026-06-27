@@ -1,5 +1,6 @@
 ---
 const vcfUrl = "/dra-estefania-derma.vcf";
+const homeUrl = "/";
 ---
 
 <!doctype html>
@@ -9,7 +10,6 @@ const vcfUrl = "/dra-estefania-derma.vcf";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Agregar contacto · Dra. Estefanía Borges</title>
-    <meta http-equiv="refresh" content={`0; url=${vcfUrl}`} />
     <style>
       body {
         margin: 0;
@@ -32,10 +32,44 @@ const vcfUrl = "/dra-estefania-derma.vcf";
     <div>
       <p>Abriendo tarjeta de contacto…</p>
       <p>
-        <a href={vcfUrl} download="Agregar contacto.vcf">
+        <a href={vcfUrl} download="Agregar contacto.vcf" id="vcard-link">
           Si no se abre automáticamente, toca aquí.
         </a>
       </p>
     </div>
+    <script define:vars={{ vcfUrl, homeUrl }}>
+      (function () {
+        function triggerDownload() {
+          var link = document.createElement("a");
+          link.href = vcfUrl;
+          link.download = "Agregar contacto.vcf";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+
+        function redirectHome() {
+          window.location.href = homeUrl;
+        }
+
+        function downloadAndRedirect() {
+          triggerDownload();
+          setTimeout(redirectHome, 1500);
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", downloadAndRedirect);
+        } else {
+          downloadAndRedirect();
+        }
+
+        var fallback = document.getElementById("vcard-link");
+        if (fallback) {
+          fallback.addEventListener("click", function () {
+            setTimeout(redirectHome, 1500);
+          });
+        }
+      })();
+    </script>
   </body>
 </html>
