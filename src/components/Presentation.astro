@@ -1,0 +1,152 @@
+---
+import { getBaseUrl } from "../utils/baseUrl.js";
+import { whatsappBaseUrl } from "../data/links.js";
+const base = getBaseUrl();
+
+const whatsappUrl = `${whatsappBaseUrl}&utm_source=web&utm_medium=presentation_button&utm_campaign=inicio`;
+
+const menuItems = [
+  { label: "Ver ubicaciones", href: `${base}contacto` },
+  { label: "Reservar una cita", href: "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan", external: true },
+  { label: "Enviar mensaje", href: whatsappUrl, external: true },
+];
+---
+
+<section class="presentation" id="presentacion">
+  <div class="presentation-inner">
+    <div class="presentation-visual">
+      <img
+        src={`${base}images/dra-estefania-dermatoscopio.jpg`}
+        alt="Dra. Estefanía Borges con dermatoscopio"
+        width="600"
+        height="750"
+        loading="eager"
+      />
+    </div>
+
+    <div class="presentation-content">
+      <h2 class="presentation-title">
+        Yo te ayudo a <em>entenderla</em>
+      </h2>
+
+      <nav class="presentation-menu" aria-label="Acciones principales">
+        {menuItems.map((item) => (
+          <a
+            href={item.href}
+            class="presentation-menu-item"
+            target={item.external ? "_blank" : undefined}
+            rel={item.external ? "noopener noreferrer" : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </div>
+</section>
+
+<style>
+  .presentation {
+    position: relative;
+    padding: var(--space-16) 0;
+    background: var(--color-background);
+    overflow: hidden;
+  }
+
+  .presentation-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .presentation-visual {
+    position: relative;
+    width: auto;
+    max-width: 100%;
+    max-height: 70vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .presentation-visual img {
+    width: auto;
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    object-position: center top;
+    display: block;
+  }
+
+  .presentation-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  .presentation-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(var(--text-4xl), 9vw, 6rem);
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    color: var(--color-text-primary);
+    letter-spacing: -0.04em;
+    margin: 0;
+  }
+
+  .presentation-title em {
+    font-style: italic;
+    color: var(--color-primary);
+  }
+
+  .presentation-menu {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-1);
+    padding: var(--space-1);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+  }
+
+  .presentation-menu-item {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: background var(--transition-fast), color var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .presentation-menu-item:hover {
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+    text-decoration: none;
+  }
+
+  @media (max-width: 599px) {
+    .presentation-inner {
+      padding: 0 var(--space-4);
+    }
+
+    .presentation-menu {
+      border-radius: var(--radius-xl);
+    }
+
+    .presentation-menu-item {
+      flex: 1 1 auto;
+      justify-content: center;
+    }
+  }
+</style>
