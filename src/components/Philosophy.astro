@@ -57,7 +57,7 @@ const pillars = [
 <style>
   .philosophy {
     position: relative;
-    padding: var(--space-16) 0 var(--space-12);
+    padding: var(--space-20) 0 var(--space-12);
     background: #FFFFFF;
     color: #1A1A1A;
     overflow: hidden;
@@ -74,7 +74,7 @@ const pillars = [
   .philosophy-header {
     text-align: center;
     max-width: 900px;
-    margin: 0 auto 64px auto;
+    margin: 0 auto 96px auto;
   }
 
   .philosophy-title {
@@ -97,7 +97,7 @@ const pillars = [
 
   .philosophy-circles {
     position: relative;
-    height: 580px;
+    height: 680px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -318,19 +318,19 @@ const pillars = [
     vennTl
       .fromTo(
         circles[0],
-        { x: -320, y: 150, opacity: 1, rotation: -10 },
+        { x: -320, y: 180, opacity: 1, rotation: -10 },
         { x: -150, y: 80, rotation: 0, duration: 1.4, ease: "power2.inOut" },
         0
       )
       .fromTo(
         circles[1],
-        { x: 320, y: 150, opacity: 1, rotation: 10 },
+        { x: 320, y: 180, opacity: 1, rotation: 10 },
         { x: 150, y: 80, rotation: 0, duration: 1.4, ease: "power2.inOut" },
         0
       )
       .fromTo(
         circles[2],
-        { x: 0, y: -220, opacity: 1, rotation: 0 },
+        { x: 0, y: -180, opacity: 1, rotation: 0 },
         { x: 0, y: -70, rotation: 0, duration: 1.4, ease: "power2.inOut" },
         0
       )
