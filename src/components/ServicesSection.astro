@@ -1,7 +1,9 @@
 ---
 import { links } from "../data/links.js";
+import { getBaseUrl } from "../utils/baseUrl.js";
 import TopicMarquee from "./TopicMarquee.astro";
 
+const base = getBaseUrl();
 const doctoraliaUrl =
   links.find((l) => l.title === "Doctoralia")?.url ||
   "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan";
@@ -22,6 +24,7 @@ const services = [
     ],
     color: "#C4B896",
     textColor: "#000000",
+    image: `${base}images/clinica.png`,
   },
   {
     category: "Tricología",
@@ -37,6 +40,7 @@ const services = [
     ],
     color: "#152B52",
     textColor: "#FFFFFF",
+    image: `${base}images/trico.png`,
   },
   {
     category: "Dermatología Estética",
@@ -52,6 +56,7 @@ const services = [
     ],
     color: "#6E9F9C",
     textColor: "#000000",
+    image: `${base}images/estetica.png`,
   },
   {
     category: "Cirugía menor Dermatológica",
@@ -67,6 +72,7 @@ const services = [
     ],
     color: "#363636",
     textColor: "#FFFFFF",
+    image: `${base}images/cirugia.png`,
   },
 ];
 ---
@@ -134,7 +140,14 @@ const services = [
               </div>
               <div class="service-card-body">
                 <div class="service-card-visual" aria-hidden="true">
-                  <div class="service-card-image"></div>
+                  <img
+                    class="service-card-image"
+                    src={service.image}
+                    alt={service.category}
+                    width="180"
+                    height="180"
+                    loading="lazy"
+                  />
                 </div>
                 <div class="service-card-info">
                   <ul class="service-card-list" role="list">
@@ -356,8 +369,9 @@ const services = [
     width: 180px;
     height: 180px;
     border-radius: 50%;
+    object-fit: cover;
+    display: block;
     background: rgba(0, 0, 0, 0.08);
-    border: 2px dashed rgba(0, 0, 0, 0.18);
     transition: transform 0.35s ease-out;
   }
 
