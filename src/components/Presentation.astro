@@ -6,93 +6,122 @@ const base = getBaseUrl();
 const whatsappUrl = `${whatsappBaseUrl}&utm_source=web&utm_medium=presentation_button&utm_campaign=inicio`;
 
 const menuItems = [
-  { label: "Ver ubicaciones", href: `${base}contacto` },
-  { label: "Reservar una cita", href: "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan", external: true },
+  { label: "Ubicaciones", href: `${base}contacto` },
+  { label: "Reservar cita", href: "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan", external: true },
   { label: "Enviar mensaje", href: whatsappUrl, external: true },
 ];
 ---
 
 <section class="presentation" id="presentacion">
-  <div class="presentation-inner">
-    <div class="presentation-visual">
-      <img
-        src={`${base}images/dra-estefania-dermatoscopio.jpg`}
-        alt="Dra. Estefanía Borges con dermatoscopio"
-        width="600"
-        height="750"
-        loading="eager"
-      />
-    </div>
+  <div class="presentation-visual">
+    <img
+      src={`${base}images/dra-estefania-pijama-azul-sin-fondo.png`}
+      alt="Dra. Estefanía Borges con dermatoscopio"
+      width="600"
+      height="900"
+      loading="eager"
+    />
+  </div>
 
-    <div class="presentation-content">
+  <div class="presentation-overlay" aria-hidden="true"></div>
+
+  <div class="signature-block">
+    <span class="signature-name" data-signature="Dra. Estefanía Borges">Dra. Estefanía Borges</span>
+    <span class="signature-title">DERMATOLOGA</span>
+  </div>
+
+  <div class="presentation-content">
+    <div class="presentation-text">
       <h2 class="presentation-title">
         Yo te ayudo a <em>entenderla</em>
       </h2>
-
-      <nav class="presentation-menu" aria-label="Acciones principales">
-        {menuItems.map((item) => (
-          <a
-            href={item.href}
-            class="presentation-menu-item"
-            target={item.external ? "_blank" : undefined}
-            rel={item.external ? "noopener noreferrer" : undefined}
-          >
-            {item.label}
-          </a>
-        ))}
-      </nav>
     </div>
+
+    <nav class="presentation-menu" aria-label="Acciones principales">
+      {menuItems.map((item) => (
+        <a
+          href={item.href}
+          class="presentation-menu-item"
+          target={item.external ? "_blank" : undefined}
+          rel={item.external ? "noopener noreferrer" : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
   </div>
 </section>
 
 <style>
   .presentation {
     position: relative;
-    padding: var(--space-16) 0;
-    background: var(--color-background);
+    background: #fafafa;
+    min-height: 100vh;
     overflow: hidden;
-  }
-
-  .presentation-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 var(--space-6);
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-6);
+    align-items: flex-end;
+    justify-content: center;
   }
 
   .presentation-visual {
-    position: relative;
-    width: auto;
-    max-width: 100%;
-    max-height: 70vh;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: center;
   }
 
   .presentation-visual img {
+    height: 100%;
     width: auto;
     max-width: 100%;
-    max-height: 70vh;
     object-fit: contain;
-    object-position: center top;
+    object-position: bottom center;
     display: block;
   }
 
+  .presentation-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: transparent;
+    pointer-events: none;
+  }
+
   .presentation-content {
-    text-align: center;
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: calc(var(--header-height) + var(--space-8)) var(--space-6) var(--space-12);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-5);
+    text-align: center;
+    gap: var(--space-8);
+  }
+
+  .presentation-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .presentation-eyebrow {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
   }
 
   .presentation-title {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(var(--text-4xl), 9vw, 6rem);
+    font-size: clamp(var(--text-4xl), 8vw, 5.5rem);
     font-weight: 600;
     line-height: var(--leading-tight);
     color: var(--color-text-primary);
@@ -105,48 +134,232 @@ const menuItems = [
     color: var(--color-primary);
   }
 
+  .presentation-subtitle {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-medium);
+    color: rgba(245, 245, 240, 0.85);
+    margin: 0;
+  }
+
+  .presentation-location {
+    font-size: var(--text-base);
+    color: rgba(245, 245, 240, 0.65);
+    margin: 0;
+  }
+
+  /* Affinity-style pill tabs */
   .presentation-menu {
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: var(--space-1);
-    padding: var(--space-1);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-full);
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    padding: 4px;
+    backdrop-filter: blur(8px);
   }
 
   .presentation-menu-item {
     display: inline-flex;
     align-items: center;
-    padding: var(--space-3) var(--space-5);
-    border-radius: var(--radius-full);
-    font-size: var(--text-sm);
-    font-weight: var(--weight-medium);
-    color: var(--color-text-secondary);
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
     text-decoration: none;
-    transition: background var(--transition-fast), color var(--transition-fast);
     white-space: nowrap;
+    transition: background-color 150ms ease, color 150ms ease;
   }
 
   .presentation-menu-item:hover {
-    background: var(--color-primary);
-    color: var(--color-text-on-primary);
-    text-decoration: none;
+    background-color: #ffffff;
+    color: #000000;
   }
 
-  @media (max-width: 599px) {
-    .presentation-inner {
-      padding: 0 var(--space-4);
+  /* Signature on the right side */
+  .signature-block {
+    position: absolute;
+    right: var(--space-10);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    pointer-events: none;
+  }
+
+  .signature-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3rem, 5.5vw, 5rem);
+    font-weight: 400;
+    line-height: 1.35;
+    padding: 0.15em 0;
+    color: #c4b896;
+    background: linear-gradient(
+      135deg,
+      #c4b896 0%,
+      #fdfbf7 30%,
+      #c4b896 50%,
+      #e8dcc0 70%,
+      #c4b896 100%
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 16px rgba(196, 184, 150, 0.45));
+    animation: metalShine 4s ease-in-out infinite;
+  }
+
+  @keyframes metalShine {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .signature-char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  .signature-title {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: clamp(1rem, 1.8vw, 1.5rem);
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #c4b896;
+    background: linear-gradient(
+      135deg,
+      #c4b896 0%,
+      #fdfbf7 30%,
+      #c4b896 50%,
+      #e8dcc0 70%,
+      #c4b896 100%
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 16px rgba(196, 184, 150, 0.45));
+    animation: metalShine 4s ease-in-out infinite;
+    margin-top: var(--space-2);
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  @media (max-width: 900px) {
+    .signature-block {
+      position: relative;
+      right: auto;
+      top: auto;
+      transform: none;
+      align-items: center;
+      text-align: center;
+      margin-top: var(--space-6);
+      pointer-events: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .presentation-content {
+      padding: calc(var(--header-height) + var(--space-6)) var(--space-4) var(--space-8);
+      gap: var(--space-6);
+    }
+
+    .presentation-title {
+      font-size: clamp(2rem, 10vw, 3.5rem);
     }
 
     .presentation-menu {
-      border-radius: var(--radius-xl);
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      max-width: 100%;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .presentation-menu::-webkit-scrollbar {
+      display: none;
     }
 
     .presentation-menu-item {
-      flex: 1 1 auto;
-      justify-content: center;
+      padding: 10px 18px;
+      font-size: 13px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .presentation-menu-item {
+      transition: none;
     }
   }
 </style>
+
+<script>
+  import { gsap } from "../utils/animations.js";
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!prefersReducedMotion) {
+    const section = document.querySelector(".presentation");
+
+    gsap.from(
+      [
+        ".presentation-visual",
+        ".presentation-eyebrow",
+        ".presentation-title",
+        ".presentation-subtitle",
+        ".presentation-location",
+        ".presentation-menu",
+      ],
+      {
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.9,
+        stagger: 0.12,
+        ease: "power2.out",
+      }
+    );
+
+    // Signature typewriter effect
+    const nameEl = document.querySelector(".signature-name") as HTMLElement | null;
+    const titleEl = document.querySelector(".signature-title") as HTMLElement | null;
+    if (nameEl && titleEl) {
+      const text = nameEl.dataset.signature || nameEl.textContent || "";
+      nameEl.innerHTML = text
+        .split("")
+        .map((char, i) => `<span class="signature-char" style="--i:${i}">${char === " " ? "&nbsp;" : char}</span>`)
+        .join("");
+      const chars = nameEl.querySelectorAll(".signature-char");
+
+      const signatureTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 70%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      signatureTl
+        .fromTo(
+          chars,
+          { opacity: 0, y: 8 },
+          { opacity: 1, y: 0, duration: 0.05, stagger: 0.06, ease: "power1.out" }
+        )
+        .fromTo(
+          titleEl,
+          { opacity: 0, y: 8 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+          "+=0.5"
+        );
+    }
+  }
+</script>

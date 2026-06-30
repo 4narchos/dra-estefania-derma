@@ -1,0 +1,373 @@
+---
+const pillars = [
+  {
+    title: "La ciencia",
+    body: "Protocolos respaldados por la mejor evidencia científica para garantizar un tratamiento seguro y efectivo.",
+  },
+  {
+    title: "Mi experiencia",
+    body: "Años afinando el ojo clínico para entender tu piel y darte el tratamiento que tú necesitas.",
+  },
+  {
+    title: "Tus preferencias",
+    body: "Te escucho para entender tus valores y tus preferencias. Juntos diseñamos un plan realista a tu medida.",
+  },
+];
+---
+
+<section class="philosophy" id="filosofia">
+  <div class="container">
+    <div class="philosophy-header">
+      <h2 class="philosophy-title">
+        Creo en una dermatología
+        <span class="philosophy-title-accent">profesional y humana</span>
+      </h2>
+    </div>
+
+    <div class="philosophy-circles">
+      <svg class="philosophy-connections" viewBox="-300 -300 600 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <path class="philosophy-connection" d="M -150 80 Q -90 25 -30 16" fill="none" stroke="#C4B896" stroke-width="2.5" stroke-linecap="round" opacity="0.5"></path>
+        <path class="philosophy-connection" d="M 150 80 Q 90 25 30 16" fill="none" stroke="#C4B896" stroke-width="2.5" stroke-linecap="round" opacity="0.5"></path>
+        <path class="philosophy-connection" d="M 0 -70 Q 0 -30 0 -16" fill="none" stroke="#C4B896" stroke-width="2.5" stroke-linecap="round" opacity="0.5"></path>
+      </svg>
+
+      {pillars.map((pillar, index) => {
+        const styles = [
+          { bg: "#152B52", text: "#FFFFFF", hover: "#1D3A6B", hoverText: "#FFFFFF" },
+          { bg: "#2D5E46", text: "#FFFFFF", hover: "#3A7A5A", hoverText: "#FFFFFF" },
+          { bg: "#C4B896", text: "#1A1A1A", hover: "#A8956E", hoverText: "#FFFFFF" },
+        ][index];
+        return (
+          <article
+            class="philosophy-circle"
+            style={`--circle-bg: ${styles.bg}; --circle-text: ${styles.text}; --circle-hover: ${styles.hover}; --circle-hover-text: ${styles.hoverText};`}
+            data-index={index}
+          >
+            <div class="philosophy-circle-inner">
+              <h3 class="philosophy-circle-title">{pillar.title}</h3>
+              <p class="philosophy-circle-body">{pillar.body}</p>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .philosophy {
+    position: relative;
+    padding: var(--space-16) 0 var(--space-12);
+    background: #FFFFFF;
+    color: #1A1A1A;
+    overflow: hidden;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+  }
+
+  .philosophy-header {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 64px auto;
+  }
+
+  .philosophy-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(var(--text-4xl), 6vw, 4.5rem);
+    font-weight: 600;
+    color: #1A1A1A;
+    line-height: var(--leading-tight);
+    margin: 0;
+    letter-spacing: -0.03em;
+  }
+
+  .philosophy-title-accent {
+    display: block;
+    font-family: 'Junicode', Georgia, serif;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--color-accent);
+  }
+
+  .philosophy-circles {
+    position: relative;
+    height: 580px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .philosophy-connections {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: visible;
+  }
+
+  .philosophy-connection {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+  }
+
+  .philosophy-circle {
+    position: absolute;
+    width: 330px;
+    height: 330px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--circle-bg);
+    color: var(--circle-text);
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.5s ease-out, z-index 0s;
+    will-change: transform;
+    z-index: 2;
+  }
+
+  /* Efecto de expansión circular en hover (adaptado de Uiverse) */
+  .philosophy-circle::before {
+    content: '';
+    position: absolute;
+    top: -24px;
+    right: -24px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--circle-hover);
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform 0.5s ease-out;
+    z-index: 0;
+  }
+
+  .philosophy-circles .philosophy-circle:hover,
+  .philosophy-circles .philosophy-circle.is-active {
+    z-index: 100;
+    color: var(--circle-hover-text);
+  }
+
+  .philosophy-circle:hover::before,
+  .philosophy-circle.is-active::before {
+    transform: scale(18);
+  }
+
+  .philosophy-circle-inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-8);
+    transition: transform 0.35s ease;
+  }
+
+  .philosophy-circle:hover .philosophy-circle-inner,
+  .philosophy-circle.is-active .philosophy-circle-inner {
+    transform: scale(1.08);
+  }
+
+  .philosophy-circle-title {
+    font-family: 'Junicode', Georgia, serif;
+    font-size: var(--text-2xl);
+    font-weight: 500;
+    color: inherit;
+    margin: 0;
+    line-height: var(--leading-tight);
+    transition: transform 0.35s ease;
+  }
+
+  .philosophy-circle-body {
+    font-size: var(--text-sm);
+    color: inherit;
+    line-height: var(--leading-relaxed);
+    margin: var(--space-3) 0 0;
+    max-width: 220px;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  /* Estado Venn: los contenidos permanecen visibles;
+     al hacer hover el círculo se escala y sube al frente para leerse */
+
+  /* En Venn los contenidos permanecen centrados;
+     el hover escala y eleva el círculo activo */
+  .philosophy-circles.is-venn .philosophy-circle[data-index="0"],
+  .philosophy-circles.is-venn .philosophy-circle[data-index="1"] {
+    z-index: 2;
+  }
+
+  .philosophy-circles.is-venn .philosophy-circle[data-index="2"] {
+    z-index: 3;
+  }
+
+  /* En Venn el hover debe vencer los z-index base de cada círculo */
+  .philosophy-circles.is-venn .philosophy-circle:hover,
+  .philosophy-circles.is-venn .philosophy-circle.is-active {
+    z-index: 100;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .philosophy-circle,
+    .philosophy-circle-inner,
+    .philosophy-circle-title,
+    .philosophy-circle-body {
+      transition: none;
+    }
+
+    .philosophy-connection {
+      transition: none;
+    }
+  }
+
+  @media (max-width: 899px) {
+    .philosophy {
+      padding: var(--space-12) 0 var(--space-16);
+    }
+
+    .philosophy-header {
+      margin-bottom: var(--space-16);
+    }
+
+    .philosophy-circles {
+      height: auto;
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+
+    .philosophy-connections {
+      display: none;
+    }
+
+    .philosophy-circle {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      top: auto !important;
+      left: auto !important;
+      transform: none !important;
+    }
+
+    .philosophy-circle-body {
+      font-size: var(--text-base);
+    }
+  }
+</style>
+
+<script>
+  import { gsap, ScrollTrigger } from "../utils/animations.js";
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+  const isMobile = window.matchMedia("(max-width: 899px)").matches;
+
+  const circles = document.querySelectorAll(
+    ".philosophy-circle"
+  ) as NodeListOf<HTMLElement>;
+  const circlesContainer = document.querySelector(".philosophy-circles");
+  const connections = document.querySelectorAll(
+    ".philosophy-connection"
+  ) as NodeListOf<SVGPathElement>;
+
+  // Tap para mostrar/ocultar descripción en móvil
+  circles.forEach((circle) => {
+    circle.addEventListener("click", () => {
+      const isActive = circle.classList.contains("is-active");
+      circles.forEach((c) => c.classList.remove("is-active"));
+      if (!isActive) circle.classList.add("is-active");
+    });
+  });
+
+  if (
+    !prefersReducedMotion &&
+    !isMobile &&
+    circles.length === 3 &&
+    circlesContainer
+  ) {
+    // Preparar trazos de conexión
+    const connectionLengths = Array.from(connections).map((path) =>
+      path.getTotalLength()
+    );
+    connections.forEach((path, i) => {
+      path.style.strokeDasharray = `${connectionLengths[i]}`;
+      path.style.strokeDashoffset = `${connectionLengths[i]}`;
+    });
+
+    // Timeline única para toda la animación Venn (entrada + acercamiento).
+    // Se reproduce sola una vez que la sección entra en pantalla.
+    const vennTl = gsap.timeline({ paused: true });
+    vennTl
+      // Entrada a posición disclosureada
+      .fromTo(
+        circles[0],
+        { x: -320, y: 150, opacity: 1, rotation: -10 },
+        { x: -240, y: 110, rotation: -6, duration: 0.6, ease: "power2.out" },
+        0
+      )
+      .fromTo(
+        circles[1],
+        { x: 320, y: 150, opacity: 1, rotation: 10 },
+        { x: 240, y: 110, rotation: 6, duration: 0.6, ease: "power2.out" },
+        0
+      )
+      .fromTo(
+        circles[2],
+        { x: 0, y: -220, opacity: 1, rotation: 0 },
+        { x: 0, y: -160, rotation: 0, duration: 0.6, ease: "power2.out" },
+        0
+      )
+      // Activar estado Venn justo antes de que los círculos se toquen
+      .add(() => circlesContainer.classList.add("is-venn"), 0.55)
+      // Acercamiento continuo a Venn
+      .to(
+        circles[0],
+        { x: -150, y: 80, rotation: 0, duration: 1.4, ease: "power2.inOut" },
+        0.6
+      )
+      .to(
+        circles[1],
+        { x: 150, y: 80, rotation: 0, duration: 1.4, ease: "power2.inOut" },
+        0.6
+      )
+      .to(
+        circles[2],
+        { x: 0, y: -70, duration: 1.4, ease: "power2.inOut" },
+        0.6
+      )
+      .to(
+        connections,
+        { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut" },
+        0.6
+      );
+
+    ScrollTrigger.create({
+      trigger: ".philosophy",
+      start: "top top",
+      end: "+=60%",
+      pin: true,
+      scrub: false,
+      anticipatePin: 1,
+      onEnter: () => vennTl.play(),
+      onEnterBack: () => vennTl.play(),
+    });
+  }
+</script>

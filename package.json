@@ -7,9 +7,14 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "preview:clean": "npm run build && http-server dist -p 4321 --no-cache -c-1 --silent",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.7.12"
+    "astro": "^5.7.12",
+    "gsap": "^3.15.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
   }
 }

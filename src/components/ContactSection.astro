@@ -1,62 +1,105 @@
 ---
-import SectionHeader from "./SectionHeader.astro";
+import { getBaseUrl } from "../utils/baseUrl.js";
 import { whatsappBaseUrl } from "../data/links.js";
+const base = getBaseUrl();
 
+const doctoraliaUrl = "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan";
 const whatsappUrl = `${whatsappBaseUrl}&utm_source=web&utm_medium=contact_section&utm_campaign=agendar`;
 
-const contactItems = [
-  {
-    title: "Ubicaciones",
-    content: [
-      "Mérida — Evoke, C. 20 No. 251. Martes/viernes 4–7:30 p.m., miércoles 10 a.m.–3 p.m.",
-      "Izamal — Sábados (horarios variables)",
-      "Valladolid — Sábados y domingos 10 a.m.–4 p.m.",
-      "Vaca — Sábados 9:30 a.m.–4 p.m.",
-    ],
-  },
-  {
-    title: "Contacto",
-    content: ["WhatsApp", "Teléfono"],
-  },
-  {
-    title: "Formas de pago",
-    content: ["Efectivo, tarjeta de crédito y débito"],
-  },
-  {
-    title: "Idiomas",
-    content: ["Español e inglés"],
-  },
+const menuItems = [
+  { label: "Ver las ubicaciones", href: `${base}ubicaciones` },
+  { label: "Enviar un mensaje", href: whatsappUrl, external: true },
+  { label: "Resuelve tus dudas", href: `${base}faqs` },
 ];
 ---
 
 <section class="contact" id="contacto">
   <div class="container">
-    <SectionHeader
-      title="Agenda tu consulta"
-      subtitle="Primera consulta dermatológica disponible. Atención personalizada, solo pacientes privados."
-    />
-    <div class="contact-grid">
-      <div class="contact-info">
-        {contactItems.map((item) => (
-          <div class="contact-item">
-            <div>
-              <strong>{item.title}</strong>
-              <div class="contact-item-content">
-                {item.content.map((line) => (
-                  <p>{line}</p>
-                ))}
-              </div>
-            </div>
+    <div class="contact-visual">
+      <img
+        src={`${base}images/dra-estefania-pijama-azul-sin-fondo.png`}
+        alt="Dra. Estefanía Borges de pie con pijama quirúrgica azul sosteniendo un dermatoscopio"
+        width="560"
+        height="700"
+        loading="eager"
+      />
+    </div>
+
+    <div class="contact-content">
+      <div class="contact-content-top">
+        <div class="cta-card group">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            class="cta-card-img"
+            viewBox="0 0 256 256"
+            xml:space="preserve"
+          >
+            <g
+              style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
+              transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"
+            >
+              <path
+                d="M 37.712 41.541 c -2.437 -10.14 2.919 -19.609 8.772 -25.137 c -6.221 11.54 -7.41 20.104 -3.461 33.177 l 2.29 -0.854 c -0.882 -2.464 -1.413 -4.873 -1.685 -7.241 c 8.23 -2.355 13.883 -7.209 15.231 -15.926 C 59.796 13.651 52.042 6.72 43.718 0.117 c 3.04 9.758 -11.581 17.964 -10.296 30.949 c 0.271 2.741 0.697 5.33 1.326 7.825"
+                style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(127,178,65); fill-rule: nonzero; opacity: 1;"
+                transform="matrix(1 0 0 1 0 0)"
+                stroke-linecap="round"
+              ></path>
+              <path
+                d="M 34.069 30.999 c 0.917 -12.923 13.599 -21.098 9.649 -30.883 c 1.394 8.216 -9.771 12.38 -12.663 22.195 c -1.575 5.836 -1.151 11.452 3.693 16.579 C 34.119 36.396 33.937 33.751 34.069 30.999 z"
+                style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(113,156,64); fill-rule: nonzero; opacity: 1;"
+                transform="matrix(1 0 0 1 0 0)"
+                stroke-linecap="round"
+              ></path>
+              <polygon
+                points="68.77,61.09 70.46,47.61 43.69,47.61 19.54,47.61 21.23,61.09"
+                style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(160,126,99); fill-rule: nonzero; opacity: 1;"
+                transform="matrix(1 0 0 1 0 0)"
+              ></polygon>
+              <polyline
+                points="63.11,61.09 59.5,90 44.01,90 30.5,90 26.89,61.09"
+                style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(160,126,99); fill-rule: nonzero; opacity: 1;"
+                transform="matrix(1 0 0 1 0 0)"
+              ></polyline>
+              <polygon
+                points="62.61,65.09 63.11,61.09 26.89,61.09 27.39,65.09"
+                style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(145,107,77); fill-rule: nonzero; opacity: 1;"
+                transform="matrix(1 0 0 1 0 0)"
+              ></polygon>
+            </g>
+          </svg>
+
+          <p class="cta-card-title">Consulta dermatológica</p>
+          <p class="cta-card-subtitle">📍 Mérida · Valladolid · Izamal</p>
+
+          <div class="cta-card-footer">
+            <p class="cta-card-price">$1,100 MXN</p>
+            <a
+              href={doctoraliaUrl}
+              class="cta-card-button"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Agendar Ahora
+            </a>
           </div>
-        ))}
+        </div>
       </div>
-      <div class="contact-cta">
-        <a href={whatsappUrl} class="btn btn-primary btn-large" target="_blank" rel="noopener noreferrer">
-          Escribir por WhatsApp
-        </a>
-        <p class="contact-note">
-          Respuesta en horario de consulta.
-        </p>
+
+      <div class="contact-content-bottom">
+        <nav class="contact-menu" aria-label="Acciones de contacto">
+          {menuItems.map((item) => (
+            <a
+              href={item.href}
+              class="contact-menu-item"
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
       </div>
     </div>
   </div>
@@ -64,7 +107,7 @@ const contactItems = [
 
 <style>
   .contact {
-    padding: var(--space-20) 0;
+    padding: 0;
     background: var(--color-surface);
     border-top: 1px solid var(--color-border);
   }
@@ -72,57 +115,261 @@ const contactItems = [
   .container {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 var(--space-6);
-  }
-
-  .contact-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-12);
-    align-items: center;
+    min-height: auto;
   }
 
   @media (min-width: 768px) {
-    .contact-grid {
+    .container {
       grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
     }
   }
 
-  .contact-item {
-    padding: var(--space-4) 0;
-    border-bottom: 1px solid var(--color-border);
+  .contact-visual {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    min-height: 60vh;
+    overflow: hidden;
   }
 
-  .contact-item strong {
+  @media (min-width: 768px) {
+    .contact-visual {
+      min-height: 100%;
+      height: 100%;
+    }
+  }
+
+  .contact-visual img {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: bottom center;
     display: block;
-    color: var(--color-text-primary);
-    font-weight: var(--weight-semibold);
-    margin-bottom: var(--space-2);
-    font-size: var(--text-sm);
   }
 
-  .contact-item-content p {
-    color: var(--color-text-secondary);
-    font-size: var(--text-sm);
-    margin-bottom: var(--space-1);
-    line-height: var(--leading-relaxed);
+  .contact-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    padding: var(--space-8) var(--space-6);
+    width: 100%;
+    height: 100%;
   }
 
-  .contact-item-content p:last-child {
-    margin-bottom: 0;
+  .contact-content-top {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
   }
 
-  .contact-cta {
-    text-align: center;
-    padding: var(--space-10);
-    background: var(--color-background);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border);
+  .contact-content-bottom {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: transparent;
+    border-top: none;
   }
 
-  .contact-note {
-    margin-top: var(--space-4);
-    color: var(--color-text-muted);
-    font-size: var(--text-sm);
+  /* Uiverse card */
+  .cta-card {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    margin: 0.5rem;
+    padding: 3rem;
+    background: #1a2332;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    z-index: 20;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .cta-card::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    inset: 0;
+    background: #243447;
+    z-index: -20;
+    border-radius: 0.75rem;
+    transform: translateY(100%);
+    transition: all 0.5s ease;
+  }
+
+  .cta-card:hover::after {
+    transform: translateY(0);
+  }
+
+  .cta-card-img {
+    width: 12rem;
+    aspect-ratio: 1/1;
+    color: #abd373;
+    background: transparent;
+    border-radius: 9999px;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .cta-card:hover .cta-card-img {
+    background: rgba(0, 0, 0, 0.2);
+    transform: translateY(-0.5rem);
+  }
+
+  .cta-card-title {
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+    font-size: 1.5rem;
+    margin: 0;
+    transition: color 0.3s ease;
+  }
+
+  .cta-card-subtitle {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
+    margin: 0;
+    transition: color 0.3s ease;
+  }
+
+  .cta-card:hover .cta-card-subtitle {
+    color: #ffffff;
+  }
+
+  .cta-card-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 0.75rem;
+    gap: 1rem;
+  }
+
+  .cta-card-price {
+    color: #abd373;
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin: 0;
+    transition: color 0.3s ease;
+  }
+
+  .cta-card:hover .cta-card-price {
+    color: #ffffff;
+  }
+
+  .cta-card-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #2D5E46;
+    color: #ffffff;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .cta-card:hover .cta-card-button {
+    background: #3a7a5a;
+    color: #ffffff;
+  }
+
+  /* Pill menu anchored in the lower third of the right column */
+  .contact-menu {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    padding: 4px;
+    backdrop-filter: blur(8px);
+    max-width: 100%;
+  }
+
+  .contact-menu-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+
+  .contact-menu-item:hover {
+    background-color: #ffffff;
+    color: #000000;
+  }
+
+  @media (max-width: 640px) {
+    .contact-content {
+      padding: var(--space-8) var(--space-5);
+      gap: var(--space-3);
+    }
+
+    .contact-content-top,
+    .contact-content-bottom {
+      padding: 0;
+    }
+
+    .contact-menu {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      max-width: 100%;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .contact-menu::-webkit-scrollbar {
+      display: none;
+    }
+
+    .contact-menu-item {
+      padding: 10px 18px;
+      font-size: 13px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-card,
+    .cta-card::after,
+    .cta-card-img,
+    .cta-card-title,
+    .cta-card-subtitle,
+    .cta-card-price,
+    .cta-card-button,
+    .contact-menu-item {
+      transition: none;
+    }
   }
 </style>

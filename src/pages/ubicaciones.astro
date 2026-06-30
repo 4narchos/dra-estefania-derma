@@ -1,0 +1,102 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { locations } from "../data/locations.js";
+---
+
+<Layout
+  title="Ubicaciones · Dra. Estefanía Borges"
+  description="Consultorios de dermatología en Mérida, Valladolid, Izamal y Vaca."
+  pageSchema="none"
+>
+  <section class="locations-page">
+    <div class="container">
+      <SectionHeader
+        title="Ubicaciones"
+        subtitle="Encuentra el consultorio más cercano."
+        align="center"
+      />
+
+      <div class="locations-grid">
+        {
+          locations.map((loc) => (
+            <article class="location-card">
+              <h2 class="location-name">{loc.name}</h2>
+              <p class="location-city">{loc.city}</p>
+              <p class="location-address">{loc.address}</p>
+              <p class="location-hours">{loc.hours}</p>
+              <a
+                href={`tel:${loc.phone.replace(/\s/g, "")}`}
+                class="location-phone"
+              >
+                {loc.phone}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .locations-page {
+    padding: var(--space-20) 0;
+    background: var(--color-background);
+    min-height: 60vh;
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+  }
+
+  .locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-6);
+  }
+
+  .location-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .location-name {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .location-city {
+    font-weight: var(--weight-semibold);
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  .location-address,
+  .location-hours {
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    margin: 0;
+    white-space: pre-line;
+  }
+
+  .location-phone {
+    margin-top: var(--space-2);
+    color: var(--color-accent);
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+  }
+
+  .location-phone:hover {
+    text-decoration: underline;
+  }
+</style>

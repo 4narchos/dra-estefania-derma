@@ -1,0 +1,374 @@
+{
+  "url": "https://www.affinity.studio/",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "sections": [
+    {
+      "name": "section",
+      "computed": {
+        "styles": {
+          "font-family": "Times",
+          "font-size": "10px",
+          "font-weight": "400",
+          "line-height": "normal",
+          "letter-spacing": "normal",
+          "color": "rgb(255, 255, 255)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "0px",
+          "padding": "0px",
+          "margin": "0px",
+          "width": "1440px",
+          "height": "1250.39px",
+          "max-width": "none",
+          "gap": "normal",
+          "text-align": "start",
+          "display": "block",
+          "flex-direction": "row",
+          "justify-content": "normal",
+          "align-items": "normal"
+        },
+        "rect": {
+          "x": 0,
+          "y": 263,
+          "width": 1440,
+          "height": 1250.390625,
+          "top": 263,
+          "left": 0
+        }
+      },
+      "html": "<section class=\"BMOCzQ LuBWVA\"><div class=\"VPALpg theme dark x1jwjm5l x1aafrix xntwwlm RdXZvQ _1kWNwg adzKqQ BMOCzQ LuBWVA\" style=\"--5dQeiQ:visible\"><div class=\"h4ULTw BMOCzQ LuBWVA\"><div class=\"BMOCzQ LuBWVA\"><div class=\"jv_R6g\" style=\"--NZu1Zw:0px;--yjD9-g:64px\"><div class=\"BMOCzQ EC2pjw LuBWVA\" style=\"--TPsgaw:16px;--nz9hsg:24px\"><div class=\"_99GB9Q rzX2Ng\" style=\"translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;\"><div class=\"jv_R6g\" style=\"--NZu1Zw:32px\"><div class=\"lbfHlg _CRXhg BMOCzQ LuBWVA\"><div class=\"Ka9auQ _94CIA\" style=\"--PmK0MA:16px;--Z_Miqg:flex-start;--TPF5Nw:center\"><div class=\"aDc6Yg\" style=\"--djlACw:0 0 calc(100% * 2/3)\"><h2 class=\"R6f5Hg a6aEOw _1tMEdg\" style=\"--dnA6PQ:start\">Meet the new standard</h2></div><div class=\"aDc6Yg\" style=\"--djlACw:0 0 calc(100% * 1/3)\"><div class=\"jv_R6g\" style=\"--NZu1Zw:16px;--okeDpw:start\"><div class=\"YvoTUg _5ERovg hANOuA PUxJhA\" style=\"--7R-YGw:start\"><div class=\"jv_R6g\" style=\"--NZu1Zw:16px\"><p class=\"N1JaYw\">Powerful tools, built for your craft.</p></div></div></div></div></div></div><div class=\"IZ4ahw\"><div class=\"lJVQMg\" style=\"--dVJz5A:16px\"><div class=\"eAUiHA\"><button class=\"_5KtATA LQzFZw VgvqkQ _8ERLTg h69Neg V_p1oA Z3nT2A LQzFZw VgvqkQ KRcKHA bfFHbg j34Zww aqbYPg _3FvZZg hTpftg S2uwKg _3CfIvg\" type=\"button\" aria-label=\"Previous\" aria-disabled=\"true\"><span class=\"vxQy1w\"><span aria-hidden=\"true\" class=\"_6XqXLQ Pk6ZMQ uUy_1w\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M6.9 10.996h11.596a.75.75 0 0 1 0 1.5H6.9l4.377 4.377a.75.75 0 0 1-1.061 1.06l-4.95-4.95a1.75 1.75 0 0 1 0-2.474l4.95-4.95a.75.75 0 1 1 1.06 1.06L6.9 10.996z\" fill=\"currentColor\"></path></svg></span></span></button></div><div class=\"eAUiHA\"><button class=\"_5KtATA LQzFZw VgvqkQ _8ERLTg h69Neg V_p1oA Z3nT2A LQzFZw VgvqkQ KRcKHA j34Zww aqbYPg _3FvZZg hTpftg S2uwKg\" type=\"button\" aria-label=\"Next\"><span class=\"vxQy1w\"><span aria-hidden=\"true\" class=\"_6XqXLQ Pk6ZM"
+    },
+    {
+      "name": "heading",
+      "text": "Meet the new standard",
+      "computed": {
+        "styles": {
+          "font-family": "\"Affinity Serif Variable\", \"Canva Sans\", \"Noto Sans Variable\", \"Noto Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif",
+          "font-size": "80px",
+          "font-weight": "700",
+          "line-height": "78.4px",
+          "letter-spacing": "normal",
+          "color": "rgb(255, 255, 255)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "0px",
+          "padding": "0px",
+          "margin": "0px",
+          "width": "853.328px",
+          "height": "78.3906px",
+          "max-width": "none",
+          "gap": "normal",
+          "text-align": "start",
+          "display": "block",
+          "flex-direction": "row",
+          "justify-content": "normal",
+          "align-items": "normal"
+        },
+        "rect": {
+          "x": 76,
+          "y": 391,
+          "width": 853.328125,
+          "height": 78.390625,
+          "top": 391,
+          "left": 76
+        }
+      },
+      "html": "<h2 class=\"R6f5Hg a6aEOw _1tMEdg\" style=\"--dnA6PQ:start\">Meet the new standard</h2>"
+    },
+    {
+      "name": "subtitle",
+      "text": "Powerful tools, built for your craft.",
+      "computed": {
+        "styles": {
+          "font-family": "\"Canva Sans\", \"Noto Sans Variable\", \"Noto Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif",
+          "font-size": "24px",
+          "font-weight": "401",
+          "line-height": "33.6px",
+          "letter-spacing": "normal",
+          "color": "rgba(255, 255, 255, 0.698)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "0px",
+          "padding": "0px",
+          "margin": "0px",
+          "width": "399.578px",
+          "height": "33.5938px",
+          "max-width": "none",
+          "gap": "normal",
+          "text-align": "start",
+          "display": "block",
+          "flex-direction": "row",
+          "justify-content": "normal",
+          "align-items": "normal"
+        },
+        "rect": {
+          "x": 945.328125,
+          "y": 413.390625,
+          "width": 399.578125,
+          "height": 33.59375,
+          "top": 413.390625,
+          "left": 945.328125
+        }
+      }
+    },
+    {
+      "name": "prevButton",
+      "computed": {
+        "styles": {
+          "font-family": "\"Canva Sans\", \"Noto Sans Variable\", \"Noto Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif",
+          "font-size": "16px",
+          "font-weight": "600",
+          "line-height": "22px",
+          "letter-spacing": "normal",
+          "color": "rgba(255, 255, 255, 0.5)",
+          "background-color": "rgba(255, 255, 255, 0)",
+          "border-radius": "9999px",
+          "padding": "0px 20px",
+          "margin": "0px",
+          "width": "56px",
+          "height": "56px",
+          "max-width": "56px",
+          "gap": "normal",
+          "text-align": "center",
+          "display": "inline-flex",
+          "flex-direction": "row",
+          "justify-content": "center",
+          "align-items": "center",
+          "border": "0px none rgba(255, 255, 255, 0.5)",
+          "opacity": "1"
+        },
+        "rect": {
+          "x": 76,
+          "y": 501.390625,
+          "width": 56,
+          "height": 56,
+          "top": 501.390625,
+          "left": 76
+        }
+      },
+      "ariaDisabled": "true"
+    },
+    {
+      "name": "nextButton",
+      "computed": {
+        "styles": {
+          "font-family": "\"Canva Sans\", \"Noto Sans Variable\", \"Noto Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif",
+          "font-size": "16px",
+          "font-weight": "600",
+          "line-height": "22px",
+          "letter-spacing": "normal",
+          "color": "rgb(255, 255, 255)",
+          "background-color": "rgba(255, 255, 255, 0)",
+          "border-radius": "9999px",
+          "padding": "0px 20px",
+          "margin": "0px",
+          "width": "56px",
+          "height": "56px",
+          "max-width": "56px",
+          "gap": "normal",
+          "text-align": "center",
+          "display": "inline-flex",
+          "flex-direction": "row",
+          "justify-content": "center",
+          "align-items": "center",
+          "border": "0px none rgb(255, 255, 255)",
+          "opacity": "1"
+        },
+        "rect": {
+          "x": 148,
+          "y": 501.390625,
+          "width": 56,
+          "height": 56,
+          "top": 501.390625,
+          "left": 148
+        }
+      }
+    },
+    {
+      "index": 0,
+      "rect": {
+        "x": 0,
+        "y": 263,
+        "width": 1440,
+        "height": 1250.390625
+      },
+      "backgroundColor": "rgb(33, 29, 29)",
+      "html": "<div class=\"VPALpg theme dark x1jwjm5l x1aafrix xntwwlm RdXZvQ _1kWNwg adzKqQ BMOCzQ LuBWVA\" style=\"--5dQeiQ:visible\"><div class=\"h4ULTw BMOCzQ LuBWVA\"><div class=\"BMOCzQ LuBWVA\"><div class=\"jv_R6g\" style=\"--NZu1Zw:0px;--yjD9-g:64px\"><div class=\"BMOCzQ EC2pjw LuBWVA\" style=\"--TPsgaw:16px;--nz9hsg:24px\"><div class=\"_99GB9Q rzX2Ng\" style=\"translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;\"><div class=\"jv_R6g\" style=\"--NZu1Zw:32px\"><div class=\"lbfHlg _CRXhg BMOCzQ LuBWVA\"><div class=\"Ka9auQ _94CIA\" style=\"--PmK0MA:16px;--Z_Miqg:flex-start;--TPF5Nw:center\"><div class=\"aDc6Yg\" style=\"--djlACw:0 0 calc(100% * 2/3)\"><h2 class=\"R6f5Hg a6aEOw _1tMEdg\" style=\"--dnA6PQ:start\">Meet the new standard</h2></div><div class=\"aDc6Yg\" style=\"--djlACw:0 0 calc(100% * 1/3)\""
+    },
+    {
+      "index": 1,
+      "rect": {
+        "x": -1,
+        "y": 620.390625,
+        "width": 1,
+        "height": 1
+      },
+      "backgroundColor": "rgb(29, 31, 38)",
+      "html": "<div class=\"FmtbLQ Zjuzfg\"><p class=\"aWBg0w V5s4kA aZskFA Yrg82w\"><a class=\"Ej7lEg WkdUeQ _3bC2IQ\" href=\"#_R_1kajaH1_\" draggable=\"false\"><span class=\"N00Reg\">Skip to end of “Meet the new standard” list</span></a></p></div>"
+    },
+    {
+      "index": 2,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "backgroundColor": "rgb(131, 217, 225)",
+      "html": "<div class=\"VPALpg theme light x1h6728g x1aafrix x19aimcq FFc1VQ BMOCzQ XxpeBg fOwrSw _8CKO_A LuBWVA\" style=\"--4FjUhQ:20px;--NlZPbQ:#83D9E1;--5dQeiQ:hidden\"><div class=\"h4ULTw BMOCzQ LuBWVA\"><div class=\"S099Vg BMOCzQ _8CKO_A _6Mu4Ow uN3EIA _1lVsiA LuBWVA\" style=\"--s_rwAw:flex;--YRbscg:column\"><div class=\"hWSUhw BMOCzQ LuBWVA\"><div class=\"BMOCzQ EC2pjw LuBWVA\" style=\"--WtUbjw:8px\"><p class=\"ysIpbg _5ERovg i8oWhQ EIY3pg\">1/6</p></div><div class=\"BMOCzQ _6Mu4Ow My5POw rxu2yw LuBWVA\" style=\"--s_rwAw:flex;--5wdutQ:4px\"><h3 class=\"aJnoKw g6xpYA _1tMEdg\">A platform that can keep up with you</h3></div><div class=\"BMOCzQ EC2pjw LuBWVA\" style=\"--KtVHvQ:16px\"><div class=\"jv_R6g\" style=\"--NZu1Zw:16px\"><div class=\"ysIpbg _5ERovg i8oWhQ EIY3pg\"><div class=\"jv_R6g\" style=\"--NZu1Zw:16px\"><p class=\"N1JaYw\""
+    },
+    {
+      "index": 3,
+      "rect": {
+        "x": 76,
+        "y": 621.390625,
+        "width": 630,
+        "height": 748
+      },
+      "backgroundColor": "rgb(131, 217, 225)",
+      "html": "<div class=\"VPALpg theme light x1h6728g x1aafrix x19aimcq FFc1VQ BMOCzQ XxpeBg fOwrSw _8CKO_A LuBWVA\" style=\"--4FjUhQ:20px;--NlZPbQ:#83D9E1;--5dQeiQ:hidden\"><div class=\"h4ULTw BMOCzQ LuBWVA\"><div class=\"S099Vg BMOCzQ _8CKO_A _6Mu4Ow uN3EIA _1lVsiA LuBWVA\" style=\"--s_rwAw:flex;--YRbscg:column\"><div class=\"hWSUhw BMOCzQ LuBWVA\"><div class=\"BMOCzQ EC2pjw LuBWVA\" style=\"--WtUbjw:8px\"><p class=\"ysIpbg _5ERovg i8oWhQ EIY3pg\">1/6</p></div><div class=\"BMOCzQ _6Mu4Ow My5POw rxu2yw LuBWVA\" style=\"--s_rwAw:flex;--5wdutQ:4px\"><h3 class=\"aJnoKw g6xpYA _1tMEdg\">A platform that can keep up with you</h3></div><div class=\"BMOCzQ EC2pjw LuBWVA\" style=\"--KtVHvQ:16px\"><div class=\"jv_R6g\" style=\"--NZu1Zw:16px\"><div class=\"ysIpbg _5ERovg i8oWhQ EIY3pg\"><div class=\"jv_R6g\" style=\"--NZu1Zw:16px\"><p class=\"N1JaYw\""
+    }
+  ],
+  "cardDetails": [
+    {
+      "index": 0,
+      "text": "Meet the new standard\n\nPowerful tools, built for your craft.\n\nStart of list: Meet the new standard\n\nSkip to end of “Meet the new standard” list\n\n1/6\n\nA platform that can keep up with you\n\nUltra fast, ",
+      "rect": {
+        "x": 0,
+        "y": 263,
+        "width": 1440,
+        "height": 1250.390625,
+        "top": 263,
+        "right": 1440,
+        "bottom": 1513.390625,
+        "left": 0
+      }
+    },
+    {
+      "index": 1,
+      "text": "1/6\n\nA platform that can keep up with you\n\nUltra fast, super smooth, and incredibly precise, Affinity keeps up with you when you need it most. Every adjustment, filter, and layer effect updates live, ",
+      "rect": {
+        "x": 76,
+        "y": 621.390625,
+        "width": 630,
+        "height": 748,
+        "top": 621.390625,
+        "right": 706,
+        "bottom": 1369.390625,
+        "left": 76
+      }
+    },
+    {
+      "index": 2,
+      "text": "",
+      "rect": {
+        "x": 730,
+        "y": 621.390625,
+        "width": 630,
+        "height": 748,
+        "top": 621.390625,
+        "right": 1360,
+        "bottom": 1369.390625,
+        "left": 730
+      }
+    },
+    {
+      "index": 3,
+      "text": "",
+      "rect": {
+        "x": 1384,
+        "y": 621.390625,
+        "width": 630,
+        "height": 748,
+        "top": 621.390625,
+        "right": 2014,
+        "bottom": 1369.390625,
+        "left": 1384
+      }
+    },
+    {
+      "index": 4,
+      "text": "4/6\n\nFully-fuelled photo editing\n\nFrom epic image composites to non-destructive RAW editing, Affinity has everything you need from your pro photo editing software.\n\nLearn more\n\nAdvanced retouching\n\nTo",
+      "rect": {
+        "x": 2038,
+        "y": 621.390625,
+        "width": 630,
+        "height": 748,
+        "top": 621.390625,
+        "right": 2668,
+        "bottom": 1369.390625,
+        "left": 2038
+      }
+    },
+    {
+      "index": 5,
+      "text": "",
+      "rect": {
+        "x": 2648,
+        "y": 621.390625,
+        "width": 630,
+        "height": 748,
+        "top": 621.390625,
+        "right": 3278,
+        "bottom": 1369.390625,
+        "left": 2648
+      }
+    },
+    {
+      "index": 6,
+      "text": "5/6\n\nAdvanced vector design\n\nPowerful enough to design a full UI system, yet fast enough to sketch out a logo idea mid-meeting, designing in Affinity just feels right.\n\nLearn more\n\nCurve editing\n\nSnap",
+      "rect": {
+        "x": 3302,
+        "y": 621.390625,
+        "width": 630,
+        "height": 748,
+        "top": 621.390625,
+        "right": 3932,
+        "bottom": 1369.390625,
+        "left": 3302
+      }
+    },
+    {
+      "index": 7,
+      "text": "",
+      "rect": {
+        "x": 3912,
+        "y": 621.390625,
+        "width": 630,
+        "height": 748,
+        "top": 621.390625,
+        "right": 4542,
+        "bottom": 1369.390625,
+        "left": 3912
+      }
+    },
+    {
+      "index": 8,
+      "text": "6/6\n\nPage layout powerhouse\n\nWhether you're laying out a book, brochure, or multi-section report, Affinity helps you tackle even the most heavyweight publishing projects.\n\nLearn more\n\nLayout managemen",
+      "rect": {
+        "x": 4566,
+        "y": 621.462646484375,
+        "width": 630,
+        "height": 748,
+        "top": 621.462646484375,
+        "right": 5196,
+        "bottom": 1369.462646484375,
+        "left": 4566
+      }
+    },
+    {
+      "index": 9,
+      "text": "",
+      "rect": {
+        "x": 5176,
+        "y": 621.462646484375,
+        "width": 630,
+        "height": 748,
+        "top": 621.462646484375,
+        "right": 5806,
+        "bottom": 1369.462646484375,
+        "left": 5176
+      }
+    }
+  ]
+}

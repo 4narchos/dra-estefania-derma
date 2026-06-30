@@ -1,106 +1,252 @@
 ---
-import { whatsappBaseUrl } from "../data/links.js";
-import { getBaseUrl } from "../utils/baseUrl.js";
-const base = getBaseUrl();
-
-const whatsappUrl = `${whatsappBaseUrl}&utm_source=web&utm_medium=hero_button&utm_campaign=inicio`;
+const conditions = [
+  { label: "Acné" },
+  { label: "Melasma" },
+  { label: "Caída de cabello" },
+  { label: "Caspa" },
+  { label: "Arrugas" },
+];
 ---
 
 <section class="hero" id="inicio">
-  <div class="hero-content">
-    <p class="hero-lema">Tu piel te habla. Yo te ayudo a entenderla.</p>
-    <h1 class="hero-title">
-      Dra. Estefanía <span class="hero-accent">Borges</span>
-    </h1>
-    <p class="hero-subtitle">Dermatóloga en Yucatán</p>
-    <div class="hero-actions">
-      <a href={whatsappUrl} class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-        Agendar consulta
-      </a>
-      <a href={`${base}#servicios`} class="btn btn-secondary">Ver servicios</a>
+  <div class="hero-stage">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="hero-title-line">Tu piel</span>
+        <span class="hero-title-line hero-title-line--accent">te habla</span>
+      </h1>
     </div>
-  </div>
-  <div class="hero-image">
-    <img
-      src={`${base}images/dra-estefania.jpg`}
-      alt="Dra. Mariana Estefanía García Borges — Dermatóloga"
-      class="hero-photo"
-      loading="eager"
-      width="400"
-      height="600"
-    />
+
+    <div class="hero-collage" aria-label="Condiciones dermatológicas tratadas">
+      {conditions.map((condition, index) => (
+        <div class={`collage-item collage-item--${index + 1}`}>
+          <div class="collage-placeholder" aria-hidden="true"></div>
+          <span class="collage-label">{condition.label}</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <div class="hero-scroll-mouse">
+        <div class="hero-scroll-wheel"></div>
+      </div>
+      <span class="hero-scroll-label">Sigue bajando</span>
+    </div>
   </div>
 </section>
 
 <style>
   .hero {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-10);
-    padding: var(--space-16) var(--space-6);
+    position: relative;
+    background: var(--color-midnight);
+    color: var(--color-text-on-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(196, 184, 150, 0.12) 0%, transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(45, 94, 70, 0.25) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-stage {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
+    padding: calc(var(--header-height) + var(--space-8)) var(--space-6) calc(var(--space-8) + 40px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    text-align: center;
   }
 
-  @media (min-width: 768px) {
-    .hero {
-      grid-template-columns: 1fr 1fr;
-      padding: var(--space-20) var(--space-6);
-    }
-  }
-
-  .hero-lema {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
-    font-weight: 600;
-    color: var(--color-primary);
-    line-height: var(--leading-tight);
-    margin-bottom: var(--space-6);
-    letter-spacing: -0.02em;
+  .hero-content {
+    padding-top: var(--space-12);
   }
 
   .hero-title {
-    font-size: clamp(var(--text-xl), 3vw, var(--text-2xl));
-    font-weight: var(--weight-semibold);
-    line-height: var(--leading-tight);
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-2);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(4rem, 15vw, 11rem);
+    font-weight: 600;
+    line-height: 0.88;
+    letter-spacing: -0.05em;
+    margin: 0;
   }
 
-  .hero-accent {
-    color: var(--color-primary);
-  }
-
-  .hero-subtitle {
-    font-size: var(--text-lg);
-    color: var(--color-text-muted);
-    font-weight: var(--weight-medium);
-    margin-bottom: var(--space-8);
-  }
-
-  .hero-description {
-    font-size: var(--text-lg);
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-8);
-    max-width: 32rem;
-    line-height: var(--leading-relaxed);
-  }
-
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-4);
-  }
-
-  .hero-photo {
-    width: 100%;
-    aspect-ratio: 3/4;
-    max-width: 400px;
-    margin: 0 auto;
-    object-fit: cover;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border);
+  .hero-title-line {
     display: block;
   }
+
+  .hero-title-line--accent {
+    font-style: italic;
+    color: var(--color-accent);
+  }
+
+  .hero-collage {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--space-6);
+    width: 100%;
+    max-width: 1200px;
+    margin-top: auto;
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
+  }
+
+  .collage-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    transition: transform 0.3s ease;
+  }
+
+  /* Podio alignment using margin-top so GSAP y-animation does not fight it */
+  .collage-item:nth-child(1),
+  .collage-item:nth-child(5) {
+    margin-top: 56px;
+  }
+
+  .collage-item:nth-child(2),
+  .collage-item:nth-child(4) {
+    margin-top: 28px;
+  }
+
+  .collage-item:nth-child(3) {
+    margin-top: 0;
+  }
+
+  .collage-placeholder {
+    width: 200px;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-md);
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .collage-label {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: rgba(245, 245, 240, 0.65);
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .collage-placeholder {
+      width: 160px;
+    }
+
+    .collage-item:nth-child(1),
+    .collage-item:nth-child(2),
+    .collage-item:nth-child(3),
+    .collage-item:nth-child(4),
+    .collage-item:nth-child(5) {
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-stage {
+      padding-bottom: calc(var(--space-8) + 40px);
+    }
+
+    .hero-collage {
+      gap: var(--space-4);
+      padding-bottom: var(--space-4);
+    }
+
+    .collage-placeholder {
+      width: 130px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .collage-placeholder {
+      width: 110px;
+    }
+  }
+
+  .hero-scroll-hint {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    color: rgba(245, 245, 240, 0.55);
+    z-index: 2;
+    margin-top: var(--space-2);
+  }
+
+  .hero-scroll-mouse {
+    width: 22px;
+    height: 34px;
+    border: 2px solid currentColor;
+    border-radius: var(--radius-full);
+    position: relative;
+  }
+
+  .hero-scroll-wheel {
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: currentColor;
+    border-radius: var(--radius-full);
+  }
+
+  .hero-scroll-label {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
 </style>
+
+<script>
+  import { gsap } from "../utils/animations.js";
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!prefersReducedMotion) {
+    const hero = document.querySelector(".hero");
+
+    const entrance = gsap.timeline({ defaults: { ease: "power3.out" } });
+    entrance
+      .from(".hero-title-line", { y: 70, opacity: 0, duration: 1.1, stagger: 0.15 })
+      .from(".hero-collage", { y: 60, duration: 1, clearProps: "transform" }, "-=0.8")
+      .from(
+        ".collage-item",
+        { opacity: 0, duration: 1, stagger: 0.1, clearProps: "opacity" },
+        "<"
+      )
+      .from(".hero-scroll-hint", { opacity: 0, duration: 0.6 }, "-=0.4");
+
+    gsap.to(".hero-stage", {
+      scrollTrigger: {
+        trigger: hero,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+      opacity: 0,
+      scale: 0.98,
+      y: -30,
+      ease: "none",
+    });
+  }
+</script>

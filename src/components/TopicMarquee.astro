@@ -1,0 +1,84 @@
+---
+const marqueeItems = [
+  "Acné",
+  "Caspa",
+  "Manchas",
+  "Alopecia",
+  "Arrugas",
+  "Skincare",
+  "Bótox",
+  "Peelings",
+  "Bioestimulantes",
+  "Microneedling",
+  "Biopsias",
+  "Crioterapia",
+  "Electrocirugía",
+  "Quistes",
+  "Lipomas",
+];
+---
+
+<div class="topic-marquee" aria-hidden="true">
+  <div class="topic-marquee-track">
+    {marqueeItems.map((item) => (
+      <span class="topic-marquee-item">{item}</span>
+    ))}
+    {marqueeItems.map((item) => (
+      <span class="topic-marquee-item">{item}</span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .topic-marquee {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: calc((var(--space-5) * 2) + (var(--text-sm) * var(--leading-normal)));
+    background: #CCB775;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.12);
+    overflow: hidden;
+    white-space: nowrap;
+    contain: paint;
+  }
+
+  .topic-marquee-track {
+    position: relative;
+    left: 0;
+    display: inline-flex;
+    align-items: center;
+    animation: marquee 30s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .topic-marquee-track {
+      animation: none;
+    }
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .topic-marquee-item {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    color: rgba(26, 26, 26, 0.85);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0 var(--space-5);
+  }
+
+  .topic-marquee-item::after {
+    content: "•";
+    margin-left: var(--space-5);
+    color: rgba(26, 26, 26, 0.55);
+  }
+</style>

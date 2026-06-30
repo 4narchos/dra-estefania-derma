@@ -1,48 +1,306 @@
 ---
+import { getBaseUrl } from "../utils/baseUrl.js";
+import TopicMarquee from "./TopicMarquee.astro";
+const base = getBaseUrl();
+
+const accordionItems = [
+  {
+    title: "Escucho tu historia",
+    content:
+      "Escucho tu historia y lo que te preocupa. Entenderte es lo más importante.",
+  },
+  {
+    title: "Te reviso a detalle",
+    content:
+      "Te reviso a detalle y empleo herramientas especializadas, como el dermatoscopio, para encontrar lo que no se ve a simple vista.",
+  },
+  {
+    title: "Llego a la raíz",
+    content:
+      "Después de conocerte, puedo identificar claramente cuál es el problema.",
+  },
+  {
+    title: "Juntos diseñamos un plan",
+    content:
+      "Juntos diseñamos un plan de tratamiento efectivo, realista, y a tu medida.",
+  },
+  {
+    title: "Te doy claridad",
+    content:
+      "Te doy claridad. Explico a detalle todo sobre tu padecimiento y me aseguro de escuchar y resolver todas tus dudas.",
+  },
+];
 ---
 
-<section class="value-proposition" id="filosofia">
-  <div class="value-proposition-inner">
-    <h2 class="value-proposition-title">
-      Tu piel te habla. <em>Yo te ayudo a entenderla.</em>
-    </h2>
-    <p class="value-proposition-body">
-      Cada piel cuenta una historia. Mi enfoque combina ciencia dermatológica, escucha activa y resultados naturales para que te sientas bien contigo misma.
-    </p>
+<section class="value-proposition" id="valor">
+  <TopicMarquee />
+
+  <div class="container">
+    <div class="value-visual">
+      <img
+        src={`${base}images/dra-estefania-desk-square.jpg`}
+        alt="Dra. Estefanía Borges en pijama quirúrgica azul, sentada en su escritorio y escuchando atentamente"
+        width="600"
+        height="600"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="value-content">
+      <h2 class="value-title">
+        Tu salud con resultados estéticos y naturales.
+      </h2>
+
+      <div class="value-accordion">
+        {
+          accordionItems.map((item, index) => (
+            <div class={`value-accordion-item ${index === 0 ? "is-open" : ""}`}>
+              <h3 class="value-accordion-heading">
+                <button
+                  type="button"
+                  class="value-accordion-trigger"
+                  aria-expanded={index === 0 ? "true" : "false"}
+                  aria-controls={`value-panel-${index}`}
+                  id={`value-trigger-${index}`}
+                >
+                  <span>{item.title}</span>
+                  <span class="value-accordion-icon" aria-hidden="true">
+                    <span class="icon-bar icon-bar-h" />
+                    <span class="icon-bar icon-bar-v" />
+                  </span>
+                </button>
+              </h3>
+              <div
+                class="value-accordion-panel"
+                id={`value-panel-${index}`}
+                role="region"
+                aria-labelledby={`value-trigger-${index}`}
+              >
+                <div class="value-accordion-body">
+                  <p>{item.content}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <a href={`${base}FAQs`} class="value-cta">
+        Aprovecha al máximo tu cita
+      </a>
+    </div>
   </div>
 </section>
 
+<script>
+  const items = document.querySelectorAll(
+    ".value-accordion-item"
+  ) as NodeListOf<HTMLElement>;
+
+  const openItem = (target: HTMLElement) => {
+    items.forEach((i) => {
+      i.classList.remove("is-open");
+      const btn = i.querySelector(
+        ".value-accordion-trigger"
+      ) as HTMLButtonElement;
+      btn.setAttribute("aria-expanded", "false");
+    });
+
+    target.classList.add("is-open");
+    const trigger = target.querySelector(
+      ".value-accordion-trigger"
+    ) as HTMLButtonElement;
+    trigger.setAttribute("aria-expanded", "true");
+  };
+
+  items.forEach((item) => {
+    const trigger = item.querySelector(
+      ".value-accordion-trigger"
+    ) as HTMLButtonElement;
+
+    trigger.addEventListener("click", () => {
+      if (item.classList.contains("is-open")) {
+        item.classList.remove("is-open");
+        trigger.setAttribute("aria-expanded", "false");
+      } else {
+        openItem(item);
+      }
+    });
+
+    item.addEventListener("mouseenter", () => openItem(item));
+  });
+</script>
+
 <style>
   .value-proposition {
-    padding: var(--space-20) var(--space-6);
+    padding: 0 0 var(--space-20) 0;
     background: var(--color-midnight);
     color: var(--color-text-on-dark);
-    text-align: center;
+    overflow: hidden;
   }
 
-  .value-proposition-inner {
+  .container {
     max-width: var(--max-width);
     margin: 0 auto;
+    padding: var(--space-16) var(--space-6) 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    align-items: start;
   }
 
-  .value-proposition-title {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(var(--text-3xl), 6vw, var(--text-5xl));
+  @media (min-width: 900px) {
+    .container {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+      align-items: center;
+    }
+  }
+
+  .value-visual img {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    display: block;
+  }
+
+  .value-content {
+    max-width: 560px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: 900px) {
+    .value-content {
+      margin: 0;
+    }
+  }
+
+  .value-title {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(var(--text-3xl), 5vw, var(--text-4xl));
     font-weight: 600;
     line-height: var(--leading-tight);
     margin-bottom: var(--space-8);
   }
 
-  .value-proposition-title em {
-    font-style: italic;
+  .value-accordion {
+    border-top: 1px solid var(--color-border-inverse);
+    margin-bottom: var(--space-8);
+  }
+
+  .value-accordion-item {
+    border-bottom: 1px solid var(--color-border-inverse);
+  }
+
+  .value-accordion-heading {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  .value-accordion-trigger {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-5) 0;
+    background: transparent;
+    border: none;
+    color: var(--color-text-on-dark);
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-tight);
+    text-align: left;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+  }
+
+  .value-accordion-trigger:hover {
     color: var(--color-accent);
   }
 
-  .value-proposition-body {
-    font-size: clamp(var(--text-lg), 2vw, var(--text-xl));
-    max-width: 48rem;
-    margin: 0 auto;
+  .value-accordion-trigger:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-md);
+  }
+
+  .value-accordion-icon {
+    position: relative;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .icon-bar {
+    position: absolute;
+    background: currentColor;
+    transition: transform var(--transition-base);
+  }
+
+  .icon-bar-h {
+    width: 100%;
+    height: 2px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  .icon-bar-v {
+    width: 2px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .value-accordion-item.is-open .icon-bar-v {
+    transform: translateX(-50%) scaleY(0);
+  }
+
+  .value-accordion-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--transition-base);
+  }
+
+  .value-accordion-item.is-open .value-accordion-panel {
+    grid-template-rows: 1fr;
+  }
+
+  .value-accordion-body {
+    overflow: hidden;
+  }
+
+  .value-accordion-body p {
+    padding-bottom: var(--space-5);
+    color: rgba(245, 245, 240, 0.8);
     line-height: var(--leading-relaxed);
-    color: rgba(245, 245, 240, 0.85);
+  }
+
+  .value-cta {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-md);
+    background: var(--color-accent);
+    color: var(--color-text-on-accent);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-base);
+    text-decoration: none;
+    transition: background var(--transition-fast);
+  }
+
+  .value-cta:hover {
+    background: var(--color-accent-alt);
   }
 </style>
