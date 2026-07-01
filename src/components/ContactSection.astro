@@ -106,7 +106,7 @@ const menuItems = [
   @media (min-width: 768px) {
     .container {
       grid-template-columns: 1fr 1fr;
-      min-height: 100vh;
+      min-height: 80vh;
     }
   }
 
@@ -116,7 +116,7 @@ const menuItems = [
     align-items: flex-end;
     justify-content: center;
     width: 100%;
-    min-height: 60vh;
+    min-height: 50vh;
     overflow: hidden;
   }
 
@@ -204,11 +204,12 @@ const menuItems = [
   }
 
   .cta-card-img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
+    width: 220px;
+    height: 220px;
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: 0.5rem;
+    border-radius: 50%;
     display: block;
     transition: transform 0.3s ease;
   }
