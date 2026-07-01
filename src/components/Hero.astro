@@ -282,6 +282,7 @@ const conditions = [
       transform: translate(-50%, -50%);
       z-index: 10;
       width: 100%;
+      margin: 0;
       padding: 0 var(--space-4);
     }
 
@@ -290,8 +291,20 @@ const conditions = [
       gap: var(--space-2);
     }
 
+    .hero-word {
+      animation: none;
+      opacity: 1;
+      filter: blur(0);
+      transform: scale(1);
+    }
+
     .mouse-btn {
       display: none;
+    }
+
+    .mouse-scroll {
+      animation: none;
+      opacity: 1;
     }
 
     .hero-collage-wrap {
@@ -314,6 +327,7 @@ const conditions = [
       flex: none;
       transform-origin: center center;
       z-index: 1;
+      transition: none;
     }
 
     .collage-item--1 {
@@ -351,22 +365,22 @@ const conditions = [
 
     .collage-item--4 {
       /* Acné - abajo izquierda */
-      bottom: 15%;
-      left: 12%;
-      width: 36vmin;
-      height: 36vmin;
-      min-width: 120px;
-      min-height: 120px;
+      bottom: 12%;
+      left: 10%;
+      width: 34vmin;
+      height: 34vmin;
+      min-width: 110px;
+      min-height: 110px;
     }
 
     .collage-item--5 {
       /* Arrugas - abajo derecha */
-      bottom: 15%;
-      right: 12%;
-      width: 42vmin;
-      height: 42vmin;
-      min-width: 140px;
-      min-height: 140px;
+      bottom: 12%;
+      right: 10%;
+      width: 34vmin;
+      height: 34vmin;
+      min-width: 110px;
+      min-height: 110px;
     }
 
     .collage-image {
@@ -434,7 +448,8 @@ const conditions = [
   import { gsap } from "../utils/animations.js";
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!prefersReducedMotion) {
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  if (!prefersReducedMotion && !isMobile) {
     const hero = document.querySelector(".hero");
 
     const entrance = gsap.timeline({ defaults: { ease: "power3.out" } });
