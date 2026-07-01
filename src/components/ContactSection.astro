@@ -367,6 +367,66 @@ const menuItems = [
     }
   }
 
+  @media (max-width: 767px) {
+    .contact {
+      height: 100dvh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 0;
+      padding: var(--space-6) 0;
+    }
+
+    .contact-visual {
+      display: none;
+    }
+
+    .contact-section-title {
+      padding: 0 var(--space-6) var(--space-6);
+    }
+
+    .contact-content {
+      flex: 1;
+      justify-content: center;
+      padding: 0 var(--space-5);
+      gap: var(--space-4);
+    }
+
+    .cta-card {
+      padding: 2rem;
+    }
+
+    .cta-card-img {
+      width: 180px;
+      height: 180px;
+    }
+
+    .cta-card-title {
+      font-size: 1.25rem;
+    }
+
+    .cta-card-subtitle {
+      font-size: 0.9375rem;
+    }
+
+    .cta-card-price {
+      font-size: 1rem;
+    }
+
+    .cta-card-button {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .cta-card,
     .cta-card::after,
