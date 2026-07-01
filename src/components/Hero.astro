@@ -139,49 +139,65 @@ const conditions = [
   .hero-collage {
     position: absolute;
     bottom: var(--space-2);
-    left: 0;
+    left: 50%;
     z-index: 1;
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    align-items: flex-start;
-    gap: var(--space-4);
-    width: 100%;
+    align-items: center;
+    width: auto;
     max-width: none;
     margin: 0;
     padding: 0;
+    perspective: 1200px;
+    transform: translateX(-50%);
   }
 
   .collage-item {
-    flex: 0 0 260px;
+    position: relative;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.3s ease;
+    margin: 0 -30px;
+    transition: transform 0.5s ease, z-index 0s;
+    transform-style: preserve-3d;
   }
 
-  /* Podio alignment using margin-top so GSAP y-animation does not fight it */
-  .collage-item:nth-child(1),
-  .collage-item:nth-child(5) {
-    margin-top: 80px;
+  .collage-item--1,
+  .collage-item--5 {
+    width: 200px;
+    z-index: 1;
+    transform: scale(0.78) rotateY(25deg);
   }
 
-  .collage-item:nth-child(2),
-  .collage-item:nth-child(4) {
-    margin-top: 40px;
+  .collage-item--2,
+  .collage-item--4 {
+    width: 240px;
+    z-index: 3;
+    transform: scale(0.95) rotateY(15deg);
   }
 
-  .collage-item:nth-child(3) {
-    margin-top: 0;
+  .collage-item--3 {
+    width: 280px;
+    z-index: 5;
+    transform: scale(1.15);
   }
+
+  .collage-item--1 { transform-origin: right center; }
+  .collage-item--5 { transform-origin: left center; }
+  .collage-item--2 { transform-origin: right center; }
+  .collage-item--4 { transform-origin: left center; }
+  .collage-item--3 { transform-origin: center center; }
 
   .collage-image {
-    width: 260px;
-    height: 260px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
     border-radius: var(--radius-md);
     object-fit: cover;
     display: block;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.4);
   }
 
   @media (min-width: 1440px) {
@@ -189,50 +205,56 @@ const conditions = [
       padding-bottom: 376px;
     }
 
-    .hero-collage {
-      gap: var(--space-6);
-    }
-
     .collage-item {
-      flex: 0 0 300px;
+      margin: 0 -40px;
     }
 
-    .collage-image {
-      width: 300px;
-      height: 300px;
+    .collage-item--1,
+    .collage-item--5 {
+      width: 240px;
+      transform: scale(0.78) rotateY(25deg);
     }
 
-    .collage-item:nth-child(1),
-    .collage-item:nth-child(5) {
-      margin-top: 96px;
+    .collage-item--2,
+    .collage-item--4 {
+      width: 280px;
+      transform: scale(0.95) rotateY(15deg);
     }
 
-    .collage-item:nth-child(2),
-    .collage-item:nth-child(4) {
-      margin-top: 48px;
+    .collage-item--3 {
+      width: 320px;
+      transform: scale(1.15);
     }
   }
 
   @media (max-width: 900px) {
     .hero-stage {
-      padding-bottom: 220px;
+      padding-bottom: 260px;
+    }
+
+    .hero-collage {
+      perspective: 900px;
     }
 
     .collage-item {
-      flex: 0 0 200px;
+      margin: 0 -18px;
     }
 
-    .collage-image {
-      width: 200px;
-      height: 200px;
+    .collage-item--1,
+    .collage-item--5 {
+      width: 150px;
+      transform: scale(0.78) rotateY(20deg);
     }
 
-    .collage-item:nth-child(1),
-    .collage-item:nth-child(2),
-    .collage-item:nth-child(3),
-    .collage-item:nth-child(4),
-    .collage-item:nth-child(5) {
-      margin-top: 0;
+    .collage-item--2,
+    .collage-item--4 {
+      width: 180px;
+      transform: scale(0.95) rotateY(12deg);
+    }
+
+    .collage-item--3 {
+      width: 210px;
+      transform: scale(1.15);
     }
   }
 
@@ -245,14 +267,18 @@ const conditions = [
       position: relative;
       bottom: auto;
       left: auto;
-      z-index: 1;
+      transform: none;
+      perspective: none;
       flex-wrap: wrap;
       gap: var(--space-4);
       padding: var(--space-8) var(--space-6) var(--space-6);
     }
 
     .collage-item {
+      margin: 0;
       flex: 1 1 calc(33.333% - var(--space-4) * 2 / 3);
+      transform: none;
+      z-index: 1;
     }
 
     .collage-image {
@@ -324,11 +350,10 @@ const conditions = [
 
     const entrance = gsap.timeline({ defaults: { ease: "power3.out" } });
     entrance
-      .from(".hero-collage", { y: 60, duration: 1, clearProps: "transform" }, 0)
       .from(
         ".collage-item",
-        { opacity: 0, duration: 1, stagger: 0.1, clearProps: "opacity" },
-        "<"
+        { opacity: 0, y: 60, duration: 1, stagger: 0.1, clearProps: "transform" },
+        0
       )
       .from(".mouse-btn", { opacity: 0, duration: 0.6 }, "+=2");
 
