@@ -27,6 +27,7 @@ const menuItems = [
 
     <div class="contact-content">
       <div class="contact-content-top">
+        <h2 class="contact-section-title">¡Nos vemos en tu consulta!</h2>
         <div class="cta-card group">
           <img
             src={`${base}images/clinic-2.jpg`}
@@ -37,7 +38,7 @@ const menuItems = [
             loading="eager"
           />
 
-          <p class="cta-card-title">¡Nos vemos en tu consulta!</p>
+          <p class="cta-card-title">Consulta dermatológica</p>
           <p class="cta-card-subtitle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -150,9 +151,21 @@ const menuItems = [
   .contact-content-top {
     flex: 0 0 auto;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 0;
+    gap: var(--space-4);
+  }
+
+  .contact-section-title {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(var(--text-3xl), 4vw, var(--text-4xl));
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    color: var(--color-text-on-dark);
+    margin: 0;
+    text-align: center;
   }
 
   .contact-content-bottom {
