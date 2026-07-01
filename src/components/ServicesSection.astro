@@ -534,20 +534,27 @@ const services = [
 
   @media (max-width: 900px) {
     .services {
+      height: 100dvh;
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
     }
 
     .services-inner {
       flex: 1;
       display: flex;
       flex-direction: column;
-      padding: 48px 32px 80px;
+      padding: 40px 24px 48px;
     }
 
     .services-header {
-      padding: 16px 0 32px;
+      padding: 12px 0 20px;
+    }
+
+    .services-title {
+      font-size: clamp(40px, 7vw, 64px);
+      line-height: 1.05;
     }
 
     .services-carousel-wrapper {
@@ -555,29 +562,56 @@ const services = [
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 0 56px;
+      padding: 0 52px;
+      position: relative;
+    }
+
+    .services-carousel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding-top: 0;
+    }
+
+    .services-carousel-track {
+      align-items: stretch;
+    }
+
+    .services-nav {
+      left: -8px;
+      right: -8px;
+    }
+
+    .services-nav-btn {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.45);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
 
     .service-card {
-      flex: 0 0 calc(100vw - 160px);
-      width: calc(100vw - 160px);
-      min-height: 600px;
-      padding: 0 0 40px;
+      flex: 0 0 calc(100vw - 128px);
+      width: calc(100vw - 128px);
+      min-height: 0;
+      height: 100%;
+      padding: 0 0 56px;
     }
 
     .service-card-header {
-      height: 200px;
-      padding: 24px 28px;
+      height: auto;
+      min-height: 150px;
+      padding: 20px 24px;
       gap: 6px;
     }
 
     .service-card-title {
-      font-size: clamp(32px, 6vw, 48px);
+      font-size: clamp(28px, 6vw, 44px);
       line-height: 1.05;
     }
 
     .service-card-description {
-      font-size: 16px;
+      font-size: clamp(13px, 3vw, 16px);
       line-height: 1.5;
     }
 
@@ -588,8 +622,9 @@ const services = [
       grid-template-columns: 1fr;
       align-items: center;
       gap: 0;
-      padding: 24px;
-      flex: none;
+      padding: 20px;
+      flex: 1 1 auto;
+      min-height: 0;
     }
 
     .service-card-visual {
@@ -603,13 +638,18 @@ const services = [
     }
 
     .service-card-image {
-      width: 340px;
-      height: 340px;
+      width: 380px;
+      height: 380px;
     }
 
     .service-card-info {
       opacity: 0;
       transform: translateX(-30px);
+    }
+
+    .service-card-list li {
+      font-size: clamp(13px, 2.8vw, 15px);
+      line-height: 1.4;
     }
 
     .service-card-button {
@@ -639,60 +679,68 @@ const services = [
 
   @media (max-width: 640px) {
     .services-inner {
-      padding: 32px 16px 64px;
+      padding: 24px 16px 32px;
     }
 
     .services-header {
-      padding: 12px 0 24px;
+      padding: 8px 0 16px;
     }
 
     .services-carousel-wrapper {
-      padding: 0 48px;
+      padding: 0 44px;
     }
 
     .services-title {
-      font-size: 40px;
+      font-size: clamp(28px, 9vw, 40px);
       line-height: 1.05;
     }
 
+    .services-nav {
+      left: -6px;
+      right: -6px;
+    }
+
     .services-nav-btn {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
     }
 
     .service-card {
-      flex: 0 0 calc(100vw - 120px);
-      width: calc(100vw - 120px);
-      min-height: 560px;
+      flex: 0 0 calc(100vw - 100px);
+      width: calc(100vw - 100px);
+      min-height: 0;
+      height: 100%;
       padding: 0 0 48px;
     }
 
     .service-card-header {
-      height: 190px;
-      padding: 20px 24px;
-      gap: 6px;
+      height: auto;
+      min-height: 120px;
+      padding: 14px 18px;
+      gap: 4px;
     }
 
     .service-card-title {
-      font-size: 32px;
+      font-size: clamp(24px, 8vw, 32px);
       line-height: 1.05;
+    }
+
+    .service-card-description {
+      font-size: clamp(12px, 3.8vw, 14px);
+      line-height: 1.45;
     }
 
     .service-card-body {
       position: relative;
       gap: 0;
-      padding: 20px;
-      flex: none;
+      padding: 16px;
+      flex: 1 1 auto;
+      min-height: 0;
     }
 
     .service-card-image {
-      width: 180px;
-      height: 180px;
-    }
-
-    .service-card-description {
-      font-size: 14px;
-      line-height: 1.45;
+      width: 220px;
+      height: 220px;
     }
 
     .service-card-list {
@@ -700,8 +748,14 @@ const services = [
     }
 
     .service-card-list li {
-      font-size: 12.5px;
-      line-height: 1.4;
+      font-size: clamp(11px, 3.5vw, 13px);
+      line-height: 1.35;
+      padding-left: 16px;
+    }
+
+    .service-card-list li::before {
+      width: 4px;
+      height: 4px;
     }
   }
 
