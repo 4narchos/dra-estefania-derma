@@ -320,60 +320,64 @@ const menuItems = [
   if (!prefersReducedMotion) {
     const section = document.querySelector(".presentation");
 
-    gsap.from(
-      [
-        ".presentation-visual",
-        ".presentation-eyebrow",
-        ".presentation-title",
-        ".presentation-subtitle",
-        ".presentation-location",
-        ".presentation-menu",
-      ],
-      {
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-        y: 50,
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.12,
-        ease: "power2.out",
-      }
-    );
-
-    // Signature typewriter effect
+    // Signature typewriter setup
     const nameEl = document.querySelector(".signature-name") as HTMLElement | null;
     const titleEl = document.querySelector(".signature-title") as HTMLElement | null;
+    let chars: NodeListOf<Element> | null = null;
+
     if (nameEl && titleEl) {
       const text = nameEl.dataset.signature || nameEl.textContent || "";
       nameEl.innerHTML = text
         .split("")
         .map((char, i) => `<span class="signature-char" style="--i:${i}">${char === " " ? "&nbsp;" : char}</span>`)
         .join("");
-      const chars = nameEl.querySelectorAll(".signature-char");
-
-      const signatureTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 70%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      signatureTl
-        .fromTo(
-          chars,
-          { opacity: 0, y: 8 },
-          { opacity: 1, y: 0, duration: 0.05, stagger: 0.06, ease: "power1.out" }
-        )
-        .fromTo(
-          titleEl,
-          { opacity: 0, y: 8 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-          "+=0.5"
-        );
+      chars = nameEl.querySelectorAll(".signature-char");
     }
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    });
+
+    // 1. Title appears in center then moves to final position
+    tl.from(".presentation-title", {
+      y: "-40vh",
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+    });
+
+    // 2. Doctor image zooms in while fading in simultaneously
+    tl.from(".presentation-visual img", {
+      scale: 0.85,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power2.out",
+    }, "-=0.2");
+
+    // 3. Signature and menu appear
+    if (chars && titleEl) {
+      tl.fromTo(
+        chars,
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.05, stagger: 0.06, ease: "power1.out" },
+        "-=0.4"
+      ).fromTo(
+        titleEl,
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+        "+=0.2"
+      );
+    }
+
+    tl.from(".presentation-menu", {
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
+    }, "-=0.4");
   }
 </script>
