@@ -19,11 +19,8 @@ const conditions = [
         <span class="hero-title-line hero-title-line--accent">te habla</span>
       </h1>
 
-      <div class="hero-scroll-hint" aria-hidden="true">
-        <div class="hero-scroll-mouse">
-          <div class="hero-scroll-wheel"></div>
-        </div>
-        <span class="hero-scroll-label">Sigue bajando</span>
+      <div class="mouse-btn" aria-hidden="true">
+        <span class="mouse-scroll"></span>
       </div>
     </div>
   </div>
@@ -238,41 +235,34 @@ const conditions = [
     }
   }
 
-  .hero-scroll-hint {
-    position: relative;
+  .mouse-btn {
+    margin: 0 auto;
+    width: 40px;
+    height: 80px;
+    border: 3px solid rgba(245, 245, 240, 0.55);
+    border-radius: 20px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-2);
-    color: rgba(245, 245, 240, 0.55);
-    z-index: 2;
-    margin-top: var(--space-2);
   }
 
-  .hero-scroll-mouse {
-    width: 22px;
-    height: 34px;
-    border: 2px solid currentColor;
-    border-radius: var(--radius-full);
-    position: relative;
+  .mouse-scroll {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(170deg, rgba(245, 245, 240, 0.7), rgba(245, 245, 240, 0.9));
+    border-radius: 50%;
+    margin: auto;
+    animation: scrolling13 2.5s linear infinite;
   }
 
-  .hero-scroll-wheel {
-    position: absolute;
-    top: 7px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 4px;
-    background: currentColor;
-    border-radius: var(--radius-full);
-  }
-
-  .hero-scroll-label {
-    font-size: var(--text-xs);
-    font-weight: var(--weight-medium);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+  @keyframes scrolling13 {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(20px);
+    }
   }
 </style>
 
@@ -292,7 +282,7 @@ const conditions = [
         { opacity: 0, duration: 1, stagger: 0.1, clearProps: "opacity" },
         "<"
       )
-      .from(".hero-scroll-hint", { opacity: 0, duration: 0.6 }, "-=0.4");
+      .from(".mouse-btn", { opacity: 0, duration: 0.6 }, "-=0.4");
 
     gsap.to(".hero-stage", {
       scrollTrigger: {
