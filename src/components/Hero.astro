@@ -15,8 +15,14 @@ const conditions = [
   <div class="hero-stage">
     <div class="hero-content">
       <h1 class="hero-title">
-        <span class="hero-title-line">Tu piel</span>
-        <span class="hero-title-line hero-title-line--accent">te habla</span>
+        <span class="hero-title-line hero-title-line--1">
+          <span class="hero-word">Tu</span>
+          <span class="hero-word">piel</span>
+        </span>
+        <span class="hero-title-line hero-title-line--2 hero-title-line--accent">
+          <span class="hero-word">te</span>
+          <span class="hero-word">habla</span>
+        </span>
       </h1>
 
       <div class="mouse-btn" aria-hidden="true">
@@ -101,6 +107,33 @@ const conditions = [
   .hero-title-line--accent {
     font-style: italic;
     color: var(--color-accent);
+  }
+
+  .hero-word {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(1.02);
+    animation: hero-blur-in 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+  }
+
+  .hero-title-line--1 .hero-word:nth-child(1) { animation-delay: 0.2s; }
+  .hero-title-line--1 .hero-word:nth-child(2) { animation-delay: 0.35s; }
+
+  .hero-title-line--2 .hero-word:nth-child(1) { animation-delay: 1.0s; }
+  .hero-title-line--2 .hero-word:nth-child(2) { animation-delay: 1.15s; }
+
+  @keyframes hero-blur-in {
+    from {
+      opacity: 0;
+      filter: blur(10px);
+      transform: scale(1.02);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: scale(1);
+    }
   }
 
   .hero-collage {
@@ -264,6 +297,20 @@ const conditions = [
       transform: translateY(20px);
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-word {
+      animation: none;
+      opacity: 1;
+      filter: blur(0);
+      transform: scale(1);
+    }
+
+    .mouse-scroll {
+      animation: none;
+      opacity: 1;
+    }
+  }
 </style>
 
 <script>
@@ -275,8 +322,7 @@ const conditions = [
 
     const entrance = gsap.timeline({ defaults: { ease: "power3.out" } });
     entrance
-      .from(".hero-title-line", { y: 70, opacity: 0, duration: 1.1, stagger: 0.15 })
-      .from(".hero-collage", { y: 60, duration: 1, clearProps: "transform" }, "-=0.8")
+      .from(".hero-collage", { y: 60, duration: 1, clearProps: "transform" }, 0)
       .from(
         ".collage-item",
         { opacity: 0, duration: 1, stagger: 0.1, clearProps: "opacity" },
