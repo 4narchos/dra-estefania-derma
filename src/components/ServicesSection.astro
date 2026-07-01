@@ -595,8 +595,16 @@ const services = [
     .service-card-visual {
       position: absolute;
       inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transform: translateX(0);
       opacity: 1;
+    }
+
+    .service-card-image {
+      width: 340px;
+      height: 340px;
     }
 
     .service-card-info {
@@ -678,8 +686,8 @@ const services = [
     }
 
     .service-card-image {
-      width: 160px;
-      height: 160px;
+      width: 180px;
+      height: 180px;
     }
 
     .service-card-description {
