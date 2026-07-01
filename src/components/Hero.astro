@@ -366,7 +366,7 @@ const conditions = [
     const entrance = gsap.timeline({ defaults: { ease: "power3.out" } });
     entrance
       .from(".hero-collage-wrap", { opacity: 0, y: 60, duration: 1 }, 0)
-      .from(".collage-item", { opacity: 0, duration: 1, stagger: 0.1 }, "<")
+      .from(".collage-item", { opacity: 0, duration: 1, stagger: { each: 0.12, from: "center" } }, "<")
       .from(".mouse-btn", { opacity: 0, duration: 0.6 }, "+=2");
 
     gsap.to(".hero-stage", {
