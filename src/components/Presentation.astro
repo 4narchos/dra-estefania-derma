@@ -319,7 +319,13 @@ const menuItems = [
     }
 
     .signature-block {
-      display: none;
+      position: absolute;
+      top: 62%;
+      left: 50%;
+      right: auto;
+      transform: translate(-50%, -50%);
+      margin-top: 0;
+      z-index: 4;
     }
 
     .presentation-visual {
@@ -416,6 +422,8 @@ const menuItems = [
       chars = nameEl.querySelectorAll(".signature-char");
     }
 
+    const isMobile = window.matchMedia("(max-width: 640px)").matches;
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
@@ -424,48 +432,89 @@ const menuItems = [
       },
     });
 
-    // 1. Title fades in at dead center and holds for 1s
-    tl.call(() => titleContainer?.classList.add("is-visible"))
-      .fromTo(
-        ".presentation-title",
-        { y: "-50vh", opacity: 0 },
-        { y: "-50vh", opacity: 1, duration: 0.6, ease: "power2.out" }
-      )
-      .to({}, { duration: 1 });
+    if (isMobile) {
+      // Mobile animation sequence
+      // 1. Title fades in at dead center
+      tl.call(() => titleContainer?.classList.add("is-visible"))
+        .set(".presentation-text", { y: "15vh", opacity: 0 })
+        .to(".presentation-text", { y: "15vh", opacity: 1, duration: 0.6, ease: "power2.out" })
+        .to({}, { duration: 0.8 });
 
-    // 2. Title moves to final position while doctor image zooms+fades in
-    tl.fromTo(
-      ".presentation-title",
-      { y: "-50vh" },
-      { y: 0, duration: 1.2, ease: "power2.out" },
-      "image"
-    ).fromTo(
-      ".presentation-visual img",
-      { scale: 0.85, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
-      "image"
-    );
+      // 2. Title moves to upper third while doctor image zooms+fades in
+      tl.to(".presentation-text", { y: 0, duration: 1.2, ease: "power2.out" }, "image")
+        .fromTo(
+          ".presentation-visual img",
+          { scale: 0.85, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
+          "image"
+        );
 
-    // 3. Signature and menu appear
-    if (chars && titleEl) {
+      // 3. Signature and menu appear
+      if (chars && titleEl) {
+        tl.fromTo(
+          chars,
+          { opacity: 0, y: 8 },
+          { opacity: 1, y: 0, duration: 0.05, stagger: 0.06, ease: "power1.out" },
+          "-=0.4"
+        ).fromTo(
+          titleEl,
+          { opacity: 0, y: 8 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+          "+=0.2"
+        );
+      }
+
+      tl.from(".presentation-menu", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      }, "-=0.4");
+    } else {
+      // Desktop animation sequence
+      // 1. Title fades in at dead center and holds for 1s
+      tl.call(() => titleContainer?.classList.add("is-visible"))
+        .fromTo(
+          ".presentation-title",
+          { y: "-50vh", opacity: 0 },
+          { y: "-50vh", opacity: 1, duration: 0.6, ease: "power2.out" }
+        )
+        .to({}, { duration: 1 });
+
+      // 2. Title moves to final position while doctor image zooms+fades in
       tl.fromTo(
-        chars,
-        { opacity: 0, y: 8 },
-        { opacity: 1, y: 0, duration: 0.05, stagger: 0.06, ease: "power1.out" },
-        "-=0.4"
+        ".presentation-title",
+        { y: "-50vh" },
+        { y: 0, duration: 1.2, ease: "power2.out" },
+        "image"
       ).fromTo(
-        titleEl,
-        { opacity: 0, y: 8 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-        "+=0.2"
+        ".presentation-visual img",
+        { scale: 0.85, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
+        "image"
       );
-    }
 
-    tl.from(".presentation-menu", {
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power2.out",
-    }, "-=0.4");
+      // 3. Signature and menu appear
+      if (chars && titleEl) {
+        tl.fromTo(
+          chars,
+          { opacity: 0, y: 8 },
+          { opacity: 1, y: 0, duration: 0.05, stagger: 0.06, ease: "power1.out" },
+          "-=0.4"
+        ).fromTo(
+          titleEl,
+          { opacity: 0, y: 8 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+          "+=0.2"
+        );
+      }
+
+      tl.from(".presentation-menu", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      }, "-=0.4");
+    }
   }
 </script>
