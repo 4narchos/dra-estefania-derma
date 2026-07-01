@@ -4,61 +4,68 @@ import StarIcon from "./StarIcon.astro";
 
 const reviews = [
   {
+    avatar: "K",
+    author: "K.G.",
+    text: "Quedé muy satisfecha con mi consulta con la Dra. Estefania. Desde el primer momento fue muy amable, empática y profesional, tomándose el tiempo para escuchar mis inquietudes y explicarme todo de manera clara.<br><br>Me dio mucha confianza por su conocimiento y la forma en que personalizó mi tratamiento. La atención fue muy eficaz y salí con un plan claro.<br><br>Sin duda la recomiendo a cualquier persona que busque una dermatóloga comprometida, humana y altamente profesional. ¡Excelente experiencia!",
+    date: "2026-06-26",
+    dateLabel: "26 de junio de 2026",
+    source: "Evoke Aging Journey & Dermatology · Visita Dermatología",
+  },
+  {
+    avatar: "P",
+    author: "P.",
+    text: "Excelente servicio y atención. La doctora es muy servicial y te explica con claridad el tratamiento a seguir.",
+    date: "2026-06-26",
+    dateLabel: "26 de junio de 2026",
+    source: "Evoke Aging Journey & Dermatology · Hydrafacial",
+  },
+  {
     avatar: "C",
-    author: "Claudia A.",
+    author: "C.G.",
+    text: "La Dra fue muy clara al explicarnos el tratamiento y los cuidados necesarios.",
+    date: "2026-06-24",
+    dateLabel: "24 de junio de 2026",
+    source: "Evoke Aging Journey & Dermatology · Visita Dermatología",
+  },
+  {
+    avatar: "L",
+    author: "L.V.",
+    text: "Excelente servicio! Muy recomendable para dermatología, me siento mucho más tranquila.",
+    date: "2026-06-24",
+    dateLabel: "24 de junio de 2026",
+    source: "Evoke Aging Journey & Dermatology · Primera visita Dermatología",
+  },
+  {
+    avatar: "M",
+    author: "M.C.",
+    text: "La forma como me atendió y la explicación que me dio.",
+    date: "2026-06-23",
+    dateLabel: "23 de junio de 2026",
+    source: "Evoke Aging Journey & Dermatology · Primera visita Dermatología",
+  },
+  {
+    avatar: "J",
+    author: "J.R.",
+    text: "Muy profesional, agradable y simpático. Recomiendo.",
+    date: "2026-06-23",
+    dateLabel: "23 de junio de 2026",
+    source: "Evoke Aging Journey & Dermatology · Visita Dermatología",
+  },
+  {
+    avatar: "L",
+    author: "L.",
+    text: "Todo fue muy práctico, excelente forma de explicar.",
+    date: "2026-06-19",
+    dateLabel: "19 de junio de 2026",
+    source: "Evoke Aging Journey & Dermatology · Primera visita Dermatología",
+  },
+  {
+    avatar: "C",
+    author: "C.A.",
     text: "La atención de la Dra. Estefanía fue excelente de principio a fin. Es muy precisa y asertiva al momento de explicar el diagnóstico y tratamiento a seguir, así como para aclarar dudas.",
     date: "2026-06-05",
     dateLabel: "5 de junio de 2026",
     source: "Evoke Aging Journey & Dermatology · Primera visita Dermatología",
-  },
-  {
-    avatar: "I",
-    author: "Iriani C.",
-    text: "Muy paciente, explicación con detalle, detenimiento en la revisión",
-    date: "2026-05-20",
-    dateLabel: "20 de mayo de 2026",
-  },
-  {
-    avatar: "M",
-    author: "Maricela S.",
-    text: "Una persona muy empática y amable, tiene mucho tacto a la hora de explicar.",
-    date: "2026-05-20",
-    dateLabel: "20 de mayo de 2026",
-  },
-  {
-    avatar: "D",
-    author: "Diego R.",
-    text: "Nos explicó muy bien el problema que había y fue muy amable.",
-    date: "2026-05-13",
-    dateLabel: "13 de mayo de 2026",
-  },
-  {
-    avatar: "N",
-    author: "Nazly G.",
-    text: "Excelente atención, escucha las necesidades de cada paciente, explica cada parte de la consulta para dejar todo claro de manera amable y profesional.",
-    date: "2026-05-08",
-    dateLabel: "8 de mayo de 2026",
-  },
-  {
-    avatar: "A",
-    author: "Angel C.",
-    text: "Todo excelente, atención personalizada y directa, carismática y empática.",
-    date: "2026-05-08",
-    dateLabel: "8 de mayo de 2026",
-  },
-  {
-    avatar: "M",
-    author: "Mauri C.",
-    text: "Increíble doctora, muy comprensible y excelente explicación.",
-    date: "2026-05-06",
-    dateLabel: "6 de mayo de 2026",
-  },
-  {
-    avatar: "F",
-    author: "Fernando S.",
-    text: "Excelente médico, desde el inicio hace todo muy ameno, da una explicación detallada del tratamiento que utilizará y muestra el porqué de ello. Sin duda me hizo sentir muy cómodo y sobre todo seguro para continuar mi tratamiento con ella.",
-    date: "2026-05-05",
-    dateLabel: "5 de mayo de 2026",
   },
 ];
 
@@ -89,7 +96,7 @@ const reviews = [
                 <StarIcon />
               </div>
             </header>
-            <blockquote class="reviews-text">{review.text}</blockquote>
+            <blockquote class="reviews-text" set:html={review.text} />
             <footer class="reviews-item-footer">
               <time datetime={review.date}>{review.dateLabel}</time>
               {review.source && <span>{review.source}</span>}
@@ -112,7 +119,7 @@ const reviews = [
                 <StarIcon />
               </div>
             </header>
-            <blockquote class="reviews-text">{review.text}</blockquote>
+            <blockquote class="reviews-text" set:html={review.text} />
             <footer class="reviews-item-footer">
               <time datetime={review.date}>{review.dateLabel}</time>
               {review.source && <span>{review.source}</span>}
