@@ -289,12 +289,6 @@ const services = [
     overflow: hidden;
     box-shadow: -9px 9px 18px rgba(0, 0, 0, 0.35),
                 9px -9px 18px rgba(255, 255, 255, 0.12);
-    transition: 0.4s;
-  }
-
-  .service-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.35);
   }
 
   .service-card-button {
@@ -605,21 +599,10 @@ const services = [
     .services-carousel-track {
       transition: none !important;
     }
-
-    .service-card {
-      transition: none;
-    }
-
-    .service-card:hover {
-      filter: none;
-      box-shadow: none;
-    }
   }
 </style>
 
 <script>
-  import { gsap } from "../utils/animations.js";
-
   (function () {
     const track = document.querySelector(
       ".services-carousel-track"
@@ -736,20 +719,5 @@ const services = [
     updateButtons();
     moveTo(visualIndex, false);
 
-    // Entrance animation: cards fade in one by one from left to right
-    if (!prefersReducedMotion) {
-      gsap.from(".service-card", {
-        scrollTrigger: {
-          trigger: ".services",
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-        x: -30,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.18,
-        ease: "power2.out",
-      });
-    }
   })();
 </script>
