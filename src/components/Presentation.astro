@@ -210,9 +210,26 @@ const menuItems = [
     line-height: 1.35;
     padding: 0.15em 0;
     color: #F8E9A1;
+    background: linear-gradient(
+      135deg,
+      #F8E9A1 0%,
+      #FFF8D6 30%,
+      #F8E9A1 50%,
+      #E6D48A 70%,
+      #F8E9A1 100%
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     filter:
       drop-shadow(0 2px 2px rgba(0, 0, 0, 0.35))
       drop-shadow(0 0 18px rgba(0, 0, 0, 0.25));
+    animation: metalShine 4s ease-in-out infinite;
+  }
+
+  @keyframes metalShine {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 
   .signature-char {
@@ -228,9 +245,21 @@ const menuItems = [
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: #F8E9A1;
+    background: linear-gradient(
+      135deg,
+      #F8E9A1 0%,
+      #FFF8D6 30%,
+      #F8E9A1 50%,
+      #E6D48A 70%,
+      #F8E9A1 100%
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     filter:
       drop-shadow(0 2px 2px rgba(0, 0, 0, 0.35))
       drop-shadow(0 0 18px rgba(0, 0, 0, 0.25));
+    animation: metalShine 4s ease-in-out infinite;
     margin-top: var(--space-2);
     opacity: 0;
     transform: translateY(8px);
