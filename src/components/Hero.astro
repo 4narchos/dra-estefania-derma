@@ -102,12 +102,6 @@ const conditions = [
     margin: 0;
   }
 
-  @media (max-width: 768px) {
-    .hero-title {
-      padding-bottom: var(--space-5);
-    }
-  }
-
   .hero-title-line {
     display: block;
   }
@@ -272,23 +266,38 @@ const conditions = [
   @media (max-width: 768px) {
     .hero {
       min-height: 100dvh;
+      display: grid;
+      place-items: center;
       position: relative;
     }
 
     .hero-stage {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
       z-index: 10;
       width: 100%;
+      max-width: none;
       margin: 0;
       padding: 0 var(--space-4);
     }
 
     .hero-content {
-      padding-top: 0;
-      gap: var(--space-2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0;
+      gap: 0;
+    }
+
+    .hero-title {
+      width: 100%;
+      padding: 0;
+      text-align: center;
+      line-height: 0.9;
     }
 
     .hero-word {
