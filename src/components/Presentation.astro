@@ -124,7 +124,7 @@ const menuItems = [
     font-size: clamp(4rem, 15vw, 11rem);
     font-weight: 600;
     line-height: 0.88;
-    color: var(--color-text-primary);
+    color: #2D5E46;
     letter-spacing: -0.05em;
     margin: 0;
   }
@@ -154,7 +154,7 @@ const menuItems = [
     justify-content: center;
     gap: 6px;
     background: rgba(0, 0, 0, 0.45);
-    border: 1px solid #ACA284;
+    border: 2px solid #ACA284;
     border-radius: 9999px;
     padding: 6px;
     backdrop-filter: blur(8px);
@@ -177,6 +177,16 @@ const menuItems = [
   .presentation-menu-item:hover {
     background-color: #ffffff;
     color: #000000;
+  }
+
+  .presentation-menu-item:nth-child(2) {
+    background-color: #ACA284;
+    color: #1a1a1a;
+  }
+
+  .presentation-menu-item:nth-child(2):hover {
+    background-color: #c4b896;
+    color: #1a1a1a;
   }
 
   /* Signature on the right side */
