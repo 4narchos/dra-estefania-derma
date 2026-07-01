@@ -320,7 +320,7 @@ const menuItems = [
 
     .signature-block {
       position: absolute;
-      top: 52%;
+      top: 62%;
       left: 50%;
       right: auto;
       transform: translate(-50%, -50%);
@@ -350,12 +350,11 @@ const menuItems = [
     }
 
     .presentation-text {
-      flex: 1 1 50%;
+      flex: 1 1 65%;
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       justify-content: center;
       width: 100%;
-      padding-bottom: var(--space-4);
     }
 
     .presentation-title {
@@ -365,7 +364,7 @@ const menuItems = [
     }
 
     .presentation-menu {
-      flex: 0 1 50%;
+      flex: 0 1 35%;
       display: inline-flex;
       justify-content: center;
       align-items: flex-start;
@@ -437,8 +436,8 @@ const menuItems = [
       // Mobile animation sequence
       // 1. Title fades in at dead center
       tl.call(() => titleContainer?.classList.add("is-visible"))
-        .set(".presentation-text", { y: "25vh", opacity: 0 })
-        .to(".presentation-text", { y: "25vh", opacity: 1, duration: 0.6, ease: "power2.out" })
+        .set(".presentation-text", { y: "15vh", opacity: 0 })
+        .to(".presentation-text", { y: "15vh", opacity: 1, duration: 0.6, ease: "power2.out" })
         .to({}, { duration: 0.8 });
 
       // 2. Title moves to upper third while doctor image zooms+fades in
