@@ -155,7 +155,7 @@ const conditions = [
     flex-wrap: nowrap;
     justify-content: center;
     align-items: flex-end;
-    width: auto;
+    width: 100%;
     max-width: none;
     margin: 0;
     padding: 0;
@@ -168,28 +168,31 @@ const conditions = [
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 -24px;
+    margin: 0 -1.5%;
     transition: transform 0.5s ease, z-index 0s;
   }
 
   .collage-item--1,
   .collage-item--5 {
-    width: 200px;
+    width: 18%;
+    min-width: 150px;
     z-index: 1;
     transform: scale(0.78);
-    margin-bottom: 70px;
+    margin-bottom: 5%;
   }
 
   .collage-item--2,
   .collage-item--4 {
-    width: 240px;
+    width: 22%;
+    min-width: 180px;
     z-index: 3;
     transform: scale(0.95);
-    margin-bottom: 35px;
+    margin-bottom: 2.5%;
   }
 
   .collage-item--3 {
-    width: 280px;
+    width: 26%;
+    min-width: 220px;
     z-index: 5;
     transform: scale(1.15);
     margin-bottom: 0;
@@ -207,53 +210,56 @@ const conditions = [
 
   @media (min-width: 1440px) {
     .hero-stage {
-      padding-bottom: 360px;
+      padding-bottom: 22%;
     }
 
     .collage-item {
-      margin: 0 -32px;
+      margin: 0 -1.2%;
     }
 
     .collage-item--1,
     .collage-item--5 {
-      width: 240px;
-      margin-bottom: 90px;
+      width: 18%;
+      margin-bottom: 5%;
     }
 
     .collage-item--2,
     .collage-item--4 {
-      width: 280px;
-      margin-bottom: 45px;
+      width: 22%;
+      margin-bottom: 2.5%;
     }
 
     .collage-item--3 {
-      width: 320px;
+      width: 26%;
     }
   }
 
   @media (max-width: 900px) {
     .hero-stage {
-      padding-bottom: 240px;
+      padding-bottom: 30%;
     }
 
     .collage-item {
-      margin: 0 -14px;
+      margin: 0 -1.2%;
     }
 
     .collage-item--1,
     .collage-item--5 {
-      width: 150px;
-      margin-bottom: 55px;
+      width: 18%;
+      min-width: 110px;
+      margin-bottom: 5%;
     }
 
     .collage-item--2,
     .collage-item--4 {
-      width: 180px;
-      margin-bottom: 28px;
+      width: 22%;
+      min-width: 140px;
+      margin-bottom: 2.5%;
     }
 
     .collage-item--3 {
-      width: 210px;
+      width: 26%;
+      min-width: 170px;
     }
   }
 
