@@ -560,35 +560,50 @@ const services = [
       line-height: 1.5;
     }
 
-    /* Forzar layout legible en pantallas táctiles pequeñas,
-       independientemente de lo que reporte la media query hover */
+    /* Tap-to-reveal: mismo comportamiento que hover en desktop */
     .service-card-body {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+      gap: 0;
       padding: 24px;
       flex: none;
     }
 
     .service-card-visual {
-      position: static;
-      transform: none;
+      position: absolute;
+      inset: 0;
+      transform: translateX(0);
       opacity: 1;
     }
 
     .service-card-info {
-      opacity: 1;
-      transform: none;
+      opacity: 0;
+      transform: translateX(-30px);
     }
 
     .service-card-button {
-      position: relative;
-      left: auto;
-      bottom: auto;
-      transform: none;
-      align-self: center;
-      margin-top: 16px;
+      opacity: 0;
+      transform: translate(-50%, 20px);
+    }
+
+    .service-card.is-active .service-card-visual {
+      transform: translateX(45%);
+      opacity: 0.35;
+    }
+
+    .service-card.is-active .service-card-image {
+      transform: scale(0.85);
+    }
+
+    .service-card.is-active .service-card-info {
       opacity: 1;
+      transform: translateX(0);
+    }
+
+    .service-card.is-active .service-card-button {
+      opacity: 1;
+      transform: translate(-50%, 0);
     }
   }
 
@@ -634,7 +649,7 @@ const services = [
     }
 
     .service-card-body {
-      gap: 12px;
+      gap: 0;
       padding: 20px;
       flex: none;
     }
@@ -798,6 +813,25 @@ const services = [
     updateButtons();
     moveTo(visualIndex, false);
 
+  })();
+
+  (function () {
+    const cards = document.querySelectorAll(
+      ".service-card"
+    ) as NodeListOf<HTMLElement>;
+    if (!cards.length) return;
+
+    // Solo activar en pantallas táctiles pequeñas (donde no hay hover confiable)
+    const isTouch = window.matchMedia("(max-width: 900px)").matches;
+    if (!isTouch) return;
+
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const isActive = card.classList.contains("is-active");
+        cards.forEach((c) => c.classList.remove("is-active"));
+        if (!isActive) card.classList.add("is-active");
+      });
+    });
   })();
 
   (function () {
