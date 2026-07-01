@@ -346,23 +346,22 @@ const menuItems = [
     }
 
     .presentation-menu {
-      display: flex;
       justify-content: center;
       margin: 0 auto;
-      flex-wrap: wrap;
-      overflow-x: visible;
+      flex-wrap: nowrap;
+      overflow-x: auto;
       max-width: 100%;
-      -webkit-overflow-scrolling: auto;
-      scrollbar-width: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
 
     .presentation-menu::-webkit-scrollbar {
-      display: block;
+      display: none;
     }
 
     .presentation-menu-item {
-      padding: 12px 20px;
-      font-size: 14px;
+      padding: 14px 24px;
+      font-size: 15px;
     }
   }
 
