@@ -4,9 +4,9 @@ const base = getBaseUrl();
 
 const conditions = [
   { label: "Acné", image: `${base}images/hero-acne.png` },
+  { label: "Caspa", image: `${base}images/hero-caspa.jpg` },
   { label: "Melasma", image: `${base}images/hero-melasma.png` },
   { label: "Caída de cabello", image: `${base}images/hero-alopecia.jpg` },
-  { label: "Caspa", image: `${base}images/hero-caspa.png` },
   { label: "Arrugas", image: `${base}images/hero-arrugas.jpg` },
 ];
 ---
@@ -27,11 +27,10 @@ const conditions = [
             class="collage-image"
             src={condition.image}
             alt={condition.label}
-            width="200"
-            height="200"
+            width="400"
+            height="400"
             loading="eager"
           />
-          <span class="collage-label">{condition.label}</span>
         </div>
       ))}
     </div>
@@ -105,68 +104,32 @@ const conditions = [
 
   .hero-collage {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
-    align-items: flex-start;
-    gap: var(--space-6);
+    align-items: stretch;
+    gap: 0;
     width: 100%;
-    max-width: 1200px;
+    max-width: none;
     margin-top: auto;
-    padding-top: var(--space-8);
-    padding-bottom: var(--space-8);
+    padding: 0;
   }
 
   .collage-item {
+    flex: 1 1 20%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-2);
     transition: transform 0.3s ease;
   }
 
-  /* Podio alignment using margin-top so GSAP y-animation does not fight it */
-  .collage-item:nth-child(1),
-  .collage-item:nth-child(5) {
-    margin-top: 56px;
-  }
-
-  .collage-item:nth-child(2),
-  .collage-item:nth-child(4) {
-    margin-top: 28px;
-  }
-
-  .collage-item:nth-child(3) {
-    margin-top: 0;
-  }
-
   .collage-image {
-    width: 200px;
-    height: 200px;
-    border-radius: var(--radius-md);
+    width: 100%;
+    height: 280px;
     object-fit: cover;
     display: block;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-  }
-
-  .collage-label {
-    font-size: var(--text-sm);
-    font-weight: var(--weight-medium);
-    color: rgba(245, 245, 240, 0.65);
-    text-align: center;
   }
 
   @media (max-width: 900px) {
     .collage-image {
-      width: 160px;
-      height: 160px;
-    }
-
-    .collage-item:nth-child(1),
-    .collage-item:nth-child(2),
-    .collage-item:nth-child(3),
-    .collage-item:nth-child(4),
-    .collage-item:nth-child(5) {
-      margin-top: 0;
+      height: 220px;
     }
   }
 
@@ -176,20 +139,21 @@ const conditions = [
     }
 
     .hero-collage {
-      gap: var(--space-4);
-      padding-bottom: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .collage-item {
+      flex: 1 1 33.333%;
     }
 
     .collage-image {
-      width: 130px;
-      height: 130px;
+      height: 180px;
     }
   }
 
   @media (max-width: 380px) {
     .collage-image {
-      width: 110px;
-      height: 110px;
+      height: 140px;
     }
   }
 
