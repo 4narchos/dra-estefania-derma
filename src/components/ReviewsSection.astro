@@ -308,7 +308,9 @@ const reviews = [
       display: flex;
       flex-direction: column;
       justify-content: center;
+      width: 100%;
       min-width: 0;
+      margin: 0;
       padding: 0 var(--space-4);
     }
 
@@ -341,6 +343,14 @@ const reviews = [
 
     .reviews-source {
       margin-top: var(--space-4);
+    }
+
+    .reviews :global(.section-header-title) {
+      width: 100%;
+    }
+
+    .reviews :global(.section-header-subtitle) {
+      max-width: none;
     }
   }
 </style>
