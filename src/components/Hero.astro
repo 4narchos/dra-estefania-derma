@@ -106,30 +106,80 @@ const conditions = [
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    align-items: stretch;
-    gap: 0;
+    align-items: flex-start;
+    gap: var(--space-4);
     width: 100%;
     max-width: none;
     margin-top: auto;
-    padding: 0;
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
   }
 
   .collage-item {
-    flex: 1 1 20%;
+    flex: 1 1 calc(20% - var(--space-4) * 4 / 5);
     display: flex;
+    flex-direction: column;
+    align-items: center;
     transition: transform 0.3s ease;
+  }
+
+  /* Podio alignment using margin-top so GSAP y-animation does not fight it */
+  .collage-item:nth-child(1),
+  .collage-item:nth-child(5) {
+    margin-top: 72px;
+  }
+
+  .collage-item:nth-child(2),
+  .collage-item:nth-child(4) {
+    margin-top: 36px;
+  }
+
+  .collage-item:nth-child(3) {
+    margin-top: 0;
   }
 
   .collage-image {
     width: 100%;
-    height: 280px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-md);
     object-fit: cover;
     display: block;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  @media (min-width: 1440px) {
+    .hero-collage {
+      gap: var(--space-6);
+    }
+
+    .collage-item {
+      flex: 1 1 calc(20% - var(--space-6) * 4 / 5);
+    }
+
+    .collage-item:nth-child(1),
+    .collage-item:nth-child(5) {
+      margin-top: 72px;
+    }
+
+    .collage-item:nth-child(2),
+    .collage-item:nth-child(4) {
+      margin-top: 36px;
+    }
   }
 
   @media (max-width: 900px) {
     .collage-image {
-      height: 220px;
+      width: 200px;
+      height: 200px;
+    }
+
+    .collage-item:nth-child(1),
+    .collage-item:nth-child(2),
+    .collage-item:nth-child(3),
+    .collage-item:nth-child(4),
+    .collage-item:nth-child(5) {
+      margin-top: 0;
     }
   }
 
@@ -140,20 +190,24 @@ const conditions = [
 
     .hero-collage {
       flex-wrap: wrap;
+      gap: var(--space-4);
+      padding-bottom: var(--space-4);
     }
 
     .collage-item {
-      flex: 1 1 33.333%;
+      flex: 1 1 calc(33.333% - var(--space-4) * 2 / 3);
     }
 
     .collage-image {
-      height: 180px;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
     }
   }
 
   @media (max-width: 380px) {
     .collage-image {
-      height: 140px;
+      border-radius: var(--radius-sm);
     }
   }
 
