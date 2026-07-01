@@ -265,10 +265,11 @@ const conditions = [
 
   @media (max-width: 768px) {
     .hero {
-      min-height: auto;
+      min-height: 100dvh;
     }
 
     .hero-stage {
+      flex: 0 0 auto;
       padding-bottom: 0;
     }
 
@@ -285,6 +286,10 @@ const conditions = [
       position: relative;
       bottom: auto;
       left: auto;
+      flex: 1 1 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
       padding-bottom: var(--space-4);
     }
 
