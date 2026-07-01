@@ -14,12 +14,20 @@ const description = "Dermatóloga en Mérida. Especialista en tricología, acné
 ---
 
 <Layout title={title} description={description} pageSchema="home">
-  <Hero />
-  <Presentation />
-  <Credentials />
-  <ServicesSection />
-  <Philosophy />
-  <ValueProposition />
-  <ReviewsSection />
-  <ContactSection />
+  <div class="page-home">
+    <Hero />
+    <Presentation />
+    <Credentials />
+    <ServicesSection />
+    <Philosophy />
+    <ValueProposition />
+    <ReviewsSection />
+    <ContactSection />
+  </div>
 </Layout>
+
+<style is:global>
+  .page-home :is(h1, h2, h3, h4, h5, h6) {
+    font-family: 'Junicode', Georgia, serif !important;
+  }
+</style>
