@@ -293,71 +293,57 @@ const conditions = [
       inset: 0;
       z-index: 1;
       padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .hero-collage {
       position: relative;
-      width: 100%;
-      height: 100%;
+      width: min(90vmin, 100%);
+      aspect-ratio: 1 / 1;
       padding: 0;
       perspective: 800px;
     }
 
     .collage-item {
       position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 16vmin;
+      height: 16vmin;
+      min-width: 64px;
+      min-height: 64px;
       margin: 0;
       flex: none;
       transform-origin: center center;
+      transform: translate(-50%, -50%);
+      z-index: 1;
     }
 
     .collage-item--1 {
-      top: 4%;
-      left: 2%;
-      width: 22%;
-      min-width: 80px;
-      z-index: 1;
-      transform: scale(0.82);
+      transform: translate(-50%, -50%) rotate(0deg) translateY(-36vmin) rotate(0deg);
     }
 
     .collage-item--2 {
-      top: 2%;
-      right: 4%;
-      width: 26%;
-      min-width: 100px;
-      z-index: 3;
-      transform: scale(0.95);
+      transform: translate(-50%, -50%) rotate(72deg) translateY(-36vmin) rotate(-72deg);
     }
 
     .collage-item--3 {
-      top: 48%;
-      left: 50%;
-      width: 32%;
-      min-width: 130px;
-      z-index: 2;
-      transform: translate(-50%, -50%) scale(1.1);
+      transform: translate(-50%, -50%) rotate(144deg) translateY(-36vmin) rotate(-144deg);
     }
 
     .collage-item--4 {
-      bottom: 18%;
-      left: 4%;
-      width: 26%;
-      min-width: 100px;
-      z-index: 3;
-      transform: scale(0.95);
+      transform: translate(-50%, -50%) rotate(216deg) translateY(-36vmin) rotate(-216deg);
     }
 
     .collage-item--5 {
-      bottom: 14%;
-      right: 2%;
-      width: 22%;
-      min-width: 80px;
-      z-index: 1;
-      transform: scale(0.82);
+      transform: translate(-50%, -50%) rotate(288deg) translateY(-36vmin) rotate(-288deg);
     }
 
     .collage-image {
       width: 100%;
-      height: auto;
+      height: 100%;
       aspect-ratio: 1 / 1;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     }
