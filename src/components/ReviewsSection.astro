@@ -323,8 +323,20 @@ const reviews = [
 
     .reviews-track {
       height: 100%;
-      align-items: center;
+      align-items: stretch;
       padding: 0 var(--space-4);
+    }
+
+    .reviews-item {
+      flex: 0 0 85vw;
+      width: 85vw;
+      overflow: hidden;
+    }
+
+    .reviews-text {
+      flex: 1 1 auto;
+      font-size: var(--text-sm);
+      overflow-y: auto;
     }
 
     .reviews-source {
