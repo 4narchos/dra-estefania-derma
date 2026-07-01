@@ -286,25 +286,14 @@ const services = [
     border-radius: 24px;
     padding: 0 0 80px;
     overflow: hidden;
-    box-shadow:
-      0 1px 1px rgba(0, 0, 0, 0.04),
-      0 2px 2px rgba(0, 0, 0, 0.04),
-      0 4px 4px rgba(0, 0, 0, 0.04),
-      0 8px 8px rgba(0, 0, 0, 0.04),
-      0 16px 16px rgba(0, 0, 0, 0.04);
-    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: -9px 9px 18px rgba(0, 0, 0, 0.35),
+                9px -9px 18px rgba(255, 255, 255, 0.12);
+    transition: 0.4s;
   }
 
   .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow:
-      0 2px 2px rgba(0, 0, 0, 0.06),
-      0 4px 4px rgba(0, 0, 0, 0.06),
-      0 8px 8px rgba(0, 0, 0, 0.06),
-      0 16px 16px rgba(0, 0, 0, 0.06),
-      0 32px 32px rgba(0, 0, 0, 0.06),
-      0 64px 64px rgba(0, 0, 0, 0.06);
+    transform: scale(1.02);
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.35);
   }
 
   .service-card-button {
@@ -325,7 +314,6 @@ const services = [
     padding: 0.75rem 1.5rem;
     text-decoration: none;
     opacity: 1;
-    transition: transform 0.25s ease-out, opacity 0.25s ease-out;
   }
 
   .service-card-header {
@@ -367,7 +355,6 @@ const services = [
     align-items: center;
     justify-content: center;
     z-index: 1;
-    transition: transform 0.35s ease-out, opacity 0.35s ease-out;
   }
 
   .service-card-image {
@@ -377,7 +364,6 @@ const services = [
     object-fit: cover;
     display: block;
     background: rgba(0, 0, 0, 0.08);
-    transition: transform 0.35s ease-out;
   }
 
   .service-card-info {
@@ -388,7 +374,6 @@ const services = [
     gap: 16px;
     opacity: 1;
     transform: none;
-    transition: opacity 0.35s ease-out, transform 0.35s ease-out;
   }
 
   .service-card-description {
@@ -400,7 +385,6 @@ const services = [
     color: var(--card-text);
     margin: 0;
     opacity: 0.85;
-    transition: opacity 0.4s ease-out;
   }
 
   .service-card-list {
@@ -432,52 +416,6 @@ const services = [
     border-radius: 9999px;
     background: currentColor;
     opacity: 0.7;
-  }
-
-  /* Efecto de despliegue en hover: la imagen se corre a la derecha
-     y la lista aparece desde la izquierda (solo en dispositivos con hover) */
-  @media (hover: hover) and (pointer: fine) {
-    .service-card-body {
-      display: grid;
-      grid-template-columns: 1fr;
-      align-items: center;
-      gap: 0;
-    }
-
-    .service-card-visual {
-      position: absolute;
-      inset: 0;
-      transform: translateX(0);
-    }
-
-    .service-card-info {
-      opacity: 0;
-      transform: translateX(-30px);
-    }
-
-    .service-card-button {
-      opacity: 0;
-      transform: translate(-50%, 20px);
-    }
-
-    .service-card:hover .service-card-visual {
-      transform: translateX(45%);
-      opacity: 0.35;
-    }
-
-    .service-card:hover .service-card-image {
-      transform: scale(0.85);
-    }
-
-    .service-card:hover .service-card-info {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .service-card:hover .service-card-button {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
   }
 
   @media (max-width: 1280px) {
@@ -679,8 +617,6 @@ const services = [
 </style>
 
 <script>
-  import { gsap, ScrollTrigger } from "../utils/animations.js";
-
   (function () {
     const track = document.querySelector(
       ".services-carousel-track"
@@ -797,34 +733,5 @@ const services = [
     updateButtons();
     moveTo(visualIndex, false);
 
-    // Animación de entrada: primero el título, luego las cards.
-    if (!prefersReducedMotion) {
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: ".services-header",
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-          defaults: { ease: "power3.out" },
-        })
-        .from(".services-title-prefix", {
-          y: 50,
-          opacity: 0,
-          duration: 0.8,
-          clearProps: "transform,opacity",
-        })
-        .from(
-          ".service-card",
-          {
-            y: 60,
-            opacity: 0,
-            duration: 0.7,
-            stagger: 0.15,
-            clearProps: "transform,opacity",
-          },
-          "-=0.3"
-        );
-    }
   })();
 </script>
