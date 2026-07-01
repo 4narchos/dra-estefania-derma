@@ -215,12 +215,12 @@ const menuItems = [
   }
 
   .presentation-menu-item:nth-child(2) {
-    background-color: #2D5E46;
+    background-color: rgba(45, 94, 70, 0.55);
     color: #ffffff;
   }
 
   .presentation-menu-item:nth-child(2):hover {
-    background-color: #3a7a5a;
+    background-color: rgba(45, 94, 70, 0.85);
     color: #ffffff;
   }
 
@@ -366,25 +366,24 @@ const menuItems = [
     }
 
     .presentation-menu {
-      flex: 0 1 35%;
-      display: inline-flex;
+      flex: 0 1 auto;
+      display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
       margin: 0 auto;
-      flex-wrap: nowrap;
-      overflow-x: auto;
+      flex-wrap: wrap;
+      width: 100%;
       max-width: 100%;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-
-    .presentation-menu::-webkit-scrollbar {
-      display: none;
+      gap: 6px;
+      padding: 6px;
     }
 
     .presentation-menu-item {
-      padding: 14px 24px;
-      font-size: 15px;
+      flex: 0 1 auto;
+      min-width: 0;
+      padding: 12px 16px;
+      font-size: 14px;
+      text-align: center;
     }
   }
 
