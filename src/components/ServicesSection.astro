@@ -28,6 +28,7 @@ const services = [
       "Dermatitis por contacto",
     ],
     color: "#E8F4F8",
+    headerColor: "#5A9BB5",
     textColor: "#1F1F1F",
     image: `${base}images/clinica.png`,
   },
@@ -42,6 +43,7 @@ const services = [
       "Hirsutismo (Vello excesivo)",
     ],
     color: "#E8F5E9",
+    headerColor: "#4CAF50",
     textColor: "#1F1F1F",
     image: `${base}images/trico.png`,
   },
@@ -60,6 +62,7 @@ const services = [
       "Terapia laser",
     ],
     color: "#FFF8E7",
+    headerColor: "#C4A86B",
     textColor: "#1F1F1F",
     image: `${base}images/estetica.png`,
   },
@@ -76,6 +79,7 @@ const services = [
       "Electrocirugía",
     ],
     color: "#D8D8D8",
+    headerColor: "#757575",
     textColor: "#1F1F1F",
     image: `${base}images/cirugia.png`,
   },
@@ -86,8 +90,10 @@ const services = [
   <TopicMarquee />
   <div class="services-inner">
     <header class="services-header">
-      <h2 class="services-title">
-        <span class="services-title-prefix">Tu salud con resultados estéticos y naturales</span>
+      <h2 class="services-title is-hidden">
+        <span class="services-title-prefix">
+          Tu salud con resultados <span class="text-esteticos">estéticos</span> y <span class="text-naturales">naturales</span>
+        </span>
       </h2>
     </header>
 
@@ -137,7 +143,7 @@ const services = [
           services.map((service, index) => (
             <article
               class="service-card"
-              style={`--card-bg: ${service.color}; --card-text: ${service.textColor};`}
+              style={`--card-bg: ${service.color}; --card-header: ${service.headerColor}; --card-text: ${service.textColor};`}
             >
               <div class="service-card-header">
                 <h3 class="service-card-title">{service.category}</h3>
@@ -210,6 +216,26 @@ const services = [
 
   .services-title-prefix {
     display: block;
+  }
+
+  .services-title-prefix .text-esteticos {
+    color: #CCB775;
+  }
+
+  .services-title-prefix .text-naturales {
+    color: #4CAF50;
+  }
+
+  .services-title.is-hidden {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  .services-title.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .services-carousel-wrapper {
@@ -321,7 +347,7 @@ const services = [
     gap: 8px;
     height: 250px;
     padding: 28px 32px;
-    background: rgba(0, 0, 0, 0.28);
+    background: var(--card-header);
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     overflow: hidden;
   }
@@ -768,5 +794,37 @@ const services = [
     updateButtons();
     moveTo(visualIndex, false);
 
+  })();
+
+  (function () {
+    const title = document.querySelector(
+      ".services-title"
+    ) as HTMLElement | null;
+    if (!title) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) {
+      title.classList.remove("is-hidden");
+      title.classList.add("is-visible");
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            title.classList.remove("is-hidden");
+            title.classList.add("is-visible");
+            observer.unobserve(title);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(title);
   })();
 </script>
