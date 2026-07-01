@@ -290,70 +290,77 @@ const conditions = [
 
     .hero-collage-wrap {
       position: absolute;
-      inset: 0;
+      inset: var(--space-2);
       z-index: 1;
       padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .hero-collage {
       position: relative;
-      width: min(100vmin, 100%);
-      aspect-ratio: 1 / 1;
+      width: 100%;
+      height: 100%;
       padding: 0;
-      perspective: 800px;
     }
 
     .collage-item {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 20vmin;
-      height: 20vmin;
-      min-width: 76px;
-      min-height: 76px;
       margin: 0;
       flex: none;
       transform-origin: center center;
-      transform: translate(-50%, -50%);
       z-index: 1;
     }
 
     .collage-item--1 {
       /* Alopecia - izquierda */
+      top: 38%;
+      left: 0;
       width: 20vmin;
       height: 20vmin;
-      transform: translate(-50%, -50%) rotate(270deg) translateY(-36vmin) rotate(-270deg);
+      min-width: 76px;
+      min-height: 76px;
+      transform: translateY(-50%);
     }
 
     .collage-item--2 {
       /* Caspa - derecha */
+      top: 38%;
+      right: 0;
       width: 20vmin;
       height: 20vmin;
-      transform: translate(-50%, -50%) rotate(90deg) translateY(-36vmin) rotate(-90deg);
+      min-width: 76px;
+      min-height: 76px;
+      transform: translateY(-50%);
     }
 
     .collage-item--3 {
       /* Melasma - arriba */
+      top: 0;
+      left: 50%;
       width: 36vmin;
       height: 36vmin;
-      transform: translate(-50%, -50%) rotate(0deg) translateY(-32vmin) rotate(0deg);
+      min-width: 120px;
+      min-height: 120px;
+      transform: translateX(-50%);
     }
 
     .collage-item--4 {
       /* Acné - abajo izquierda */
+      bottom: 2%;
+      left: 18%;
       width: 29vmin;
       height: 29vmin;
-      transform: translate(-50%, -50%) rotate(210deg) translateY(-30vmin) rotate(-210deg);
+      min-width: 100px;
+      min-height: 100px;
     }
 
     .collage-item--5 {
       /* Arrugas - abajo derecha */
+      bottom: 2%;
+      right: 18%;
       width: 29vmin;
       height: 29vmin;
-      transform: translate(-50%, -50%) rotate(150deg) translateY(-30vmin) rotate(-150deg);
+      min-width: 100px;
+      min-height: 100px;
     }
 
     .collage-image {
