@@ -292,4 +292,42 @@ const reviews = [
   .reviews-source a:hover {
     text-decoration: underline;
   }
+
+  @media (max-width: 899px) {
+    .reviews {
+      height: 100dvh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-12) 0;
+    }
+
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 0 var(--space-4);
+    }
+
+    .reviews-marquee {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      width: calc(100% + (var(--space-4) * 2));
+      margin-left: calc(var(--space-4) * -1);
+      margin-right: calc(var(--space-4) * -1);
+      min-height: 0;
+    }
+
+    .reviews-track {
+      height: 100%;
+      align-items: stretch;
+      padding: 0 var(--space-4);
+    }
+
+    .reviews-source {
+      margin-top: auto;
+      padding-bottom: var(--space-4);
+    }
+  }
 </style>
