@@ -342,17 +342,17 @@ const menuItems = [
       },
     });
 
-    // 1. Title fades in at center and holds for 1s
+    // 1. Title blurs in at dead center and holds for 1s
     tl.fromTo(
       ".presentation-title",
-      { y: "-40vh", opacity: 0 },
-      { y: "-40vh", opacity: 1, duration: 0.6, ease: "power2.out" }
+      { y: "-50vh", opacity: 0, filter: "blur(10px)", scale: 1.02 },
+      { y: "-50vh", opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }
     ).to({}, { duration: 1 });
 
     // 2. Title moves to final position while doctor image zooms+fades in
     tl.fromTo(
       ".presentation-title",
-      { y: "-40vh" },
+      { y: "-50vh" },
       { y: 0, duration: 1.2, ease: "power2.out" },
       "image"
     ).fromTo(
