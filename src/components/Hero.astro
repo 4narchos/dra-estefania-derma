@@ -1,10 +1,13 @@
 ---
+import { getBaseUrl } from "../utils/baseUrl.js";
+const base = getBaseUrl();
+
 const conditions = [
-  { label: "Acné" },
-  { label: "Melasma" },
-  { label: "Caída de cabello" },
-  { label: "Caspa" },
-  { label: "Arrugas" },
+  { label: "Acné", image: `${base}images/hero-acne.png` },
+  { label: "Melasma", image: `${base}images/hero-melasma.png` },
+  { label: "Caída de cabello", image: `${base}images/hero-alopecia.jpg` },
+  { label: "Caspa", image: `${base}images/hero-caspa.png` },
+  { label: "Arrugas", image: `${base}images/hero-arrugas.jpg` },
 ];
 ---
 
@@ -20,7 +23,14 @@ const conditions = [
     <div class="hero-collage" aria-label="Condiciones dermatológicas tratadas">
       {conditions.map((condition, index) => (
         <div class={`collage-item collage-item--${index + 1}`}>
-          <div class="collage-placeholder" aria-hidden="true"></div>
+          <img
+            class="collage-image"
+            src={condition.image}
+            alt={condition.label}
+            width="200"
+            height="200"
+            loading="eager"
+          />
           <span class="collage-label">{condition.label}</span>
         </div>
       ))}
@@ -129,12 +139,12 @@ const conditions = [
     margin-top: 0;
   }
 
-  .collage-placeholder {
+  .collage-image {
     width: 200px;
-    aspect-ratio: 1 / 1;
+    height: 200px;
     border-radius: var(--radius-md);
-    border: 1px dashed rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.04);
+    object-fit: cover;
+    display: block;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
   }
 
@@ -146,8 +156,9 @@ const conditions = [
   }
 
   @media (max-width: 900px) {
-    .collage-placeholder {
+    .collage-image {
       width: 160px;
+      height: 160px;
     }
 
     .collage-item:nth-child(1),
@@ -169,14 +180,16 @@ const conditions = [
       padding-bottom: var(--space-4);
     }
 
-    .collage-placeholder {
+    .collage-image {
       width: 130px;
+      height: 130px;
     }
   }
 
   @media (max-width: 380px) {
-    .collage-placeholder {
+    .collage-image {
       width: 110px;
+      height: 110px;
     }
   }
 
