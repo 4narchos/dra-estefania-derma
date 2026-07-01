@@ -33,7 +33,11 @@ const menuItems = [
   <div class="presentation-content">
     <div class="presentation-text">
       <h2 class="presentation-title">
-        Yo te ayudo a <em>entenderla</em>
+        <span class="presentation-word">Yo</span>
+        <span class="presentation-word">te</span>
+        <span class="presentation-word">ayudo</span>
+        <span class="presentation-word">a</span>
+        <em class="presentation-word">entenderla</em>
       </h2>
     </div>
 
@@ -127,11 +131,42 @@ const menuItems = [
     color: #3A3A3A;
     letter-spacing: -0.05em;
     margin: 0;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
   }
 
   .presentation-title em {
     font-style: italic;
     color: #C4B896;
+  }
+
+  .presentation-word {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(1.02);
+  }
+
+  .presentation-title.is-visible .presentation-word {
+    animation: presentation-blur-in 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+  }
+
+  .presentation-title.is-visible .presentation-word:nth-child(1) { animation-delay: 0.1s; }
+  .presentation-title.is-visible .presentation-word:nth-child(2) { animation-delay: 0.2s; }
+  .presentation-title.is-visible .presentation-word:nth-child(3) { animation-delay: 0.3s; }
+  .presentation-title.is-visible .presentation-word:nth-child(4) { animation-delay: 0.4s; }
+  .presentation-title.is-visible .presentation-word:nth-child(5) { animation-delay: 0.5s; }
+
+  @keyframes presentation-blur-in {
+    from {
+      opacity: 0;
+      filter: blur(10px);
+      transform: scale(1.02);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: scale(1);
+    }
   }
 
   .presentation-subtitle {
@@ -310,6 +345,13 @@ const menuItems = [
     .presentation-menu-item {
       transition: none;
     }
+
+    .presentation-word {
+      animation: none !important;
+      opacity: 1;
+      filter: blur(0);
+      transform: scale(1);
+    }
   }
 </style>
 
@@ -323,6 +365,7 @@ const menuItems = [
     // Signature typewriter setup
     const nameEl = document.querySelector(".signature-name") as HTMLElement | null;
     const titleEl = document.querySelector(".signature-title") as HTMLElement | null;
+    const titleContainer = document.querySelector(".presentation-title") as HTMLElement | null;
     let chars: NodeListOf<Element> | null = null;
 
     if (nameEl && titleEl) {
@@ -342,12 +385,14 @@ const menuItems = [
       },
     });
 
-    // 1. Title blurs in at dead center and holds for 1s
-    tl.fromTo(
-      ".presentation-title",
-      { y: "-50vh", opacity: 0, filter: "blur(10px)", scale: 1.02 },
-      { y: "-50vh", opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }
-    ).to({}, { duration: 1 });
+    // 1. Title fades in at dead center and holds for 1s
+    tl.call(() => titleContainer?.classList.add("is-visible"))
+      .fromTo(
+        ".presentation-title",
+        { y: "-50vh", opacity: 0 },
+        { y: "-50vh", opacity: 1, duration: 0.6, ease: "power2.out" }
+      )
+      .to({}, { duration: 1 });
 
     // 2. Title moves to final position while doctor image zooms+fades in
     tl.fromTo(
