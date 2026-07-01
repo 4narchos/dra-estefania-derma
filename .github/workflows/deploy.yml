@@ -29,9 +29,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Prepare web-in-bio deploy
-        run: node scripts/prepare-web-in-bio.cjs
-
       - name: Build site
         run: npm run build
 
