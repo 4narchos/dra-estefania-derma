@@ -342,21 +342,25 @@ const menuItems = [
       },
     });
 
-    // 1. Title appears in center then moves to final position
-    tl.from(".presentation-title", {
-      y: "-40vh",
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-    });
+    // 1. Title fades in at center and holds for 1s
+    tl.fromTo(
+      ".presentation-title",
+      { y: "-40vh", opacity: 0 },
+      { y: "-40vh", opacity: 1, duration: 0.6, ease: "power2.out" }
+    ).to({}, { duration: 1 });
 
-    // 2. Doctor image zooms in while fading in simultaneously
-    tl.from(".presentation-visual img", {
-      scale: 0.85,
-      opacity: 0,
-      duration: 1.2,
-      ease: "power2.out",
-    }, "-=0.2");
+    // 2. Title moves to final position while doctor image zooms+fades in
+    tl.fromTo(
+      ".presentation-title",
+      { y: "-40vh" },
+      { y: 0, duration: 1.2, ease: "power2.out" },
+      "image"
+    ).fromTo(
+      ".presentation-visual img",
+      { scale: 0.85, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
+      "image"
+    );
 
     // 3. Signature and menu appear
     if (chars && titleEl) {
