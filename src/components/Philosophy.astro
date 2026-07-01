@@ -244,13 +244,17 @@ const pillars = [
     }
 
     .philosophy-header {
-      margin-bottom: var(--space-16);
+      margin-bottom: var(--space-12);
     }
 
     .philosophy-circles {
-      height: auto;
-      flex-direction: column;
-      gap: var(--space-8);
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+      height: 600px;
+      margin: 0 auto;
+      display: block;
+      overflow: visible;
     }
 
     .philosophy-connections {
@@ -258,12 +262,26 @@ const pillars = [
     }
 
     .philosophy-circle {
-      position: relative;
+      position: absolute;
+      left: 50%;
       width: 300px;
       height: 300px;
-      top: auto !important;
-      left: auto !important;
-      transform: none !important;
+      transform: translateX(-50%);
+    }
+
+    .philosophy-circle[data-index="0"] {
+      top: 0;
+      z-index: 1;
+    }
+
+    .philosophy-circle[data-index="1"] {
+      top: 150px;
+      z-index: 2;
+    }
+
+    .philosophy-circle[data-index="2"] {
+      top: 300px;
+      z-index: 3;
     }
 
     .philosophy-circle-body {
@@ -352,5 +370,38 @@ const pillars = [
       onEnter: () => vennTl.play(),
       onEnterBack: () => vennTl.play(),
     });
+  } else if (
+    !prefersReducedMotion &&
+    isMobile &&
+    circles.length === 3 &&
+    circlesContainer
+  ) {
+    // Mobile: los 3 círculos se alinean verticalmente y se acercan
+    // hasta superponerse por la mitad.
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: ".philosophy",
+        start: "top 70%",
+        toggleActions: "play none none none",
+      },
+    })
+      .fromTo(
+        circles[0],
+        { y: -150, scale: 0.9, opacity: 0.8 },
+        { y: 0, scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
+        0
+      )
+      .fromTo(
+        circles[1],
+        { y: 80, scale: 0.9, opacity: 0.8 },
+        { y: 0, scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
+        0
+      )
+      .fromTo(
+        circles[2],
+        { y: 150, scale: 0.9, opacity: 0.8 },
+        { y: 0, scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
+        0
+      );
   }
 </script>
