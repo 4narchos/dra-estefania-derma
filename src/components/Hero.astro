@@ -75,7 +75,7 @@ const conditions = [
     width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: calc(var(--header-height) + var(--space-4)) var(--space-6) 340px;
+    padding: calc(var(--header-height) + var(--space-4)) var(--space-6) 330px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -88,7 +88,7 @@ const conditions = [
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-8);
+    gap: var(--space-6);
   }
 
   .hero-title {
@@ -186,7 +186,7 @@ const conditions = [
 
   @media (min-width: 1440px) {
     .hero-stage {
-      padding-bottom: 396px;
+      padding-bottom: 376px;
     }
 
     .hero-collage {
@@ -269,18 +269,20 @@ const conditions = [
   }
 
   .mouse-btn {
+    position: relative;
+    z-index: 3;
     margin: 0 auto;
-    width: 40px;
-    height: 80px;
-    border: 3px solid rgba(245, 245, 240, 0.55);
-    border-radius: 20px;
+    width: 32px;
+    height: 64px;
+    border: 2px solid rgba(245, 245, 240, 0.55);
+    border-radius: 16px;
     display: flex;
   }
 
   .mouse-scroll {
     display: block;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     background: linear-gradient(170deg, rgba(245, 245, 240, 0.7), rgba(245, 245, 240, 0.9));
     border-radius: 50%;
     margin: auto;
@@ -290,11 +292,11 @@ const conditions = [
   @keyframes scrolling13 {
     0% {
       opacity: 0;
-      transform: translateY(-20px);
+      transform: translateY(-16px);
     }
     100% {
       opacity: 1;
-      transform: translateY(20px);
+      transform: translateY(16px);
     }
   }
 
