@@ -617,6 +617,8 @@ const services = [
 </style>
 
 <script>
+  import { gsap } from "../utils/animations.js";
+
   (function () {
     const track = document.querySelector(
       ".services-carousel-track"
@@ -733,5 +735,21 @@ const services = [
     updateButtons();
     moveTo(visualIndex, false);
 
+    // Entrance animation: cards appear from left to right
+    if (!prefersReducedMotion) {
+      gsap.from(".service-card", {
+        scrollTrigger: {
+          trigger: ".services-carousel",
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+        x: -60,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: "power2.out",
+        clearProps: "all",
+      });
+    }
   })();
 </script>
