@@ -266,16 +266,22 @@ const conditions = [
   @media (max-width: 768px) {
     .hero {
       min-height: 100dvh;
+      position: relative;
     }
 
     .hero-stage {
-      flex: 0 0 auto;
-      padding-bottom: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      width: 100%;
+      padding: 0 var(--space-4);
     }
 
     .hero-content {
-      padding-top: var(--space-2);
-      gap: var(--space-3);
+      padding-top: 0;
+      gap: var(--space-2);
     }
 
     .mouse-btn {
@@ -283,53 +289,70 @@ const conditions = [
     }
 
     .hero-collage-wrap {
-      position: relative;
-      bottom: auto;
-      left: auto;
-      flex: 1 1 auto;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      padding-bottom: var(--space-4);
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 0;
     }
 
     .hero-collage {
-      flex-wrap: nowrap;
-      gap: 0;
-      padding: var(--space-2) 0 0;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding: 0;
       perspective: 800px;
     }
 
     .collage-item {
-      margin: 0 -2%;
-      flex: 0 0 auto;
-      transform-origin: bottom center;
+      position: absolute;
+      margin: 0;
+      flex: none;
+      transform-origin: center center;
     }
 
-    .collage-item--1,
-    .collage-item--5 {
-      width: 16%;
-      min-width: 70px;
+    .collage-item--1 {
+      top: 4%;
+      left: 2%;
+      width: 22%;
+      min-width: 80px;
       z-index: 1;
-      transform: scale(0.72);
-      margin-bottom: 6%;
+      transform: scale(0.82);
     }
 
-    .collage-item--2,
-    .collage-item--4 {
-      width: 20%;
-      min-width: 90px;
+    .collage-item--2 {
+      top: 2%;
+      right: 4%;
+      width: 26%;
+      min-width: 100px;
       z-index: 3;
-      transform: scale(0.88);
-      margin-bottom: 3%;
+      transform: scale(0.95);
     }
 
     .collage-item--3 {
-      width: 24%;
-      min-width: 110px;
-      z-index: 5;
-      transform: scale(1.05);
-      margin-bottom: 0;
+      top: 48%;
+      left: 50%;
+      width: 32%;
+      min-width: 130px;
+      z-index: 2;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .collage-item--4 {
+      bottom: 18%;
+      left: 4%;
+      width: 26%;
+      min-width: 100px;
+      z-index: 3;
+      transform: scale(0.95);
+    }
+
+    .collage-item--5 {
+      bottom: 14%;
+      right: 2%;
+      width: 22%;
+      min-width: 80px;
+      z-index: 1;
+      transform: scale(0.82);
     }
 
     .collage-image {
