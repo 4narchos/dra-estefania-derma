@@ -556,7 +556,7 @@ const services = [
     }
 
     .service-card-description {
-      font-size: 14px;
+      font-size: 16px;
       line-height: 1.5;
     }
 
@@ -660,7 +660,7 @@ const services = [
     }
 
     .service-card-description {
-      font-size: 12.5px;
+      font-size: 14px;
       line-height: 1.45;
     }
 
@@ -826,6 +826,37 @@ const services = [
     if (!isTouch) return;
 
     cards.forEach((card) => {
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      card.addEventListener(
+        "touchstart",
+        (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+          touchStartY = e.changedTouches[0].screenY;
+        },
+        { passive: true }
+      );
+
+      card.addEventListener(
+        "touchend",
+        (e) => {
+          const touchEndX = e.changedTouches[0].screenX;
+          const touchEndY = e.changedTouches[0].screenY;
+          const diffX = Math.abs(touchEndX - touchStartX);
+          const diffY = Math.abs(touchEndY - touchStartY);
+
+          // Solo reaccionar a un tap limpio, no a un swipe
+          if (diffX < 10 && diffY < 10) {
+            const isActive = card.classList.contains("is-active");
+            cards.forEach((c) => c.classList.remove("is-active"));
+            if (!isActive) card.classList.add("is-active");
+          }
+        },
+        { passive: true }
+      );
+
+      // Fallback para clicks no táctiles (laptops pequeñas)
       card.addEventListener("click", () => {
         const isActive = card.classList.contains("is-active");
         cards.forEach((c) => c.classList.remove("is-active"));
