@@ -736,18 +736,18 @@ const services = [
     updateButtons();
     moveTo(visualIndex, false);
 
-    // Entrance animation: cards appear from left to right
+    // Entrance animation: cards fade in one by one from left to right
     if (!prefersReducedMotion) {
       gsap.from(".service-card", {
         scrollTrigger: {
-          trigger: ".services-carousel",
-          start: "top 85%",
+          trigger: ".services",
+          start: "top 80%",
           toggleActions: "play none none reverse",
         },
-        x: -60,
+        x: -30,
         opacity: 0,
-        duration: 0.7,
-        stagger: 0.15,
+        duration: 0.6,
+        stagger: 0.18,
         ease: "power2.out",
       });
     }
