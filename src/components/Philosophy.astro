@@ -370,38 +370,5 @@ const pillars = [
       onEnter: () => vennTl.play(),
       onEnterBack: () => vennTl.play(),
     });
-  } else if (
-    !prefersReducedMotion &&
-    isMobile &&
-    circles.length === 3 &&
-    circlesContainer
-  ) {
-    // Mobile: los 3 círculos se alinean verticalmente y se acercan
-    // hasta superponerse por la mitad.
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: ".philosophy",
-        start: "top 70%",
-        toggleActions: "play none none none",
-      },
-    })
-      .fromTo(
-        circles[0],
-        { y: -150, scale: 0.9, opacity: 0.8 },
-        { y: 0, scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
-        0
-      )
-      .fromTo(
-        circles[1],
-        { y: 80, scale: 0.9, opacity: 0.8 },
-        { y: 0, scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
-        0
-      )
-      .fromTo(
-        circles[2],
-        { y: 150, scale: 0.9, opacity: 0.8 },
-        { y: 0, scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
-        0
-      );
   }
 </script>
