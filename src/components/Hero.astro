@@ -6,8 +6,8 @@ const conditions = [
   { label: "Caspa", image: `${base}images/hero-caspa.jpg?v=1` },
   { label: "Acné", image: `${base}images/hero-acne.jpg?v=1` },
   { label: "Melasma", image: `${base}images/hero-melasma.jpg?v=1` },
-  { label: "Caída de cabello", image: `${base}images/hero-alopecia.jpg?v=1` },
   { label: "Arrugas", image: `${base}images/hero-arrugas.jpg?v=1` },
+  { label: "Caída de cabello", image: `${base}images/hero-alopecia.jpg?v=1` },
 ];
 ---
 
@@ -265,34 +265,52 @@ const conditions = [
 
   @media (max-width: 768px) {
     .hero-stage {
-      padding-bottom: calc(var(--space-8) + 40px);
+      padding-bottom: var(--space-6);
     }
 
     .hero-collage-wrap {
       position: relative;
       bottom: auto;
       left: auto;
-      padding-bottom: 0;
+      padding-bottom: var(--space-8);
     }
 
     .hero-collage {
-      flex-wrap: wrap;
-      gap: var(--space-4);
-      padding: var(--space-8) var(--space-6) var(--space-6);
+      flex-wrap: nowrap;
+      gap: 0;
+      padding: var(--space-4) var(--space-4) var(--space-6);
+      perspective: 800px;
     }
 
     .collage-item {
-      margin: 0;
-      flex: 1 1 calc(33.333% - var(--space-4) * 2 / 3);
-      transform: none;
-      z-index: 1;
+      margin: 0 -2%;
+      flex: 0 0 auto;
+      transform-origin: bottom center;
     }
 
     .collage-item--1,
-    .collage-item--2,
-    .collage-item--3,
-    .collage-item--4,
     .collage-item--5 {
+      width: 16%;
+      min-width: 70px;
+      z-index: 1;
+      transform: scale(0.72);
+      margin-bottom: 6%;
+    }
+
+    .collage-item--2,
+    .collage-item--4 {
+      width: 20%;
+      min-width: 90px;
+      z-index: 3;
+      transform: scale(0.88);
+      margin-bottom: 3%;
+    }
+
+    .collage-item--3 {
+      width: 24%;
+      min-width: 110px;
+      z-index: 5;
+      transform: scale(1.05);
       margin-bottom: 0;
     }
 
@@ -300,6 +318,7 @@ const conditions = [
       width: 100%;
       height: auto;
       aspect-ratio: 1 / 1;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     }
   }
 
