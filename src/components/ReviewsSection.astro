@@ -5,7 +5,7 @@ import StarIcon from "./StarIcon.astro";
 const reviews = [
   {
     avatar: "C",
-    author: "Claudia Algalán",
+    author: "Claudia A.",
     text: "La atención de la Dra. Estefanía fue excelente de principio a fin. Es muy precisa y asertiva al momento de explicar el diagnóstico y tratamiento a seguir, así como para aclarar dudas.",
     date: "2026-06-05",
     dateLabel: "5 de junio de 2026",
@@ -13,49 +13,49 @@ const reviews = [
   },
   {
     avatar: "I",
-    author: "Iriani Castillo",
+    author: "Iriani C.",
     text: "Muy paciente, explicación con detalle, detenimiento en la revisión",
     date: "2026-05-20",
     dateLabel: "20 de mayo de 2026",
   },
   {
     avatar: "M",
-    author: "Maricela Sosa",
+    author: "Maricela S.",
     text: "Una persona muy empática y amable, tiene mucho tacto a la hora de explicar.",
     date: "2026-05-20",
     dateLabel: "20 de mayo de 2026",
   },
   {
     avatar: "D",
-    author: "Diego Rodriguez Perez",
+    author: "Diego R.",
     text: "Nos explicó muy bien el problema que había y fue muy amable.",
     date: "2026-05-13",
     dateLabel: "13 de mayo de 2026",
   },
   {
     avatar: "N",
-    author: "Nazly González",
+    author: "Nazly G.",
     text: "Excelente atención, escucha las necesidades de cada paciente, explica cada parte de la consulta para dejar todo claro de manera amable y profesional.",
     date: "2026-05-08",
     dateLabel: "8 de mayo de 2026",
   },
   {
     avatar: "A",
-    author: "Angel Chin",
+    author: "Angel C.",
     text: "Todo excelente, atención personalizada y directa, carismática y empática.",
     date: "2026-05-08",
     dateLabel: "8 de mayo de 2026",
   },
   {
     avatar: "M",
-    author: "Mauri Cruz",
+    author: "Mauri C.",
     text: "Increíble doctora, muy comprensible y excelente explicación.",
     date: "2026-05-06",
     dateLabel: "6 de mayo de 2026",
   },
   {
     avatar: "F",
-    author: "FS",
+    author: "Fernando S.",
     text: "Excelente médico, desde el inicio hace todo muy ameno, da una explicación detallada del tratamiento que utilizará y muestra el porqué de ello. Sin duda me hizo sentir muy cómodo y sobre todo seguro para continuar mi tratamiento con ella.",
     date: "2026-05-05",
     dateLabel: "5 de mayo de 2026",
@@ -79,7 +79,7 @@ const reviews = [
               <span class="reviews-avatar">{review.avatar}</span>
               <div class="reviews-item-meta">
                 <h3 class="reviews-author">{review.author}</h3>
-                <span class="reviews-verified">Cita verificada</span>
+
               </div>
               <div class="reviews-item-stars" aria-label="5 estrellas">
                 <StarIcon />
@@ -102,7 +102,7 @@ const reviews = [
               <span class="reviews-avatar">{review.avatar}</span>
               <div class="reviews-item-meta">
                 <h3 class="reviews-author">{review.author}</h3>
-                <span class="reviews-verified">Cita verificada</span>
+
               </div>
               <div class="reviews-item-stars" aria-label="5 estrellas">
                 <StarIcon />
@@ -337,8 +337,16 @@ const reviews = [
 
     .reviews-text {
       flex: 1 1 auto;
-      font-size: var(--text-sm);
+      font-size: var(--text-base);
       overflow-y: auto;
+    }
+
+    .reviews-author {
+      font-size: var(--text-base);
+    }
+
+    .reviews-item-footer {
+      font-size: var(--text-sm);
     }
 
     .reviews-source {
