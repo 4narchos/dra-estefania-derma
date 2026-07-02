@@ -126,6 +126,8 @@ const faqItems = [
         openItem(item);
       }
     });
+
+    item.addEventListener("mouseenter", () => openItem(item));
   });
 
   const ctaWrapper = document.querySelector(".faqs-cta-wrapper");
