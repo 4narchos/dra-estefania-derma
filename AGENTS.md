@@ -1,5 +1,15 @@
 # Agent Notes — Dra. Estefanía Dermatología
 
+## Deploy workflow
+
+After making any code changes that affect the site, always:
+
+1. Run `npm run build` and fix any errors before committing.
+2. Stage, commit, and push to `main`.
+3. The repository deploys automatically to GitHub Pages via `.github/workflows/deploy.yml` on every push to `main`.
+
+Do not leave changes uncommitted or unpushed unless the user explicitly asks you to stop.
+
 ## Reusable components and data (read this first)
 
 This project uses a single source of truth for contact info and reusable UI elements.
