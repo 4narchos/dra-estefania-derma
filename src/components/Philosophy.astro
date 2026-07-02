@@ -370,8 +370,9 @@ const pillars = [
     gsap.set(words, { opacity: 1, filter: "blur(0px)", scale: 1 });
     gsap.set(circles, { opacity: 1, scale: 1 });
   } else {
-    // Estado inicial del título
+    // Estado inicial del título y círculos
     gsap.set(words, { opacity: 0, filter: "blur(10px)", scale: 1.02 });
+    gsap.set(circles, { opacity: 0, scale: 0.8 });
 
   // Timeline de entrada del título y círculos
   const entranceTl = gsap.timeline({ paused: true });
