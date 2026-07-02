@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ServicesSection from "../components/ServicesSection.astro";
-import ContactCTA from "../components/ContactCTA.astro";
 
 const title = "Servicios Dermatológicos | Dra. Estefanía";
 const description = "Tratamientos dermatológicos personalizados en Mérida, Yucatán. Acné, melasma, rejuvenecimiento facial, Botox, peeling químico, Hydrafacial, depilación láser y dermatoscopía.";
@@ -9,36 +8,4 @@ const description = "Tratamientos dermatológicos personalizados en Mérida, Yuc
 
 <Layout title={title} description={description} pageSchema="services">
   <ServicesSection />
-
-  <section class="services-contact-cta">
-    <div class="container">
-      <ContactCTA />
-    </div>
-  </section>
 </Layout>
-
-<style>
-  .services-contact-cta {
-    padding: var(--space-20) 0;
-    background: var(--color-surface);
-    border-top: 1px solid var(--color-border);
-  }
-
-  .container {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 var(--space-6);
-    display: flex;
-    justify-content: center;
-  }
-
-  @media (max-width: 767px) {
-    .services-contact-cta {
-      padding: var(--space-12) 0;
-    }
-
-    .container {
-      padding: 0 var(--space-4);
-    }
-  }
-</style>
