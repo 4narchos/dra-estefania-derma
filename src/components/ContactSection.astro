@@ -8,9 +8,9 @@ const mapsUrl = "https://maps.app.goo.gl/aGnKcnuMojufXUo38";
 const whatsappUrl = `${whatsappBaseUrl}&utm_source=web&utm_medium=contact_section&utm_campaign=agendar`;
 
 const menuItems = [
-  { label: "Ver más ubicaciones", href: `${base}ubicaciones` },
-  { label: "Enviar un mensaje", href: whatsappUrl, external: true },
-  { label: "Preguntas frecuentes", href: `${base}faqs` },
+  { label: "Más ubicaciones", href: `${base}ubicaciones` },
+  { label: "Enviar mensaje", href: whatsappUrl, external: true },
+  { label: "Preguntas", href: `${base}faqs` },
 ];
 ---
 
@@ -414,9 +414,9 @@ const menuItems = [
         "title"
         "card"
         "menu";
-      gap: var(--space-4);
+      gap: var(--space-3);
       min-height: 0;
-      padding: var(--space-5) var(--space-4) var(--space-6);
+      padding: var(--space-5) var(--space-4) var(--space-5);
     }
 
     .contact-visual {
@@ -444,6 +444,8 @@ const menuItems = [
       width: 100%;
       min-width: 0;
       padding: 0;
+      display: flex;
+      justify-content: center;
     }
 
     .contact-content-bottom {
@@ -456,7 +458,7 @@ const menuItems = [
     }
 
     .cta-card {
-      width: 100%;
+      width: min(100%, 360px);
       max-width: 100%;
       margin: 0;
       padding: 1.25rem;
