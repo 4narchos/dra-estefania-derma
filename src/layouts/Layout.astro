@@ -6,6 +6,14 @@ import ShareSticky from "../components/ShareSticky.astro";
 import { faqs } from "../data/faq.js";
 import { services } from "../data/services.js";
 import { socialLinks } from "../data/socialLinks.js";
+import {
+  numberMain,
+  mainAddress,
+  emailMain,
+  doctoraliaUrl,
+  googleProfile,
+  mapsLinkMain,
+} from "../data/site.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
 
 interface Props {
@@ -56,13 +64,13 @@ const physicianSchema = {
   "medicalSpecialty": "Dermatology",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "C. 20 No. 251, Calle 10 15-local 9, Morelos Oriente",
+    "streetAddress": mainAddress,
     "addressLocality": "Mérida",
     "addressRegion": "Yucatán",
     "postalCode": "97130",
     "addressCountry": "MX"
   },
-  "telephone": "+52-999-221-3021",
+  "telephone": `+52-${numberMain.replace(/\s/g, "")}`,
   "url": siteUrl,
   "image": `${siteUrl}/images/dra-estefania.jpg`,
   "description": description,
@@ -76,7 +84,8 @@ const physicianSchema = {
   ],
   "knowsLanguage": ["es", "en"],
   "sameAs": [
-    "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan",
+    doctoraliaUrl,
+    googleProfile,
     ...socialLinks.filter((link) => link.active).map((link) => link.url)
   ],
   "alumniOf": [
@@ -109,11 +118,11 @@ const localBusinessSchema = {
   "name": "Evoke Aging Journey & Dermatology",
   "description": "Consultorio de dermatología en Mérida, Yucatán.",
   "url": siteUrl,
-  "telephone": "+52-999-221-3021",
+  "telephone": `+52-${numberMain.replace(/\s/g, "")}`,
   "image": `${siteUrl}/images/dra-estefania.jpg`,
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "C. 20 No. 251, Calle 10 15-local 9, Morelos Oriente",
+    "streetAddress": mainAddress,
     "addressLocality": "Mérida",
     "addressRegion": "Yucatán",
     "postalCode": "97130",

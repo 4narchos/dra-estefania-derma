@@ -1,20 +1,29 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import MapWidget from "../components/MapWidget.astro";
-import { whatsappBaseUrl } from "../data/links.js";
+import DoctoraliaCalendarWidget from "../components/DoctoraliaCalendarWidget.astro";
+import QuickSocials from "../components/QuickSocials.astro";
+import LocationWidgetMain from "../components/LocationWidgetMain.astro";
+import {
+  getWhatsAppUrl,
+  getTelUrl,
+  mapsLinkMain,
+  googleProfile,
+  emailMain,
+  doctoraliaUrl,
+  credentialUrl,
+  numberMain,
+  mainAddress,
+} from "../data/site.js";
 import { locations } from "../data/locations.js";
 import { socialLinks } from "../data/socialLinks.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
 
 const base = getBaseUrl();
 const mainLocation = locations[0];
-const googleMapsUrl = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
-const googleMapsSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8098.894030569736!2d-89.59418694315481!3d21.020613550273655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f56779bac8f87d1%3A0x2bc4da0bb4d62d7c!2sDra.%20Estefania%20Borges%20Dermat%C3%B3loga!5e0!3m2!1ses-419!2smx!4v1781652609779!5m2!1ses-419!2smx";
 const title = "Dermatóloga en Mérida · Tu piel te habla, y yo te ayudo a entenderla ✨";
 const description = "Enfermedades de la piel, el pelo y las uñas, dermatología estética y cirugía dermatológica menor";
 
-const whatsappUrl = `${whatsappBaseUrl}&utm_source=web&utm_medium=contacto_page&utm_campaign=agendar`;
-
+const whatsappUrl = getWhatsAppUrl({ medium: "contacto_page" });
 const instagramLink = socialLinks.find((s) => s.icon === "instagram");
 ---
 
@@ -36,7 +45,7 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
                 />
               </a>
               <a
-                href="https://www.consejomexicanodermatologia.org.mx/miembros/dermatologia/item/dra-mariana-estefania-garcia-borges?category_id=23"
+                href={credentialUrl}
                 class="contact-avatar-badge"
                 aria-label="Verificar"
                 title="Verificar"
@@ -52,7 +61,7 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
 
             <div class="contact-info">
               <a
-                href="https://share.google/HfPkNGvUKMkqxHdiu"
+                href={googleProfile}
                 class="contact-name"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -63,48 +72,16 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
                 </svg>
               </a>
 
-              <div class="contact-handle-tooltip">
-                <button
-                  type="button"
-                  class="contact-handle"
-                  aria-label="Ver redes sociales"
-                  aria-expanded="false"
-                >
-                  <svg class="contact-handle-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <title>Link icon</title>
-                    <path d="m9.726 5.123 1.228-1.228a6.47 6.47 0 0 1 9.15 9.152l-1.227 1.227m-4.603 4.603-1.228 1.228a6.47 6.47 0 0 1-9.15-9.152l1.227-1.227"/>
-                    <line x1="8.471" x2="15.529" y1="15.529" y2="8.471"/>
-                  </svg>
-                  <span>@dra.estefaniaderma</span>
-                </button>
-                <div class="contact-handle-icons">
-                  {socialLinks.map((social) => (
-                    <a
-                      href={social.url}
-                      class={`contact-handle-icon contact-handle-icon--${social.icon}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={social.name}
-                      title={social.name}
-                    >
-                      {social.icon === "instagram" && (
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                      )}
-                      {social.icon === "facebook" && (
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                      )}
-                      {social.icon === "tiktok" && (
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-                      )}
-                    </a>
-                  ))}
-                </div>
-              </div>
+              <QuickSocials handle="@dra.estefaniaderma" socials={socialLinks} />
 
               <button
                 type="button"
                 class="contact-add-button"
-                onclick="downloadVCard()"
+                data-email={emailMain}
+                data-phone={numberMain}
+                data-doctoralia={doctoraliaUrl}
+                data-instagram={instagramLink?.url || "https://instagram.com/dra.estefaniaderma"}
+                onclick="downloadVCard(this)"
                 aria-label="Agregar contacto"
                 title="Agregar contacto"
               >
@@ -137,8 +114,8 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
             </svg>
           </button>
           <div class="contact-location-panel">
-            <a href={googleMapsUrl} class="contact-location-address" target="_blank" rel="noopener noreferrer">
-              <span>{mainLocation.address}</span>
+            <a href={mapsLinkMain} class="contact-location-address" target="_blank" rel="noopener noreferrer">
+              <span>{mainAddress}</span>
               <svg class="contact-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
                 <polyline points="15,3 21,3 21,9"/>
@@ -146,7 +123,7 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
               </svg>
             </a>
             <div class="contact-location-map">
-              <MapWidget src={googleMapsSrc} title="Ubicación del consultorio" compact />
+              <LocationWidgetMain compact />
             </div>
           </div>
         </div>
@@ -250,18 +227,7 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
             </svg>
           </button>
           <div class="doctoralia-modal-body">
-            <a
-              id="zl-url"
-              class="zl-url"
-              href="https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan"
-              rel="nofollow"
-              data-zlw-doctor="mariana-estefania-garcia-borges-2"
-              data-zlw-type="big_with_calendar"
-              data-zlw-opinion="false"
-              data-zlw-hide-branding="true"
-              data-zlw-saas-only="true"
-              data-zlw-a11y-title="Widget de reserva de citas médicas"
-            ></a>
+            <DoctoraliaCalendarWidget mode="modal" containerClass="doctoralia-modal-body" />
           </div>
         </div>
       </div>
@@ -684,113 +650,6 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
     .contact-motto {
       font-size: 0.75rem;
     }
-  }
-
-  .contact-handle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-1);
-    width: 100%;
-    padding: 2px var(--space-1);
-    margin: 0 calc(var(--space-1) * -1);
-    font-size: var(--text-sm);
-    font-family: inherit;
-    font-weight: var(--weight-medium);
-    color: #1D5A8F;
-    text-decoration: none;
-    background: transparent;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: color var(--transition-fast), background var(--transition-fast);
-  }
-
-  .contact-handle:hover,
-  .contact-handle-tooltip:hover .contact-handle {
-    color: #14496F;
-  }
-
-  .contact-handle-chevron {
-    flex-shrink: 0;
-    width: 1em;
-    height: 1em;
-    color: currentColor;
-    transition: transform var(--transition-fast);
-  }
-
-  .contact-handle-tooltip:hover .contact-handle-chevron,
-  .contact-handle-tooltip.is-open .contact-handle-chevron {
-    transform: scale(1.15) translateY(-1px);
-  }
-
-  .contact-handle-tooltip {
-    position: relative;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .contact-handle-icons {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    width: 100%;
-    min-width: max-content;
-    transform: scale(0.85);
-    transform-origin: top center;
-    display: flex;
-    justify-content: center;
-    gap: var(--space-2);
-    padding: 6px var(--space-2) var(--space-2);
-    background: #fff;
-    border-radius: 999px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
-    z-index: 10;
-  }
-
-  .contact-handle-tooltip:hover .contact-handle-icons,
-  .contact-handle-tooltip.is-open .contact-handle-icons {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-    pointer-events: auto;
-  }
-
-  .contact-handle-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #f5f5f5;
-    color: #333;
-    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
-  }
-
-  .contact-handle-icon:hover {
-    transform: translateY(-3px) scale(1.1);
-  }
-
-  .contact-handle-icon--instagram:hover {
-    background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    color: #fff;
-  }
-
-  .contact-handle-icon--facebook:hover {
-    background: #1877f2;
-    color: #fff;
-  }
-
-  .contact-handle-icon--tiktok:hover {
-    background: #000;
-    color: #fff;
   }
 
   .contact-external-icon {
@@ -1284,16 +1143,6 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
     min-height: 200px;
   }
 
-  .doctoralia-modal-body .zl-url:empty::before {
-    content: "Cargando calendario…";
-    color: var(--color-text-secondary);
-    font-size: var(--text-sm);
-  }
-
-  .doctoralia-modal-body .zl-url {
-    text-decoration: none;
-  }
-
   .intro-modal {
     position: fixed;
     inset: 0;
@@ -1450,7 +1299,6 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
       font-size: 1.125rem;
     }
 
-    .contact-handle,
     .contact-bio,
     .contact-motto {
       font-size: var(--text-base);
@@ -1623,39 +1471,13 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
   })();
 </script>
 
-<script>
-  (function () {
-    const tooltip = document.querySelector(".contact-handle-tooltip");
-    const handle = tooltip?.querySelector(".contact-handle");
-    if (!tooltip || !handle) return;
-
-    const open = () => {
-      tooltip.classList.add("is-open");
-      handle.setAttribute("aria-expanded", "true");
-    };
-
-    const close = () => {
-      tooltip.classList.remove("is-open");
-      handle.setAttribute("aria-expanded", "false");
-    };
-
-    handle.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (tooltip.classList.contains("is-open")) {
-        close();
-      } else {
-        open();
-      }
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!tooltip.contains(e.target)) close();
-    });
-  })();
-</script>
-
 <script is:inline>
-  function downloadVCard() {
+  function downloadVCard(button) {
+    const email = button?.dataset.email || "estefaniaborges.derma@gmail.com";
+    const phone = button?.dataset.phone || "999 221 3021";
+    const doctoralia = button?.dataset.doctoralia || "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan";
+    const instagram = button?.dataset.instagram || "https://instagram.com/dra.estefaniaderma";
+
     const vCard = [
       "BEGIN:VCARD",
       "VERSION:3.0",
@@ -1663,14 +1485,14 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
       "FN:Dra. Mariana Estefanía García Borges",
       "ORG:Dermatóloga en Yucatán",
       "TITLE:Dermatóloga",
-      "EMAIL;TYPE=WORK:estefaniaborges.derma@gmail.com",
-      "TEL;TYPE=CELL:+52 999 221 3021",
+      `EMAIL;TYPE=WORK:${email}`,
+      `TEL;TYPE=CELL:+52 ${phone}`,
       "URL:https://estefaniaderma.mx/",
-      "URL;TYPE=Instagram:https://instagram.com/dra.estefaniaderma",
-      "URL;TYPE=Doctoralia:https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan",
-      "X-SOCIALPROFILE;TYPE=instagram:https://instagram.com/dra.estefaniaderma",
-      "X-SOCIALPROFILE;TYPE=doctoralia:https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan",
-      "NOTE:Dermatóloga en Yucatán, México. Instagram: @dra.estefaniaderma, Doctoralia: https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan",
+      `URL;TYPE=Instagram:${instagram}`,
+      `URL;TYPE=Doctoralia:${doctoralia}`,
+      `X-SOCIALPROFILE;TYPE=instagram:${instagram}`,
+      `X-SOCIALPROFILE;TYPE=doctoralia:${doctoralia}`,
+      `NOTE:Dermatóloga en Yucatán, México. Instagram: @dra.estefaniaderma, Doctoralia: ${doctoralia}`,
       "END:VCARD"
     ].join("\r\n");
 

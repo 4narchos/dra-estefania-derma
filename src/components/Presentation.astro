@@ -1,14 +1,13 @@
 ---
 import { getBaseUrl } from "../utils/baseUrl.js";
-import { whatsappBaseUrl } from "../data/links.js";
+import { getWhatsAppUrl, doctoraliaUrl } from "../data/site.js";
+import PillMenu from "./PillMenu.astro";
 const base = getBaseUrl();
-
-const whatsappUrl = `${whatsappBaseUrl}&utm_source=web&utm_medium=presentation_button&utm_campaign=inicio`;
 
 const menuItems = [
   { label: "Ubicaciones", href: `${base}contacto` },
-  { label: "Reservar cita", href: "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan", external: true },
-  { label: "Enviar mensaje", href: whatsappUrl, external: true },
+  { label: "Reservar cita", href: doctoraliaUrl, external: true, highlighted: true },
+  { label: "Enviar mensaje", href: getWhatsAppUrl({ medium: "presentation_button", campaign: "inicio" }), external: true },
 ];
 ---
 
@@ -41,18 +40,7 @@ const menuItems = [
       </h2>
     </div>
 
-    <nav class="presentation-menu" aria-label="Acciones principales">
-      {menuItems.map((item) => (
-        <a
-          href={item.href}
-          class="presentation-menu-item"
-          target={item.external ? "_blank" : undefined}
-          rel={item.external ? "noopener noreferrer" : undefined}
-        >
-          {item.label}
-        </a>
-      ))}
-    </nav>
+    <PillMenu variant="presentation" items={menuItems} ariaLabel="Acciones principales" />
   </div>
 </section>
 
@@ -180,48 +168,6 @@ const menuItems = [
     font-size: var(--text-base);
     color: rgba(245, 245, 240, 0.65);
     margin: 0;
-  }
-
-  /* Affinity-style pill tabs */
-  .presentation-menu {
-    display: inline-flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-    background: rgba(0, 0, 0, 0.45);
-    border: 2px solid #ACA284;
-    border-radius: 9999px;
-    padding: 6px;
-    backdrop-filter: blur(8px);
-  }
-
-  .presentation-menu-item {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px 32px;
-    border-radius: 9999px;
-    font-size: 16px;
-    font-weight: 500;
-    color: #ffffff;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: background-color 150ms ease, color 150ms ease;
-  }
-
-  .presentation-menu-item:hover {
-    background-color: #ffffff;
-    color: #000000;
-  }
-
-  .presentation-menu-item:nth-child(2) {
-    background-color: rgba(45, 94, 70, 0.55);
-    color: #ffffff;
-  }
-
-  .presentation-menu-item:nth-child(2):hover {
-    background-color: rgba(45, 94, 70, 0.85);
-    color: #ffffff;
   }
 
   /* Signature on the right side */
@@ -365,34 +311,9 @@ const menuItems = [
       font-size: clamp(2rem, 10vw, 3.5rem);
     }
 
-    .presentation-menu {
-      flex: 0 1 auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto;
-      flex-wrap: nowrap;
-      width: 100%;
-      max-width: 100%;
-      gap: 4px;
-      padding: 4px;
-      overflow: visible;
-    }
-
-    .presentation-menu-item {
-      flex: 1 1 0;
-      min-width: 0;
-      padding: 12px clamp(6px, 2.5vw, 14px);
-      font-size: clamp(11px, 3.2vw, 14px);
-      text-align: center;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .presentation-menu-item {
-      transition: none;
-    }
-
     .presentation-word {
       animation: none !important;
       opacity: 1;
@@ -466,7 +387,7 @@ const menuItems = [
         );
       }
 
-      tl.from(".presentation-menu", {
+      tl.from(".pill-menu", {
         y: 30,
         opacity: 0,
         duration: 0.8,
@@ -511,7 +432,7 @@ const menuItems = [
         );
       }
 
-      tl.from(".presentation-menu", {
+      tl.from(".pill-menu", {
         y: 30,
         opacity: 0,
         duration: 0.8,

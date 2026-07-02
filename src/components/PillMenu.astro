@@ -1,0 +1,136 @@
+---
+interface MenuItem {
+  label: string;
+  href: string;
+  external?: boolean;
+  highlighted?: boolean;
+}
+
+interface Props {
+  items: MenuItem[];
+  variant?: "presentation" | "contact";
+  ariaLabel?: string;
+}
+
+const {
+  items,
+  variant = "contact",
+  ariaLabel = "Acciones",
+} = Astro.props;
+---
+
+<nav class:list={["pill-menu", `pill-menu--${variant}`]} aria-label={ariaLabel}>
+  {items.map((item) => (
+    <a
+      href={item.href}
+      class:list={["pill-menu-item", item.highlighted && "pill-menu-item--highlighted"]}
+      target={item.external ? "_blank" : undefined}
+      rel={item.external ? "noopener noreferrer" : undefined}
+    >
+      {item.label}
+    </a>
+  ))}
+</nav>
+
+<style>
+  .pill-menu {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 9999px;
+    backdrop-filter: blur(8px);
+    max-width: 100%;
+  }
+
+  .pill-menu--presentation {
+    flex-wrap: wrap;
+    gap: 6px;
+    border: 2px solid #ACA284;
+    padding: 6px;
+  }
+
+  .pill-menu--contact {
+    flex-wrap: nowrap;
+    gap: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 4px;
+  }
+
+  .pill-menu-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+
+  .pill-menu--presentation .pill-menu-item {
+    padding: 16px 32px;
+    font-size: 16px;
+  }
+
+  .pill-menu--contact .pill-menu-item {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+
+  .pill-menu-item:hover {
+    background-color: #ffffff;
+    color: #000000;
+  }
+
+  .pill-menu-item--highlighted {
+    background-color: rgba(45, 94, 70, 0.55);
+    color: #ffffff;
+  }
+
+  .pill-menu-item--highlighted:hover {
+    background-color: rgba(45, 94, 70, 0.85);
+    color: #ffffff;
+  }
+
+  @media (max-width: 640px) {
+    .pill-menu {
+      flex-wrap: nowrap;
+      width: 100%;
+      max-width: 100%;
+      gap: 4px;
+      padding: 4px;
+      overflow: visible;
+    }
+
+    .pill-menu--contact {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .pill-menu--contact::-webkit-scrollbar {
+      display: none;
+    }
+
+    .pill-menu-item {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 12px clamp(6px, 2.5vw, 14px);
+      font-size: clamp(11px, 3.2vw, 14px);
+      text-align: center;
+    }
+
+    .pill-menu--contact .pill-menu-item {
+      padding: 10px clamp(6px, 2vw, 12px);
+      font-size: clamp(10px, 3vw, 13px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pill-menu-item {
+      transition: none;
+    }
+  }
+</style>

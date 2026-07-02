@@ -1,6 +1,7 @@
 ---
 import SectionHeader from "./SectionHeader.astro";
 import StarIcon from "./StarIcon.astro";
+import { doctoraliaUrl } from "../data/site.js";
 
 const reviews = [
   {
@@ -131,7 +132,7 @@ const reviews = [
 
     <p class="reviews-source">
       <a
-        href="https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan"
+        href={doctoraliaUrl}
         target="_blank"
         rel="noopener noreferrer"
       >

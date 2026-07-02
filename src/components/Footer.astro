@@ -1,6 +1,6 @@
 ---
-import MapWidget from "./MapWidget.astro";
-import { whatsappBaseUrl } from "../data/links.js";
+import LocationWidgetMain from "./LocationWidgetMain.astro";
+import { getWhatsAppUrl, credentialUrl, mapsLinkMain } from "../data/site.js";
 import { locations } from "../data/locations.js";
 import { socialLinks } from "../data/socialLinks.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
@@ -17,15 +17,10 @@ const navLinks = [
   { label: "Contacto", href: `${base}contacto` },
 ];
 
-
-
 const credentialLink = {
   label: "Consejo Mexicano de Dermatología",
-  href: "https://www.consejomexicanodermatologia.org.mx/miembros/dermatologia/item/dra-mariana-estefania-garcia-borges?category_id=23",
+  href: credentialUrl,
 };
-
-const googleMapsSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8098.894030569736!2d-89.59418694315481!3d21.020613550273655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f56779bac8f87d1%3A0x2bc4da0bb4d62d7c!2sDra.%20Estefania%20Borges%20Dermat%C3%B3loga!5e0!3m2!1ses-419!2smx!4v1781652609779!5m2!1ses-419!2smx";
-const googleMapsUrl = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
 ---
 
 <footer class="site-footer">
@@ -35,23 +30,21 @@ const googleMapsUrl = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
       <div class="footer-block footer-block--location">
         <h3 class="footer-block-title">Ubicación</h3>
         <a
-          href={googleMapsUrl}
+          href={mapsLinkMain}
           class="footer-contact-link footer-contact-link--address"
           target="_blank"
           rel="noopener noreferrer"
         >
           {mainLocation.address}
         </a>
-        <div class="footer-map">
-          <MapWidget src={googleMapsSrc} title="Ubicación del consultorio" compact />
-        </div>
+        <LocationWidgetMain />
       </div>
 
       {/* Contacto: CTA, teléfono, WhatsApp y horarios */}
       <div class="footer-block footer-block--contact">
         <h3 class="footer-block-title">Contacto</h3>
         <a
-          href={`${whatsappBaseUrl}&utm_source=web&utm_medium=footer&utm_campaign=agendar`}
+          href={getWhatsAppUrl({ medium: "footer" })}
           class="footer-cta"
           target="_blank"
           rel="noopener noreferrer"
@@ -61,7 +54,7 @@ const googleMapsUrl = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
         <ul class="footer-link-list footer-link-list--inline footer-link-list--contact">
           <li>
             <a
-              href={`${whatsappBaseUrl}&utm_source=web&utm_medium=footer&utm_campaign=agendar`}
+              href={getWhatsAppUrl({ medium: "footer" })}
               class="footer-contact-link"
               target="_blank"
               rel="noopener noreferrer"

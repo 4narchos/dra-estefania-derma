@@ -1,0 +1,63 @@
+---
+import { doctoraliaUrl } from "../data/site.js";
+import { loadDoctoraliaWidget } from "../utils/doctoralia.js";
+
+interface Props {
+  id?: string;
+  containerClass?: string;
+  mode?: "dropdown" | "modal" | "inline";
+  href?: string;
+}
+
+const {
+  id = "zl-url",
+  containerClass = "",
+  mode = "inline",
+  href = doctoraliaUrl,
+} = Astro.props;
+---
+
+<div class:list={["doctoralia-widget", `doctoralia-widget--${mode}`, containerClass]}>
+  <a
+    {id}
+    class="zl-url"
+    {href}
+    rel="nofollow"
+    data-zlw-doctor="mariana-estefania-garcia-borges-2"
+    data-zlw-type="big_with_calendar"
+    data-zlw-opinion="false"
+    data-zlw-hide-branding="true"
+    data-zlw-saas-only="true"
+    data-zlw-a11y-title="Widget de reserva de citas médicas"
+  ></a>
+</div>
+
+<script>
+  import { loadDoctoraliaWidget } from "../utils/doctoralia.js";
+
+  // Precarga el widget de forma temprana para que el hover/click sea fluido.
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(() => loadDoctoraliaWidget(), { timeout: 5000 });
+  } else {
+    setTimeout(() => loadDoctoraliaWidget(), 3000);
+  }
+</script>
+
+<style>
+  .doctoralia-widget {
+    position: relative;
+  }
+
+  .doctoralia-widget .zl-url:empty::before {
+    content: "Cargando calendario…";
+    display: block;
+    padding: 1rem;
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    text-align: center;
+  }
+
+  .doctoralia-widget .zl-url {
+    text-decoration: none;
+  }
+</style>

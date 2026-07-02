@@ -1,5 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import {
+  emailMain,
+  numberMain,
+  getTelUrl,
+  getWhatsAppUrl,
+  mainAddress,
+} from "../data/site.js";
 
 const title = "Aviso de Privacidad | Dra. Estefanía Borges";
 const description = "Aviso de privacidad del consultorio de dermatología de la Dra. Mariana Estefanía García Borges en Mérida, Yucatán.";
@@ -17,9 +24,8 @@ const description = "Aviso de privacidad del consultorio de dermatología de la 
     <div class="container">
       <div class="privacy-body">
         <p>
-          La Dra. Mariana Estefanía García Borges, con domicilio en C. 20 No. 251, Calle 10 15-local 9,
-          Morelos Oriente, 97130 Mérida, Yucatán, es responsable del tratamiento de los datos personales
-          que nos proporcione.
+          La Dra. Mariana Estefanía García Borges, con domicilio en {mainAddress}, es responsable del
+          tratamiento de los datos personales que nos proporcione.
         </p>
 
         <h2>Datos personales que recabamos</h2>
@@ -61,8 +67,8 @@ const description = "Aviso de privacidad del consultorio de dermatología de la 
         <h2>Cómo ejercer sus derechos ARCO</h2>
         <p>
           Para ejercer cualquiera de los derechos ARCO, puede enviar una solicitud al correo electrónico
-          <a href="mailto:contacto@estefaniaderma.mx">contacto@estefaniaderma.mx</a> o comunicarse al
-          teléfono <a href="tel:+52-999-221-3021">999 221 3021</a>. Su solicitud debe incluir nombre
+          <a href={`mailto:${emailMain}`}>{emailMain}</a> o comunicarse al
+          teléfono <a href={getTelUrl()}>{numberMain}</a>. Su solicitud debe incluir nombre
           completo, copia de identificación oficial, descripción clara del derecho que desea ejercer y
           datos de contacto para notificarle la respuesta.
         </p>
@@ -83,7 +89,7 @@ const description = "Aviso de privacidad del consultorio de dermatología de la 
         <h2>Contacto</h2>
         <p>
           Si tiene alguna duda sobre este aviso de privacidad, puede contactarnos a través de WhatsApp al
-          <a href="https://api.whatsapp.com/send?phone=529992213021" target="_blank" rel="noopener noreferrer">999 221 3021</a>.
+          <a href={getWhatsAppUrl({ medium: "aviso" })} target="_blank" rel="noopener noreferrer">{numberMain}</a>.
         </p>
       </div>
     </div>

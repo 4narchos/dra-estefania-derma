@@ -1,9 +1,9 @@
 ---
-import { whatsappBaseUrl } from "../data/links.js";
+import { getWhatsAppUrl } from "../data/site.js";
 ---
 
 <a
-  href={`${whatsappBaseUrl}&utm_source=web&utm_medium=sticky&utm_campaign=agendar`}
+  href={getWhatsAppUrl({ medium: "sticky" })}
   class="whatsapp-sticky"
   target="_blank"
   rel="noopener noreferrer"

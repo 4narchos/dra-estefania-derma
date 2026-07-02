@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { whatsappBaseUrl } from "../data/links.js";
+import { getWhatsAppUrl } from "../data/site.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
 
 const base = getBaseUrl();
@@ -64,7 +64,7 @@ const faqItems = [
 
         <div class="faqs-cta-wrapper">
           <a
-            href={`${whatsappBaseUrl}&utm_source=web&utm_medium=faqs&utm_campaign=agendar`}
+            href={getWhatsAppUrl({ medium: "faqs" })}
             class="faqs-cta-default"
             target="_blank"
             rel="noopener noreferrer"

@@ -1,90 +1,27 @@
 ---
 import { getBaseUrl } from "../utils/baseUrl.js";
-import { whatsappBaseUrl } from "../data/links.js";
+import { getWhatsAppUrl, mapsLinkMain, doctoraliaUrl } from "../data/site.js";
+import CTACard from "./CTACard.astro";
+import PillMenu from "./PillMenu.astro";
 const base = getBaseUrl();
-
-const doctoraliaUrl = "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan";
-const mapsUrl = "https://maps.app.goo.gl/aGnKcnuMojufXUo38";
-const whatsappUrl = `${whatsappBaseUrl}&utm_source=web&utm_medium=contact_section&utm_campaign=agendar`;
 
 const menuItems = [
   { label: "Más ubicaciones", href: `${base}ubicaciones` },
-  { label: "Enviar mensaje", href: whatsappUrl, external: true },
+  { label: "Enviar mensaje", href: getWhatsAppUrl({ medium: "contact_section" }), external: true },
   { label: "Preguntas", href: `${base}faqs` },
 ];
 ---
 
 <div class="contact-content">
   <div class="contact-content-top">
-    <div class="cta-card group">
-      <a
-        href={doctoraliaUrl}
-        class="cta-card-main"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src={`${base}images/clinic-2.jpg`}
-          alt="Consultorio dermatológico en Mérida"
-          class="cta-card-img"
-          width="460"
-          height="260"
-          loading="eager"
-        />
-
-        <p class="cta-card-title">Consulta dermatológica</p>
-      </a>
-
-      <a
-        href={mapsUrl}
-        class="cta-card-subtitle"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="cta-card-location-icon"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-          <circle cx="12" cy="10" r="3"></circle>
-        </svg>
-        C.20 #251 Frac. Altabrisa, Mérida
-      </a>
-
-      <a
-        href={doctoraliaUrl}
-        class="cta-card-footer"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <p class="cta-card-price">$1,100 MXN</p>
-        <span class="cta-card-button">
-          Agendar Ahora
-        </span>
-      </a>
-    </div>
+    <CTACard
+      imageSrc={`${base}images/clinic-2.jpg`}
+      imageAlt="Consultorio dermatológico en Mérida"
+    />
   </div>
 
   <div class="contact-content-bottom">
-    <nav class="contact-menu" aria-label="Acciones de contacto">
-      {menuItems.map((item) => (
-        <a
-          href={item.href}
-          class="contact-menu-item"
-          target={item.external ? "_blank" : undefined}
-          rel={item.external ? "noopener noreferrer" : undefined}
-        >
-          {item.label}
-        </a>
-      ))}
-    </nav>
+    <PillMenu variant="contact" items={menuItems} ariaLabel="Acciones de contacto" />
   </div>
 </div>
 
@@ -118,181 +55,6 @@ const menuItems = [
     border-top: none;
   }
 
-  /* Uiverse card */
-  .cta-card {
-    position: relative;
-    width: 100%;
-    max-width: 460px;
-    margin: 0.5rem;
-    padding: 3rem;
-    background: #1a2332;
-    border-radius: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    z-index: 20;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-
-  .cta-card a {
-    text-decoration: none;
-  }
-
-  .cta-card a.cta-card-subtitle {
-    color: #ffffff;
-  }
-
-  .cta-card-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    width: 100%;
-  }
-
-  .cta-card::after {
-    content: "";
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    inset: 0;
-    background: #243447;
-    z-index: -20;
-    border-radius: 0.75rem;
-    transform: translateY(100%);
-    transition: all 0.5s ease;
-  }
-
-  .cta-card-img {
-    width: 220px;
-    height: 220px;
-    max-width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 50%;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  .cta-card-title {
-    font-weight: 600;
-    color: #ffffff;
-    letter-spacing: 0.05em;
-    font-size: 1.5rem;
-    margin: 0;
-    transition: color 0.3s ease;
-  }
-
-  .cta-card-subtitle {
-    font-weight: 600;
-    color: #ffffff;
-    font-size: 1rem;
-    margin: 0;
-    transition: color 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .cta-card-location-icon {
-    width: 1rem;
-    height: 1rem;
-    flex-shrink: 0;
-  }
-
-  .cta-card-footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-top: 0.75rem;
-    gap: 1rem;
-  }
-
-  .cta-card-price {
-    color: #abd373;
-    font-weight: 700;
-    font-size: 1.125rem;
-    margin: 0;
-    transition: color 0.3s ease;
-  }
-
-  .cta-card-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: #2D5E46;
-    color: #ffffff;
-    padding: 0.625rem 1.25rem;
-    font-size: 0.9375rem;
-    font-weight: 600;
-    border-radius: 9999px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .cta-card:hover::after {
-      transform: translateY(0);
-    }
-
-    .cta-card:hover .cta-card-img {
-      transform: translateY(-0.25rem);
-    }
-
-    .cta-card:hover .cta-card-subtitle {
-      color: #ffffff;
-    }
-
-    .cta-card:hover .cta-card-price {
-      color: #ffffff;
-    }
-
-    .cta-card:hover .cta-card-button {
-      background: #3a7a5a;
-      color: #ffffff;
-    }
-  }
-
-  /* Pill menu */
-  .contact-menu {
-    display: inline-flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    gap: 4px;
-    background: rgba(0, 0, 0, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 9999px;
-    padding: 4px;
-    backdrop-filter: blur(8px);
-    max-width: 100%;
-  }
-
-  .contact-menu-item {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 24px;
-    border-radius: 9999px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #ffffff;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: background-color 150ms ease, color 150ms ease;
-  }
-
-  .contact-menu-item:hover {
-    background-color: #ffffff;
-    color: #000000;
-  }
-
   @media (max-width: 640px) {
     .contact-content {
       padding: var(--space-8) var(--space-5);
@@ -303,103 +65,11 @@ const menuItems = [
     .contact-content-bottom {
       padding: 0;
     }
-
-    .contact-menu {
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      max-width: 100%;
-      gap: 2px;
-      padding: 2px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-
-    .contact-menu::-webkit-scrollbar {
-      display: none;
-    }
-
-    .contact-menu-item {
-      padding: 8px 12px;
-      font-size: 12px;
-    }
   }
 
   @media (max-width: 767px) {
     .contact-content {
       display: contents;
-    }
-
-    .cta-card {
-      width: auto;
-      max-width: 340px;
-      margin: 0;
-      padding: 2rem 1.5rem;
-      gap: 0.75rem;
-    }
-
-    .cta-card-img {
-      width: 180px;
-      height: 180px;
-    }
-
-    .cta-card-title {
-      font-size: 1.25rem;
-      text-align: center;
-    }
-
-    .cta-card-subtitle {
-      font-size: 0.8125rem;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .cta-card-footer {
-      margin-top: 0.5rem;
-      gap: 0.75rem;
-    }
-
-    .cta-card-price {
-      font-size: 1rem;
-      white-space: nowrap;
-    }
-
-    .cta-card-button {
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
-    }
-
-    .contact-menu {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: nowrap;
-      width: 100%;
-      max-width: 100%;
-      gap: 4px;
-      padding: 4px;
-      overflow: visible;
-    }
-
-    .contact-menu-item {
-      flex: 1 1 0;
-      min-width: 0;
-      padding: 10px clamp(6px, 2vw, 12px);
-      font-size: clamp(10px, 3vw, 13px);
-      text-align: center;
-      white-space: nowrap;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .cta-card,
-    .cta-card::after,
-    .cta-card-img,
-    .cta-card-title,
-    .cta-card-subtitle,
-    .cta-card-price,
-    .cta-card-button,
-    .contact-menu-item {
-      transition: none;
     }
   }
 </style>

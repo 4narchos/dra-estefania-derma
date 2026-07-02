@@ -1,12 +1,9 @@
 ---
-import { links } from "../data/links.js";
+import { doctoraliaUrl } from "../data/site.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
 import TopicMarquee from "./TopicMarquee.astro";
 
 const base = getBaseUrl();
-const doctoraliaUrl =
-  links.find((l) => l.title === "Doctoralia")?.url ||
-  "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan";
 
 const services = [
   {

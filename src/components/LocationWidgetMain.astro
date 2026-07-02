@@ -1,0 +1,45 @@
+---
+import MapWidget from "./MapWidget.astro";
+import { googleMapsEmbedSrc, mapsLinkMain } from "../data/site.js";
+
+interface Props {
+  src?: string;
+  title?: string;
+  compact?: boolean;
+  href?: string;
+}
+
+const {
+  src = googleMapsEmbedSrc,
+  title = "Ubicación del consultorio",
+  compact = true,
+  href = mapsLinkMain,
+} = Astro.props;
+---
+
+<div class="location-widget-main">
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Ver ubicación en Google Maps"
+    class="location-widget-main-link"
+  >
+    <MapWidget {src} {title} {compact} />
+  </a>
+</div>
+
+<style>
+  .location-widget-main {
+    margin-top: var(--space-2);
+  }
+
+  .location-widget-main-link {
+    display: block;
+    text-decoration: none;
+  }
+
+  .location-widget-main-link:hover .map-widget {
+    box-shadow: 0 0 0 2px var(--color-primary);
+  }
+</style>

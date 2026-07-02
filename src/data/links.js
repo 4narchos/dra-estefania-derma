@@ -1,14 +1,18 @@
 import { socialLinks } from "./socialLinks.js";
+import {
+  numberMain,
+  numberMainRaw,
+  whatsappMessage as baseWhatsAppMessage,
+  whatsappLinkMain,
+  doctoraliaUrl,
+} from "./site.js";
 
 const instagramLink = socialLinks.find((s) => s.icon === "instagram");
 
-export const whatsappNumber = "529992213021";
-
-export const whatsappMessage = encodeURIComponent(
-  "Hola, vi su página web y quisiera agendar una consulta dermatológica."
-);
-
-export const whatsappBaseUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${whatsappMessage}`;
+// Re-export with the historical names so existing imports keep working.
+export const whatsappNumber = numberMainRaw;
+export const whatsappMessage = baseWhatsAppMessage;
+export const whatsappBaseUrl = whatsappLinkMain;
 
 export const linkCategories = {
   CONTACT: "contacto",
@@ -31,11 +35,11 @@ export const links = [
     url: `tel:+52-${whatsappNumber.replace(/^52/, "")}`,
     icon: "📞",
     category: linkCategories.CONTACT,
-    description: "999 221 3021",
+    description: numberMain,
   },
   {
     title: "Doctoralia",
-    url: "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan",
+    url: doctoraliaUrl,
     icon: "🏥",
     category: linkCategories.AGENDA,
     description: "Agenda cita en Doctoralia",
@@ -49,7 +53,7 @@ export const links = [
   },
   {
     title: "Perfil profesional",
-    url: "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan",
+    url: doctoraliaUrl,
     icon: "👩‍⚕️",
     category: linkCategories.PROFESIONAL,
     description: "Ver perfil en Doctoralia",
