@@ -424,21 +424,18 @@ const pillars = [
         0
       );
 
+    const desktopTl = gsap.timeline({ paused: true });
+    desktopTl.add(titleTl).add(vennTl, "+=0.3");
+
     ScrollTrigger.create({
       trigger: ".philosophy",
       start: "top top",
-      end: "+=60%",
+      end: "+=80%",
       pin: true,
       scrub: false,
       anticipatePin: 1,
-      onEnter: () => {
-        titleTl.play();
-        vennTl.play();
-      },
-      onEnterBack: () => {
-        titleTl.play();
-        vennTl.play();
-      },
+      onEnter: () => desktopTl.play(),
+      onEnterBack: () => desktopTl.play(),
     });
   } else if (isMobile) {
     // MOBILE: animación de entrada del título y círculos
