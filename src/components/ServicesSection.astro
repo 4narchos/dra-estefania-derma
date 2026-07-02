@@ -18,7 +18,7 @@ const services = [
       "Manchas y piel pigmentada",
       "Rosacea",
       "Psoriasis",
-      "Cáncer de piel y lesiones pre malignas",
+      "Cáncer de piel",
       "Vitiligo",
       "Onicomicosis",
       "Sudoración excesiva",
@@ -923,12 +923,14 @@ const services = [
     cards.forEach((card) => {
       let touchStartX = 0;
       let touchStartY = 0;
+      let touchHandled = false;
 
       card.addEventListener(
         "touchstart",
         (e) => {
           touchStartX = e.changedTouches[0].screenX;
           touchStartY = e.changedTouches[0].screenY;
+          touchHandled = false;
         },
         { passive: true }
       );
@@ -943,6 +945,7 @@ const services = [
 
           // Solo reaccionar a un tap limpio, no a un swipe
           if (diffX < 20 && diffY < 20) {
+            touchHandled = true;
             const isActive = card.classList.contains("is-active");
             cards.forEach((c) => c.classList.remove("is-active"));
             if (!isActive) card.classList.add("is-active");
@@ -953,6 +956,10 @@ const services = [
 
       // Fallback para clicks no táctiles (laptops pequeñas)
       card.addEventListener("click", () => {
+        if (touchHandled) {
+          touchHandled = false;
+          return;
+        }
         const isActive = card.classList.contains("is-active");
         cards.forEach((c) => c.classList.remove("is-active"));
         if (!isActive) card.classList.add("is-active");
