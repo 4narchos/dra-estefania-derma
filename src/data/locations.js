@@ -21,9 +21,9 @@ export const locations = [
     phone: "999 221 3021",
   },
   {
-    name: "Consultorio Vaca",
-    city: "Vaca",
-    address: "Vaca, Yucatán",
+    name: "Consultorio Baca",
+    city: "Baca",
+    address: "Baca, Yucatán",
     hours: "Sábados\n9:30 a.m.–4:00 p.m.",
     phone: "999 221 3021",
   },

@@ -102,9 +102,6 @@ const pillars = [
 
   .philosophy-word {
     display: inline-block;
-    opacity: 0;
-    filter: blur(10px);
-    transform: scale(1.02);
   }
 
   .philosophy-word--accent {
@@ -355,10 +352,6 @@ const pillars = [
   const connections = document.querySelectorAll(
     ".philosophy-connection"
   ) as NodeListOf<SVGPathElement>;
-  const words = document.querySelectorAll(
-    ".philosophy-word"
-  ) as NodeListOf<HTMLElement>;
-
   // Tap para mostrar/ocultar descripción en móvil
   circles.forEach((circle) => {
     circle.addEventListener("click", () => {
@@ -368,27 +361,10 @@ const pillars = [
     });
   });
 
-  function createTitleEntrance() {
-    const tl = gsap.timeline({ paused: true });
-    tl.to(words[0], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.1)
-      .to(words[1], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.2)
-      .to(words[2], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.3)
-      .to(words[3], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.4)
-      .to(words[4], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 1.0)
-      .to(words[5], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 1.3)
-      .to(words[6], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 2.2);
-    return tl;
-  }
-
   if (prefersReducedMotion) {
-    gsap.set(words, { opacity: 1, filter: "blur(0px)", scale: 1 });
     gsap.set(circles, { opacity: 1, scale: 1 });
   } else if (!isMobile && circles.length === 3 && circlesContainer) {
-    // DESKTOP: animación del título + Venn original
-    gsap.set(words, { opacity: 0, filter: "blur(10px)", scale: 1.02 });
-
-    const titleTl = createTitleEntrance();
-
+    // DESKTOP: animación Venn original
     const connectionLengths = Array.from(connections).map((path) =>
       path.getTotalLength()
     );
@@ -424,41 +400,26 @@ const pillars = [
         0
       );
 
-    const desktopTl = gsap.timeline({ paused: true });
-    desktopTl.add(titleTl).add(vennTl, "+=0.3");
-
     ScrollTrigger.create({
       trigger: ".philosophy",
       start: "top top",
-      end: "+=80%",
+      end: "+=60%",
       pin: true,
       scrub: false,
       anticipatePin: 1,
-      onEnter: () => desktopTl.play(),
-      onEnterBack: () => desktopTl.play(),
+      onEnter: () => vennTl.play(),
+      onEnterBack: () => vennTl.play(),
     });
   } else if (isMobile) {
-    // MOBILE: animación de entrada del título y círculos
-    gsap.set(words, { opacity: 0, filter: "blur(10px)", scale: 1.02 });
+    // MOBILE: animación de entrada de los círculos
     gsap.set(circles, { opacity: 0, scale: 0.8, x: 0, y: 0 });
 
     const entranceTl = gsap.timeline({ paused: true });
 
     entranceTl
-      .to(words[0], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.1)
-      .to(words[1], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.2)
-      .to(words[2], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.3)
-      .to(words[3], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.4)
-      // "profesional" + CIENCIA
-      .to(words[4], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 1.0)
-      .to(circles[0], { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 1.0)
-      // "y"
-      .to(words[5], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 1.3)
-      // EXPERIENCIA
-      .to(circles[1], { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 1.5)
-      // "humana" + EXPECTATIVAS
-      .to(words[6], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 2.2)
-      .to(circles[2], { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 2.2);
+      .to(circles[0], { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 0.2)
+      .to(circles[1], { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 0.6)
+      .to(circles[2], { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 1.0);
 
     ScrollTrigger.create({
       trigger: ".philosophy",

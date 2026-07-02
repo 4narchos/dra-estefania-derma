@@ -5,7 +5,7 @@ export const faqs = [
   },
   {
     question: "¿En dónde atiende la Dra. García Borges?",
-    answer: "La Dra. García Borges atiende en 4 ubicaciones en Yucatán: (1) Evoke Aging Journey & Dermatology en Mérida — martes y viernes 4:00-7:30 p.m., miércoles 10:00 a.m.-3:00 p.m.; (2) Izamal — sábados (horarios variables); (3) Valladolid — sábados y domingos 10:00-16:00; (4) Vaca — sábados 9:30-16:00. Agenda tu cita por WhatsApp al 999 221 3021.",
+    answer: "La Dra. García Borges atiende en 4 ubicaciones en Yucatán: (1) Evoke Aging Journey & Dermatology en Mérida — martes y viernes 4:00-7:30 p.m., miércoles 10:00 a.m.-3:00 p.m.; (2) Izamal — sábados (horarios variables); (3) Valladolid — sábados y domingos 10:00-16:00; (4) Baca — sábados 9:30-16:00. Agenda tu cita por WhatsApp al 999 221 3021.",
   },
   {
     question: "¿Cuánto cuesta la primera consulta dermatológica en Mérida?",

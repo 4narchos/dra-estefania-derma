@@ -1,7 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import SectionHeader from "../components/SectionHeader.astro";
-import { faqs } from "../data/faq.js";
 ---
 
 <Layout
@@ -9,76 +7,12 @@ import { faqs } from "../data/faq.js";
   description="Resuelve tus dudas sobre dermatología en Mérida con la Dra. Estefanía Borges."
   pageSchema="none"
 >
-  <section class="faqs-page">
-    <div class="container">
-      <SectionHeader
-        title="Preguntas frecuentes"
-        subtitle="Resuelve tus dudas antes de tu consulta."
-        align="center"
-      />
-
-      <div class="faqs-list">
-        {
-          faqs.map((faq) => (
-            <details class="faq-item">
-              <summary class="faq-question">{faq.question}</summary>
-              <div class="faq-answer">
-                <p>{faq.answer}</p>
-              </div>
-            </details>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+  <main class="faqs-page"></main>
 </Layout>
 
 <style>
   .faqs-page {
-    padding: var(--space-20) 0;
-    background: var(--color-background);
     min-height: 60vh;
-  }
-
-  .container {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 var(--space-6);
-  }
-
-  .faqs-list {
-    display: grid;
-    gap: var(--space-4);
-    max-width: 48rem;
-    margin: 0 auto;
-  }
-
-  .faq-item {
-    background: var(--color-surface);
-    border-radius: var(--radius-md);
-    padding: var(--space-5);
-  }
-
-  .faq-question {
-    font-weight: var(--weight-semibold);
-    color: var(--color-text-primary);
-    cursor: pointer;
-    font-size: var(--text-lg);
-    line-height: var(--leading-tight);
-    list-style: none;
-  }
-
-  .faq-question::-webkit-details-marker {
-    display: none;
-  }
-
-  .faq-answer {
-    margin-top: var(--space-3);
-    color: var(--color-text-secondary);
-    line-height: var(--leading-relaxed);
-  }
-
-  .faq-answer p {
-    margin: 0;
+    background: var(--color-background);
   }
 </style>
