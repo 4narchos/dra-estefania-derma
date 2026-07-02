@@ -300,13 +300,6 @@ const conditions = [
       line-height: 0.9;
     }
 
-    .hero-word {
-      animation: none;
-      opacity: 1;
-      filter: blur(0);
-      transform: scale(1);
-    }
-
     .mouse-btn {
       display: none;
     }
@@ -468,8 +461,11 @@ const conditions = [
     gsap.set(".mouse-btn", { opacity: 0 });
 
     if (isMobile) {
-      // Mobile: aparición escalonada de arriba hacia abajo
-      const mobileEntrance = gsap.timeline({ defaults: { ease: "power3.out" } });
+      // Mobile: título animado (misma secuencia que desktop) y luego imágenes
+      const mobileEntrance = gsap.timeline({
+        defaults: { ease: "power3.out" },
+        delay: 1.9,
+      });
       mobileEntrance
         .from(".collage-item--3", { opacity: 0, scale: 0.8, duration: 0.7 })
         .from(".collage-item--1, .collage-item--2", { opacity: 0, scale: 0.8, duration: 0.7 }, "-=0.4")
