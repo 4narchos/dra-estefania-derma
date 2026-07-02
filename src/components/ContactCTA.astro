@@ -167,10 +167,6 @@ const menuItems = [
     transition: all 0.5s ease;
   }
 
-  .cta-card:hover::after {
-    transform: translateY(0);
-  }
-
   .cta-card-img {
     width: 220px;
     height: 220px;
@@ -180,10 +176,6 @@ const menuItems = [
     border-radius: 50%;
     display: block;
     transition: transform 0.3s ease;
-  }
-
-  .cta-card:hover .cta-card-img {
-    transform: translateY(-0.25rem);
   }
 
   .cta-card-title {
@@ -212,10 +204,6 @@ const menuItems = [
     flex-shrink: 0;
   }
 
-  .cta-card:hover .cta-card-subtitle {
-    color: #ffffff;
-  }
-
   .cta-card-footer {
     display: flex;
     flex-direction: row;
@@ -234,10 +222,6 @@ const menuItems = [
     transition: color 0.3s ease;
   }
 
-  .cta-card:hover .cta-card-price {
-    color: #ffffff;
-  }
-
   .cta-card-button {
     display: inline-flex;
     align-items: center;
@@ -253,9 +237,27 @@ const menuItems = [
     white-space: nowrap;
   }
 
-  .cta-card:hover .cta-card-button {
-    background: #3a7a5a;
-    color: #ffffff;
+  @media (hover: hover) and (pointer: fine) {
+    .cta-card:hover::after {
+      transform: translateY(0);
+    }
+
+    .cta-card:hover .cta-card-img {
+      transform: translateY(-0.25rem);
+    }
+
+    .cta-card:hover .cta-card-subtitle {
+      color: #ffffff;
+    }
+
+    .cta-card:hover .cta-card-price {
+      color: #ffffff;
+    }
+
+    .cta-card:hover .cta-card-button {
+      background: #3a7a5a;
+      color: #ffffff;
+    }
   }
 
   /* Pill menu */

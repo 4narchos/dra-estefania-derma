@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import { locations } from "../data/locations.js";
+
+const doctoraliaUrl = "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan";
 ---
 
 <Layout
@@ -45,11 +47,12 @@ import { locations } from "../data/locations.js";
               <p class="location-detail location-detail--hours">{loc.hours}</p>
 
               <a
-                href={`tel:${loc.phone.replace(/\s/g, "")}`}
+                href={doctoraliaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 class="cta-card-footer location-footer"
               >
-                <span class="cta-card-price">{loc.phone}</span>
-                <span class="cta-card-button">Llamar</span>
+                <span class="cta-card-button">Agendar</span>
               </a>
             </article>
           ))
@@ -123,10 +126,6 @@ import { locations } from "../data/locations.js";
     transition: all 0.5s ease;
   }
 
-  .cta-card:hover::after {
-    transform: translateY(0);
-  }
-
   .cta-card-title {
     font-weight: 600;
     color: #ffffff;
@@ -172,7 +171,7 @@ import { locations } from "../data/locations.js";
   .cta-card-footer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     margin-top: 0.5rem;
@@ -180,26 +179,14 @@ import { locations } from "../data/locations.js";
     text-decoration: none;
   }
 
-  .cta-card-price {
-    color: #abd373;
-    font-weight: 700;
-    font-size: 0.9375rem;
-    margin: 0;
-    transition: color 0.3s ease;
-    white-space: nowrap;
-  }
-
-  .cta-card:hover .cta-card-price {
-    color: #ffffff;
-  }
-
   .cta-card-button {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     background: #2d5e46;
     color: #ffffff;
-    padding: 0.5rem 0.875rem;
+    padding: 0.5rem 1.5rem;
     font-size: 0.8125rem;
     font-weight: 600;
     border-radius: 9999px;
@@ -208,8 +195,14 @@ import { locations } from "../data/locations.js";
     white-space: nowrap;
   }
 
-  .cta-card:hover .cta-card-button {
-    background: #3a7a5a;
+  @media (hover: hover) and (pointer: fine) {
+    .cta-card:hover::after {
+      transform: translateY(0);
+    }
+
+    .cta-card:hover .cta-card-button {
+      background: #3a7a5a;
+    }
   }
 
   @media (max-width: 640px) {
@@ -236,17 +229,14 @@ import { locations } from "../data/locations.js";
     }
 
     .cta-card-footer {
+      justify-content: center;
       gap: 0.75rem;
       margin-top: 0.75rem;
     }
 
-    .cta-card-price {
-      font-size: 1rem;
-    }
-
     .cta-card-button {
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
+      padding: 0.625rem 2rem;
+      font-size: 0.9375rem;
     }
   }
 
@@ -255,7 +245,6 @@ import { locations } from "../data/locations.js";
     .cta-card::after,
     .cta-card-title,
     .cta-card-subtitle,
-    .cta-card-price,
     .cta-card-button {
       transition: none;
     }
