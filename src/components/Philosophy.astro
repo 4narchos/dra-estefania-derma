@@ -102,9 +102,6 @@ const pillars = [
 
   .philosophy-word {
     display: inline-block;
-    opacity: 0;
-    filter: blur(10px);
-    transform: scale(1.02);
   }
 
   .philosophy-word--accent {
@@ -300,12 +297,20 @@ const pillars = [
       display: none;
     }
 
+    .philosophy-word {
+      opacity: 0;
+      filter: blur(10px);
+      transform: scale(1.02);
+    }
+
     .philosophy-circle {
       position: absolute;
       left: 50%;
       width: 240px;
       height: 240px;
       margin-left: -120px;
+      opacity: 0;
+      transform: scale(0.8);
     }
 
     .philosophy-circle[data-index="0"] {
@@ -369,38 +374,8 @@ const pillars = [
   if (prefersReducedMotion) {
     gsap.set(words, { opacity: 1, filter: "blur(0px)", scale: 1 });
     gsap.set(circles, { opacity: 1, scale: 1 });
-  } else {
-    // Estado inicial del título y círculos
-    gsap.set(words, { opacity: 0, filter: "blur(10px)", scale: 1.02 });
-    gsap.set(circles, { opacity: 0, scale: 0.8 });
-
-  // Timeline de entrada del título y círculos
-  const entranceTl = gsap.timeline({ paused: true });
-
-  // Texto base: "Creo en una dermatología"
-  entranceTl
-    .to(words[0], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.1)
-    .to(words[1], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.2)
-    .to(words[2], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.3)
-    .to(words[3], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.4)
-    // "profesional" + CIENCIA
-    .to(words[4], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 1.0)
-    .to(circles[0], { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 1.0)
-    // "y"
-    .to(words[5], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 1.3)
-    // EXPERIENCIA
-    .to(circles[1], { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 1.5)
-    // "humana" + EXPECTATIVAS
-    .to(words[6], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 2.2)
-    .to(circles[2], { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 2.2);
-
-  if (!isMobile && circles.length === 3 && circlesContainer) {
-    // Estado inicial de los círculos en posiciones Venn
-    gsap.set(circles[0], { x: -320, y: 180 });
-    gsap.set(circles[1], { x: 320, y: 180 });
-    gsap.set(circles[2], { x: 0, y: -180 });
-
-    // Preparar trazos de conexión
+  } else if (!isMobile && circles.length === 3 && circlesContainer) {
+    // DESKTOP: animación Venn original
     const connectionLengths = Array.from(connections).map((path) =>
       path.getTotalLength()
     );
@@ -409,21 +384,23 @@ const pillars = [
       path.style.strokeDashoffset = `${connectionLengths[i]}`;
     });
 
-    // Timeline Venn: acercamiento a la posición final
     const vennTl = gsap.timeline({ paused: true });
     vennTl
-      .to(
+      .fromTo(
         circles[0],
+        { x: -320, y: 180, opacity: 1, rotation: -10 },
         { x: -150, y: 80, rotation: 0, duration: 1.4, ease: "power2.inOut" },
         0
       )
-      .to(
+      .fromTo(
         circles[1],
+        { x: 320, y: 180, opacity: 1, rotation: 10 },
         { x: 150, y: 80, rotation: 0, duration: 1.4, ease: "power2.inOut" },
         0
       )
-      .to(
+      .fromTo(
         circles[2],
+        { x: 0, y: -180, opacity: 1, rotation: 0 },
         { x: 0, y: -70, rotation: 0, duration: 1.4, ease: "power2.inOut" },
         0
       )
@@ -434,29 +411,43 @@ const pillars = [
         0
       );
 
-    // Timeline maestra: entrada + Venn
-    const masterTl = gsap.timeline({ paused: true });
-    masterTl.add(entranceTl).add(vennTl, "+=0.3");
-
     ScrollTrigger.create({
       trigger: ".philosophy",
       start: "top top",
-      end: "+=80%",
+      end: "+=60%",
       pin: true,
       scrub: false,
       anticipatePin: 1,
-      onEnter: () => masterTl.play(),
-      onEnterBack: () => masterTl.play(),
+      onEnter: () => vennTl.play(),
+      onEnterBack: () => vennTl.play(),
     });
-  } else {
-    // Mobile: círculos inician centrados y escalados
-    gsap.set(circles, { x: 0, y: 0 });
+  } else if (isMobile) {
+    // MOBILE: animación de entrada del título y círculos
+    gsap.set(words, { opacity: 0, filter: "blur(10px)", scale: 1.02 });
+    gsap.set(circles, { opacity: 0, scale: 0.8, x: 0, y: 0 });
+
+    const entranceTl = gsap.timeline({ paused: true });
+
+    entranceTl
+      .to(words[0], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.1)
+      .to(words[1], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.2)
+      .to(words[2], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.3)
+      .to(words[3], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 0.4)
+      // "profesional" + CIENCIA
+      .to(words[4], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 1.0)
+      .to(circles[0], { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 1.0)
+      // "y"
+      .to(words[5], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 1.3)
+      // EXPERIENCIA
+      .to(circles[1], { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 1.5)
+      // "humana" + EXPECTATIVAS
+      .to(words[6], { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "power2.out" }, 2.2)
+      .to(circles[2], { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 2.2);
 
     ScrollTrigger.create({
       trigger: ".philosophy",
       start: "top 80%",
       onEnter: () => entranceTl.play(),
     });
-  }
   }
 </script>
