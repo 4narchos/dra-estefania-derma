@@ -471,8 +471,11 @@ const conditions = [
         .from(".collage-item--1, .collage-item--2", { opacity: 0, scale: 0.8, duration: 0.7 }, "-=0.4")
         .from(".collage-item--4, .collage-item--5", { opacity: 0, scale: 0.8, duration: 0.7 }, "-=0.4");
     } else {
-      // Desktop: animación de carrusel
-      const entrance = gsap.timeline({ defaults: { ease: "power3.out" } });
+      // Desktop: título animado primero, luego carrusel
+      const entrance = gsap.timeline({
+        defaults: { ease: "power3.out" },
+        delay: 1.9,
+      });
       entrance
         .from(".hero-collage-wrap", { opacity: 0, y: 60, duration: 1 }, 0)
         .from(".collage-item", { opacity: 0, duration: 1, stagger: { each: 0.12, from: "center" } }, "<");
