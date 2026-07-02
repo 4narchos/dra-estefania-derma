@@ -408,44 +408,79 @@ const menuItems = [
 
     .container {
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas:
+        "title"
+        "card"
+        "menu";
+      gap: var(--space-4);
       min-height: 0;
-      padding: var(--space-6) 0;
+      padding: var(--space-5) var(--space-4) var(--space-6);
     }
 
     .contact-visual {
       display: none;
     }
 
-    .contact-section-title {
-      font-size: clamp(2.75rem, 10vw, 4rem);
-      padding: var(--space-10) var(--space-6) var(--space-6);
+    .contact-content {
+      display: contents;
     }
 
-    .contact-content {
-      flex: 1;
-      justify-content: center;
-      padding: 0 var(--space-5);
-      gap: var(--space-4);
+    .contact-section-title {
+      grid-area: title;
+      align-self: start;
+      justify-self: center;
+      width: 100%;
+      font-size: clamp(2.25rem, 8vw, 3.25rem);
+      padding: 0;
+      margin: 0;
+    }
+
+    .contact-content-top {
+      grid-area: card;
+      align-self: center;
+      justify-self: center;
+      width: 100%;
+      min-width: 0;
+      padding: 0;
+    }
+
+    .contact-content-bottom {
+      grid-area: menu;
+      align-self: end;
+      justify-self: center;
+      width: 100%;
+      min-width: 0;
+      padding: 0;
     }
 
     .cta-card {
-      padding: 2rem;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 1.25rem;
+      gap: 0.5rem;
     }
 
     .cta-card-img {
-      width: 180px;
-      height: 180px;
+      width: 140px;
+      height: 140px;
     }
 
     .cta-card-title {
-      font-size: 1.25rem;
+      font-size: 1.125rem;
+      text-align: center;
     }
 
     .cta-card-subtitle {
-      font-size: 0.9375rem;
+      font-size: 0.875rem;
+      text-align: center;
+    }
+
+    .cta-card-footer {
+      margin-top: 0.5rem;
+      gap: 0.75rem;
     }
 
     .cta-card-price {
@@ -453,8 +488,29 @@ const menuItems = [
     }
 
     .cta-card-button {
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
+      padding: 0.5rem 0.875rem;
+      font-size: 0.8125rem;
+    }
+
+    .contact-menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      width: 100%;
+      max-width: 100%;
+      gap: 4px;
+      padding: 4px;
+      overflow: visible;
+    }
+
+    .contact-menu-item {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 10px clamp(6px, 2vw, 12px);
+      font-size: clamp(10px, 3vw, 13px);
+      text-align: center;
+      white-space: nowrap;
     }
   }
 
