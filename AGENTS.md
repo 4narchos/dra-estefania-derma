@@ -16,8 +16,8 @@ This project uses a single source of truth for contact info and reusable UI elem
 
 - `src/data/site.js` — canonical data for phone, address, email, WhatsApp, Doctoralia, Google Profile, Maps, embed src, and price. Always import from here; never hardcode these values.
 - `src/components/FloatingCard.astro` — reusable floating card container (dropdown/tooltip style) used for hover actions.
-- `src/components/DoctoraliaCalendarWidget.astro` — pure Doctoralia calendar widget snippet. Use it inside `FloatingCard` for dropdowns or inside any container for modals/inline.
-- `src/components/AgendarButton.astro` — reusable “Agendar” button with hover layer effect (shows WhatsApp back-layer) and optional Doctoralia `FloatingCard` dropdown. Click always opens WhatsApp; hover reveals the Doctoralia widget.
+- `src/components/DoctoraliaCalendarWidget.astro` — pure Doctoralia calendar widget snippet. Accepts optional `id` and `href` props; use it inside `FloatingCard` for dropdowns or inside any container for modals/inline.
+- `src/components/AgendarButton.astro` — reusable “Agendar” button. Hover (1s delay) opens a modal with `DoctoraliaCalendarWidget`; click opens WhatsApp. Supports `variant`, `href`, `showDropdown`, and `widgetId` props. Each instance gets a unique internal ID so multiple buttons can coexist, but avoid more than one `showDropdown={true}` per page because the Doctoralia script only renders one widget target by default.
 - `src/components/CTACard.astro` — blue Uiverse CTA card used in `#contacto`.
 - `src/components/PillMenu.astro` — pill/tab menu used in `Presentation` and `ContactCTA`.
 - `src/components/LocationWidgetMain.astro` — footer/location map widget.

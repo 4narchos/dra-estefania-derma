@@ -3,13 +3,14 @@ import { doctoraliaUrl } from "../data/site.js";
 
 interface Props {
   href?: string;
+  id?: string;
 }
 
-const { href = doctoraliaUrl } = Astro.props;
+const { href = doctoraliaUrl, id = "zl-url" } = Astro.props;
 ---
 
 <a
-  id="zl-url"
+  id={id}
   class="zl-url"
   href={href}
   rel="nofollow"
