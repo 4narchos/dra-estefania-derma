@@ -1,6 +1,6 @@
 ---
 import { getBaseUrl } from "../utils/baseUrl.js";
-import HeaderAgendarButton from "./HeaderAgendarButton.astro";
+import AgendarButton from "./AgendarButton.astro";
 const base = getBaseUrl();
 
 interface Props {
@@ -54,7 +54,7 @@ function isActive(linkPath: string): boolean {
       </a>
     </div>
 
-    <HeaderAgendarButton variant="mobile" />
+    <AgendarButton variant="mobile" />
 
     <div class="nav-actions">
       <button
@@ -85,7 +85,7 @@ function isActive(linkPath: string): boolean {
       ))}
     </ul>
 
-    <HeaderAgendarButton variant="desktop" showDropdown={!isContactPage} />
+    <AgendarButton variant="desktop" showDropdown={!isContactPage} />
   </nav>
 </header>
 

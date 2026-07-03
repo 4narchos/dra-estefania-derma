@@ -21,27 +21,27 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
 ---
 
 {variant === "desktop" && (
-  <div class="nav-cta-wrapper">
+  <div class="agendar-button" data-agendar-button>
     <a
       href={href}
-      class="nav-cta-default"
+      class="agendar-button__cta"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Agendar cita por WhatsApp"
       title="Agendar cita por WhatsApp"
     >
-      <span class="nav-cta-layer nav-cta-layer--front">
-        <i aria-hidden="true" class="nav-cta-icon" set:html={calendarIcon} />
+      <span class="agendar-button__layer agendar-button__layer--front">
+        <i aria-hidden="true" class="agendar-button__icon" set:html={calendarIcon} />
         <span>Agendar</span>
       </span>
-      <span class="nav-cta-layer nav-cta-layer--back" aria-hidden="true">
-        <i aria-hidden="true" class="nav-cta-icon" set:html={whatsappIcon} />
+      <span class="agendar-button__layer agendar-button__layer--back" aria-hidden="true">
+        <i aria-hidden="true" class="agendar-button__icon" set:html={whatsappIcon} />
         <span>Enviar mensaje</span>
       </span>
     </a>
 
     {showDropdown && (
-      <FloatingCard class="nav-cta-dropdown nav-cta-dropdown--widget">
+      <FloatingCard class="agendar-button__dropdown">
         <DoctoraliaCalendarWidget />
       </FloatingCard>
     )}
@@ -51,57 +51,61 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
 {variant === "mobile" && (
   <a
     href={href}
-    class="nav-cta-mobile"
+    class="agendar-button agendar-button--mobile"
     target="_blank"
     rel="noopener noreferrer"
   >
-    <i aria-hidden="true" class="nav-cta-icon" set:html={calendarIcon} />
+    <i aria-hidden="true" class="agendar-button__icon" set:html={calendarIcon} />
     <span>Agendar</span>
   </a>
 )}
 
 <script>
   (function () {
-    const ctaWrapper = document.querySelector(".nav-cta-wrapper");
-    if (!ctaWrapper) return;
+    document.querySelectorAll("[data-agendar-button]").forEach((button) => {
+      const dropdown = button.querySelector<HTMLElement>(".floating-card");
+      let closeTimer: number | undefined;
 
-    const floatingCard = ctaWrapper.querySelector(".floating-card");
-    let splitTimer: ReturnType<typeof setTimeout> | undefined;
+      const open = () => {
+        clearTimeout(closeTimer);
+        button.classList.add("is-active");
+        if (dropdown) dropdown.classList.add("is-open");
+      };
 
-    const setSplit = (active: boolean) => {
-      clearTimeout(splitTimer);
-      splitTimer = setTimeout(() => {
-        ctaWrapper.classList.toggle("is-split", active);
-      }, active ? 0 : 150);
-    };
+      const close = () => {
+        closeTimer = window.setTimeout(() => {
+          button.classList.remove("is-active");
+          if (dropdown) dropdown.classList.remove("is-open");
+        }, 150);
+      };
 
-    ctaWrapper.addEventListener("mouseenter", () => setSplit(true));
-    ctaWrapper.addEventListener("mouseleave", () => setSplit(false));
-    ctaWrapper.addEventListener("focusin", () => setSplit(true));
-    ctaWrapper.addEventListener("focusout", () => setSplit(false));
+      // Hover/focus on the button container toggles the split animation and dropdown.
+      button.addEventListener("mouseenter", open);
+      button.addEventListener("mouseleave", close);
+      button.addEventListener("focusin", open);
+      button.addEventListener("focusout", close);
 
-    if (floatingCard) {
-      floatingCard.addEventListener("mouseenter", () => setSplit(true));
-      floatingCard.addEventListener("mouseleave", () => setSplit(false));
-      floatingCard.addEventListener("focusin", () => setSplit(true));
-      floatingCard.addEventListener("focusout", () => setSplit(false));
-    }
+      // Keep the dropdown open while the cursor is over it.
+      if (dropdown) {
+        dropdown.addEventListener("mouseenter", open);
+        dropdown.addEventListener("mouseleave", close);
+        dropdown.addEventListener("focusin", open);
+        dropdown.addEventListener("focusout", close);
+      }
+    });
   })();
 </script>
 
 <style is:global>
-  .nav-cta-wrapper {
+  .agendar-button {
     position: relative;
     display: inline-flex;
     justify-self: end;
+    /* Safe hover area between the button and the dropdown so the cursor never loses the menu. */
     padding-bottom: 0.5rem;
   }
 
-  .nav-cta-dropdown {
-    top: 100%;
-  }
-
-  .nav-cta-default {
+  .agendar-button__cta {
     --cta-bg: #325C46;
 
     position: relative;
@@ -121,12 +125,12 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
     transition: background var(--transition-fast);
   }
 
-  .nav-cta-wrapper:hover .nav-cta-default,
-  .nav-cta-wrapper.is-split .nav-cta-default {
+  .agendar-button:hover .agendar-button__cta,
+  .agendar-button.is-active .agendar-button__cta {
     --cta-bg: #264839;
   }
 
-  .nav-cta-layer {
+  .agendar-button__layer {
     position: absolute;
     left: 0;
     width: 100%;
@@ -139,24 +143,24 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
     transition: top 0.5s ease;
   }
 
-  .nav-cta-layer--front {
+  .agendar-button__layer--front {
     top: 0;
   }
 
-  .nav-cta-layer--back {
+  .agendar-button__layer--back {
     top: 100%;
     font-size: clamp(0.6875rem, 1.2vw, 0.8125rem);
   }
 
-  .nav-cta-wrapper.is-split .nav-cta-layer--front {
+  .agendar-button.is-active .agendar-button__layer--front {
     top: -100%;
   }
 
-  .nav-cta-wrapper.is-split .nav-cta-layer--back {
+  .agendar-button.is-active .agendar-button__layer--back {
     top: 0;
   }
 
-  .nav-cta-icon {
+  .agendar-button__icon {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -166,14 +170,15 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
     height: 18px;
   }
 
-  .nav-cta-icon svg {
+  .agendar-button__icon svg {
     display: block;
     width: 18px;
     height: 18px;
     fill: currentColor;
   }
 
-  .nav-cta-dropdown--widget {
+  .agendar-button__dropdown {
+    top: 100%;
     width: 460px;
     min-width: 320px;
     max-width: calc(100vw - 2rem);
@@ -181,7 +186,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
     overflow: visible;
   }
 
-  .nav-cta-mobile {
+  .agendar-button--mobile {
     display: none;
     background: #325C46;
     color: #fff;
@@ -202,17 +207,17 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
     transition: background var(--transition-fast);
   }
 
-  .nav-cta-mobile:hover {
+  .agendar-button--mobile:hover {
     background: #264839;
     text-decoration: none;
   }
 
   @media (max-width: 768px) {
-    .nav-cta-wrapper {
+    .agendar-button:not(.agendar-button--mobile) {
       display: none;
     }
 
-    .nav-cta-mobile {
+    .agendar-button--mobile {
       display: inline-flex;
       justify-self: center;
       padding: 0.375rem 0.625rem;

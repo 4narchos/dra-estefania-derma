@@ -78,8 +78,7 @@ const { class: extraClass = "", showOnHover = true, closable = false } = Astro.p
     pointer-events: none;
   }
 
-  /* Show when an ancestor signals it (e.g. header CTA hover split). */
-  :global(.nav-cta-wrapper.is-split) .floating-card--hover,
+  /* Show when the parent explicitly opens the card. */
   .floating-card--hover.is-open {
     opacity: 1;
     visibility: visible;
