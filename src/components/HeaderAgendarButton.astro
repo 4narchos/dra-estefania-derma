@@ -65,19 +65,27 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
     const ctaWrapper = document.querySelector(".nav-cta-wrapper");
     if (!ctaWrapper) return;
 
+    const floatingCard = ctaWrapper.querySelector(".floating-card");
     let splitTimer: ReturnType<typeof setTimeout> | undefined;
 
     const setSplit = (active: boolean) => {
       clearTimeout(splitTimer);
       splitTimer = setTimeout(() => {
         ctaWrapper.classList.toggle("is-split", active);
-      }, active ? 500 : 150);
+      }, active ? 0 : 150);
     };
 
     ctaWrapper.addEventListener("mouseenter", () => setSplit(true));
     ctaWrapper.addEventListener("mouseleave", () => setSplit(false));
     ctaWrapper.addEventListener("focusin", () => setSplit(true));
     ctaWrapper.addEventListener("focusout", () => setSplit(false));
+
+    if (floatingCard) {
+      floatingCard.addEventListener("mouseenter", () => setSplit(true));
+      floatingCard.addEventListener("mouseleave", () => setSplit(false));
+      floatingCard.addEventListener("focusin", () => setSplit(true));
+      floatingCard.addEventListener("focusout", () => setSplit(false));
+    }
   })();
 </script>
 
@@ -86,6 +94,11 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
     position: relative;
     display: inline-flex;
     justify-self: end;
+    padding-bottom: 0.5rem;
+  }
+
+  .nav-cta-dropdown {
+    top: 100%;
   }
 
   .nav-cta-default {
