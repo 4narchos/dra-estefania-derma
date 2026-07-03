@@ -2,14 +2,61 @@
 interface Props {
   class?: string;
   showOnHover?: boolean;
+  closable?: boolean;
 }
 
-const { class: extraClass = "", showOnHover = true } = Astro.props;
+const { class: extraClass = "", showOnHover = true, closable = false } = Astro.props;
 ---
 
-<div class:list={["floating-card", extraClass, { "floating-card--hover": showOnHover }]}>
+<div
+  class:list={[
+    "floating-card",
+    extraClass,
+    { "floating-card--hover": showOnHover, "floating-card--closable": closable },
+  ]}
+  data-floating-card
+>
+  {
+    closable && (
+      <button
+        type="button"
+        class="floating-card-close"
+        aria-label="Cerrar"
+        data-floating-card-close
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </button>
+    )
+  }
   <slot />
 </div>
+
+<script>
+  (function () {
+    document.querySelectorAll("[data-floating-card]").forEach((card) => {
+      const closeBtn = card.querySelector("[data-floating-card-close]");
+      if (!closeBtn) return;
+
+      closeBtn.addEventListener("click", () => {
+        card.classList.add("is-closed");
+      });
+    });
+  })();
+</script>
 
 <style>
   .floating-card {
@@ -38,5 +85,61 @@ const { class: extraClass = "", showOnHover = true } = Astro.props;
     visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
+  }
+
+  .floating-card.is-closed {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-4px) !important;
+    pointer-events: none !important;
+  }
+
+  .floating-card--closable {
+    padding-top: 2.5rem;
+  }
+
+  .floating-card-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: #f5f3ef;
+    border: none;
+    border-radius: 50%;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: background var(--transition-fast), color var(--transition-fast);
+    z-index: 2;
+  }
+
+  .floating-card-close:hover {
+    background: #E6E3DB;
+    color: var(--color-text-primary);
+  }
+
+  @media (max-width: 640px) {
+    .floating-card--closable {
+      position: fixed;
+      top: 3.5rem;
+      left: 1rem;
+      right: 1rem;
+      bottom: auto;
+      width: auto;
+      max-height: calc(100vh - 5rem);
+      overflow: auto;
+      padding-top: 3rem;
+    }
+
+    .floating-card--closable .floating-card-close {
+      top: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+    }
   }
 </style>

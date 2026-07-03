@@ -85,9 +85,7 @@ function isActive(linkPath: string): boolean {
       ))}
     </ul>
 
-    <div class="nav-cta-wrapper">
-      <HeaderAgendarButton variant="desktop" showDropdown={!isContactPage} />
-    </div>
+    <HeaderAgendarButton variant="desktop" showDropdown={!isContactPage} />
   </nav>
 </header>
 
@@ -198,12 +196,6 @@ function isActive(linkPath: string): boolean {
     justify-self: end;
   }
 
-  .nav-cta-wrapper {
-    justify-self: end;
-    position: relative;
-    display: inline-flex;
-  }
-
   .nav-toggle {
     display: none;
     flex-direction: column;
@@ -299,10 +291,6 @@ function isActive(linkPath: string): boolean {
       width: 100%;
       padding: var(--space-3) 0;
       font-size: var(--text-base);
-    }
-
-    .nav-cta-wrapper {
-      display: none;
     }
   }
 </style>

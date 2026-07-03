@@ -21,7 +21,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
 ---
 
 {variant === "desktop" && (
-  <>
+  <div class="nav-cta-wrapper">
     <a
       href={href}
       class="nav-cta-default"
@@ -45,7 +45,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
         <DoctoraliaCalendarWidget />
       </FloatingCard>
     )}
-  </>
+  </div>
 )}
 
 {variant === "mobile" && (
@@ -85,6 +85,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
   .nav-cta-wrapper {
     position: relative;
     display: inline-flex;
+    justify-self: end;
   }
 
   .nav-cta-default {
