@@ -275,11 +275,13 @@ function isActive(linkPath: string): boolean {
       padding: var(--space-6);
       gap: var(--space-2);
       transform: translateX(100%);
-      transition: transform var(--transition-base);
+      visibility: hidden;
+      transition: transform var(--transition-base), visibility var(--transition-base);
     }
 
     .nav-menu.is-open {
       transform: translateX(0);
+      visibility: visible;
     }
 
     .nav-menu li {
