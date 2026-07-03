@@ -1,6 +1,6 @@
 ---
 import LocationWidgetMain from "./LocationWidgetMain.astro";
-import { getWhatsAppUrl, credentialUrl, mapsLinkMain } from "../data/site.js";
+import { getWhatsAppUrl, getTelUrl, credentialUrl, mapsLinkMain } from "../data/site.js";
 import { locations } from "../data/locations.js";
 import { socialLinks } from "../data/socialLinks.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
@@ -63,7 +63,7 @@ const credentialLink = {
             </a>
           </li>
           <li>
-            <a href={`tel:+52-${mainLocation.phone.replace(/\s/g, "")}`} class="footer-contact-link">
+            <a href={getTelUrl(mainLocation.phone)} class="footer-contact-link">
               {mainLocation.phone}
             </a>
           </li>

@@ -2,17 +2,12 @@ import { socialLinks } from "./socialLinks.js";
 import {
   numberMain,
   numberMainRaw,
-  whatsappMessage as baseWhatsAppMessage,
   whatsappLinkMain,
+  getTelUrl,
   doctoraliaUrl,
 } from "./site.js";
 
 const instagramLink = socialLinks.find((s) => s.icon === "instagram");
-
-// Re-export with the historical names so existing imports keep working.
-export const whatsappNumber = numberMainRaw;
-export const whatsappMessage = baseWhatsAppMessage;
-export const whatsappBaseUrl = whatsappLinkMain;
 
 export const linkCategories = {
   CONTACT: "contacto",
@@ -24,7 +19,7 @@ export const linkCategories = {
 export const links = [
   {
     title: "WhatsApp",
-    url: `${whatsappBaseUrl}&utm_source=web&utm_medium=linktree&utm_campaign=contacto`,
+    url: `${whatsappLinkMain}&utm_source=web&utm_medium=linktree&utm_campaign=contacto`,
     icon: "💬",
     category: linkCategories.CONTACT,
     highlighted: true,
@@ -32,7 +27,7 @@ export const links = [
   },
   {
     title: "Llamar",
-    url: `tel:+52-${whatsappNumber.replace(/^52/, "")}`,
+    url: getTelUrl(numberMain),
     icon: "📞",
     category: linkCategories.CONTACT,
     description: numberMain,

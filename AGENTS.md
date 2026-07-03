@@ -26,6 +26,26 @@ This project uses a single source of truth for contact info and reusable UI elem
 
 When updating phone, address, email, WhatsApp link, Doctoralia URL, Google Profile, Maps link, or price, change `src/data/site.js` only. All components and pages consume from there.
 
+### Hard rule: no literal contact data in components
+
+Never write these values as string literals or fallback defaults outside of `src/data/site.js` and `src/data/socialLinks.js`:
+
+- Email (`estefaniaborges.derma@gmail.com`)
+- Phone (`999 221 3021`, `529992213021`)
+- WhatsApp URL or message text
+- Doctoralia URL or short URL
+- Instagram URL or handle (`@dra.estefaniaderma`)
+- Address (`C. 20 251...`, `C.20 #251...`)
+- Consultation price (`$1,100 MXN`)
+- Google Maps link or embed URL
+- Credential URL
+
+Always import from `src/data/site.js` or `src/data/socialLinks.js`. Build phone links with `getTelUrl()` and WhatsApp links with `getWhatsAppUrl()`.
+
+For inline browser scripts (`is:inline`) that cannot import modules, pass values through `data-*` attributes rendered by Astro. Do not use hardcoded fallback strings inside the script.
+
+Before committing, run `npm run audit:hardcoded` to catch accidental literals.
+
 ## Archived sections
 
 Inactive page sections are kept in `src/components/_archive/` instead of being deleted. To restore one, move the file back to `src/components/` and uncomment its import and usage in the relevant page. Currently archived:

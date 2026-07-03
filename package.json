@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "preview:clean": "npm run build && http-server dist -p 4321 --no-cache -c-1 --silent",
-    "astro": "astro"
+    "astro": "astro",
+    "audit:hardcoded": "node scripts/audit-hardcoded.mjs"
   },
   "dependencies": {
     "astro": "^5.7.12",

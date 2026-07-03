@@ -19,8 +19,10 @@ Usa este documento como referencia para crear nuevas subpáginas de servicios in
 import Layout from "../../layouts/Layout.astro";
 import SectionHeader from "../../components/SectionHeader.astro";
 import { getBaseUrl } from "../../utils/baseUrl.js";
+import { getWhatsAppUrl } from "../../data/site.js";
 
 const base = getBaseUrl();
+const whatsappUrl = getWhatsAppUrl({ medium: "servicio" });
 
 const title = "{Nombre del servicio} | Dra. Estefanía";
 const description = "{Descripción SEO de 150-160 caracteres}";
@@ -108,7 +110,7 @@ const serviceSchema = {
       <div class="cta-box">
         <h2 class="cta-title">¿Te interesa este tratamiento?</h2>
         <p class="cta-text">Agenda una consulta de evaluación para determinar si es la mejor opción para tu piel.</p>
-        <a href={`{whatsappUrl}`} class="btn btn-primary btn-large" target="_blank" rel="noopener noreferrer">
+        <a href={whatsappUrl} class="btn btn-primary btn-large" target="_blank" rel="noopener noreferrer">
           Agendar consulta
         </a>
       </div>

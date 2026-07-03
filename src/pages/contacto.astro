@@ -71,7 +71,7 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
                 </svg>
               </a>
 
-              <QuickSocials handle="@dra.estefaniaderma" socials={socialLinks} />
+              <QuickSocials socials={socialLinks} />
 
               <button
                 type="button"
@@ -79,7 +79,8 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
                 data-email={emailMain}
                 data-phone={numberMain}
                 data-doctoralia={doctoraliaUrl}
-                data-instagram={instagramLink?.url || "https://instagram.com/dra.estefaniaderma"}
+                data-instagram={instagramLink?.url}
+                data-instagram-handle={instagramLink?.handle}
                 onclick="downloadVCard(this)"
                 aria-label="Agregar contacto"
                 title="Agregar contacto"
@@ -1365,10 +1366,16 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
 
 <script is:inline>
   function downloadVCard(button) {
-    const email = button?.dataset.email || "estefaniaborges.derma@gmail.com";
-    const phone = button?.dataset.phone || "999 221 3021";
-    const doctoralia = button?.dataset.doctoralia || "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan";
-    const instagram = button?.dataset.instagram || "https://instagram.com/dra.estefaniaderma";
+    const email = button?.dataset.email;
+    const phone = button?.dataset.phone;
+    const doctoralia = button?.dataset.doctoralia;
+    const instagram = button?.dataset.instagram;
+    const instagramHandle = button?.dataset.instagramHandle;
+
+    if (!email || !phone || !doctoralia || !instagram) {
+      console.error("Faltan datos de contacto para generar la vCard.");
+      return;
+    }
 
     const vCard = [
       "BEGIN:VCARD",
@@ -1384,7 +1391,7 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
       `URL;TYPE=Doctoralia:${doctoralia}`,
       `X-SOCIALPROFILE;TYPE=instagram:${instagram}`,
       `X-SOCIALPROFILE;TYPE=doctoralia:${doctoralia}`,
-      `NOTE:Dermatóloga en Yucatán, México. Instagram: @dra.estefaniaderma, Doctoralia: ${doctoralia}`,
+      `NOTE:Dermatóloga en Yucatán, México. Instagram: ${instagramHandle || instagram}, Doctoralia: ${doctoralia}`,
       "END:VCARD"
     ].join("\r\n");
 
