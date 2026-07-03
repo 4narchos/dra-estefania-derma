@@ -25,6 +25,12 @@ This project uses a single source of truth for contact info and reusable UI elem
 
 When updating phone, address, email, WhatsApp link, Doctoralia URL, Google Profile, Maps link, or price, change `src/data/site.js` only. All components and pages consume from there.
 
+## Archived sections
+
+Inactive page sections are kept in `src/components/_archive/` instead of being deleted. To restore one, move the file back to `src/components/` and uncomment its import and usage in the relevant page. Currently archived:
+
+- `src/components/_archive/Philosophy.astro` — formerly rendered between `ServicesSection` and `ValueProposition` on the homepage.
+
 ## Critical persistent references
 
 If context has been compressed, read these files **before** modifying any section they describe:
