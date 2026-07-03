@@ -1,7 +1,6 @@
 ---
 import { getWhatsAppUrl } from "../data/site.js";
 import DoctoraliaCalendarWidget from "./DoctoraliaCalendarWidget.astro";
-import FloatingCard from "./FloatingCard.astro";
 
 interface Props {
   variant?: "desktop" | "mobile";
@@ -20,92 +19,150 @@ const calendarIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height=
 const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
 ---
 
-{variant === "desktop" && (
-  <div class="agendar-button" data-agendar-button>
+{
+  variant === "desktop" && (
+    <>
+      <a
+        href={href}
+        class="agendar-button"
+        data-agendar-trigger
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Agendar cita por WhatsApp"
+        title="Agendar cita por WhatsApp"
+      >
+        <span class="agendar-button__layer agendar-button__layer--front">
+          <i aria-hidden="true" class="agendar-button__icon" set:html={calendarIcon} />
+          <span>Agendar</span>
+        </span>
+        <span class="agendar-button__layer agendar-button__layer--back" aria-hidden="true">
+          <i aria-hidden="true" class="agendar-button__icon" set:html={whatsappIcon} />
+          <span>Enviar mensaje</span>
+        </span>
+      </a>
+
+      {showDropdown && (
+        <div
+          class="agendar-button__modal"
+          data-agendar-modal
+          aria-hidden="true"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Agendar cita con Doctoralia"
+        >
+          <div class="agendar-button__modal-backdrop" data-agendar-close />
+          <div class="agendar-button__modal-content">
+            <button
+              type="button"
+              class="agendar-button__modal-close"
+              aria-label="Cerrar"
+              data-agendar-close
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            </button>
+            <div class="agendar-button__modal-body">
+              <DoctoraliaCalendarWidget />
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+
+{
+  variant === "mobile" && (
     <a
       href={href}
-      class="agendar-button__cta"
+      class="agendar-button agendar-button--mobile"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Agendar cita por WhatsApp"
-      title="Agendar cita por WhatsApp"
     >
-      <span class="agendar-button__layer agendar-button__layer--front">
-        <i aria-hidden="true" class="agendar-button__icon" set:html={calendarIcon} />
-        <span>Agendar</span>
-      </span>
-      <span class="agendar-button__layer agendar-button__layer--back" aria-hidden="true">
-        <i aria-hidden="true" class="agendar-button__icon" set:html={whatsappIcon} />
-        <span>Enviar mensaje</span>
-      </span>
+      <i aria-hidden="true" class="agendar-button__icon" set:html={calendarIcon} />
+      <span>Agendar</span>
     </a>
-
-    {showDropdown && (
-      <FloatingCard class="agendar-button__dropdown">
-        <DoctoraliaCalendarWidget />
-      </FloatingCard>
-    )}
-  </div>
-)}
-
-{variant === "mobile" && (
-  <a
-    href={href}
-    class="agendar-button agendar-button--mobile"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <i aria-hidden="true" class="agendar-button__icon" set:html={calendarIcon} />
-    <span>Agendar</span>
-  </a>
-)}
+  )
+}
 
 <script>
   (function () {
-    document.querySelectorAll("[data-agendar-button]").forEach((button) => {
-      const dropdown = button.querySelector<HTMLElement>(".floating-card");
-      let closeTimer: number | undefined;
+    function loadDoctoraliaWidget() {
+      if (document.getElementById("zl-widget-s")) return;
+      const script = document.createElement("script");
+      script.id = "zl-widget-s";
+      script.src = "https://platform.docplanner.com/js/widget.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
 
-      const open = () => {
-        clearTimeout(closeTimer);
-        button.classList.add("is-active");
-        if (dropdown) dropdown.classList.add("is-open");
+    // Precarga el widget para que la apertura en hover sea fluida.
+    setTimeout(loadDoctoraliaWidget, 3000);
+
+    document.querySelectorAll("[data-agendar-trigger]").forEach((trigger) => {
+      const modal = trigger.nextElementSibling as HTMLElement | null;
+      if (!modal || !modal.hasAttribute("data-agendar-modal")) return;
+
+      const closeButtons = modal.querySelectorAll("[data-agendar-close]");
+      let hoverTimer: number | undefined;
+
+      const openModal = () => {
+        clearTimeout(hoverTimer);
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        loadDoctoraliaWidget();
       };
 
-      const close = () => {
-        closeTimer = window.setTimeout(() => {
-          button.classList.remove("is-active");
-          if (dropdown) dropdown.classList.remove("is-open");
-        }, 150);
+      const closeModal = () => {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
       };
 
-      // Hover/focus on the button container toggles the split animation and dropdown.
-      button.addEventListener("mouseenter", open);
-      button.addEventListener("mouseleave", close);
-      button.addEventListener("focusin", open);
-      button.addEventListener("focusout", close);
+      const startHoverTimer = () => {
+        hoverTimer = window.setTimeout(openModal, 1000);
+      };
 
-      // Keep the dropdown open while the cursor is over it.
-      if (dropdown) {
-        dropdown.addEventListener("mouseenter", open);
-        dropdown.addEventListener("mouseleave", close);
-        dropdown.addEventListener("focusin", open);
-        dropdown.addEventListener("focusout", close);
-      }
+      const cancelHoverTimer = () => {
+        clearTimeout(hoverTimer);
+      };
+
+      trigger.addEventListener("mouseenter", startHoverTimer);
+      trigger.addEventListener("mouseleave", cancelHoverTimer);
+      trigger.addEventListener("focus", startHoverTimer);
+      trigger.addEventListener("blur", cancelHoverTimer);
+
+      closeButtons.forEach((btn) => btn.addEventListener("click", closeModal));
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.classList.contains("is-open")) {
+          closeModal();
+        }
+      });
     });
   })();
 </script>
 
 <style is:global>
   .agendar-button {
-    position: relative;
-    display: inline-flex;
-    justify-self: end;
-    /* Safe hover area between the button and the dropdown so the cursor never loses the menu. */
-    padding-bottom: 0.5rem;
-  }
-
-  .agendar-button__cta {
     --cta-bg: #325C46;
 
     position: relative;
@@ -123,11 +180,12 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
     text-decoration: none;
     cursor: pointer;
     transition: background var(--transition-fast);
+    justify-self: end;
   }
 
-  .agendar-button:hover .agendar-button__cta,
-  .agendar-button.is-active .agendar-button__cta {
+  .agendar-button:hover {
     --cta-bg: #264839;
+    text-decoration: none;
   }
 
   .agendar-button__layer {
@@ -152,10 +210,12 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
     font-size: clamp(0.6875rem, 1.2vw, 0.8125rem);
   }
 
+  .agendar-button:hover .agendar-button__layer--front,
   .agendar-button.is-active .agendar-button__layer--front {
     top: -100%;
   }
 
+  .agendar-button:hover .agendar-button__layer--back,
   .agendar-button.is-active .agendar-button__layer--back {
     top: 0;
   }
@@ -177,20 +237,12 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
     fill: currentColor;
   }
 
-  .agendar-button__dropdown {
-    top: 100%;
-    width: 460px;
-    min-width: 320px;
-    max-width: calc(100vw - 2rem);
-    padding: 0;
-    overflow: visible;
-  }
-
   .agendar-button--mobile {
     display: none;
+    width: auto;
+    height: auto;
     background: #325C46;
     color: #fff;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
     font-size: 0.875rem;
     font-weight: 600;
     line-height: 1;
@@ -205,11 +257,81 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
     text-decoration: none;
     white-space: nowrap;
     transition: background var(--transition-fast);
+    justify-self: center;
   }
 
   .agendar-button--mobile:hover {
     background: #264839;
     text-decoration: none;
+  }
+
+  .agendar-button__modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-fast), visibility var(--transition-fast);
+  }
+
+  .agendar-button__modal.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .agendar-button__modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .agendar-button__modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    max-height: calc(100vh - 2rem);
+    overflow: auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    z-index: 1;
+  }
+
+  .agendar-button__modal-close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    background: #f5f3ef;
+    border: none;
+    border-radius: 50%;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: background var(--transition-fast), color var(--transition-fast);
+    z-index: 10;
+  }
+
+  .agendar-button__modal-close:hover {
+    background: #E6E3DB;
+    color: var(--color-text-primary);
+  }
+
+  .agendar-button__modal-body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 420px;
+    padding: var(--space-6);
   }
 
   @media (max-width: 768px) {
@@ -219,7 +341,6 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
 
     .agendar-button--mobile {
       display: inline-flex;
-      justify-self: center;
       padding: 0.375rem 0.625rem;
       min-height: 2rem;
       font-size: 0.8125rem;
