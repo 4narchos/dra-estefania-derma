@@ -25,6 +25,7 @@ export const whatsappLinkMain = `https://api.whatsapp.com/send?phone=${numberMai
 
 export const doctoraliaUrl =
   "https://www.doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan";
+export const doctoraliaShortUrl = "https://www.doctoralia.com.mx/z/DUNvsn";
 
 export const credentialUrl =
   "https://www.consejomexicanodermatologia.org.mx/miembros/dermatologia/item/dra-mariana-estefania-garcia-borges?category_id=23";

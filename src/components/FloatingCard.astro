@@ -1,0 +1,42 @@
+---
+interface Props {
+  class?: string;
+  showOnHover?: boolean;
+}
+
+const { class: extraClass = "", showOnHover = true } = Astro.props;
+---
+
+<div class:list={["floating-card", extraClass, { "floating-card--hover": showOnHover }]}>
+  <slot />
+</div>
+
+<style>
+  .floating-card {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: 320px;
+    max-width: calc(100vw - 2rem);
+    background: #fff;
+    border: 1px solid #E6E3DB;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+    z-index: 101;
+    pointer-events: none;
+  }
+
+  /* Show when an ancestor signals it (e.g. header CTA hover split). */
+  :global(.nav-cta-wrapper.is-split) .floating-card--hover,
+  .floating-card--hover.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+</style>
