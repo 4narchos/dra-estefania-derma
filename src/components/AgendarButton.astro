@@ -1,22 +1,15 @@
 ---
 import { getWhatsAppUrl } from "../data/site.js";
-import DoctoraliaCalendarWidget from "./DoctoraliaCalendarWidget.astro";
 
 interface Props {
   variant?: "desktop" | "mobile";
   href?: string;
-  showDropdown?: boolean;
-  widgetId?: string;
 }
 
 const {
   variant = "desktop",
   href = getWhatsAppUrl({ medium: "header" }),
-  showDropdown = true,
-  widgetId = "zl-url",
 } = Astro.props;
-
-const instanceId = Math.random().toString(36).slice(2, 9);
 
 const calendarIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M6 3a1 1 0 0 1 2 0v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1zM5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9zm2 3.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0m4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 15a1 1 0 1 0 0 2 1 1 0 0 0 0-2m3 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>`;
 
@@ -25,66 +18,24 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
 
 {
   variant === "desktop" && (
-    <>
-      <a
-        href={href}
-        class="agendar-button"
-        data-agendar-trigger={instanceId}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Agendar cita por WhatsApp"
-        title="Agendar cita por WhatsApp"
-      >
-        <span class="agendar-button__layer agendar-button__layer--front">
-          <i aria-hidden="true" class="agendar-button__icon" set:html={calendarIcon} />
-          <span>Agendar</span>
-        </span>
-        <span class="agendar-button__layer agendar-button__layer--back" aria-hidden="true">
-          <i aria-hidden="true" class="agendar-button__icon" set:html={whatsappIcon} />
-          <span>Enviar mensaje</span>
-        </span>
-      </a>
-
-      {showDropdown && (
-        <div
-          class="agendar-button__modal"
-          data-agendar-modal={instanceId}
-          aria-hidden="true"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Agendar cita con Doctoralia"
-        >
-          <div class="agendar-button__modal-backdrop" data-agendar-close />
-          <div class="agendar-button__modal-content">
-            <button
-              type="button"
-              class="agendar-button__modal-close"
-              aria-label="Cerrar"
-              data-agendar-close
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M18 6 6 18" />
-                <path d="m6 6 12 12" />
-              </svg>
-            </button>
-            <div class="agendar-button__modal-body">
-              <DoctoraliaCalendarWidget id={widgetId} />
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+    <a
+      href={href}
+      class="agendar-button"
+      data-agendar-trigger
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Agendar cita por WhatsApp"
+      title="Agendar cita por WhatsApp"
+    >
+      <span class="agendar-button__layer agendar-button__layer--front">
+        <i aria-hidden="true" class="agendar-button__icon" set:html={calendarIcon} />
+        <span>Agendar</span>
+      </span>
+      <span class="agendar-button__layer agendar-button__layer--back" aria-hidden="true">
+        <i aria-hidden="true" class="agendar-button__icon" set:html={whatsappIcon} />
+        <span>Enviar mensaje</span>
+      </span>
+    </a>
   )
 }
 
@@ -104,44 +55,15 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
 
 <script>
   (function () {
-    function loadDoctoraliaWidget() {
-      if (document.getElementById("zl-widget-s")) return;
-      const script = document.createElement("script");
-      script.id = "zl-widget-s";
-      script.src = "https://platform.docplanner.com/js/widget.js";
-      script.async = true;
-      document.body.appendChild(script);
-    }
-
-    // Precarga el widget para que la apertura en hover sea fluida.
-    setTimeout(loadDoctoraliaWidget, 3000);
-
     document.querySelectorAll("[data-agendar-trigger]").forEach((trigger) => {
-      const instanceId = trigger.getAttribute("data-agendar-trigger");
-      const modal = instanceId
-        ? document.querySelector<HTMLElement>(`[data-agendar-modal="${instanceId}"]`)
-        : null;
-      if (!modal) return;
-
-      const closeButtons = modal.querySelectorAll("[data-agendar-close]");
       let hoverTimer: number | undefined;
 
-      const openModal = () => {
-        clearTimeout(hoverTimer);
-        modal.classList.add("is-open");
-        modal.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
-        loadDoctoraliaWidget();
-      };
-
-      const closeModal = () => {
-        modal.classList.remove("is-open");
-        modal.setAttribute("aria-hidden", "true");
-        document.body.style.overflow = "";
+      const openDoctoralia = () => {
+        window.dispatchEvent(new CustomEvent("open-doctoralia-modal"));
       };
 
       const startHoverTimer = () => {
-        hoverTimer = window.setTimeout(openModal, 1000);
+        hoverTimer = window.setTimeout(openDoctoralia, 1000);
       };
 
       const cancelHoverTimer = () => {
@@ -152,18 +74,6 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
       trigger.addEventListener("mouseleave", cancelHoverTimer);
       trigger.addEventListener("focus", startHoverTimer);
       trigger.addEventListener("blur", cancelHoverTimer);
-
-      closeButtons.forEach((btn) => btn.addEventListener("click", closeModal));
-
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) closeModal();
-      });
-
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && modal.classList.contains("is-open")) {
-          closeModal();
-        }
-      });
     });
   })();
 </script>
@@ -270,75 +180,6 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
   .agendar-button--mobile:hover {
     background: #264839;
     text-decoration: none;
-  }
-
-  .agendar-button__modal {
-    position: fixed;
-    inset: 0;
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-4);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--transition-fast), visibility var(--transition-fast);
-  }
-
-  .agendar-button__modal.is-open {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .agendar-button__modal-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-  }
-
-  .agendar-button__modal-content {
-    position: relative;
-    width: 100%;
-    max-width: 480px;
-    max-height: calc(100vh - 2rem);
-    overflow: auto;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    z-index: 1;
-  }
-
-  .agendar-button__modal-close {
-    position: absolute;
-    top: var(--space-3);
-    right: var(--space-3);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    padding: 0;
-    background: #f5f3ef;
-    border: none;
-    border-radius: 50%;
-    color: var(--color-text-secondary);
-    cursor: pointer;
-    transition: background var(--transition-fast), color var(--transition-fast);
-    z-index: 10;
-  }
-
-  .agendar-button__modal-close:hover {
-    background: #E6E3DB;
-    color: var(--color-text-primary);
-  }
-
-  .agendar-button__modal-body {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 420px;
-    padding: var(--space-6);
   }
 
   @media (max-width: 768px) {

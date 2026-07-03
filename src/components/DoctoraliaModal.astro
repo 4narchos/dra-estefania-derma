@@ -1,0 +1,164 @@
+---
+import DoctoraliaCalendarWidget from "./DoctoraliaCalendarWidget.astro";
+---
+
+<div
+  class="doctoralia-modal"
+  id="doctoralia-modal"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Agendar cita con Doctoralia"
+>
+  <div class="doctoralia-modal-backdrop" data-doctoralia-close></div>
+  <div class="doctoralia-modal-content">
+    <button
+      type="button"
+      class="doctoralia-modal-close"
+      aria-label="Cerrar"
+      data-doctoralia-close
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </svg>
+    </button>
+    <div class="doctoralia-modal-body">
+      <DoctoraliaCalendarWidget />
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const modal = document.getElementById("doctoralia-modal");
+    if (!modal) return;
+
+    const closeButtons = modal.querySelectorAll("[data-doctoralia-close]");
+
+    function loadDoctoraliaWidget() {
+      if (document.getElementById("zl-widget-s")) return;
+      const script = document.createElement("script");
+      script.id = "zl-widget-s";
+      script.src = "https://platform.docplanner.com/js/widget.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+
+    // Precarga el widget para que la apertura en hover sea fluida.
+    setTimeout(loadDoctoraliaWidget, 3000);
+
+    const open = () => {
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      loadDoctoraliaWidget();
+    };
+
+    const close = () => {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    };
+
+    // Global events that any trigger can dispatch.
+    window.addEventListener("open-doctoralia-modal", open);
+    window.addEventListener("close-doctoralia-modal", close);
+
+    closeButtons.forEach((btn) => btn.addEventListener("click", close));
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) close();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) {
+        close();
+      }
+    });
+  })();
+</script>
+
+<style is:global>
+  .doctoralia-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    padding-top: calc(var(--space-4) + env(safe-area-inset-top, 0px));
+    height: 100vh;
+    height: 100dvh;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-fast), visibility var(--transition-fast);
+  }
+
+  .doctoralia-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .doctoralia-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .doctoralia-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    max-height: calc(100vh - 2rem);
+    max-height: calc(100dvh - 2rem);
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    overflow: auto;
+    padding: 0;
+    z-index: 1;
+  }
+
+  .doctoralia-modal-close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F0EBE0;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    color: var(--color-text-primary);
+    transition: background var(--transition-fast);
+    z-index: 10;
+  }
+
+  .doctoralia-modal-close:hover {
+    background: #E6E3DB;
+  }
+
+  .doctoralia-modal-body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+  }
+</style>

@@ -8,7 +8,6 @@ interface Props {
 }
 
 const { currentPath = "/" } = Astro.props;
-const isContactPage = currentPath.replace(/\/$/, "") === `${base}contacto`;
 
 const navLinks = [
   { label: "Inicio", href: `${base}`, path: `${base}` },
@@ -85,7 +84,7 @@ function isActive(linkPath: string): boolean {
       ))}
     </ul>
 
-    <AgendarButton variant="desktop" showDropdown={!isContactPage} />
+    <AgendarButton variant="desktop" />
   </nav>
 </header>
 

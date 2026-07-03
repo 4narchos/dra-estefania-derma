@@ -3,6 +3,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import WhatsAppSticky from "../components/WhatsAppSticky.astro";
 import ShareSticky from "../components/ShareSticky.astro";
+import DoctoraliaModal from "../components/DoctoraliaModal.astro";
 import { faqs } from "../data/faq.js";
 import { services } from "../data/services.js";
 import { socialLinks } from "../data/socialLinks.js";
@@ -406,5 +407,6 @@ const servicesListSchema = {
     {showFooter && <Footer />}
     {showWhatsApp && <WhatsAppSticky />}
     {showShare && <ShareSticky />}
+    <DoctoraliaModal />
   </body>
 </html>
