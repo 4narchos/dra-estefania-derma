@@ -256,9 +256,9 @@ const menuItems = [
 
     .presentation-text {
       position: absolute;
-      top: calc(var(--header-height) + var(--space-4));
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
       width: 100%;
       max-width: none;
       padding: 0 var(--space-4);
@@ -349,52 +349,66 @@ const menuItems = [
     });
 
     if (isMobile) {
-      // Mobile animation sequence
-      // 1. "Yo te ayudo a entenderla" fades in
-      tl.fromTo(
-        ".presentation-text",
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
-      ).to({}, { duration: 0.8 });
+      const textEl = document.querySelector(".presentation-text") as HTMLElement | null;
+      const signatureEl = document.querySelector(".signature-block") as HTMLElement | null;
 
-      // 2. Crossfade: text swaps for signature while doctor image zooms+fades in
-      tl.to(".presentation-text", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, "swap")
-        .fromTo(
-          ".presentation-visual img",
-          { scale: 0.85, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
-          "swap"
-        );
-
-      // 3. Signature appears in the same top spot (crossfade overlaps with text)
-      if (chars && titleEl) {
-        tl.fromTo(
-          ".signature-block",
-          { opacity: 0 },
-          { opacity: 1, duration: 0.5, ease: "power2.inOut" },
-          "swap"
-        )
-        .fromTo(
-          chars,
-          { opacity: 0, y: 8 },
-          { opacity: 1, y: 0, duration: 0.05, stagger: 0.06, ease: "power1.out" },
-          "swap+=0.2"
-        )
-        .fromTo(
-          titleEl,
-          { opacity: 0, y: 8 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-          "+=0.2"
-        );
+      // Measure vertical distance between centered text and final signature position
+      let moveDistance = -120;
+      if (textEl && signatureEl && section) {
+        const textRect = textEl.getBoundingClientRect();
+        const sigRect = signatureEl.getBoundingClientRect();
+        const sectionRect = section.getBoundingClientRect();
+        const textCenterY = textRect.top + textRect.height / 2 - sectionRect.top;
+        const sigCenterY = sigRect.top + sigRect.height / 2 - sectionRect.top;
+        moveDistance = sigCenterY - textCenterY;
       }
 
-      // 4. Menu appears at bottom
-      tl.from(".pill-menu", {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      }, "-=0.4");
+      // 1. "Yo te ayudo a entenderla" fades in at center
+      tl.fromTo(
+        ".presentation-text",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+      ).to({}, { duration: 0.6 });
+
+      // 2. Doctor image zooms+fades in while text moves up to the top edge
+      tl.fromTo(
+        ".presentation-visual img",
+        { scale: 0.85, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
+        "moveUp"
+      ).to(
+        ".presentation-text",
+        { y: moveDistance, duration: 1.2, ease: "power2.out" },
+        "moveUp"
+      );
+
+      // 3. Text fades out and signature replaces it at the top; menu rises from bottom
+      if (chars && titleEl) {
+        tl.to(".presentation-text", { opacity: 0, duration: 0.4, ease: "power2.inOut" }, "swap")
+          .fromTo(
+            ".signature-block",
+            { opacity: 0 },
+            { opacity: 1, duration: 0.4, ease: "power2.inOut" },
+            "swap"
+          )
+          .fromTo(
+            chars,
+            { opacity: 0, y: 8 },
+            { opacity: 1, y: 0, duration: 0.05, stagger: 0.06, ease: "power1.out" },
+            "swap+=0.15"
+          )
+          .fromTo(
+            titleEl,
+            { opacity: 0, y: 8 },
+            { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+            "swap+=0.3"
+          )
+          .from(
+            ".pill-menu",
+            { y: 30, opacity: 0, duration: 0.8, ease: "power2.out" },
+            "swap"
+          );
+      }
     } else {
       // Desktop animation sequence
       // 1. Title fades in at dead center and holds for 1s
