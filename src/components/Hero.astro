@@ -337,16 +337,16 @@ const conditions = [
     }
 
     .hero-stage {
-      position: absolute;
-      inset: 0;
+      position: relative;
       z-index: 10;
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
       max-width: none;
+      min-height: 100%;
       margin: 0;
-      padding: 0 var(--space-4);
-      pointer-events: none;
+      padding: 0;
     }
 
     .hero-content {
@@ -354,14 +354,13 @@ const conditions = [
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      width: 100%;
-      padding: 0;
+      width: auto;
+      padding: 0 var(--space-4);
       gap: 0;
-      pointer-events: auto;
     }
 
     .hero-title {
-      width: 100%;
+      width: auto;
       margin: 0;
       padding: 0;
       text-align: center;
