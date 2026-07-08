@@ -337,15 +337,16 @@ const conditions = [
     }
 
     .hero-stage {
-      position: relative;
-      top: auto;
-      left: auto;
-      transform: none;
+      position: absolute;
+      inset: 0;
       z-index: 10;
+      display: grid;
+      place-items: center;
       width: 100%;
       max-width: none;
       margin: 0;
       padding: 0 var(--space-4);
+      pointer-events: none;
     }
 
     .hero-content {
@@ -356,13 +357,15 @@ const conditions = [
       width: 100%;
       padding: 0;
       gap: 0;
+      pointer-events: auto;
     }
 
     .hero-title {
       width: 100%;
+      margin: 0;
       padding: 0;
       text-align: center;
-      line-height: 0.9;
+      line-height: 1;
     }
 
     .mouse-btn {
