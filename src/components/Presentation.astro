@@ -256,7 +256,7 @@ const menuItems = [
 
     .presentation-text {
       position: absolute;
-      top: 14%;
+      bottom: var(--space-6);
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
@@ -275,7 +275,7 @@ const menuItems = [
 
     .signature-block {
       position: absolute;
-      top: 14%;
+      top: calc(var(--header-height) + var(--space-4));
       left: 50%;
       right: auto;
       transform: translateX(-50%);
@@ -350,7 +350,7 @@ const menuItems = [
 
     if (isMobile) {
       // Mobile animation sequence
-      // 1. "Yo te ayudo a entenderla" fades in at top
+      // 1. "Yo te ayudo a entenderla" fades in at the bottom
       tl.fromTo(
         ".presentation-text",
         { opacity: 0, y: 20 },
@@ -366,7 +366,7 @@ const menuItems = [
           "image"
         );
 
-      // 3. Signature appears in the same top spot
+      // 3. Signature appears near the top
       if (chars && titleEl) {
         tl.fromTo(
           ".signature-block",
