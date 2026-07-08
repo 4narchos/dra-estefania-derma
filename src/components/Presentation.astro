@@ -24,22 +24,22 @@ const menuItems = [
 
   <div class="presentation-overlay" aria-hidden="true"></div>
 
+  <div class="presentation-text">
+    <h2 class="presentation-title">
+      <span class="presentation-word">Yo</span>
+      <span class="presentation-word">te</span>
+      <span class="presentation-word">ayudo</span>
+      <span class="presentation-word">a</span>
+      <em class="presentation-word">entenderla</em>
+    </h2>
+  </div>
+
   <div class="signature-block">
     <span class="signature-name" data-signature="Dra. Estefanía Borges">Dra. Estefanía Borges</span>
     <span class="signature-title">DERMATÓLOGA</span>
   </div>
 
   <div class="presentation-content">
-    <div class="presentation-text">
-      <h2 class="presentation-title">
-        <span class="presentation-word">Yo</span>
-        <span class="presentation-word">te</span>
-        <span class="presentation-word">ayudo</span>
-        <span class="presentation-word">a</span>
-        <em class="presentation-word">entenderla</em>
-      </h2>
-    </div>
-
     <PillMenu variant="presentation" items={menuItems} ariaLabel="Acciones principales" />
   </div>
 </section>
@@ -51,8 +51,9 @@ const menuItems = [
     min-height: var(--viewport-minus-header);
     overflow: hidden;
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
   }
 
   .presentation-visual {
@@ -81,34 +82,27 @@ const menuItems = [
     pointer-events: none;
   }
 
+  .presentation-text {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding-top: calc(var(--header-height) + var(--space-8));
+    margin-bottom: var(--space-8);
+    pointer-events: none;
+  }
+
   .presentation-content {
     position: relative;
     z-index: 3;
     width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: calc(var(--header-height) + var(--space-8)) var(--space-6) var(--space-12);
+    padding: 0 var(--space-6) var(--space-12);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: var(--space-8);
-  }
-
-  .presentation-text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-3);
-  }
-
-  .presentation-eyebrow {
-    font-size: var(--text-sm);
-    font-weight: var(--weight-medium);
-    color: var(--color-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin: 0;
   }
 
   .presentation-title {
@@ -155,19 +149,6 @@ const menuItems = [
       filter: blur(0);
       transform: scale(1);
     }
-  }
-
-  .presentation-subtitle {
-    font-size: var(--text-xl);
-    font-weight: var(--weight-medium);
-    color: rgba(245, 245, 240, 0.85);
-    margin: 0;
-  }
-
-  .presentation-location {
-    font-size: var(--text-base);
-    color: rgba(245, 245, 240, 0.65);
-    margin: 0;
   }
 
   /* Signature on the right side */
@@ -264,16 +245,6 @@ const menuItems = [
       align-items: stretch;
     }
 
-    .signature-block {
-      position: absolute;
-      top: 62%;
-      left: 50%;
-      right: auto;
-      transform: translate(-50%, -50%);
-      margin-top: 0;
-      z-index: 4;
-    }
-
     .presentation-visual {
       min-height: 100%;
     }
@@ -283,34 +254,56 @@ const menuItems = [
       min-height: var(--viewport-minus-header);
     }
 
-    .presentation-content {
-      align-items: center;
-      text-align: center;
-      width: 100%;
-      height: 100%;
-      min-height: var(--viewport-minus-header);
-      padding: calc(var(--header-height) + var(--space-6)) var(--space-4) var(--space-8);
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
     .presentation-text {
-      flex: 1 1 65%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
+      position: absolute;
+      top: 14%;
+      left: 50%;
+      transform: translateX(-50%);
       width: 100%;
-      padding-top: var(--space-8);
+      max-width: none;
+      padding: 0 var(--space-4);
+      margin: 0;
+      z-index: 5;
+      opacity: 0;
     }
 
     .presentation-title {
-      text-align: center;
       width: 100%;
       font-size: clamp(2rem, 10vw, 3.5rem);
+      line-height: 1;
     }
 
+    .signature-block {
+      position: absolute;
+      top: 14%;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+      margin-top: 0;
+      z-index: 4;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+    }
+
+    .signature-name {
+      font-size: clamp(2.5rem, 12vw, 4rem);
+      line-height: 1.2;
+    }
+
+    .signature-title {
+      font-size: clamp(0.875rem, 4vw, 1.25rem);
+    }
+
+    .presentation-content {
+      justify-content: flex-end;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      min-height: var(--viewport-minus-header);
+      padding: 0 var(--space-4) var(--space-6);
+      gap: 0;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -357,14 +350,15 @@ const menuItems = [
 
     if (isMobile) {
       // Mobile animation sequence
-      // 1. Title fades in at dead center
-      tl.call(() => titleContainer?.classList.add("is-visible"))
-        .set(".presentation-text", { y: "15vh", opacity: 0 })
-        .to(".presentation-text", { y: "15vh", opacity: 1, duration: 0.6, ease: "power2.out" })
-        .to({}, { duration: 0.8 });
+      // 1. "Yo te ayudo a entenderla" fades in at top
+      tl.fromTo(
+        ".presentation-text",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+      ).to({}, { duration: 0.8 });
 
-      // 2. Title moves to upper third while doctor image zooms+fades in
-      tl.to(".presentation-text", { y: 0, duration: 1.2, ease: "power2.out" }, "image")
+      // 2. Text fades out while doctor image zooms+fades in
+      tl.to(".presentation-text", { opacity: 0, y: -20, duration: 0.5, ease: "power2.in" }, "image")
         .fromTo(
           ".presentation-visual img",
           { scale: 0.85, opacity: 0 },
@@ -372,14 +366,20 @@ const menuItems = [
           "image"
         );
 
-      // 3. Signature and menu appear
+      // 3. Signature appears in the same top spot
       if (chars && titleEl) {
         tl.fromTo(
+          ".signature-block",
+          { opacity: 0 },
+          { opacity: 1, duration: 0.3, ease: "power2.out" }
+        )
+        .fromTo(
           chars,
           { opacity: 0, y: 8 },
           { opacity: 1, y: 0, duration: 0.05, stagger: 0.06, ease: "power1.out" },
-          "-=0.4"
-        ).fromTo(
+          "<"
+        )
+        .fromTo(
           titleEl,
           { opacity: 0, y: 8 },
           { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
@@ -387,6 +387,7 @@ const menuItems = [
         );
       }
 
+      // 4. Menu appears at bottom
       tl.from(".pill-menu", {
         y: 30,
         opacity: 0,
