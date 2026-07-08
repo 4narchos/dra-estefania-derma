@@ -9,12 +9,23 @@ const conditions = [
   { label: "Acné", image: `${base}images/hero-acne.jpg?v=1` },
   { label: "Arrugas", image: `${base}images/hero-arrugas.jpg?v=1` },
 ];
+
+const titleLines = {
+  top: [
+    { text: "Tu", delay: 0.2 },
+    { text: "piel", delay: 0.35 },
+  ],
+  bottom: [
+    { text: "te", delay: 1.0 },
+    { text: "habla", delay: 1.15 },
+  ],
+};
 ---
 
 <section class="hero" id="inicio">
   <div class="hero-stage">
     <div class="hero-content">
-      <h1 class="hero-title">
+      <h1 class="hero-title hero-title--desktop">
         <span class="hero-title-line hero-title-line--1">
           <span class="hero-word">Tu</span>
           <span class="hero-word">piel</span>
@@ -48,64 +59,72 @@ const conditions = [
       ))}
     </div>
 
-    <!-- Mobile: 6 círculos en 2 filas de 3 formando un óvalo/semilunas alrededor del título -->
+    <!-- Mobile: 6 círculos en grid 3x2 con el título en el centro -->
     <div class="hero-collage hero-collage--mobile" aria-label="Condiciones dermatológicas tratadas">
-      <div class="collage-row collage-row--top">
-        <div class="collage-item collage-item--side">
-          <img
-            class="collage-image"
-            src={`${base}images/hero-alopecia-mobile.webp?v=1`}
-            alt="Caída de cabello"
-            width="300"
-            height="300"
-            loading="eager"
-          />
-        </div>
-        <div class="collage-item collage-item--center">
-          <img
-            class="collage-image"
-            src={`${base}images/hero-melasma-mobile.webp?v=1`}
-            alt="Melasma"
-            width="300"
-            height="300"
-            loading="eager"
-          />
-        </div>
-        <div class="collage-item collage-item--side">
-          <img
-            class="collage-image"
-            src={`${base}images/hero-caspa-mobile.webp?v=1`}
-            alt="Caspa"
-            width="300"
-            height="300"
-            loading="eager"
-          />
-        </div>
+      <div class="collage-item collage-item--top-left">
+        <img
+          class="collage-image"
+          src={`${base}images/hero-alopecia-mobile.webp?v=1`}
+          alt="Caída de cabello"
+          width="300"
+          height="300"
+          loading="eager"
+        />
+      </div>
+      <div class="collage-item collage-item--top-center">
+        <img
+          class="collage-image"
+          src={`${base}images/hero-melasma-mobile.webp?v=1`}
+          alt="Melasma"
+          width="300"
+          height="300"
+          loading="eager"
+        />
+      </div>
+      <div class="collage-item collage-item--top-right">
+        <img
+          class="collage-image"
+          src={`${base}images/hero-caspa-mobile.webp?v=1`}
+          alt="Caspa"
+          width="300"
+          height="300"
+          loading="eager"
+        />
       </div>
 
-      <div class="collage-row collage-row--bottom">
-        <div class="collage-item collage-item--side">
-          <img
-            class="collage-image"
-            src={`${base}images/hero-arrugas-mobile.webp?v=1`}
-            alt="Arrugas"
-            width="300"
-            height="300"
-            loading="eager"
-          />
-        </div>
-        <div class="collage-item collage-item--center">
-          <img
-            class="collage-image"
-            src={`${base}images/hero-acne-mobile.webp?v=1`}
-            alt="Acné"
-            width="300"
-            height="300"
-            loading="eager"
-          />
-        </div>
-        <div class="collage-item collage-item--side collage-item--empty" aria-hidden="true"></div>
+      <!-- Título visual centrado entre las dos filas. El h1 accesible sigue en .hero-stage -->
+      <h1 class="hero-title hero-title--mobile" aria-hidden="true">
+        <span class="hero-title-line hero-title-line--1">
+          <span class="hero-word">Tu</span>
+          <span class="hero-word">piel</span>
+        </span>
+        <span class="hero-title-line hero-title-line--2 hero-title-line--accent">
+          <span class="hero-word">te</span>
+          <span class="hero-word">habla</span>
+        </span>
+      </h1>
+
+      <div class="collage-item collage-item--bottom-left">
+        <img
+          class="collage-image"
+          src={`${base}images/hero-arrugas-mobile.webp?v=1`}
+          alt="Arrugas"
+          width="300"
+          height="300"
+          loading="eager"
+        />
       </div>
+      <div class="collage-item collage-item--bottom-center">
+        <img
+          class="collage-image"
+          src={`${base}images/hero-acne-mobile.webp?v=1`}
+          alt="Acné"
+          width="300"
+          height="300"
+          loading="eager"
+        />
+      </div>
+      <div class="collage-item collage-item--bottom-right collage-item--empty" aria-hidden="true"></div>
     </div>
   </div>
 </section>
@@ -161,6 +180,10 @@ const conditions = [
     line-height: 0.88;
     letter-spacing: -0.05em;
     margin: 0;
+  }
+
+  .hero-title--mobile {
+    display: none;
   }
 
   .hero-title-line {
@@ -337,32 +360,30 @@ const conditions = [
     }
 
     .hero-stage {
-      position: relative;
-      top: auto;
-      left: auto;
-      transform: none;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      visibility: hidden;
+      padding: 0;
+    }
+
+    .hero-title--desktop {
+      visibility: hidden;
+    }
+
+    .hero-title--mobile {
+      display: block;
+      visibility: visible;
+      grid-column: 2;
+      grid-row: 1 / 3;
+      align-self: center;
+      justify-self: center;
       z-index: 10;
-      width: 100%;
-      max-width: none;
       margin: 0;
-      padding: 0 var(--space-4);
-    }
-
-    .hero-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      padding: 0;
-      gap: 0;
-    }
-
-    .hero-title {
-      width: 100%;
-      padding: 0;
-      text-align: center;
+      padding: 0 var(--space-2);
+      font-size: clamp(3.5rem, 15vw, 6.5rem);
       line-height: 0.9;
+      text-align: center;
     }
 
     .mouse-btn {
@@ -386,28 +407,24 @@ const conditions = [
     }
 
     .hero-collage--mobile {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-template-areas:
+        "top-left top-center top-right"
+        "bottom-left bottom-center bottom-right";
+      gap: 1rem 0.75rem;
       align-items: center;
-      gap: clamp(2rem, 10vh, 5rem);
+      justify-items: center;
       width: 100%;
       height: 100%;
-      padding: 0 var(--space-4);
-    }
-
-    .collage-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.75rem;
-      width: 100%;
+      padding: var(--space-4);
     }
 
     .hero-collage--mobile .collage-item {
       position: relative;
-      width: 29vmin;
-      height: 29vmin;
+      width: 100%;
+      height: 100%;
       min-width: 110px;
       min-height: 110px;
       max-width: 170px;
@@ -418,25 +435,33 @@ const conditions = [
       transition: none;
     }
 
+    .collage-item--top-left { grid-area: top-left; }
+    .collage-item--top-center { grid-area: top-center; }
+    .collage-item--top-right { grid-area: top-right; }
+    .collage-item--bottom-left { grid-area: bottom-left; }
+    .collage-item--bottom-center { grid-area: bottom-center; }
+    .collage-item--bottom-right { grid-area: bottom-right; }
+
     .collage-item--empty {
       visibility: hidden;
     }
 
-    /* Semiluna superior: centro ligeramente más arriba, lados ligeramente más abajo */
-    .collage-row--top .collage-item--center {
-      transform: translateY(-0.75rem);
+    /* Semiluna: centros ligeramente hacia afuera, lados hacia adentro */
+    .collage-item--top-center {
+      transform: translateY(-0.5rem);
     }
 
-    .collage-row--top .collage-item--side {
+    .collage-item--top-left,
+    .collage-item--top-right {
       transform: translateY(0.25rem);
     }
 
-    /* Semiluna inferior: centro ligeramente más abajo, lados ligeramente más arriba */
-    .collage-row--bottom .collage-item--center {
-      transform: translateY(0.75rem);
+    .collage-item--bottom-center {
+      transform: translateY(0.5rem);
     }
 
-    .collage-row--bottom .collage-item--side {
+    .collage-item--bottom-left,
+    .collage-item--bottom-right {
       transform: translateY(-0.25rem);
     }
 
@@ -516,8 +541,9 @@ const conditions = [
         delay: 1.9,
       });
       mobileEntrance
-        .from(".collage-row--top .collage-item--center, .collage-row--bottom .collage-item--center", { opacity: 0, scale: 0.8, duration: 0.7 })
-        .from(".collage-row--top .collage-item--side, .collage-row--bottom .collage-item--side:not(.collage-item--empty)", { opacity: 0, scale: 0.8, duration: 0.7, stagger: 0.08 }, "-=0.4");
+        .from(".hero-title--mobile .hero-word", { opacity: 0, filter: "blur(10px)", scale: 1.02, duration: 0.6, stagger: 0.15 })
+        .from(".collage-item--top-center, .collage-item--bottom-center", { opacity: 0, scale: 0.8, duration: 0.7 }, "-=0.2")
+        .from(".collage-item--top-left, .collage-item--top-right, .collage-item--bottom-left", { opacity: 0, scale: 0.8, duration: 0.7, stagger: 0.08 }, "-=0.4");
     } else {
       // Desktop: título animado primero, luego carrusel
       const entrance = gsap.timeline({
