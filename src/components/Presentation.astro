@@ -12,15 +12,7 @@ const menuItems = [
 ---
 
 <section class="presentation" id="presentacion">
-  <div class="presentation-header">
-    <div class="presentation-location">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-        <circle cx="12" cy="10" r="3"></circle>
-      </svg>
-      <span>Mérida</span>
-    </div>
-  </div>
+  <div class="presentation-header"></div>
 
   <div class="presentation-visual">
     <img
@@ -46,7 +38,16 @@ const menuItems = [
 
   <div class="signature-block">
     <span class="signature-name" data-signature="Dra. Estefanía Borges">Dra. Estefanía Borges</span>
-    <span class="signature-title">DERMATÓLOGA</span>
+    <div class="signature-row">
+      <span class="signature-title">DERMATÓLOGA</span>
+      <span class="presentation-location">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span>Mérida</span>
+      </span>
+    </div>
   </div>
 
   <div class="presentation-content">
@@ -232,9 +233,19 @@ const menuItems = [
       drop-shadow(0 2px 2px rgba(0, 0, 0, 0.35))
       drop-shadow(0 0 18px rgba(0, 0, 0, 0.25));
     animation: metalShine 4s ease-in-out infinite;
-    margin-top: var(--space-2);
     opacity: 0;
     transform: translateY(8px);
+  }
+
+  .signature-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .presentation-location {
+    display: none;
   }
 
   @media (max-width: 900px) {
@@ -262,29 +273,26 @@ const menuItems = [
       left: 0;
       right: 0;
       height: 30%;
-      background: #5A9BB5;
+      background: #141E2A;
       z-index: 2;
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-      padding: calc(var(--header-height) + var(--space-2)) var(--space-4) var(--space-4);
+      opacity: 0;
     }
 
     .presentation-location {
       display: inline-flex;
       align-items: center;
-      gap: var(--space-2);
-      color: #ffffff;
+      gap: var(--space-1);
+      color: #F8E9A1;
       font-family: 'Inter', system-ui, sans-serif;
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
     .presentation-location svg {
-      width: 16px;
-      height: 16px;
+      width: 12px;
+      height: 12px;
       flex-shrink: 0;
     }
 
@@ -355,7 +363,16 @@ const menuItems = [
 
     .signature-title {
       font-size: clamp(0.875rem, 4vw, 1.25rem);
+      margin-top: 0;
+    }
+
+    .signature-row {
       margin-top: 2px;
+      gap: var(--space-2);
+    }
+
+    .presentation-location {
+      display: inline-flex;
     }
 
     .presentation-content {
@@ -433,13 +450,20 @@ const menuItems = [
         { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
       ).to({}, { duration: 1.1 });
 
-      // 2. Doctor image zooms+fades in while text moves up to the top edge
+      // 2. Header fades in + doctor image zooms+fades in while text moves up to the top edge
       tl.fromTo(
+        ".presentation-header",
+        { opacity: 0 },
+        { opacity: 1, duration: 1.2, ease: "power2.out" },
+        "moveUp"
+      )
+      .fromTo(
         ".presentation-visual img",
         { scale: 0.85, opacity: 0 },
         { scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
         "moveUp"
-      ).to(
+      )
+      .to(
         ".presentation-text",
         { y: moveDistance, duration: 1.2, ease: "power2.out" },
         "moveUp"
