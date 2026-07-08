@@ -381,12 +381,12 @@ const menuItems = [
         moveDistance = sigCenterY - textCenterY;
       }
 
-      // 1. "Yo te ayudo a entenderla" fades in at center
+      // 1. "Yo te ayudo a entenderla" fades in at center and holds
       tl.fromTo(
         ".presentation-text",
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
-      ).to({}, { duration: 0.6 });
+      ).to({}, { duration: 1.1 });
 
       // 2. Doctor image zooms+fades in while text moves up to the top edge
       tl.fromTo(
