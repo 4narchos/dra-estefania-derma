@@ -12,27 +12,20 @@ const conditions = [
 ---
 
 <section class="hero" id="inicio">
-  <div class="hero-stage">
-    <div class="hero-content">
-      <h1 class="hero-title">
-        <span class="hero-title-line hero-title-line--1">
-          <span class="hero-word">Tu</span>
-          <span class="hero-word">piel</span>
-        </span>
-        <span class="hero-title-line hero-title-line--2 hero-title-line--accent">
-          <span class="hero-word">te</span>
-          <span class="hero-word">habla</span>
-        </span>
-      </h1>
-
-      <div class="mouse-btn" aria-hidden="true">
-        <span class="mouse-scroll"></span>
-      </div>
-    </div>
+  <div class="hero-title-wrapper">
+    <h1 class="hero-title">
+      <span class="hero-title-line hero-title-line--1">
+        <span class="hero-word">Tu</span>
+        <span class="hero-word">piel</span>
+      </span>
+      <span class="hero-title-line hero-title-line--2 hero-title-line--accent">
+        <span class="hero-word">te</span>
+        <span class="hero-word">habla</span>
+      </span>
+    </h1>
   </div>
 
   <div class="hero-collage-wrap">
-    <!-- Desktop: collage original de 5 imágenes -->
     <div class="hero-collage hero-collage--desktop" aria-label="Condiciones dermatológicas tratadas">
       {conditions.map((condition, index) => (
         <div class={`collage-item collage-item--${index + 1}`}>
@@ -48,7 +41,6 @@ const conditions = [
       ))}
     </div>
 
-    <!-- Mobile: 6 círculos en 2 filas de 3 formando un óvalo/semilunas alrededor del título -->
     <div class="hero-collage hero-collage--mobile" aria-label="Condiciones dermatológicas tratadas">
       <div class="collage-row collage-row--top">
         <div class="collage-item collage-item--side">
@@ -108,6 +100,10 @@ const conditions = [
       </div>
     </div>
   </div>
+
+  <div class="mouse-btn" aria-hidden="true">
+    <span class="mouse-scroll"></span>
+  </div>
 </section>
 
 <style>
@@ -118,6 +114,8 @@ const conditions = [
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
   }
 
@@ -131,34 +129,19 @@ const conditions = [
     pointer-events: none;
   }
 
-  .hero-stage {
+  .hero-title-wrapper {
     position: relative;
-    z-index: 2;
-    flex: 1;
-    width: 100%;
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: calc(var(--header-height) + var(--space-4)) var(--space-6) 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    z-index: 10;
     text-align: center;
-  }
-
-  .hero-content {
-    padding-top: var(--space-6);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-6);
+    pointer-events: none;
+    margin-bottom: var(--space-8);
   }
 
   .hero-title {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: clamp(4rem, 15vw, 11rem);
     font-weight: 600;
-    line-height: 0.88;
+    line-height: 1;
     letter-spacing: -0.05em;
     margin: 0;
   }
@@ -273,6 +256,38 @@ const conditions = [
     box-shadow: 0 16px 50px rgba(0, 0, 0, 0.4);
   }
 
+  .mouse-btn {
+    position: relative;
+    z-index: 3;
+    margin: 0 auto;
+    width: 32px;
+    height: 64px;
+    border: 2px solid rgba(245, 245, 240, 0.55);
+    border-radius: 16px;
+    display: flex;
+  }
+
+  .mouse-scroll {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(170deg, rgba(245, 245, 240, 0.7), rgba(245, 245, 240, 0.9));
+    border-radius: 50%;
+    margin: auto;
+    animation: scrolling13 2.5s linear infinite;
+  }
+
+  @keyframes scrolling13 {
+    0% {
+      opacity: 0;
+      transform: translateY(-16px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(16px);
+    }
+  }
+
   @media (min-width: 1440px) {
     .hero-stage {
       padding-bottom: 22%;
@@ -300,8 +315,8 @@ const conditions = [
   }
 
   @media (max-width: 900px) {
-    .hero-stage {
-      padding-bottom: 30%;
+    .hero-collage-wrap {
+      padding-bottom: 6%;
     }
 
     .collage-item {
@@ -331,49 +346,28 @@ const conditions = [
   @media (max-width: 768px) {
     .hero {
       min-height: var(--viewport-minus-header);
-      display: grid;
-      place-items: center;
-      position: relative;
+      display: block;
     }
 
-    .hero-stage {
-      position: relative;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .hero-title-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       width: 100%;
       max-width: none;
-      min-height: 100%;
       margin: 0;
-      padding: 0;
-    }
-
-    .hero-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: auto;
       padding: 0 var(--space-4);
-      gap: 0;
+      z-index: 10;
     }
 
     .hero-title {
-      width: auto;
-      margin: 0;
-      padding: 0;
-      text-align: center;
+      font-size: clamp(3.5rem, 15vw, 6.5rem);
       line-height: 1;
     }
 
     .mouse-btn {
       display: none;
-    }
-
-    .mouse-scroll {
-      animation: none;
-      opacity: 1;
     }
 
     .hero-collage-wrap {
@@ -451,38 +445,6 @@ const conditions = [
     }
   }
 
-  .mouse-btn {
-    position: relative;
-    z-index: 3;
-    margin: 0 auto;
-    width: 32px;
-    height: 64px;
-    border: 2px solid rgba(245, 245, 240, 0.55);
-    border-radius: 16px;
-    display: flex;
-  }
-
-  .mouse-scroll {
-    display: block;
-    width: 16px;
-    height: 16px;
-    background: linear-gradient(170deg, rgba(245, 245, 240, 0.7), rgba(245, 245, 240, 0.9));
-    border-radius: 50%;
-    margin: auto;
-    animation: scrolling13 2.5s linear infinite;
-  }
-
-  @keyframes scrolling13 {
-    0% {
-      opacity: 0;
-      transform: translateY(-16px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(16px);
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .hero-word {
       animation: none;
@@ -517,7 +479,8 @@ const conditions = [
         delay: 1.9,
       });
       mobileEntrance
-        .from(".collage-row--top .collage-item--center, .collage-row--bottom .collage-item--center", { opacity: 0, scale: 0.8, duration: 0.7 })
+        .from(".hero-title .hero-word", { opacity: 0, filter: "blur(10px)", scale: 1.02, duration: 0.6, stagger: 0.15 })
+        .from(".collage-row--top .collage-item--center, .collage-row--bottom .collage-item--center", { opacity: 0, scale: 0.8, duration: 0.7 }, "-=0.2")
         .from(".collage-row--top .collage-item--side, .collage-row--bottom .collage-item--side:not(.collage-item--empty)", { opacity: 0, scale: 0.8, duration: 0.7, stagger: 0.08 }, "-=0.4");
     } else {
       // Desktop: título animado primero, luego carrusel
@@ -529,7 +492,7 @@ const conditions = [
         .from(".hero-collage-wrap", { opacity: 0, y: 60, duration: 1 }, 0)
         .from(".collage-item", { opacity: 0, duration: 1, stagger: { each: 0.12, from: "center" } }, "<");
 
-      gsap.to(".hero-stage", {
+      gsap.to(".hero-title-wrapper", {
         scrollTrigger: {
           trigger: hero,
           start: "top top",
