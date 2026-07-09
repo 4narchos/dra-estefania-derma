@@ -15,13 +15,16 @@ const menuItems = [
   <div class="presentation-header"></div>
 
   <div class="presentation-visual">
-    <img
-      src={`${base}images/dra-estefania-pijama-azul-sin-fondo.png`}
-      alt="Dra. Estefanía Borges con dermatoscopio"
-      width="600"
-      height="900"
-      loading="eager"
-    />
+    <picture>
+      <source media="(max-width: 640px)" srcset={`${base}images/dra-estefania-mobile.webp?v=1`} type="image/webp" />
+      <img
+        src={`${base}images/dra-estefania-pijama-azul-sin-fondo.png`}
+        alt="Dra. Estefanía Borges con dermatoscopio"
+        width="600"
+        height="900"
+        loading="eager"
+      />
+    </picture>
   </div>
 
   <div class="presentation-overlay" aria-hidden="true"></div>
@@ -300,7 +303,7 @@ const menuItems = [
     .presentation-visual {
       position: absolute;
       inset: auto 0 0 0;
-      top: 36%;
+      top: 32%;
       min-height: auto;
       z-index: 1;
       display: flex;
