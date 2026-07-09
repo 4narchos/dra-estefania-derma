@@ -376,7 +376,13 @@ const conditions = [
     }
 
     .mouse-btn {
-      display: none;
+      display: flex;
+      position: absolute;
+      bottom: var(--space-6);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      margin: 0;
     }
 
     .hero-collage-wrap {
@@ -521,9 +527,9 @@ const conditions = [
     };
 
     if (document.readyState === "complete") {
-      setTimeout(showMouseBtn, 5000);
+      setTimeout(showMouseBtn, 3000);
     } else {
-      window.addEventListener("load", () => setTimeout(showMouseBtn, 5000));
+      window.addEventListener("load", () => setTimeout(showMouseBtn, 3000));
     }
   }
 </script>
