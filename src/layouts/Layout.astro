@@ -272,6 +272,12 @@ const servicesListSchema = {
         --viewport-minus-header: calc(100dvh - var(--header-height, 72px));
       }
 
+      @media (max-width: 768px) {
+        html {
+          --header-height: 56px;
+        }
+      }
+
       body {
         font-family: var(--font-body);
         color: var(--color-text-primary);
