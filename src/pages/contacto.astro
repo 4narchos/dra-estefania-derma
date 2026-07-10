@@ -34,14 +34,18 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
           <div class="contact-profile-row">
             <div class="contact-avatar">
               <a href="/acerca/" class="contact-avatar-link" aria-label="Ver perfil">
-                <img
-                  src={`${base}images/dra-estefania-dermatoscopio.jpg`}
-                  alt="Dra. Mariana Estefanía García Borges"
-                  class="contact-avatar-img"
-                  loading="eager"
-                  width="96"
-                  height="96"
-                />
+                <picture>
+                  <source srcset={`${base}images/dra-estefania-dermatoscopio.webp`} type="image/webp" />
+                  <img
+                    src={`${base}images/dra-estefania-dermatoscopio.jpg`}
+                    alt="Dra. Mariana Estefanía García Borges"
+                    class="contact-avatar-img"
+                    loading="eager"
+                    width="96"
+                    height="96"
+                    decoding="async"
+                  />
+                </picture>
               </a>
               <a
                 href={credentialUrl}
@@ -160,7 +164,10 @@ const instagramLink = socialLinks.find((s) => s.icon === "instagram");
               aria-label="Agendar cita con Doctoralia"
             >
               <span class="contact-link-icon">
-                <img src={`${base}images/doctoralia-symbol.png`} alt="" class="contact-link-symbol" loading="lazy" width="26" height="26" />
+                <picture>
+                  <source srcset={`${base}images/doctoralia-symbol.webp`} type="image/webp" />
+                  <img src={`${base}images/doctoralia-symbol.png`} alt="" class="contact-link-symbol" loading="lazy" width="26" height="26" decoding="async" />
+                </picture>
               </span>
               <span class="contact-link-text">Doctoralia</span>
             </button>

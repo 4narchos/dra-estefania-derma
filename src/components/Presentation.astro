@@ -1,6 +1,8 @@
 ---
-import { getBaseUrl } from "../utils/baseUrl.js";
+import { Image } from "astro:assets";
+import draPresentation from "../assets/images/dra-estefania-pijama-azul-sin-fondo.webp";
 import { getWhatsAppUrl, doctoraliaUrl } from "../data/site.js";
+import { getBaseUrl } from "../utils/baseUrl.js";
 import PillMenu from "./PillMenu.astro";
 const base = getBaseUrl();
 
@@ -15,12 +17,14 @@ const menuItems = [
   <div class="presentation-header"></div>
 
   <div class="presentation-visual">
-    <img
-      src={`${base}images/dra-estefania-pijama-azul-sin-fondo.png`}
+    <Image
+      src={draPresentation}
       alt="Dra. Estefanía Borges con dermatoscopio"
-      width="600"
-      height="900"
-      loading="eager"
+      width={600}
+      height={900}
+      densities={[1, 2]}
+      loading="lazy"
+      decoding="async"
     />
   </div>
 
@@ -408,159 +412,177 @@ const menuItems = [
 </style>
 
 <script>
-  import { gsap } from "../utils/animations.js";
-
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!prefersReducedMotion) {
-    const section = document.querySelector(".presentation");
+    const loadAnimations = async () => {
+      const { gsap } = await import("../utils/animations.js");
+      const section = document.querySelector(".presentation");
 
-    // Signature typewriter setup
-    const nameEl = document.querySelector(".signature-name") as HTMLElement | null;
-    const titleEl = document.querySelector(".signature-title") as HTMLElement | null;
-    const titleContainer = document.querySelector(".presentation-title") as HTMLElement | null;
-    let chars: NodeListOf<Element> | null = null;
+      // Signature typewriter setup
+      const nameEl = document.querySelector(".signature-name") as HTMLElement | null;
+      const titleEl = document.querySelector(".signature-title") as HTMLElement | null;
+      const titleContainer = document.querySelector(".presentation-title") as HTMLElement | null;
+      let chars: NodeListOf<Element> | null = null;
 
-    if (nameEl && titleEl) {
-      const text = nameEl.dataset.signature || nameEl.textContent || "";
-      nameEl.innerHTML = text
-        .split("")
-        .map((char, i) => `<span class="signature-char" style="--i:${i}">${char === " " ? "&nbsp;" : char}</span>`)
-        .join("");
-      chars = nameEl.querySelectorAll(".signature-char");
-    }
-
-    const isMobile = window.matchMedia("(max-width: 640px)").matches;
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top 80%",
-        toggleActions: "play none none reverse",
-      },
-    });
-
-    if (isMobile) {
-      const textEl = document.querySelector(".presentation-text") as HTMLElement | null;
-
-      // Center the moving title inside the 30% header area
-      let moveDistance = -120;
-      if (textEl && section) {
-        const textRect = textEl.getBoundingClientRect();
-        const sectionRect = section.getBoundingClientRect();
-        const textCenterY = textRect.top + textRect.height / 2 - sectionRect.top;
-        const headerCenterY = sectionRect.height * 0.12;
-        moveDistance = headerCenterY - textCenterY;
+      if (nameEl && titleEl) {
+        const text = nameEl.dataset.signature || nameEl.textContent || "";
+        nameEl.innerHTML = text
+          .split("")
+          .map((char, i) => `<span class="signature-char" style="--i:${i}">${char === " " ? "&nbsp;" : char}</span>`)
+          .join("");
+        chars = nameEl.querySelectorAll(".signature-char");
       }
 
-      // 1. "Yo te ayudo a entenderla" fades in at center and holds
-      tl.fromTo(
-        ".presentation-text",
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
-      ).to({}, { duration: 1.1 });
+      const isMobile = window.matchMedia("(max-width: 640px)").matches;
 
-      // 2. Header fades in + doctor image zooms+fades in while text moves up to the top edge
-      tl.fromTo(
-        ".presentation-header",
-        { opacity: 0 },
-        { opacity: 1, duration: 1.2, ease: "power2.out" },
-        "moveUp"
-      )
-      .fromTo(
-        ".presentation-visual img",
-        { scale: 0.85, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
-        "moveUp"
-      )
-      .to(
-        ".presentation-text",
-        { y: moveDistance, duration: 1.2, ease: "power2.out" },
-        "moveUp"
-      )
-      .to(
-        ".presentation-title .presentation-word:nth-child(-n+4)",
-        { color: "#ffffff", duration: 1.2, ease: "power2.out" },
-        "moveUp"
-      );
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      });
 
-      // 3. Text fades out and signature replaces it at the top; menu rises from bottom
-      if (chars && titleEl) {
-        tl.to(".presentation-text", { opacity: 0, duration: 0.4, ease: "power2.inOut" }, "swap")
+      if (isMobile) {
+        const textEl = document.querySelector(".presentation-text") as HTMLElement | null;
+
+        // Center the moving title inside the 30% header area
+        let moveDistance = -120;
+        if (textEl && section) {
+          const textRect = textEl.getBoundingClientRect();
+          const sectionRect = section.getBoundingClientRect();
+          const textCenterY = textRect.top + textRect.height / 2 - sectionRect.top;
+          const headerCenterY = sectionRect.height * 0.12;
+          moveDistance = headerCenterY - textCenterY;
+        }
+
+        // 1. "Yo te ayudo a entenderla" fades in at center and holds
+        tl.fromTo(
+          ".presentation-text",
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+        ).to({}, { duration: 1.1 });
+
+        // 2. Header fades in + doctor image zooms+fades in while text moves up to the top edge
+        tl.fromTo(
+          ".presentation-header",
+          { opacity: 0 },
+          { opacity: 1, duration: 1.2, ease: "power2.out" },
+          "moveUp"
+        )
+        .fromTo(
+          ".presentation-visual img",
+          { scale: 0.85, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
+          "moveUp"
+        )
+        .to(
+          ".presentation-text",
+          { y: moveDistance, duration: 1.2, ease: "power2.out" },
+          "moveUp"
+        )
+        .to(
+          ".presentation-title .presentation-word:nth-child(-n+4)",
+          { color: "#ffffff", duration: 1.2, ease: "power2.out" },
+          "moveUp"
+        );
+
+        // 3. Text fades out and signature replaces it at the top; menu rises from bottom
+        if (chars && titleEl) {
+          tl.to(".presentation-text", { opacity: 0, duration: 0.4, ease: "power2.inOut" }, "swap")
+            .fromTo(
+              ".signature-block",
+              { opacity: 0 },
+              { opacity: 1, duration: 0.4, ease: "power2.inOut" },
+              "swap"
+            )
+            .fromTo(
+              chars,
+              { opacity: 0, y: 8 },
+              { opacity: 1, y: 0, duration: 0.05, stagger: 0.06, ease: "power1.out" },
+              "swap+=0.15"
+            )
+            .fromTo(
+              titleEl,
+              { opacity: 0, y: 8 },
+              { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+              "swap+=0.3"
+            )
+            .fromTo(
+              ".presentation-location",
+              { opacity: 0, y: 8 },
+              { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+              "swap+=0.6"
+            )
+            .from(
+              ".pill-menu",
+              { y: 30, opacity: 0, duration: 0.8, ease: "power2.out" },
+              "swap"
+            );
+        }
+      } else {
+        // Desktop animation sequence
+        // 1. Title fades in at dead center and holds for 1s
+        tl.call(() => titleContainer?.classList.add("is-visible"))
           .fromTo(
-            ".signature-block",
-            { opacity: 0 },
-            { opacity: 1, duration: 0.4, ease: "power2.inOut" },
-            "swap"
+            ".presentation-title",
+            { y: "-50vh", opacity: 0 },
+            { y: "-50vh", opacity: 1, duration: 0.6, ease: "power2.out" }
           )
-          .fromTo(
+          .to({}, { duration: 1 });
+
+        // 2. Title moves to final position while doctor image zooms+fades in
+        tl.fromTo(
+          ".presentation-title",
+          { y: "-50vh" },
+          { y: 0, duration: 1.2, ease: "power2.out" },
+          "image"
+        ).fromTo(
+          ".presentation-visual img",
+          { scale: 0.85, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
+          "image"
+        );
+
+        // 3. Signature and menu appear
+        if (chars && titleEl) {
+          tl.fromTo(
             chars,
             { opacity: 0, y: 8 },
             { opacity: 1, y: 0, duration: 0.05, stagger: 0.06, ease: "power1.out" },
-            "swap+=0.15"
-          )
-          .fromTo(
+            "-=0.4"
+          ).fromTo(
             titleEl,
             { opacity: 0, y: 8 },
             { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-            "swap+=0.3"
-          )
-          .fromTo(
-            ".presentation-location",
-            { opacity: 0, y: 8 },
-            { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-            "swap+=0.6"
-          )
-          .from(
-            ".pill-menu",
-            { y: 30, opacity: 0, duration: 0.8, ease: "power2.out" },
-            "swap"
+            "+=0.2"
           );
-      }
-    } else {
-      // Desktop animation sequence
-      // 1. Title fades in at dead center and holds for 1s
-      tl.call(() => titleContainer?.classList.add("is-visible"))
-        .fromTo(
-          ".presentation-title",
-          { y: "-50vh", opacity: 0 },
-          { y: "-50vh", opacity: 1, duration: 0.6, ease: "power2.out" }
-        )
-        .to({}, { duration: 1 });
+        }
 
-      // 2. Title moves to final position while doctor image zooms+fades in
-      tl.fromTo(
-        ".presentation-title",
-        { y: "-50vh" },
-        { y: 0, duration: 1.2, ease: "power2.out" },
-        "image"
-      ).fromTo(
-        ".presentation-visual img",
-        { scale: 0.85, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
-        "image"
+        tl.from(".pill-menu", {
+          y: 30,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        }, "-=0.4");
+      }
+    };
+
+    // Cargar cuando la sección esté cerca del viewport o en idle
+    const section = document.querySelector(".presentation");
+    if (section && "IntersectionObserver" in window) {
+      const obs = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            obs.disconnect();
+            loadAnimations();
+          }
+        },
+        { rootMargin: "200px", threshold: 0 }
       );
-
-      // 3. Signature and menu appear
-      if (chars && titleEl) {
-        tl.fromTo(
-          chars,
-          { opacity: 0, y: 8 },
-          { opacity: 1, y: 0, duration: 0.05, stagger: 0.06, ease: "power1.out" },
-          "-=0.4"
-        ).fromTo(
-          titleEl,
-          { opacity: 0, y: 8 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-          "+=0.2"
-        );
-      }
-
-      tl.from(".pill-menu", {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      }, "-=0.4");
+      obs.observe(section);
+    } else {
+      loadAnimations();
     }
   }
 </script>

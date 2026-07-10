@@ -1,8 +1,11 @@
 ---
+import { Image } from "astro:assets";
 import { doctoraliaUrl } from "../data/site.js";
-import { getBaseUrl } from "../utils/baseUrl.js";
 
-const base = getBaseUrl();
+import clinicaImg from "../assets/images/clinica.webp";
+import tricoImg from "../assets/images/trico.webp";
+import esteticaImg from "../assets/images/estetica.webp";
+import cirugiaImg from "../assets/images/cirugia.webp";
 
 const services = [
   {
@@ -24,7 +27,7 @@ const services = [
     color: "#E8F4F8",
     headerColor: "#5A9BB5",
     textColor: "#1F1F1F",
-    image: `${base}images/clinica.webp?v=2`,
+    image: clinicaImg,
   },
   {
     category: "Tricología",
@@ -39,7 +42,7 @@ const services = [
     color: "#E8F5E9",
     headerColor: "#2D5E46",
     textColor: "#1F1F1F",
-    image: `${base}images/trico.png`,
+    image: tricoImg,
   },
   {
     category: "Dermatología Estética",
@@ -58,7 +61,7 @@ const services = [
     color: "#FFF8E7",
     headerColor: "#C4A86B",
     textColor: "#1F1F1F",
-    image: `${base}images/estetica.png`,
+    image: esteticaImg,
   },
   {
     category: "Cirugía menor Dermatológica",
@@ -75,7 +78,7 @@ const services = [
     color: "#D8D8D8",
     headerColor: "#757575",
     textColor: "#1F1F1F",
-    image: `${base}images/cirugia.webp?v=2`,
+    image: cirugiaImg,
   },
 ];
 ---
@@ -144,13 +147,16 @@ const services = [
               </div>
               <div class="service-card-body">
                 <div class="service-card-visual" aria-hidden="true">
-                  <img
+                  <Image
                     class="service-card-image"
                     src={service.image}
                     alt={service.category}
-                    width="180"
-                    height="180"
+                    width={400}
+                    height={400}
+                    densities={[1, 2]}
+                    sizes="(max-width: 640px) min(240px, calc(100vw - 130px)), (max-width: 900px) 400px, (max-width: 1280px) 260px, 320px"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div class="service-card-info">

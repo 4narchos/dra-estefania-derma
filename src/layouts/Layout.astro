@@ -191,9 +191,6 @@ const servicesListSchema = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#1D5A8F" />
     <link rel="icon" type="image/png" href={`${baseUrl}favicon.png`} />
@@ -226,12 +223,13 @@ const servicesListSchema = {
 
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 
-    <!-- Doctoralia widget resources -->
+    <!-- Doctoralia widget resources (solo dns-prefetch; el script se carga bajo demanda) -->
     <link rel="dns-prefetch" href="https://platform.docplanner.com" />
+    <link rel="dns-prefetch" href="https://www.doctoralia.com.mx" />
     <link rel="preconnect" href="https://www.doctoralia.com.mx" />
-    <link rel="prefetch" href="https://platform.docplanner.com/js/widget.js" as="script" />
 
     <!-- Schema.org -->
     {(pageSchema === "home" || pageSchema === "about" || pageSchema === "services" || pageSchema === "contact") && (

@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import draDesk from "../assets/images/dra-estefania-desk-square.webp";
 import { getBaseUrl } from "../utils/baseUrl.js";
 import TopicMarquee from "./TopicMarquee.astro";
 const base = getBaseUrl();
@@ -37,12 +39,15 @@ const accordionItems = [
 
   <div class="container">
     <div class="value-visual">
-      <img
-        src={`${base}images/dra-estefania-desk-square.jpg`}
+      <Image
+        src={draDesk}
         alt="Dra. Estefanía Borges en pijama quirúrgica azul, sentada en su escritorio y escuchando atentamente"
-        width="600"
-        height="600"
+        width={600}
+        height={600}
+        densities={[1, 2]}
+        sizes="(max-width: 899px) 100vw, 480px"
         loading="lazy"
+        decoding="async"
       />
     </div>
 

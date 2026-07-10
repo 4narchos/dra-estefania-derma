@@ -56,9 +56,6 @@ import DoctoraliaCalendarWidget from "./DoctoraliaCalendarWidget.astro";
       document.body.appendChild(script);
     }
 
-    // Precarga el widget para que la apertura en hover sea fluida.
-    setTimeout(loadDoctoraliaWidget, 3000);
-
     const open = () => {
       modal.classList.add("is-open");
       modal.setAttribute("aria-hidden", "false");

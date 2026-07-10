@@ -32,24 +32,34 @@ function isActive(linkPath: string): boolean {
   <nav class="nav-container" aria-label="Navegación principal">
     <div class="nav-brand" aria-label="Logo">
       <a href={`${base}`} class="nav-brand-link nav-brand-link--desktop">
-        <img
-          src={`${base}images/header banner desktop.png?v=2`}
-          alt="Dra. Estefanía Borges - Dermatóloga"
-          class="nav-brand-banner nav-brand-banner--desktop"
-          width="1200"
-          height="300"
-          loading="eager"
-        />
+        <picture>
+          <source srcset={`${base}images/header banner desktop.webp`} type="image/webp" />
+          <img
+            src={`${base}images/header banner desktop.png?v=2`}
+            alt="Dra. Estefanía Borges - Dermatóloga"
+            class="nav-brand-banner nav-brand-banner--desktop"
+            width="1200"
+            height="300"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
       </a>
       <a href={`${base}`} class="nav-brand-link nav-brand-link--mobile">
-        <img
-          src={`${base}images/header banner.png?v=2`}
-          alt="Dra. Estefanía Borges - Dermatóloga"
-          class="nav-brand-banner nav-brand-banner--mobile"
-          width="900"
-          height="300"
-          loading="eager"
-        />
+        <picture>
+          <source srcset={`${base}images/header banner.webp`} type="image/webp" />
+          <img
+            src={`${base}images/header banner.png?v=2`}
+            alt="Dra. Estefanía Borges - Dermatóloga"
+            class="nav-brand-banner nav-brand-banner--mobile"
+            width="900"
+            height="300"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
       </a>
     </div>
 

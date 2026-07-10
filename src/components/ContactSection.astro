@@ -1,19 +1,21 @@
 ---
-import { getBaseUrl } from "../utils/baseUrl.js";
+import { Image } from "astro:assets";
+import draContact from "../assets/images/dra-estefania-pijama-azul-sin-fondo.webp";
 import ContactCTA from "./ContactCTA.astro";
-const base = getBaseUrl();
 ---
 
 <section class="contact" id="contacto">
   <div class="container">
     <h2 class="contact-section-title">¡Nos vemos en el consultorio!</h2>
     <div class="contact-visual">
-      <img
-        src={`${base}images/dra-estefania-pijama-azul-sin-fondo.png`}
+      <Image
+        src={draContact}
         alt="Dra. Estefanía Borges de pie con pijama quirúrgica azul sosteniendo un dermatoscopio"
-        width="560"
-        height="700"
-        loading="eager"
+        width={560}
+        height={700}
+        densities={[1, 2]}
+        loading="lazy"
+        decoding="async"
       />
     </div>
 

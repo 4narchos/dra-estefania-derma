@@ -70,6 +70,8 @@ const reviews = [
   },
 ];
 
+const displayReviews = reviews.slice(0, 4);
+
 ---
 
 <section class="reviews" id="opiniones">
@@ -81,7 +83,7 @@ const reviews = [
 
     <div class="reviews-marquee" aria-label="Opiniones de pacientes">
       <div class="reviews-track">
-        {reviews.map((review) => (
+        {displayReviews.map((review) => (
           <article class="reviews-item">
             <header class="reviews-item-header">
               <span class="reviews-avatar">{review.avatar}</span>
@@ -104,7 +106,7 @@ const reviews = [
             </footer>
           </article>
         ))}
-        {reviews.map((review) => (
+        {displayReviews.map((review) => (
           <article class="reviews-item" aria-hidden="true">
             <header class="reviews-item-header">
               <span class="reviews-avatar">{review.avatar}</span>

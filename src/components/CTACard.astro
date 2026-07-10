@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import {
   doctoraliaUrl,
   mapsLinkMain,
@@ -7,7 +8,7 @@ import {
 } from "../data/site.js";
 
 interface Props {
-  imageSrc: string;
+  imageSrc: ImageMetadata;
   imageAlt: string;
   title?: string;
   locationHref?: string;
@@ -36,13 +37,15 @@ const {
     target="_blank"
     rel="noopener noreferrer"
   >
-    <img
+    <Image
       src={imageSrc}
       alt={imageAlt}
       class="cta-card-img"
-      width="460"
-      height="260"
-      loading="eager"
+      width={220}
+      height={220}
+      densities={[1, 2]}
+      loading="lazy"
+      decoding="async"
     />
     <p class="cta-card-title">{title}</p>
   </a>
