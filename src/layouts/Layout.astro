@@ -226,6 +226,22 @@ const servicesListSchema = {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 
+    <!-- Precargar fuentes críticas para evitar FOUT en el LCP -->
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgEM86xQ.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/junicode/JunicodeVF-Roman.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
     <!-- Doctoralia widget resources (solo dns-prefetch; el script se carga bajo demanda) -->
     <link rel="dns-prefetch" href="https://platform.docplanner.com" />
     <link rel="dns-prefetch" href="https://www.doctoralia.com.mx" />
