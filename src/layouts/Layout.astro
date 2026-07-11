@@ -511,6 +511,8 @@ const servicesListSchema = {
       .page-preloader {
         position: fixed;
         inset: 0;
+        width: 100%;
+        min-height: 100dvh;
         z-index: 9999;
         background: #000C1E;
         display: flex;
@@ -523,7 +525,7 @@ const servicesListSchema = {
         width: 40px;
         height: 40px;
         border: 3px solid rgba(245, 245, 240, 0.2);
-        border-top-color: var(--color-accent);
+        border-top-color: #C4B896;
         border-radius: 50%;
         animation: preloader-spin 1s linear infinite;
       }
@@ -540,24 +542,8 @@ const servicesListSchema = {
 
       html.is-preloading,
       html.is-preloading body {
+        height: 100%;
         overflow: hidden;
-      }
-
-      /* Contenido se revela suavemente cuando el preloader termina */
-      .page-wrapper {
-        opacity: 0;
-        transition: opacity 0.4s ease;
-      }
-
-      html.is-loaded .page-wrapper {
-        opacity: 1;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .page-preloader,
-        .page-wrapper {
-          transition: none;
-        }
       }
     </style>
 
