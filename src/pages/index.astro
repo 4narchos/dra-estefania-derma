@@ -1,4 +1,5 @@
 ---
+import { getImage } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import Presentation from "../components/Presentation.astro";
@@ -9,11 +10,56 @@ import ValueProposition from "../components/ValueProposition.astro";
 import ReviewsSection from "../components/ReviewsSection.astro";
 import ContactSection from "../components/ContactSection.astro";
 
+import heroMelasmaMobile from "../assets/images/hero-melasma-mobile.webp";
+import heroAcneMobile from "../assets/images/hero-acne-mobile.webp";
+
+import { getBaseUrl } from "../utils/baseUrl.js";
+
+const baseUrl = getBaseUrl();
+
 const title = "Dermatóloga en Mérida · Tu piel te habla, y yo te ayudo a entenderla ✨";
 const description = "Dermatóloga en Mérida. Especialista en tricología, acné y dermatología estética. Tu salud con resultados estéticos y naturales. Agenda tu cita aquí.";
+
+// Precargar sólo los recursos críticos above-the-fold en mobile.
+// Las imágenes del centro del collage son las más visibles junto al título.
+const [melasmaImg, acneImg] = await Promise.all([
+  getImage({ src: heroMelasmaMobile, width: 300, height: 300 }),
+  getImage({ src: heroAcneMobile, width: 300, height: 300 }),
+]);
+
+const criticalPreloads = [
+  {
+    href: `${baseUrl}images/header banner.webp`,
+    as: "image",
+    type: "image/webp",
+    media: "(max-width: 768px)",
+    fetchpriority: "high",
+  },
+  {
+    href: `${baseUrl}images/header banner desktop.webp`,
+    as: "image",
+    type: "image/webp",
+    media: "(min-width: 769px)",
+    fetchpriority: "high",
+  },
+  {
+    href: melasmaImg.src,
+    as: "image",
+    type: "image/webp",
+    media: "(max-width: 768px)",
+    fetchpriority: "high",
+  },
+  {
+    href: acneImg.src,
+    as: "image",
+    type: "image/webp",
+    media: "(max-width: 768px)",
+    fetchpriority: "high",
+  },
+];
 ---
 
-<Layout title={title} description={description} pageSchema="home">
+<Layout title={title} description={description} pageSchema="home" criticalPreloads={criticalPreloads}>
   <div class="page-home">
     <Hero />
     <Presentation />

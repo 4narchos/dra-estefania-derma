@@ -27,6 +27,13 @@ interface Props {
   showWhatsApp?: boolean;
   showShare?: boolean;
   pageSchema?: "home" | "about" | "services" | "contact" | "none";
+  criticalPreloads?: Array<{
+    href: string;
+    as: string;
+    type?: string;
+    media?: string;
+    fetchpriority?: string;
+  }>;
 }
 
 const {
@@ -39,6 +46,7 @@ const {
   showWhatsApp = true,
   showShare = true,
   pageSchema = "none",
+  criticalPreloads = [],
 } = Astro.props;
 
 const baseUrl = getBaseUrl();
@@ -250,6 +258,18 @@ const servicesListSchema = {
       type="font/woff2"
       crossorigin
     />
+
+    <!-- Precargar recursos críticos above-the-fold (sólo si la página los define) -->
+    {criticalPreloads.map((preload) => (
+      <link
+        rel="preload"
+        href={preload.href}
+        as={preload.as}
+        type={preload.type}
+        media={preload.media}
+        fetchpriority={preload.fetchpriority}
+      />
+    ))}
 
     <!-- Doctoralia widget resources (solo dns-prefetch; el script se carga bajo demanda) -->
     <link rel="dns-prefetch" href="https://platform.docplanner.com" />
