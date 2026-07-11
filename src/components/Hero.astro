@@ -474,33 +474,13 @@ const mobileBottom = [
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
   if (!prefersReducedMotion) {
-    // Carga GSAP de forma diferida para no bloquear el primer paint
-    const loadAnimations = async () => {
-      const { gsap } = await import("../utils/animations.js");
-      const hero = document.querySelector(".hero");
-
-      // Oculta el indicador de scroll hasta su aparición programada
-      gsap.set(".mouse-btn", { opacity: 0 });
-
-      if (isMobile) {
-        // Mobile: título animado primero, luego collage en semiluna
-        const mobileEntrance = gsap.timeline({
-          defaults: { ease: "power3.out" },
-          delay: 1.9,
-        });
-        mobileEntrance
-          .from(".hero-title .hero-word", { opacity: 0, filter: "blur(10px)", scale: 1.02, duration: 0.6, stagger: 0.15 })
-          .from(".collage-row--top .collage-item--center, .collage-row--bottom .collage-item--center", { opacity: 0, scale: 0.8, duration: 0.7 }, "-=0.2")
-          .from(".collage-row--top .collage-item--side, .collage-row--bottom .collage-item--side:not(.collage-item--empty)", { opacity: 0, scale: 0.8, duration: 0.7, stagger: 0.08 }, "-=0.4");
-      } else {
-        // Desktop: título animado primero, luego carrusel
-        const entrance = gsap.timeline({
-          defaults: { ease: "power3.out" },
-          delay: 1.9,
-        });
-        entrance
-          .from(".hero-collage-wrap", { opacity: 0, y: 60, duration: 1 }, 0)
-          .from(".collage-item", { opacity: 0, duration: 1, stagger: { each: 0.12, from: "center" } }, "<");
+    // El texto y el collage tienen animación de entrada con CSS puro para evitar parpadeo.
+    // GSAP solo se carga bajo demanda para el parallax del título en desktop.
+    if (!isMobile) {
+      const loadParallax = async () => {
+        const { gsap } = await import("../utils/animations.js");
+        const hero = document.querySelector(".hero");
+        if (!hero) return;
 
         gsap.to(".hero-title-wrapper", {
           scrollTrigger: {
@@ -514,24 +494,37 @@ const mobileBottom = [
           y: -30,
           ease: "none",
         });
-      }
-
-      // Indicador de scroll aparece 3s después de que cargue la página
-      const showMouseBtn = () => {
-        gsap.to(".mouse-btn", { opacity: 1, duration: 0.6 });
       };
 
+      if ("IntersectionObserver" in window) {
+        const obs = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((e) => e.isIntersecting)) {
+              obs.disconnect();
+              loadParallax();
+            }
+          },
+          { rootMargin: "0px", threshold: 0 }
+        );
+        obs.observe(document.querySelector(".hero"));
+      } else {
+        loadParallax();
+      }
+    }
+
+    // Indicador de scroll: animación CSS existente, sin depender de GSAP
+    const mouseBtn = document.querySelector(".mouse-btn");
+    if (mouseBtn) {
+      mouseBtn.style.opacity = "0";
+      const showMouseBtn = () => {
+        mouseBtn.style.transition = "opacity 0.6s ease";
+        mouseBtn.style.opacity = "1";
+      };
       if (document.readyState === "complete") {
         setTimeout(showMouseBtn, 3000);
       } else {
         window.addEventListener("load", () => setTimeout(showMouseBtn, 3000));
       }
-    };
-
-    if ("requestIdleCallback" in window) {
-      requestIdleCallback(loadAnimations, { timeout: 1200 });
-    } else {
-      setTimeout(loadAnimations, 200);
     }
   }
 </script>
