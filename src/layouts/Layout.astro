@@ -515,10 +515,9 @@ const servicesListSchema = {
         min-height: 100dvh;
         z-index: 9999;
         background: #000C1E;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
+        display: grid;
+        place-items: center;
+        transition: opacity 0.35s ease 0.2s, visibility 0s linear 0.55s;
       }
 
       .page-preloader__spinner {
@@ -544,6 +543,23 @@ const servicesListSchema = {
       html.is-preloading body {
         height: 100%;
         overflow: hidden;
+      }
+
+      /* Contenido se revela suavemente cuando el preloader termina */
+      .page-wrapper {
+        opacity: 0;
+        transition: opacity 0.35s ease;
+      }
+
+      html.is-loaded .page-wrapper {
+        opacity: 1;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .page-preloader,
+        .page-wrapper {
+          transition: none;
+        }
       }
     </style>
 
