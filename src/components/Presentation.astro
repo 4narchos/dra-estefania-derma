@@ -55,7 +55,9 @@ const menuItems = [
   </div>
 
   <div class="presentation-content">
-    <PillMenu variant="presentation" items={menuItems} ariaLabel="Acciones principales" />
+    <div class="presentation-menu">
+      <PillMenu variant="presentation" items={menuItems} ariaLabel="Acciones principales" />
+    </div>
   </div>
 </section>
 
@@ -268,7 +270,7 @@ const menuItems = [
   @media (max-width: 640px) {
     .presentation {
       align-items: stretch;
-      height: calc(100dvh - var(--header-height));
+      min-height: calc(100dvh - var(--header-height));
     }
 
     .presentation-header {
@@ -395,12 +397,13 @@ const menuItems = [
       align-items: center;
       width: 100%;
       height: 100%;
-      padding: 0 var(--space-4) 0;
+      min-height: calc(100dvh - var(--header-height));
+      padding: 0 var(--space-4) var(--space-6);
       gap: 0;
     }
 
-    .presentation-content .pill-menu {
-      margin-bottom: var(--space-6);
+    .presentation-menu {
+      transform: translateY(calc(var(--space-5) * -1));
     }
   }
 
