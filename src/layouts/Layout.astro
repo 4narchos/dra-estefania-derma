@@ -506,16 +506,127 @@ const servicesListSchema = {
         font-style: italic;
         font-display: swap;
       }
+    <style is:global>
+      /* Preloader */
+      .page-preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: #000C1E;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+
+      .page-preloader__spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(245, 245, 240, 0.2);
+        border-top-color: var(--color-accent);
+        border-radius: 50%;
+        animation: preloader-spin 1s linear infinite;
+      }
+
+      @keyframes preloader-spin {
+        to { transform: rotate(360deg); }
+      }
+
+      html.is-loaded .page-preloader {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      html.is-preloading,
+      html.is-preloading body {
+        overflow: hidden;
+      }
+
+      /* Contenido se revela suavemente cuando el preloader termina */
+      .page-wrapper {
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      html.is-loaded .page-wrapper {
+        opacity: 1;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .page-preloader,
+        .page-wrapper {
+          transition: none;
+        }
+      }
     </style>
+
+    <script is:inline define:vars={{ criticalPreloadUrls: criticalPreloads.map(p => p.href) }}>
+      (function () {
+        const html = document.documentElement;
+        if (html.classList.contains('is-loaded') || html.classList.contains('is-preloading')) return;
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) {
+          html.classList.add('is-loaded');
+          return;
+        }
+
+        html.classList.add('is-preloading');
+
+        const promises = [];
+        const maxWait = 2800;
+
+        // Esperar fuentes críticas
+        if ('fonts' in document) {
+          const criticalFonts = [
+            { family: "'Playfair Display'", weight: '600' },
+            { family: "'Inter'", weight: '400' },
+            { family: "'Inter'", weight: '600' },
+          ];
+          criticalFonts.forEach((font) => {
+            promises.push(document.fonts.load(font.weight + ' 16px ' + font.family).catch(() => {}));
+          });
+        }
+
+        // Esperar imágenes críticas precargadas
+        criticalPreloadUrls.forEach((url) => {
+          if (!url || url.endsWith('.woff2')) return;
+          promises.push(
+            new Promise((resolve) => {
+              const img = new Image();
+              img.onload = resolve;
+              img.onerror = resolve;
+              img.src = url;
+            })
+          );
+        });
+
+        const timeout = new Promise((resolve) => setTimeout(resolve, maxWait));
+
+        Promise.race([Promise.all(promises), timeout]).then(() => {
+          requestAnimationFrame(() => {
+            html.classList.remove('is-preloading');
+            html.classList.add('is-loaded');
+          });
+        });
+      })();
+    </script>
   </head>
   <body>
-    {showHeader && <Header currentPath={Astro.url.pathname} />}
-    <main>
-      <slot />
-    </main>
-    {showFooter && <Footer />}
-    {showWhatsApp && <WhatsAppSticky />}
-    {showShare && <ShareSticky />}
-    <DoctoraliaModal />
+    <div class="page-preloader" aria-hidden="true">
+      <div class="page-preloader__spinner"></div>
+    </div>
+
+    <div class="page-wrapper">
+      {showHeader && <Header currentPath={Astro.url.pathname} />}
+      <main>
+        <slot />
+      </main>
+      {showFooter && <Footer />}
+      {showWhatsApp && <WhatsAppSticky />}
+      {showShare && <ShareSticky />}
+      <DoctoraliaModal />
+    </div>
   </body>
 </html>

@@ -163,14 +163,17 @@ const mobileBottom = [
     opacity: 0;
     filter: blur(10px);
     transform: scale(1.02);
+  }
+
+  html.is-loaded .hero-word {
     animation: hero-blur-in 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
   }
 
-  .hero-title-line--1 .hero-word:nth-child(1) { animation-delay: 0.2s; }
-  .hero-title-line--1 .hero-word:nth-child(2) { animation-delay: 0.35s; }
+  html.is-loaded .hero-title-line--1 .hero-word:nth-child(1) { animation-delay: 0.2s; }
+  html.is-loaded .hero-title-line--1 .hero-word:nth-child(2) { animation-delay: 0.35s; }
 
-  .hero-title-line--2 .hero-word:nth-child(1) { animation-delay: 1.0s; }
-  .hero-title-line--2 .hero-word:nth-child(2) { animation-delay: 1.15s; }
+  html.is-loaded .hero-title-line--2 .hero-word:nth-child(1) { animation-delay: 1.0s; }
+  html.is-loaded .hero-title-line--2 .hero-word:nth-child(2) { animation-delay: 1.15s; }
 
   @keyframes hero-blur-in {
     from {
@@ -259,6 +262,9 @@ const mobileBottom = [
     box-shadow: 0 16px 50px rgba(0, 0, 0, 0.4);
     opacity: 0;
     transform: scale(0.88);
+  }
+
+  html.is-loaded .collage-image {
     animation: collage-image-enter 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
   }
 
@@ -274,18 +280,18 @@ const mobileBottom = [
   }
 
   /* Stagger de entrada: desde el centro hacia los lados */
-  .hero-collage--desktop .collage-item--3 .collage-image { animation-delay: 1.35s; }
-  .hero-collage--desktop .collage-item--2 .collage-image,
-  .hero-collage--desktop .collage-item--4 .collage-image { animation-delay: 1.48s; }
-  .hero-collage--desktop .collage-item--1 .collage-image,
-  .hero-collage--desktop .collage-item--5 .collage-image { animation-delay: 1.6s; }
+  html.is-loaded .hero-collage--desktop .collage-item--3 .collage-image { animation-delay: 1.35s; }
+  html.is-loaded .hero-collage--desktop .collage-item--2 .collage-image,
+  html.is-loaded .hero-collage--desktop .collage-item--4 .collage-image { animation-delay: 1.48s; }
+  html.is-loaded .hero-collage--desktop .collage-item--1 .collage-image,
+  html.is-loaded .hero-collage--desktop .collage-item--5 .collage-image { animation-delay: 1.6s; }
 
-  .collage-row--top .collage-item--center .collage-image { animation-delay: 1.35s; }
-  .collage-row--bottom .collage-item--center .collage-image { animation-delay: 1.45s; }
-  .collage-row--top .collage-item--side:nth-child(1) .collage-image { animation-delay: 1.55s; }
-  .collage-row--top .collage-item--side:nth-child(3) .collage-image { animation-delay: 1.62s; }
-  .collage-row--bottom .collage-item--side:nth-child(1) .collage-image { animation-delay: 1.68s; }
-  .collage-row--bottom .collage-item--side:nth-child(3) .collage-image { animation-delay: 1.75s; }
+  html.is-loaded .collage-row--top .collage-item--center .collage-image { animation-delay: 1.35s; }
+  html.is-loaded .collage-row--bottom .collage-item--center .collage-image { animation-delay: 1.45s; }
+  html.is-loaded .collage-row--top .collage-item--side:nth-child(1) .collage-image { animation-delay: 1.55s; }
+  html.is-loaded .collage-row--top .collage-item--side:nth-child(3) .collage-image { animation-delay: 1.62s; }
+  html.is-loaded .collage-row--bottom .collage-item--side:nth-child(1) .collage-image { animation-delay: 1.68s; }
+  html.is-loaded .collage-row--bottom .collage-item--side:nth-child(3) .collage-image { animation-delay: 1.75s; }
 
   .mouse-btn {
     position: relative;
