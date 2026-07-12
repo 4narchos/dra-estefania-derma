@@ -586,6 +586,19 @@ const servicesListSchema = {
         const perImageTimeout = 5000;
         const absoluteTimeout = 5500;
 
+        // En la home, esperar a que el componente scrolly-driven mobile esté
+        // completamente inicializado (GSAP + timeline + pines) antes de quitar
+        // el preloader. Así la página es interactiva en cuanto desaparece el
+        // spinner, no solo visible con fondos.
+        const isHome = location.pathname === '/' || location.pathname === '/index.html';
+        if (isHome) {
+          promises.push(
+            new Promise((resolve) => {
+              window.__resolveScrollyReady = resolve;
+            })
+          );
+        }
+
         // Esperar fuentes críticas
         if ('fonts' in document) {
           const criticalFonts = [

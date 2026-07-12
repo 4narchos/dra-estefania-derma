@@ -14,13 +14,26 @@ gsap.registerPlugin(ScrollTrigger);
 
 const DESKTOP_MIN = 769;
 
+function resolveScrollyReady() {
+  if (typeof window !== "undefined" && window.__resolveScrollyReady) {
+    window.__resolveScrollyReady();
+    window.__resolveScrollyReady = null;
+  }
+}
+
 export function initHomeIntroScrollMobile() {
   // Solo mobile.
-  if (window.innerWidth >= DESKTOP_MIN) return;
+  if (window.innerWidth >= DESKTOP_MIN) {
+    resolveScrollyReady();
+    return;
+  }
 
   const html = document.documentElement;
   const section = document.querySelector(".home-intro-scroll-mobile");
-  if (!section) return;
+  if (!section) {
+    resolveScrollyReady();
+    return;
+  }
 
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
@@ -29,6 +42,7 @@ export function initHomeIntroScrollMobile() {
   // En reduced motion mostramos directamente el estado final.
   if (prefersReducedMotion) {
     section.classList.add("is-static");
+    resolveScrollyReady();
     return;
   }
 
@@ -391,6 +405,10 @@ async function loadAndInit(section) {
     img.addEventListener("load", fadeIn, { once: true });
     img.addEventListener("error", fadeIn, { once: true });
   });
+
+  // El componente scrolly-driven ya está completamente inicializado: GSAP,
+  // pines, timelines y fallback de imágenes. Avisamos al preloader.
+  resolveScrollyReady();
 
   // Refrescar cálculos si el usuario rota el dispositivo.
   const handleOrientationChange = () => {
