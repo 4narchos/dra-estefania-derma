@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getWhatsAppUrl, doctoraliaUrl } from "../data/site.js";
+import { getWhatsAppUrl, doctoraliaUrl, consultationPrice } from "../data/site.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
 import PillMenu from "../components/PillMenu.astro";
 import LocationWidgetMain from "../components/LocationWidgetMain.astro";
@@ -29,8 +29,13 @@ const faqItems = [
   {
     title: "¿Cómo debo prepararme para la consulta?",
     content: [
-      "Lleva una lista de tus productos favoritos y los que utilizas, anota tus preguntas y, si es posible, fotografías previas de tus lesiones.",
-      "Si tu problema de piel es en el rostro, el maquillaje dificulta la valoración. Asiste con la piel limpia y sin productos.",
+      "Para aprovechar tu consulta al máximo, sugerimos seguir estas indicaciones:",
+    ],
+    bullets: [
+      "Si el motivo de consulta es en el rostro, asiste con la piel completamente limpia, sin maquillaje ni otros productos, ya que dificultan la valoración de las lesiones.",
+      "Lleva una lista de productos o medicamentos que uses o hayas usado.",
+      "Anota tus preguntas para asegurar que todas tus inquietudes sean abordadas durante la consulta.",
+      "Llega a la hora programada. Tenemos un margen máximo de tolerancia de 15 minutos para asegurar la calidad de atención de todos los pacientes.",
     ],
   },
   {
@@ -53,18 +58,22 @@ const faqItems = [
     ],
   },
   {
-    title: "¿Puedo quitarme un quiste, lunar o verruga el mismo día de la consulta?",
+    title: "¿Puedo remover una lesión (quiste, lunar, verruga) el mismo día de la consulta?",
     content: [
-      "Hay lesiones simples para las que se puede programar una cirugía desde la primera valoración.",
-      "No obstante, algunas lesiones requieren una valoración previa.",
+      "Todo procedimiento dermatológico requiere una valoración inicial para determinar qué se adapta mejor a tu caso.",
+      "Algunas lesiones de baja complejidad pueden tratarse durante la misma sesión. Sin embargo, si la lesión requiere una intervención más compleja, el procedimiento se programará para una fecha posterior.",
     ],
   },
   {
-    title: "¿Dónde puedo resolver dudas sobre mi receta?",
-    content: ["Puedes enviarme un mensaje. Estaré encantada de resolver tus dudas."],
+    title: "¿Cuál es el costo de la consulta?",
+    content: [`La valoración de especialidad tiene un costo de ${consultationPrice}.`],
+  },
+  {
+    title: "¿Dónde puedo resolver dudas sobre mi tratamiento?",
+    content: ["Puedes enviarme un mensaje. Con gusto resolveré tus dudas."],
     cta: {
       label: "Enviar mensaje",
-      href: getWhatsAppUrl({ medium: "faqs_receta", campaign: "faqs" }),
+      href: getWhatsAppUrl({ medium: "faqs_tratamiento", campaign: "faqs" }),
     },
   },
 ];
@@ -115,6 +124,13 @@ const menuItems = [
                     {item.content.map((paragraph) => (
                       <p>{paragraph}</p>
                     ))}
+                    {item.bullets && (
+                      <ul class="faqs-bullets">
+                        {item.bullets.map((bullet) => (
+                          <li>{bullet}</li>
+                        ))}
+                      </ul>
+                    )}
                     {item.widget === "location" && <LocationWidgetMain dark />}
                     {item.cta && (
                       <p>
@@ -311,6 +327,22 @@ const menuItems = [
   }
 
   .faqs-accordion-body p:last-child {
+    padding-bottom: 0;
+  }
+
+  .faqs-bullets {
+    list-style: disc;
+    padding-left: var(--space-6);
+    margin: 0 0 var(--space-5);
+    color: rgba(245, 245, 240, 0.8);
+    line-height: var(--leading-relaxed);
+  }
+
+  .faqs-bullets li {
+    padding-bottom: var(--space-3);
+  }
+
+  .faqs-bullets li:last-child {
     padding-bottom: 0;
   }
 
