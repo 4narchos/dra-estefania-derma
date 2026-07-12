@@ -8,6 +8,7 @@ interface Props {
   compact?: boolean;
   href?: string;
   address?: string;
+  dark?: boolean;
 }
 
 const {
@@ -16,10 +17,11 @@ const {
   compact = true,
   href = mapsLinkMain,
   address = mainAddress,
+  dark = false,
 } = Astro.props;
 ---
 
-<div class="location-widget-main">
+<div class:list={["location-widget-main", { "location-widget-main--dark": dark }]}>
   <p class="location-widget-address">{address}</p>
   <a
     href={href}
@@ -43,6 +45,10 @@ const {
     color: inherit;
     margin: 0 0 var(--space-3);
     text-align: center;
+  }
+
+  .location-widget-main--dark .location-widget-address {
+    color: var(--color-text-on-dark);
   }
 
   .location-widget-main-link {
