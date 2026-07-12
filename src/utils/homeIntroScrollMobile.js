@@ -11,11 +11,16 @@ const DESKTOP_MIN = 769;
 
 export function initHomeIntroScrollMobile() {
   // Solo mobile.
-  if (window.innerWidth >= DESKTOP_MIN) return;
+  if (window.innerWidth >= DESKTOP_MIN) {
+    markReady();
+    return;
+  }
 
-  const html = document.documentElement;
   const section = document.querySelector(".home-intro-scroll-mobile");
-  if (!section) return;
+  if (!section) {
+    markReady();
+    return;
+  }
 
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
@@ -24,23 +29,21 @@ export function initHomeIntroScrollMobile() {
   // En reduced motion mostramos directamente el estado final.
   if (prefersReducedMotion) {
     section.classList.add("is-static");
+    markReady();
     return;
   }
 
-  const start = () => {
-    loadAndInit(section);
-  };
+  // Inicializamos inmediatamente (sin esperar is-loaded) para que el pin de
+  // ScrollTrigger se monte antes de que el preloader revele la página y las
+  // animaciones CSS del hero comiencen. Así evitamos que el re-emparentado del
+  // DOM reinicie esas animaciones.
+  loadAndInit(section).then(markReady).catch(markReady);
+}
 
-  if (html.classList.contains("is-loaded")) {
-    start();
-  } else {
-    const observer = new MutationObserver(() => {
-      if (html.classList.contains("is-loaded")) {
-        observer.disconnect();
-        start();
-      }
-    });
-    observer.observe(html, { attributes: true, attributeFilter: ["class"] });
+function markReady() {
+  window.__homeIntroReady = true;
+  if (typeof Event === "function") {
+    window.dispatchEvent(new Event("homeIntroReady"));
   }
 }
 
@@ -118,6 +121,18 @@ async function loadAndInit(section) {
   gsap.set(bg, { backgroundColor: "#041322" });
 
   const ctx = gsap.context(() => {
+    // Fijamos el stage con ScrollTrigger. Se hace antes de que el preloader
+    // quite la opacidad, así el re-emparentado del DOM no reinicia las
+    // animaciones CSS de entrada del hero.
+    ScrollTrigger.create({
+      trigger: track,
+      start: scrollStart,
+      end: "bottom bottom",
+      pin: stage,
+      pinSpacing: false,
+      anticipatePin: 1,
+    });
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: track,
