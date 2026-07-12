@@ -37,6 +37,7 @@ const [
   acneImg,
   rosaceaImg,
   draPresentationImg,
+  draPresentationImg2x,
 ] = await Promise.all([
   getImage({ src: heroAlopeciaMobile, width: 300, height: 300 }),
   getImage({ src: heroMelasmaMobile, width: 300, height: 300 }),
@@ -45,6 +46,7 @@ const [
   getImage({ src: heroAcneMobile, width: 300, height: 300 }),
   getImage({ src: heroRosaceaMobile, width: 300, height: 300 }),
   getImage({ src: draPresentationMobile, width: 600, height: 900 }),
+  getImage({ src: draPresentationMobile, width: 1200, height: 1800 }),
 ]);
 
 const mobileScrollyImages = [
@@ -54,7 +56,6 @@ const mobileScrollyImages = [
   arrugasImg,
   acneImg,
   rosaceaImg,
-  draPresentationImg,
 ];
 
 const criticalPreloads = [
@@ -79,6 +80,15 @@ const criticalPreloads = [
     media: "(max-width: 768px)",
     fetchpriority: "high",
   })),
+  {
+    href: draPresentationImg.src,
+    as: "image",
+    type: "image/webp",
+    media: "(max-width: 768px)",
+    fetchpriority: "high",
+    srcset: `${draPresentationImg.src} 1x, ${draPresentationImg2x.src} 2x`,
+    sizes: "100vw",
+  },
 ];
 ---
 

@@ -270,6 +270,8 @@ const servicesListSchema = {
         type={preload.type}
         media={preload.media}
         fetchpriority={preload.fetchpriority}
+        imagesrcset={preload.srcset}
+        imagesizes={preload.sizes}
       />
     ))}
 
@@ -581,7 +583,8 @@ const servicesListSchema = {
         html.classList.add('is-preloading');
 
         const promises = [];
-        const maxWait = 15000;
+        const perImageTimeout = 15000;
+        const absoluteTimeout = 30000;
 
         // Esperar fuentes críticas
         if ('fonts' in document) {
@@ -596,21 +599,31 @@ const servicesListSchema = {
           });
         }
 
+        // Carga una imagen crítica con timeout individual, respetando srcset
+        // para que el navegador descargue la densidad correcta (ej. 2x).
+        function loadImage(item) {
+          return new Promise((resolve) => {
+            const timer = setTimeout(resolve, perImageTimeout);
+            const img = new Image();
+            img.onload = () => { clearTimeout(timer); resolve(); };
+            img.onerror = () => { clearTimeout(timer); resolve(); };
+            if (item.srcset) {
+              img.srcset = item.srcset;
+              img.sizes = item.sizes || '100vw';
+            } else {
+              img.src = item.href;
+            }
+          });
+        }
+
         // Esperar imágenes críticas precargadas (respetando el media query)
         criticalPreloadsData.forEach((item) => {
           if (!item || !item.href || item.href.endsWith('.woff2')) return;
           if (item.media && !window.matchMedia(item.media).matches) return;
-          promises.push(
-            new Promise((resolve) => {
-              const img = new Image();
-              img.onload = resolve;
-              img.onerror = resolve;
-              img.src = item.href;
-            })
-          );
+          promises.push(loadImage(item));
         });
 
-        const timeout = new Promise((resolve) => setTimeout(resolve, maxWait));
+        const timeout = new Promise((resolve) => setTimeout(resolve, absoluteTimeout));
 
         Promise.race([Promise.all(promises), timeout]).then(() => {
           requestAnimationFrame(() => {
