@@ -118,18 +118,6 @@ async function loadAndInit(section) {
   gsap.set(bg, { backgroundColor: "#041322" });
 
   const ctx = gsap.context(() => {
-    // Fijamos el stage con ScrollTrigger en lugar de depender de position:sticky.
-    // En iOS esto evita el “temblor” propio del repaint de elementos sticky
-    // cuando el scroll con momentum rebota.
-    ScrollTrigger.create({
-      trigger: track,
-      start: scrollStart,
-      end: "bottom bottom",
-      pin: stage,
-      pinSpacing: false,
-      anticipatePin: 1,
-    });
-
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: track,
