@@ -1,12 +1,13 @@
 ---
 import MapWidget from "./MapWidget.astro";
-import { googleMapsEmbedSrc, mapsLinkMain } from "../data/site.js";
+import { googleMapsEmbedSrc, mapsLinkMain, mainAddress } from "../data/site.js";
 
 interface Props {
   src?: string;
   title?: string;
   compact?: boolean;
   href?: string;
+  address?: string;
 }
 
 const {
@@ -14,10 +15,12 @@ const {
   title = "Ubicación del consultorio",
   compact = true,
   href = mapsLinkMain,
+  address = mainAddress,
 } = Astro.props;
 ---
 
 <div class="location-widget-main">
+  <p class="location-widget-address">{address}</p>
   <a
     href={href}
     target="_blank"
@@ -32,6 +35,14 @@ const {
 <style>
   .location-widget-main {
     margin-top: var(--space-2);
+  }
+
+  .location-widget-address {
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    color: inherit;
+    margin: 0 0 var(--space-3);
+    text-align: center;
   }
 
   .location-widget-main-link {

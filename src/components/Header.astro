@@ -94,6 +94,9 @@ function isActive(linkPath: string): boolean {
           </a>
         </li>
       ))}
+      <li class="nav-menu-cta nav-menu-cta--mobile" role="none">
+        <AgendarButton variant="mobile" />
+      </li>
       <li class="nav-menu-widget nav-menu-widget--mobile" role="none">
         <LocationWidgetMain />
       </li>
@@ -230,7 +233,8 @@ function isActive(linkPath: string): boolean {
 
   .nav-link--mobile-only,
   .nav-item--mobile-only,
-  .nav-menu-widget--mobile {
+  .nav-menu-widget--mobile,
+  .nav-menu-cta--mobile {
     display: none;
   }
 
@@ -317,8 +321,18 @@ function isActive(linkPath: string): boolean {
 
     .nav-link--mobile-only,
     .nav-item--mobile-only,
-    .nav-menu-widget--mobile {
+    .nav-menu-widget--mobile,
+    .nav-menu-cta--mobile {
       display: block;
+    }
+
+    .nav-menu-cta {
+      margin-top: var(--space-2);
+      width: 100%;
+    }
+
+    .nav-menu-cta .agendar-button--mobile {
+      width: 100%;
     }
 
     .nav-menu-widget {
