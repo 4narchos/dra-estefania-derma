@@ -334,21 +334,53 @@ function isActive(linkPath: string): boolean {
     const toggle = document.querySelector(".nav-toggle");
     const menu = document.querySelector(".nav-menu");
 
-    if (toggle && menu) {
-      toggle.addEventListener("click", () => {
-        const isOpen = menu.classList.toggle("is-open");
-        toggle.setAttribute("aria-expanded", String(isOpen));
-        toggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
-      });
+    if (!toggle || !menu) return;
 
-      menu.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          menu.classList.remove("is-open");
-          toggle.setAttribute("aria-expanded", "false");
-          toggle.setAttribute("aria-label", "Abrir menú");
-        });
-      });
-    }
+    let scrollY = 0;
 
+    const setMenuOpen = (isOpen) => {
+      if (isOpen) {
+        scrollY = window.scrollY;
+        document.body.style.position = "fixed";
+        document.body.style.top = `-${scrollY}px`;
+        document.body.style.left = "0";
+        document.body.style.right = "0";
+        document.body.classList.add("menu-is-open");
+      } else {
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
+        document.body.classList.remove("menu-is-open");
+        window.scrollTo(0, scrollY);
+      }
+    };
+
+    const closeMenu = () => {
+      if (!menu.classList.contains("is-open")) return;
+      menu.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Abrir menú");
+      setMenuOpen(false);
+    };
+
+    toggle.addEventListener("click", () => {
+      const isOpen = menu.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      toggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+      setMenuOpen(isOpen);
+    });
+
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) closeMenu();
+    });
   })();
 </script>
