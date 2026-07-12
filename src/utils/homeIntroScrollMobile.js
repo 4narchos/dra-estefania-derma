@@ -188,7 +188,7 @@ async function loadAndInit(section) {
     );
 
     // 25-40%: texto "Yo te ayudo a entenderla" aparece en el centro del stage
-    // y se mantiene ahí un momento sobre el fondo azul.
+    // y se mantiene ahí hasta el 45% para que el mensaje se lea completo.
     tl.to(
       presTitle,
       {
@@ -200,7 +200,7 @@ async function loadAndInit(section) {
       0.25
     );
 
-    // 40-55%: el texto sube hacia el header, y a la vez aparecen el header
+    // 45-60%: el texto sube hacia el header, y a la vez aparecen el header
     // azul y la foto de la Dra. con zoom in + fade in. Todo sobre el fondo azul.
     tl.to(
       presTitle,
@@ -209,7 +209,7 @@ async function loadAndInit(section) {
         duration: 0.15,
         ease: "none",
       },
-      0.40
+      0.45
     );
 
     tl.to(
@@ -219,7 +219,7 @@ async function loadAndInit(section) {
         duration: 0.15,
         ease: "none",
       },
-      0.40
+      0.45
     );
 
     tl.to(
@@ -230,40 +230,41 @@ async function loadAndInit(section) {
         duration: 0.15,
         ease: "none",
       },
-      0.40
+      0.45
     );
 
-    // 55-70%: el texto se desvanece y el fondo transiciona a blanco, dejando
+    // 60-70%: el texto se desvanece y el fondo transiciona a blanco, dejando
     // la foto y el header como elementos principales.
     tl.to(
       presTitle,
       {
         opacity: 0,
-        duration: 0.15,
+        duration: 0.10,
         ease: "none",
       },
-      0.55
+      0.60
     );
 
     tl.to(
       bg,
       {
         backgroundColor: "#fafafa",
-        duration: 0.15,
+        duration: 0.10,
         ease: "none",
       },
-      0.55
+      0.60
     );
 
-    // 70-85%: aparece la firma en el header.
+    // 72-82%: firma, nombre, especialidad, ubicación y menú aparecen juntos
+    // para dejar el estado final quieto un buen tramo al final del track.
     tl.to(
       presSignature,
       {
         opacity: 1,
-        duration: 0.15,
+        duration: 0.10,
         ease: "none",
       },
-      0.70
+      0.72
     );
 
     tl.to(
@@ -271,10 +272,10 @@ async function loadAndInit(section) {
       {
         opacity: 1,
         y: 0,
-        duration: 0.12,
+        duration: 0.10,
         ease: "none",
       },
-      0.73
+      0.75
     );
 
     tl.to(
@@ -282,23 +283,22 @@ async function loadAndInit(section) {
       {
         opacity: 1,
         y: 0,
-        duration: 0.1,
+        duration: 0.08,
         stagger: 0.02,
         ease: "none",
       },
-      0.78
+      0.79
     );
 
-    // 85-100%: menú inferior aparece.
     tl.to(
       presMenu,
       {
         opacity: 1,
         y: 0,
-        duration: 0.15,
+        duration: 0.10,
         ease: "none",
       },
-      0.85
+      0.75
     );
   }, section);
 
