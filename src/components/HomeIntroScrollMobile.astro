@@ -106,7 +106,34 @@ const bottomRow = [
 
       <!-- Escenario Presentación -->
       <div class="his-pres-scene">
-        <div class="his-pres-header"></div>
+        <div class="his-pres-header">
+          <div class="his-pres-signature">
+            <span class="his-pres-name" data-signature="Dra. Estefanía Borges">
+              Dra. Estefanía Borges
+            </span>
+            <div class="his-pres-row">
+              <span class="his-pres-role">DERMATÓLOGA</span>
+              <span class="his-pres-location">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Mérida</span>
+              </span>
+            </div>
+          </div>
+        </div>
 
         <h2 class="his-pres-title">
           <span class="his-pres-title-part1">Yo te ayudo a</span>
@@ -124,33 +151,6 @@ const bottomRow = [
             decoding="async"
             fetchpriority="high"
           />
-        </div>
-
-        <div class="his-pres-signature">
-          <span class="his-pres-name" data-signature="Dra. Estefanía Borges">
-            Dra. Estefanía Borges
-          </span>
-          <div class="his-pres-row">
-            <span class="his-pres-role">DERMATÓLOGA</span>
-            <span class="his-pres-location">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-              <span>Mérida</span>
-            </span>
-          </div>
         </div>
 
         <div class="his-pres-menu">
@@ -412,6 +412,12 @@ const bottomRow = [
       background: #041322;
       z-index: 4;
       opacity: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-4);
+      text-align: center;
     }
 
     .his-pres-title {
@@ -464,21 +470,19 @@ const bottomRow = [
     }
 
     .his-pres-signature {
-      position: absolute;
-      top: var(--space-6);
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 5;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
+      width: 100%;
+      max-width: 100%;
       pointer-events: none;
     }
 
     .his-pres-name {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(1.75rem, 8vw, 2.75rem);
+      font-size: clamp(2rem, 9vw, 3rem);
       font-weight: 400;
       line-height: 1.15;
       white-space: nowrap;
@@ -515,23 +519,11 @@ const bottomRow = [
 
     .his-pres-role {
       font-family: 'Inter', system-ui, sans-serif;
-      font-size: clamp(0.75rem, 3.5vw, 1.125rem);
+      font-size: clamp(0.75rem, 3.8vw, 1.125rem);
       font-weight: 600;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #F8E9A1;
-      background: linear-gradient(
-        135deg,
-        #F8E9A1 0%,
-        #FFF8D6 30%,
-        #F8E9A1 50%,
-        #E6D48A 70%,
-        #F8E9A1 100%
-      );
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: his-metal-shine 4s ease-in-out infinite;
+      color: #F5F5F0;
       will-change: transform, opacity;
     }
 
@@ -539,9 +531,9 @@ const bottomRow = [
       display: inline-flex;
       align-items: center;
       gap: var(--space-1);
-      color: #2D5E46;
+      color: #F5F5F0;
       font-family: 'Inter', system-ui, sans-serif;
-      font-size: 10px;
+      font-size: clamp(0.625rem, 3vw, 0.875rem);
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
