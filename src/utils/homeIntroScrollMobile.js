@@ -323,63 +323,73 @@ async function loadAndInit(section) {
     tl.to({}, { duration: 0.15 }, "+=0");
   }, section);
 
-  // La animación de entrada se dispara solo cuando las imágenes críticas del
-  // escenario ya están cargadas. El preloader las precarga, pero esto cubre
-  // timeouts o fallos de caché en conexiones lentas, evitando que la animación
-  // arranque sobre imágenes vacías.
-  waitForImages([...heroImages, presVisual]).then(() => {
-    const heroIntroTl = gsap.timeline({ delay: 0.2 });
+  // La animación de entrada arranca inmediatamente después del preloader.
+  // El preloader ya esperó (máx. 5 s) a que las imágenes críticas carguen;
+  // si alguna imagen aún no llegó, la animación la prepara en opacity 1 y se
+  // mostrará en cuanto termine de descargar, sin bloquear el inicio.
+  const heroIntroTl = gsap.timeline({ delay: 0.2 });
 
-    // "Tu piel" aparece primero.
-    heroIntroTl.to(
-      [heroWords[0], heroWords[1]],
-      {
-        opacity: 1,
-        filter: "blur(0px)",
-        scale: 1,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: "power2.out",
-      }
-    );
+  // "Tu piel" aparece primero.
+  heroIntroTl.to(
+    [heroWords[0], heroWords[1]],
+    {
+      opacity: 1,
+      filter: "blur(0px)",
+      scale: 1,
+      duration: 0.6,
+      stagger: 0.15,
+      ease: "power2.out",
+    }
+  );
 
-    // Pausa breve para que el mensaje "Tu piel" se asiente antes de "te habla".
-    heroIntroTl.to({}, { duration: 0.3 });
+  // Pausa breve para que el mensaje "Tu piel" se asiente antes de "te habla".
+  heroIntroTl.to({}, { duration: 0.3 });
 
-    // "te habla" aparece y, al mismo tiempo, inician las imágenes del collage.
-    heroIntroTl.to(
-      [heroWords[2], heroWords[3]],
-      {
-        opacity: 1,
-        filter: "blur(0px)",
-        scale: 1,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: "power2.out",
-      }
-    );
+  // "te habla" aparece y, al mismo tiempo, inician las imágenes del collage.
+  heroIntroTl.to(
+    [heroWords[2], heroWords[3]],
+    {
+      opacity: 1,
+      filter: "blur(0px)",
+      scale: 1,
+      duration: 0.6,
+      stagger: 0.15,
+      ease: "power2.out",
+    }
+  );
 
-    heroIntroTl.to(
-      heroImages,
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: "power2.out",
-      },
-      "<"
-    );
+  heroIntroTl.to(
+    heroImages,
+    {
+      opacity: 1,
+      scale: 1,
+      duration: 0.7,
+      stagger: 0.1,
+      ease: "power2.out",
+    },
+    "<"
+  );
 
-    heroIntroTl.to(
-      mouseBtn,
-      {
-        opacity: 1,
-        duration: 0.6,
-        ease: "power2.out",
-      },
-      "-=0.2"
-    );
+  heroIntroTl.to(
+    mouseBtn,
+    {
+      opacity: 1,
+      duration: 0.6,
+      ease: "power2.out",
+    },
+    "-=0.2"
+  );
+
+  // Fallback: si alguna imagen llega tarde (después del timeout del preloader),
+  // aseguramos que aparezca suavemente en cuanto se complete la descarga.
+  [...heroImages, presVisual].forEach((img) => {
+    if (!img) return;
+    if (img.complete && img.naturalHeight > 0) return;
+    const fadeIn = () => {
+      gsap.to(img, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" });
+    };
+    img.addEventListener("load", fadeIn, { once: true });
+    img.addEventListener("error", fadeIn, { once: true });
   });
 
   // Refrescar cálculos si el usuario rota el dispositivo.
@@ -398,18 +408,4 @@ async function loadAndInit(section) {
     window.removeEventListener("orientationchange", handleOrientationChange);
     ctx.revert();
   };
-}
-
-function waitForImages(images) {
-  return Promise.all(
-    images.map((img) => {
-      if (!img) return Promise.resolve();
-      if (img.complete && img.naturalHeight > 0) return Promise.resolve();
-      return new Promise((resolve) => {
-        const done = () => resolve();
-        img.addEventListener("load", done, { once: true });
-        img.addEventListener("error", done, { once: true });
-      });
-    })
-  );
 }

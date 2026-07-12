@@ -73,13 +73,7 @@ const criticalPreloads = [
     media: "(min-width: 769px)",
     fetchpriority: "high",
   },
-  ...mobileScrollyImages.map((img) => ({
-    href: img.src,
-    as: "image",
-    type: "image/webp",
-    media: "(max-width: 768px)",
-    fetchpriority: "high",
-  })),
+  // Imagen más importante del hook: la Dra. debe cargar sí o sí.
   {
     href: draPresentationImg.src,
     as: "image",
@@ -89,6 +83,13 @@ const criticalPreloads = [
     srcset: `${draPresentationImg.src} 1x, ${draPresentationImg2x.src} 2x`,
     sizes: "100vw",
   },
+  ...mobileScrollyImages.map((img) => ({
+    href: img.src,
+    as: "image",
+    type: "image/webp",
+    media: "(max-width: 768px)",
+    fetchpriority: "high",
+  })),
 ];
 ---
 

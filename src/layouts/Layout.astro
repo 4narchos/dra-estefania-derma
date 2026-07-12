@@ -583,8 +583,8 @@ const servicesListSchema = {
         html.classList.add('is-preloading');
 
         const promises = [];
-        const perImageTimeout = 15000;
-        const absoluteTimeout = 30000;
+        const perImageTimeout = 5000;
+        const absoluteTimeout = 5500;
 
         // Esperar fuentes críticas
         if ('fonts' in document) {
