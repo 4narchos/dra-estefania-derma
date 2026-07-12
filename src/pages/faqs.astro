@@ -1,19 +1,78 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getWhatsAppUrl } from "../data/site.js";
+import { getWhatsAppUrl, doctoraliaUrl } from "../data/site.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
+import PillMenu from "../components/PillMenu.astro";
+import LocationWidgetMain from "../components/LocationWidgetMain.astro";
 
 const base = getBaseUrl();
 
 const faqItems = [
-  { title: "¿Qué incluye la consulta?", content: "" },
-  { title: "¿Dónde está el consultorio?", content: "" },
-  { title: "¿Cómo debo prepararme para ir a la consulta?", content: "" },
-  { title: "¿Cuáles son los horarios de atención?", content: "" },
-  { title: "¿A partir de qué edad recibe pacientes?", content: "" },
-  { title: "¿Cuánto dura una consulta?", content: "" },
-  { title: "¿Puedo quitarme un quiste, lunar o verruga el mismo día de la consulta?", content: "" },
-  { title: "¿Si tengo una duda o problema con mi receta dónde puedo preguntar?", content: "" },
+  {
+    title: "¿Qué incluye la consulta?",
+    content: [
+      "La consulta incluye una valoración médica completa, y un plan de tratamiento entregado en una receta médica que el paciente puede surtir donde guste.",
+    ],
+  },
+  {
+    title: "¿Dónde está el consultorio?",
+    content: [],
+    widget: "location",
+  },
+  {
+    title: "¿Dónde puedo surtir mi receta?",
+    content: [
+      "Puedes surtir tu receta donde tú prefieras.",
+      "En la clínica también contamos con una farmacia si el paciente decide surtirla en ese momento.",
+    ],
+  },
+  {
+    title: "¿Cómo debo prepararme para ir a la consulta?",
+    content: [
+      "Lleva una lista de tus productos favoritos y los que utilizas, anota tus preguntas y si es posible lleva fotos previas de tus lesiones.",
+      "Si tu problema de la piel es en la cara, usar maquillaje dificulta la valoración. Lléva tu piel libre de productos.",
+    ],
+  },
+  {
+    title: "¿Cuáles son los horarios de atención?",
+    content: [
+      "Atendemos de 10 a 7pm de lunes a viernes.",
+      "Es necesario sacar una cita previamente.",
+    ],
+  },
+  {
+    title: "¿A partir de qué edad recibe pacientes?",
+    content: ["Vemos pacientes de todas las edades."],
+  },
+  {
+    title: "¿Cuánto dura una consulta?",
+    content: [
+      "La consulta dura 30 minutos.",
+      "Valoramos el tiempo de todos nuestros pacientes por lo que para nosotros es muy importante que las consultas siempre empiecen de forma puntual.",
+      "Sin embargo hay casos extraordinarios, como podría ser el suyo, que requieren un poco más del tiempo previsto y podrían retrasar un poco la agenda. Agradecemos su comprensión.",
+    ],
+  },
+  {
+    title: "¿Puedo quitarme un quiste, lunar o verruga el mismo día de la consulta?",
+    content: [
+      "Hay lesiones simples que se puede programar una cirugía desde la primer valoración.",
+      "Sin embargo, algunas lesiones requieren una valoración previa.",
+    ],
+  },
+  {
+    title: "¿Si tengo una duda o problema con mi receta dónde puedo preguntar?",
+    content: ["Puedes enviarme un mensaje. Estaré encantada de resolver tus dudas."],
+    cta: {
+      label: "Enviar mensaje",
+      href: getWhatsAppUrl({ medium: "faqs_receta", campaign: "faqs" }),
+    },
+  },
+];
+
+const menuItems = [
+  { label: "Ubicaciones", href: `${base}ubicaciones` },
+  { label: "Reservar cita", href: doctoraliaUrl, external: true, highlighted: true },
+  { label: "Enviar mensaje", href: getWhatsAppUrl({ medium: "faqs_bottom", campaign: "faqs" }), external: true },
 ];
 ---
 
@@ -54,7 +113,22 @@ const faqItems = [
                   aria-labelledby={`faqs-trigger-${index}`}
                 >
                   <div class="faqs-accordion-body">
-                    <p>{item.content}</p>
+                    {item.content.map((paragraph) => (
+                      <p>{paragraph}</p>
+                    ))}
+                    {item.widget === "location" && <LocationWidgetMain />}
+                    {item.cta && (
+                      <p>
+                        <a
+                          href={item.cta.href}
+                          class="faqs-body-link"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {item.cta.label}
+                        </a>
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -62,30 +136,8 @@ const faqItems = [
           }
         </div>
 
-        <div class="faqs-cta-wrapper">
-          <a
-            href={getWhatsAppUrl({ medium: "faqs" })}
-            class="faqs-cta-default"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Agendar cita por WhatsApp"
-            title="Agendar cita por WhatsApp"
-          >
-            <span class="faqs-cta-layer faqs-cta-layer--front">
-              <i aria-hidden="true" class="faqs-cta-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M6 3a1 1 0 0 1 2 0v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1zM5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9zm2 3.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0m4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 15a1 1 0 1 0 0 2 1 1 0 0 0 0-2m3 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></svg>
-              </i>
-              <span>Agendar</span>
-            </span>
-            <span class="faqs-cta-layer faqs-cta-layer--back" aria-hidden="true">
-              <i aria-hidden="true" class="faqs-cta-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-              </i>
-              <span>Enviar mensaje</span>
-            </span>
-          </a>
+        <div class="faqs-menu">
+          <PillMenu variant="contact" items={menuItems} ariaLabel="Acciones principales" />
         </div>
       </div>
     </div>
@@ -129,23 +181,6 @@ const faqItems = [
 
     item.addEventListener("mouseenter", () => openItem(item));
   });
-
-  const ctaWrapper = document.querySelector(".faqs-cta-wrapper");
-  if (ctaWrapper) {
-    let splitTimer: number;
-
-    const setSplit = (active: boolean) => {
-      clearTimeout(splitTimer);
-      splitTimer = window.setTimeout(() => {
-        ctaWrapper.classList.toggle("is-split", active);
-      }, active ? 500 : 150);
-    };
-
-    ctaWrapper.addEventListener("mouseenter", () => setSplit(true));
-    ctaWrapper.addEventListener("mouseleave", () => setSplit(false));
-    ctaWrapper.addEventListener("focusin", () => setSplit(true));
-    ctaWrapper.addEventListener("focusout", () => setSplit(false));
-  }
 </script>
 
 <style>
@@ -283,83 +318,22 @@ const faqItems = [
     min-height: 1.5em;
   }
 
-  /* Same style/animation as .nav-cta-wrapper */
-  .faqs-cta-wrapper {
-    align-self: center;
-    position: relative;
-    display: inline-flex;
+  .faqs-accordion-body p:last-child {
+    padding-bottom: 0;
   }
 
-  .faqs-cta-default {
-    --cta-bg: #325C46;
+  .faqs-body-link {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
 
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-    width: 10rem;
-    height: 2.75rem;
-    background: var(--cta-bg);
+  .faqs-body-link:hover {
     color: #fff;
-    border-radius: 999px;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background var(--transition-fast);
   }
 
-  .faqs-cta-wrapper:hover .faqs-cta-default,
-  .faqs-cta-wrapper.is-split .faqs-cta-default {
-    --cta-bg: #264839;
-  }
-
-  .faqs-cta-layer {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    white-space: nowrap;
-    transition: top 0.5s ease;
-  }
-
-  .faqs-cta-layer--front {
-    top: 0;
-  }
-
-  .faqs-cta-layer--back {
-    top: 100%;
-    font-size: clamp(0.6875rem, 1.2vw, 0.8125rem);
-  }
-
-  .faqs-cta-wrapper.is-split .faqs-cta-layer--front {
-    top: -100%;
-  }
-
-  .faqs-cta-wrapper.is-split .faqs-cta-layer--back {
-    top: 0;
-  }
-
-  .faqs-cta-icon {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 18px;
-    height: 18px;
-  }
-
-  .faqs-cta-icon svg {
-    display: block;
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
+  .faqs-menu {
+    align-self: center;
   }
 
   @media (max-width: 640px) {
@@ -375,19 +349,12 @@ const faqItems = [
       font-size: var(--text-base);
       padding: var(--space-4) 0;
     }
-
-    .faqs-cta-default {
-      width: 100%;
-      max-width: 10rem;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .faqs-accordion-panel,
     .icon-bar,
-    .faqs-accordion-trigger,
-    .faqs-cta-default,
-    .faqs-cta-layer {
+    .faqs-accordion-trigger {
       transition: none;
     }
   }

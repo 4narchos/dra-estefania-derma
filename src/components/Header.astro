@@ -1,6 +1,7 @@
 ---
 import { getBaseUrl } from "../utils/baseUrl.js";
 import AgendarButton from "./AgendarButton.astro";
+import LocationWidgetMain from "./LocationWidgetMain.astro";
 const base = getBaseUrl();
 
 interface Props {
@@ -14,6 +15,7 @@ const navLinks = [
   { label: "Acerca", href: `${base}acerca`, path: `${base}acerca` },
   { label: "Servicios", href: `${base}servicios`, path: `${base}servicios` },
   { label: "Contacto", href: `${base}contacto`, path: `${base}contacto` },
+  { label: "Preguntas frecuentes", href: `${base}faqs`, path: `${base}faqs`, mobileOnly: true },
 ];
 
 function isActive(linkPath: string): boolean {
@@ -81,10 +83,10 @@ function isActive(linkPath: string): boolean {
 
     <ul class="nav-menu" id="nav-menu" role="menubar">
       {navLinks.map((link) => (
-        <li role="none">
+        <li role="none" class:list={[{ "nav-item--mobile-only": link.mobileOnly }]}>
           <a
             href={link.href}
-            class:list={["nav-link", isActive(link.path) && "is-active"]}
+            class:list={["nav-link", isActive(link.path) && "is-active", link.mobileOnly && "nav-link--mobile-only"]}
             role="menuitem"
             aria-current={isActive(link.path) ? "page" : undefined}
           >
@@ -92,6 +94,9 @@ function isActive(linkPath: string): boolean {
           </a>
         </li>
       ))}
+      <li class="nav-menu-widget nav-menu-widget--mobile" role="none">
+        <LocationWidgetMain />
+      </li>
     </ul>
 
     <AgendarButton variant="desktop" />
@@ -223,6 +228,12 @@ function isActive(linkPath: string): boolean {
     transition: all 0.25s ease;
   }
 
+  .nav-link--mobile-only,
+  .nav-item--mobile-only,
+  .nav-menu-widget--mobile {
+    display: none;
+  }
+
   @media (max-width: 768px) {
     .site-header {
       --header-height: 56px;
@@ -303,6 +314,18 @@ function isActive(linkPath: string): boolean {
       padding: var(--space-3) 0;
       font-size: var(--text-base);
     }
+
+    .nav-link--mobile-only,
+    .nav-item--mobile-only,
+    .nav-menu-widget--mobile {
+      display: block;
+    }
+
+    .nav-menu-widget {
+      margin-top: auto;
+      padding-top: var(--space-4);
+      width: 100%;
+    }
   }
 </style>
 
@@ -318,7 +341,7 @@ function isActive(linkPath: string): boolean {
         toggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
       });
 
-      menu.querySelectorAll(".nav-link").forEach((link) => {
+      menu.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", () => {
           menu.classList.remove("is-open");
           toggle.setAttribute("aria-expanded", "false");
