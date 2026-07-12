@@ -241,28 +241,7 @@ const bottomRow = [
       opacity: 0;
       filter: blur(10px);
       transform: scale(1.02);
-    }
-
-    html.is-loaded .his-hero-word {
-      animation: his-hero-blur-in 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-    }
-
-    html.is-loaded .his-hero-line:nth-child(1) .his-hero-word:nth-child(1) { animation-delay: 0.2s; }
-    html.is-loaded .his-hero-line:nth-child(1) .his-hero-word:nth-child(2) { animation-delay: 0.35s; }
-    html.is-loaded .his-hero-line:nth-child(2) .his-hero-word:nth-child(1) { animation-delay: 0.55s; }
-    html.is-loaded .his-hero-line:nth-child(2) .his-hero-word:nth-child(2) { animation-delay: 0.70s; }
-
-    @keyframes his-hero-blur-in {
-      from {
-        opacity: 0;
-        filter: blur(10px);
-        transform: scale(1.02);
-      }
-      to {
-        opacity: 1;
-        filter: blur(0);
-        transform: scale(1);
-      }
+      will-change: transform, opacity, filter;
     }
 
     .his-collage {
@@ -306,29 +285,8 @@ const bottomRow = [
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
       opacity: 0;
       transform: scale(0.88);
+      will-change: transform, opacity;
     }
-
-    html.is-loaded .his-collage-image {
-      animation: his-collage-image-enter 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-    }
-
-    @keyframes his-collage-image-enter {
-      from {
-        opacity: 0;
-        transform: scale(0.88);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    html.is-loaded .his-collage-row--top .his-collage-item:nth-child(2) .his-collage-image { animation-delay: 0.85s; }
-    html.is-loaded .his-collage-row--bottom .his-collage-item:nth-child(2) .his-collage-image { animation-delay: 0.95s; }
-    html.is-loaded .his-collage-row--top .his-collage-item:nth-child(1) .his-collage-image,
-    html.is-loaded .his-collage-row--top .his-collage-item:nth-child(3) .his-collage-image { animation-delay: 1.05s; }
-    html.is-loaded .his-collage-row--bottom .his-collage-item:nth-child(1) .his-collage-image,
-    html.is-loaded .his-collage-row--bottom .his-collage-item:nth-child(3) .his-collage-image { animation-delay: 1.15s; }
 
     /* Semiluna */
     .his-collage-row--top .his-collage-item:nth-child(2) {
@@ -361,12 +319,7 @@ const bottomRow = [
       border-radius: 16px;
       display: flex;
       opacity: 0;
-    }
-
-    html.is-loaded .his-mouse-btn {
-      opacity: 1;
-      transition: opacity 0.6s ease;
-      transition-delay: 1.6s;
+      will-change: opacity;
     }
 
     .his-mouse-scroll {

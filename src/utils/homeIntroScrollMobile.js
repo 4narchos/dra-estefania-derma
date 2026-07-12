@@ -51,9 +51,6 @@ async function loadAndInit(section) {
   ]);
   gsap.registerPlugin(ScrollTrigger);
 
-  // Suaviza el scroll táctil de iOS y evita que el rebote del momentum
-  // haga oscilar las animaciones scrolly-driven.
-  ScrollTrigger.normalizeScroll(true);
   // Evita que la barra de direcciones de Safari móvil invalide los cálculos
   // de ScrollTrigger en cada cambio de altura del viewport.
   ScrollTrigger.config({ ignoreMobileResize: true });
@@ -63,7 +60,9 @@ async function loadAndInit(section) {
   const bg = section.querySelector(".his-bg");
   const heroScene = section.querySelector(".his-hero-scene");
   const heroTitle = section.querySelector(".his-hero-title");
+  const heroWords = section.querySelectorAll(".his-hero-word");
   const heroCircles = section.querySelectorAll(".his-collage-item");
+  const heroImages = section.querySelectorAll(".his-collage-image");
   const presScene = section.querySelector(".his-pres-scene");
   const presVisual = section.querySelector(".his-pres-visual img");
   const presHeader = section.querySelector(".his-pres-header");
@@ -103,8 +102,9 @@ async function loadAndInit(section) {
   // Establecer estado inicial de forma explícita para evitar saltos si el
   // usuario ya scrolleó antes de que cargue GSAP.
   gsap.set(heroScene, { opacity: 1, y: 0 });
-  gsap.set(heroTitle, { opacity: 1, y: 0 });
-  gsap.set(heroCircles, { opacity: 1, scale: 1 });
+  gsap.set(heroWords, { opacity: 0, filter: "blur(10px)", scale: 1.02 });
+  gsap.set(heroImages, { opacity: 0, scale: 0.88 });
+  gsap.set(mouseBtn, { opacity: 0 });
   gsap.set(presScene, { opacity: 1 });
   gsap.set(presVisual, { opacity: 0, scale: 0.85 });
   gsap.set(presHeader, { opacity: 0 });
@@ -132,6 +132,46 @@ async function loadAndInit(section) {
       pinSpacing: false,
       anticipatePin: 1,
     });
+
+    // Animación de entrada del hero controlada por GSAP (no por CSS keyframes).
+    // Se ejecuta DESPUÉS de que el pin ya montó el stage, así que cualquier
+    // re-emparentado de ScrollTrigger no reinicia la animación y evitamos la
+    // doble carga del texto "Tu piel te habla".
+    const heroIntroTl = gsap.timeline({ delay: 0.2 });
+
+    heroIntroTl.to(
+      heroWords,
+      {
+        opacity: 1,
+        filter: "blur(0px)",
+        scale: 1,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: "power2.out",
+      }
+    );
+
+    heroIntroTl.to(
+      heroImages,
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.7,
+        stagger: 0.1,
+        ease: "power2.out",
+      },
+      "-=0.35"
+    );
+
+    heroIntroTl.to(
+      mouseBtn,
+      {
+        opacity: 1,
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      "-=0.2"
+    );
 
     const tl = gsap.timeline({
       scrollTrigger: {
