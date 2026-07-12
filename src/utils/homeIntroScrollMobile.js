@@ -113,8 +113,8 @@ async function loadAndInit(section) {
     y: titleCenterStageY,
     scale: 0.98,
   });
-  gsap.set(presTitlePart1, { color: "#3A3A3A" });
-  gsap.set(presTitlePart2, { color: "#CCB775" });
+  gsap.set(presTitlePart1, { color: "#F5F5F0" });
+  gsap.set(presTitlePart2, { color: "#C4B896" });
   gsap.set(presSignature, { opacity: 0 });
   gsap.set([presName, presRole, presLocation], { opacity: 0, y: 12 });
   gsap.set(presMenu, { opacity: 0, y: 30 });
@@ -187,7 +187,8 @@ async function loadAndInit(section) {
       0.15
     );
 
-    // 25-40%: texto "Yo te ayudo a entenderla" aparece en el centro del stage.
+    // 25-40%: texto "Yo te ayudo a entenderla" aparece en el centro del stage
+    // y se mantiene ahí un momento sobre el fondo azul.
     tl.to(
       presTitle,
       {
@@ -199,15 +200,27 @@ async function loadAndInit(section) {
       0.25
     );
 
-    // 30-50%: fondo azul → blanco, imagen de la Dra. zoom in + fade in.
+    // 40-55%: el texto sube, el fondo transiciona a blanco y la foto de la Dra.
+    // hace zoom in + fade in. El cuerpo del texto pasa de blanco a oscuro para
+    // mantenerse legible sobre el fondo blanco; "entenderla" conserva su acento.
+    tl.to(
+      presTitle,
+      {
+        y: titleCenterHeaderY,
+        duration: 0.15,
+        ease: "none",
+      },
+      0.40
+    );
+
     tl.to(
       bg,
       {
         backgroundColor: "#fafafa",
-        duration: 0.2,
+        duration: 0.15,
         ease: "none",
       },
-      0.3
+      0.40
     );
 
     tl.to(
@@ -215,52 +228,42 @@ async function loadAndInit(section) {
       {
         opacity: 1,
         scale: 1,
-        duration: 0.2,
+        duration: 0.15,
         ease: "none",
       },
-      0.3
+      0.40
     );
 
-    // 45-65%: header se revela y el texto sube desde el centro hasta el header.
+    tl.to(
+      presTitlePart1,
+      {
+        color: "#3A3A3A",
+        duration: 0.12,
+        ease: "none",
+      },
+      0.43
+    );
+
+    // 55-70%: el header azul se revela y el texto entra en él. El cuerpo del
+    // texto vuelve a blanco para leerse sobre el fondo oscuro del header.
     tl.to(
       presHeader,
       {
         opacity: 1,
-        duration: 0.2,
+        duration: 0.15,
         ease: "none",
       },
-      0.45
+      0.55
     );
 
-    tl.to(
-      presTitle,
-      {
-        y: titleCenterHeaderY,
-        duration: 0.2,
-        ease: "none",
-      },
-      0.45
-    );
-
-    // 60-70%: el texto cambia a los colores finales (sobre fondo azul del header).
     tl.to(
       presTitlePart1,
       {
-        color: "#E6C875",
-        duration: 0.1,
+        color: "#F5F5F0",
+        duration: 0.15,
         ease: "none",
       },
-      0.6
-    );
-
-    tl.to(
-      presTitlePart2,
-      {
-        color: "#2D5E46",
-        duration: 0.1,
-        ease: "none",
-      },
-      0.6
+      0.55
     );
 
     // 70-85%: el título del header desaparece y aparece la firma en su lugar.
