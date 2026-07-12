@@ -158,8 +158,25 @@ async function loadAndInit(section) {
     // doble carga del texto "Tu piel te habla".
     const heroIntroTl = gsap.timeline({ delay: 0.2 });
 
+    // "Tu piel" aparece primero.
     heroIntroTl.to(
-      heroWords,
+      [heroWords[0], heroWords[1]],
+      {
+        opacity: 1,
+        filter: "blur(0px)",
+        scale: 1,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: "power2.out",
+      }
+    );
+
+    // Pausa breve para que el mensaje "Tu piel" se asiente antes de "te habla".
+    heroIntroTl.to({}, { duration: 0.3 });
+
+    // "te habla" aparece y, al mismo tiempo, inician las imágenes del collage.
+    heroIntroTl.to(
+      [heroWords[2], heroWords[3]],
       {
         opacity: 1,
         filter: "blur(0px)",
@@ -179,7 +196,7 @@ async function loadAndInit(section) {
         stagger: 0.1,
         ease: "power2.out",
       },
-      "-=0.35"
+      "<"
     );
 
     heroIntroTl.to(
@@ -359,6 +376,10 @@ async function loadAndInit(section) {
       },
       0.75
     );
+
+    // Pausa final breve para que el usuario lea el nombre, especialidad y menú
+    // antes de que la siguiente sección entre en escena.
+    tl.to({}, { duration: 0.15 }, "+=0");
   }, section);
 
   // Refrescar cálculos si el usuario rota el dispositivo.
