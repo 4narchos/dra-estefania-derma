@@ -51,9 +51,6 @@ async function loadAndInit(section) {
   ]);
   gsap.registerPlugin(ScrollTrigger);
 
-  // Suaviza el scroll táctil de iOS y evita que el rebote del momentum
-  // haga oscilar las animaciones scrolly-driven.
-  ScrollTrigger.normalizeScroll(true);
   // Evita que la barra de direcciones de Safari móvil invalide los cálculos
   // de ScrollTrigger en cada cambio de altura del viewport.
   ScrollTrigger.config({ ignoreMobileResize: true });
