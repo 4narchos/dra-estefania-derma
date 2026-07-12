@@ -11,16 +11,11 @@ const DESKTOP_MIN = 769;
 
 export function initHomeIntroScrollMobile() {
   // Solo mobile.
-  if (window.innerWidth >= DESKTOP_MIN) {
-    markReady();
-    return;
-  }
+  if (window.innerWidth >= DESKTOP_MIN) return;
 
+  const html = document.documentElement;
   const section = document.querySelector(".home-intro-scroll-mobile");
-  if (!section) {
-    markReady();
-    return;
-  }
+  if (!section) return;
 
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
@@ -29,21 +24,23 @@ export function initHomeIntroScrollMobile() {
   // En reduced motion mostramos directamente el estado final.
   if (prefersReducedMotion) {
     section.classList.add("is-static");
-    markReady();
     return;
   }
 
-  // Inicializamos inmediatamente (sin esperar is-loaded) para que el pin de
-  // ScrollTrigger se monte antes de que el preloader revele la página y las
-  // animaciones CSS del hero comiencen. Así evitamos que el re-emparentado del
-  // DOM reinicie esas animaciones.
-  loadAndInit(section).then(markReady).catch(markReady);
-}
+  const start = () => {
+    loadAndInit(section);
+  };
 
-function markReady() {
-  window.__homeIntroReady = true;
-  if (typeof Event === "function") {
-    window.dispatchEvent(new Event("homeIntroReady"));
+  if (html.classList.contains("is-loaded")) {
+    start();
+  } else {
+    const observer = new MutationObserver(() => {
+      if (html.classList.contains("is-loaded")) {
+        observer.disconnect();
+        start();
+      }
+    });
+    observer.observe(html, { attributes: true, attributeFilter: ["class"] });
   }
 }
 
@@ -54,6 +51,9 @@ async function loadAndInit(section) {
   ]);
   gsap.registerPlugin(ScrollTrigger);
 
+  // Suaviza el scroll táctil de iOS y evita que el rebote del momentum
+  // haga oscilar las animaciones scrolly-driven.
+  ScrollTrigger.normalizeScroll(true);
   // Evita que la barra de direcciones de Safari móvil invalide los cálculos
   // de ScrollTrigger en cada cambio de altura del viewport.
   ScrollTrigger.config({ ignoreMobileResize: true });
@@ -121,9 +121,9 @@ async function loadAndInit(section) {
   gsap.set(bg, { backgroundColor: "#041322" });
 
   const ctx = gsap.context(() => {
-    // Fijamos el stage con ScrollTrigger. Se hace antes de que el preloader
-    // quite la opacidad, así el re-emparentado del DOM no reinicia las
-    // animaciones CSS de entrada del hero.
+    // Fijamos el stage con ScrollTrigger en lugar de depender de position:sticky.
+    // En iOS esto evita el “temblor” propio del repaint de elementos sticky
+    // cuando el scroll con momentum rebota.
     ScrollTrigger.create({
       trigger: track,
       start: scrollStart,

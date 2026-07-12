@@ -567,23 +567,6 @@ const servicesListSchema = {
       }
     </style>
 
-  </head>
-  <body>
-    <div class="page-preloader" aria-hidden="true">
-      <div class="page-preloader__spinner"></div>
-    </div>
-
-    <div class="page-wrapper">
-      {showHeader && <Header currentPath={Astro.url.pathname} />}
-      <main>
-        <slot />
-      </main>
-      {showFooter && <Footer />}
-      {showWhatsApp && <WhatsAppSticky />}
-      {showShare && <ShareSticky />}
-      <DoctoraliaModal />
-    </div>
-
     <script is:inline define:vars={{ criticalPreloadUrls: criticalPreloads.map(p => p.href) }}>
       (function () {
         const html = document.documentElement;
@@ -625,21 +608,6 @@ const servicesListSchema = {
           );
         });
 
-        // En home mobile, esperar a que el componente scrolly-driven haya
-        // inicializado el pin de ScrollTrigger para evitar que las animaciones
-        // CSS del hero se reinicien al re-emparentar el DOM.
-        if (document.querySelector('.home-intro-scroll-mobile')) {
-          promises.push(
-            new Promise((resolve) => {
-              if (window.__homeIntroReady) {
-                resolve();
-              } else {
-                window.addEventListener('homeIntroReady', resolve, { once: true });
-              }
-            })
-          );
-        }
-
         const timeout = new Promise((resolve) => setTimeout(resolve, maxWait));
 
         Promise.race([Promise.all(promises), timeout]).then(() => {
@@ -650,5 +618,21 @@ const servicesListSchema = {
         });
       })();
     </script>
+  </head>
+  <body>
+    <div class="page-preloader" aria-hidden="true">
+      <div class="page-preloader__spinner"></div>
+    </div>
+
+    <div class="page-wrapper">
+      {showHeader && <Header currentPath={Astro.url.pathname} />}
+      <main>
+        <slot />
+      </main>
+      {showFooter && <Footer />}
+      {showWhatsApp && <WhatsAppSticky />}
+      {showShare && <ShareSticky />}
+      <DoctoraliaModal />
+    </div>
   </body>
 </html>
