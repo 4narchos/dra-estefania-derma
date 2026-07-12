@@ -424,6 +424,12 @@ const bottomRow = [
       object-position: bottom center;
       display: block;
       opacity: 0;
+      /* Contorno suave que sigue la silueta de la foto (no el rectángulo),
+         para darle profesionalismo sobre fondo blanco y separarla del fondo. */
+      filter:
+        drop-shadow(0 0 0.5px rgba(0, 0, 0, 0.35))
+        drop-shadow(0 0 1.5px rgba(0, 0, 0, 0.2))
+        drop-shadow(0 8px 20px rgba(0, 0, 0, 0.28));
       will-change: transform, opacity;
     }
 
