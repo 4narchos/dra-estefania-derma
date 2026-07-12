@@ -177,12 +177,15 @@ const bottomRow = [
     .his-track {
       position: relative;
       height: 300vh;
+      /* Fondo de respaldo que sigue la transición azul → blanco, por si el
+         stage fijo no llega a cubrir el viewport completo por barras de
+         herramientas móviles. */
+      background: linear-gradient(to bottom, #041322 0%, #041322 30%, #fafafa 50%, #fafafa 100%);
     }
 
     .his-stage {
-      position: sticky;
-      top: var(--header-height, 56px);
-      height: calc(100dvh - var(--header-height, 56px));
+      position: relative;
+      height: var(--his-stage-height, calc(100svh - var(--header-height, 56px)));
       overflow: hidden;
       isolation: isolate;
     }

@@ -59,6 +59,7 @@ async function loadAndInit(section) {
   ScrollTrigger.config({ ignoreMobileResize: true });
 
   const track = section.querySelector(".his-track");
+  const stage = section.querySelector(".his-stage");
   const bg = section.querySelector(".his-bg");
   const heroScene = section.querySelector(".his-hero-scene");
   const heroTitle = section.querySelector(".his-hero-title");
@@ -79,7 +80,7 @@ async function loadAndInit(section) {
   // Medidas necesarias para posicionar el título de presentación en el centro
   // del stage y luego deslizarlo hasta el header. Se toman una sola vez antes
   // de construir el timeline.
-  const stageRect = section.querySelector(".his-stage").getBoundingClientRect();
+  const stageRect = stage.getBoundingClientRect();
   const headerRect = presHeader.getBoundingClientRect();
   const titleRect = presTitle.getBoundingClientRect();
 
@@ -113,13 +114,25 @@ async function loadAndInit(section) {
   gsap.set(bg, { backgroundColor: "#041322" });
 
   const ctx = gsap.context(() => {
+    // Fijamos el stage con ScrollTrigger en lugar de depender de position:sticky.
+    // En iOS esto evita el “temblor” propio del repaint de elementos sticky
+    // cuando el scroll con momentum rebota.
+    ScrollTrigger.create({
+      trigger: track,
+      start: "top top",
+      end: "bottom bottom",
+      pin: stage,
+      pinSpacing: false,
+      anticipatePin: 1,
+    });
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: track,
         start: "top top",
         end: "bottom bottom",
-        scrub: 0.3,
-        invalidateOnRefresh: true,
+        scrub: 0.5,
+        fastScrollEnd: true,
       },
     });
 
@@ -299,6 +312,11 @@ async function loadAndInit(section) {
       0.85
     );
   }, section);
+
+  // Refrescar cálculos si el usuario rota el dispositivo.
+  window.addEventListener("orientationchange", () => {
+    setTimeout(() => ScrollTrigger.refresh(), 100);
+  });
 
   // Limpieza si el componente se desmonta (poco común en sitios estáticos,
   // pero buena práctica).
