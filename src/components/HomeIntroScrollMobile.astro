@@ -106,12 +106,12 @@ const bottomRow = [
 
       <!-- Escenario Presentación -->
       <div class="his-pres-scene">
-        <div class="his-pres-header">
-          <h2 class="his-pres-title">
-            <span class="his-pres-title-part1">Yo te ayudo a</span>
-            <em class="his-pres-title-part2">entenderla</em>
-          </h2>
-        </div>
+        <div class="his-pres-header"></div>
+
+        <h2 class="his-pres-title">
+          <span class="his-pres-title-part1">Yo te ayudo a</span>
+          <em class="his-pres-title-part2">entenderla</em>
+        </h2>
 
         <div class="his-pres-visual">
           <Image
@@ -410,14 +410,16 @@ const bottomRow = [
       height: 25%;
       min-height: 130px;
       background: #041322;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--space-4);
       z-index: 4;
+      opacity: 0;
     }
 
     .his-pres-title {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
       font-family: 'Playfair Display', Georgia, serif;
       font-size: clamp(2rem, 11vw, 4rem);
       font-weight: 600;

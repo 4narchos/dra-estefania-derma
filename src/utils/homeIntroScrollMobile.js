@@ -200,9 +200,8 @@ async function loadAndInit(section) {
       0.25
     );
 
-    // 40-55%: el texto sube, el fondo transiciona a blanco y la foto de la Dra.
-    // hace zoom in + fade in. El cuerpo del texto pasa de blanco a oscuro para
-    // mantenerse legible sobre el fondo blanco; "entenderla" conserva su acento.
+    // 40-55%: el texto sube hacia el header, y a la vez aparecen el header
+    // azul y la foto de la Dra. con zoom in + fade in. Todo sobre el fondo azul.
     tl.to(
       presTitle,
       {
@@ -214,9 +213,9 @@ async function loadAndInit(section) {
     );
 
     tl.to(
-      bg,
+      presHeader,
       {
-        backgroundColor: "#fafafa",
+        opacity: 1,
         duration: 0.15,
         ease: "none",
       },
@@ -234,39 +233,8 @@ async function loadAndInit(section) {
       0.40
     );
 
-    tl.to(
-      presTitlePart1,
-      {
-        color: "#3A3A3A",
-        duration: 0.12,
-        ease: "none",
-      },
-      0.43
-    );
-
-    // 55-70%: el header azul se revela y el texto entra en él. El cuerpo del
-    // texto vuelve a blanco para leerse sobre el fondo oscuro del header.
-    tl.to(
-      presHeader,
-      {
-        opacity: 1,
-        duration: 0.15,
-        ease: "none",
-      },
-      0.55
-    );
-
-    tl.to(
-      presTitlePart1,
-      {
-        color: "#F5F5F0",
-        duration: 0.15,
-        ease: "none",
-      },
-      0.55
-    );
-
-    // 70-85%: el título del header desaparece y aparece la firma en su lugar.
+    // 55-70%: el texto se desvanece y el fondo transiciona a blanco, dejando
+    // la foto y el header como elementos principales.
     tl.to(
       presTitle,
       {
@@ -274,9 +242,20 @@ async function loadAndInit(section) {
         duration: 0.15,
         ease: "none",
       },
-      0.7
+      0.55
     );
 
+    tl.to(
+      bg,
+      {
+        backgroundColor: "#fafafa",
+        duration: 0.15,
+        ease: "none",
+      },
+      0.55
+    );
+
+    // 70-85%: aparece la firma en el header.
     tl.to(
       presSignature,
       {
@@ -284,7 +263,7 @@ async function loadAndInit(section) {
         duration: 0.15,
         ease: "none",
       },
-      0.75
+      0.70
     );
 
     tl.to(
@@ -295,7 +274,7 @@ async function loadAndInit(section) {
         duration: 0.12,
         ease: "none",
       },
-      0.78
+      0.73
     );
 
     tl.to(
@@ -307,7 +286,7 @@ async function loadAndInit(section) {
         stagger: 0.02,
         ease: "none",
       },
-      0.82
+      0.78
     );
 
     // 85-100%: menú inferior aparece.
