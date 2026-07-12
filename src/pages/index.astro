@@ -11,8 +11,13 @@ import ValueProposition from "../components/ValueProposition.astro";
 import ReviewsSection from "../components/ReviewsSection.astro";
 import ContactSection from "../components/ContactSection.astro";
 
+import heroAlopeciaMobile from "../assets/images/hero-alopecia-mobile.webp";
 import heroMelasmaMobile from "../assets/images/hero-melasma-mobile.webp";
+import heroCaspaMobile from "../assets/images/hero-caspa-mobile.webp";
+import heroArrugasMobile from "../assets/images/hero-arrugas-mobile.webp";
 import heroAcneMobile from "../assets/images/hero-acne-mobile.webp";
+import heroRosaceaMobile from "../assets/images/hero-rosacea-mobile.webp";
+import draPresentationMobile from "../assets/images/dra-estefania-pijama-azul-sin-fondo.webp";
 
 import { getBaseUrl } from "../utils/baseUrl.js";
 
@@ -21,12 +26,36 @@ const baseUrl = getBaseUrl();
 const title = "Dermatóloga en Mérida · Tu piel te habla, y yo te ayudo a entenderla ✨";
 const description = "Dermatóloga en Mérida. Especialista en tricología, acné y dermatología estética. Tu salud con resultados estéticos y naturales. Agenda tu cita aquí.";
 
-// Precargar sólo los recursos críticos above-the-fold en mobile.
-// Las imágenes del centro del collage son las más visibles junto al título.
-const [melasmaImg, acneImg] = await Promise.all([
+// Precargar primero todo el contenido de la animación scrolly-driven mobile
+// (Hero + Presentación) para que el preloader no desaparezca hasta que esas
+// imágenes estén listas y las animaciones no se vean rotas en conexiones lentas.
+const [
+  alopeciaImg,
+  melasmaImg,
+  caspaImg,
+  arrugasImg,
+  acneImg,
+  rosaceaImg,
+  draPresentationImg,
+] = await Promise.all([
+  getImage({ src: heroAlopeciaMobile, width: 300, height: 300 }),
   getImage({ src: heroMelasmaMobile, width: 300, height: 300 }),
+  getImage({ src: heroCaspaMobile, width: 300, height: 300 }),
+  getImage({ src: heroArrugasMobile, width: 300, height: 300 }),
   getImage({ src: heroAcneMobile, width: 300, height: 300 }),
+  getImage({ src: heroRosaceaMobile, width: 300, height: 300 }),
+  getImage({ src: draPresentationMobile, width: 600, height: 900 }),
 ]);
+
+const mobileScrollyImages = [
+  alopeciaImg,
+  melasmaImg,
+  caspaImg,
+  arrugasImg,
+  acneImg,
+  rosaceaImg,
+  draPresentationImg,
+];
 
 const criticalPreloads = [
   {
@@ -43,20 +72,13 @@ const criticalPreloads = [
     media: "(min-width: 769px)",
     fetchpriority: "high",
   },
-  {
-    href: melasmaImg.src,
+  ...mobileScrollyImages.map((img) => ({
+    href: img.src,
     as: "image",
     type: "image/webp",
     media: "(max-width: 768px)",
     fetchpriority: "high",
-  },
-  {
-    href: acneImg.src,
-    as: "image",
-    type: "image/webp",
-    media: "(max-width: 768px)",
-    fetchpriority: "high",
-  },
+  })),
 ];
 ---
 

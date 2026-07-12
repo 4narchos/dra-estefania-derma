@@ -567,7 +567,7 @@ const servicesListSchema = {
       }
     </style>
 
-    <script is:inline define:vars={{ criticalPreloadUrls: criticalPreloads.map(p => p.href) }}>
+    <script is:inline define:vars={{ criticalPreloadsData: criticalPreloads }}>
       (function () {
         const html = document.documentElement;
         if (html.classList.contains('is-loaded') || html.classList.contains('is-preloading')) return;
@@ -581,12 +581,13 @@ const servicesListSchema = {
         html.classList.add('is-preloading');
 
         const promises = [];
-        const maxWait = 2800;
+        const maxWait = 8000;
 
         // Esperar fuentes críticas
         if ('fonts' in document) {
           const criticalFonts = [
             { family: "'Playfair Display'", weight: '600' },
+            { family: "'Great Vibes'", weight: '400' },
             { family: "'Inter'", weight: '400' },
             { family: "'Inter'", weight: '600' },
           ];
@@ -595,15 +596,16 @@ const servicesListSchema = {
           });
         }
 
-        // Esperar imágenes críticas precargadas
-        criticalPreloadUrls.forEach((url) => {
-          if (!url || url.endsWith('.woff2')) return;
+        // Esperar imágenes críticas precargadas (respetando el media query)
+        criticalPreloadsData.forEach((item) => {
+          if (!item || !item.href || item.href.endsWith('.woff2')) return;
+          if (item.media && !window.matchMedia(item.media).matches) return;
           promises.push(
             new Promise((resolve) => {
               const img = new Image();
               img.onload = resolve;
               img.onerror = resolve;
-              img.src = url;
+              img.src = item.href;
             })
           );
         });
