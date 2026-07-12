@@ -1,0 +1,609 @@
+---
+import { Image } from "astro:assets";
+
+import heroAlopeciaMobile from "../assets/images/hero-alopecia-mobile.webp";
+import heroMelasmaMobile from "../assets/images/hero-melasma-mobile.webp";
+import heroCaspaMobile from "../assets/images/hero-caspa-mobile.webp";
+import heroArrugasMobile from "../assets/images/hero-arrugas-mobile.webp";
+import heroAcneMobile from "../assets/images/hero-acne-mobile.webp";
+import heroRosaceaMobile from "../assets/images/hero-rosacea-mobile.webp";
+
+import draPresentation from "../assets/images/dra-estefania-pijama-azul-sin-fondo.webp";
+
+import PillMenu from "./PillMenu.astro";
+import { getWhatsAppUrl, doctoraliaUrl } from "../data/site.js";
+import { getBaseUrl } from "../utils/baseUrl.js";
+
+const base = getBaseUrl();
+
+const menuItems = [
+  { label: "Ubicaciones", href: `${base}contacto` },
+  { label: "Reservar cita", href: doctoraliaUrl, external: true, highlighted: true },
+  { label: "Enviar mensaje", href: getWhatsAppUrl({ medium: "presentation_button", campaign: "inicio" }), external: true },
+];
+
+const topRow = [
+  { label: "Alopecia", image: heroAlopeciaMobile, dirX: -1, dirY: -1 },
+  { label: "Melasma", image: heroMelasmaMobile, dirX: 0, dirY: -1 },
+  { label: "Caspa", image: heroCaspaMobile, dirX: 1, dirY: -1 },
+];
+
+const bottomRow = [
+  { label: "Arrugas", image: heroArrugasMobile, dirX: -1, dirY: 1 },
+  { label: "Acné", image: heroAcneMobile, dirX: 0, dirY: 1 },
+  { label: "Rosácea", image: heroRosaceaMobile, dirX: 1, dirY: 1 },
+];
+---
+
+<section class="home-intro-scroll-mobile" id="inicio" aria-label="Inicio">
+  <div class="his-track">
+    <div class="his-stage">
+      <div class="his-stage-inner">
+        <div class="his-bg"></div>
+
+        <!-- Escenario Hero -->
+        <div class="his-hero-scene">
+        <h1 class="his-hero-title">
+          <span class="his-hero-line">
+            <span class="his-hero-word">Tu</span>{" "}
+            <span class="his-hero-word">piel</span>
+          </span>
+          <span class="his-hero-line his-hero-line--accent">
+            <span class="his-hero-word">te</span>{" "}
+            <span class="his-hero-word">habla</span>
+          </span>
+        </h1>
+
+        <div class="his-collage" aria-label="Condiciones dermatológicas tratadas">
+          <div class="his-collage-row his-collage-row--top">
+            {
+              topRow.map((item) => (
+                <div
+                  class="his-collage-item"
+                  data-dir-x={item.dirX}
+                  data-dir-y={item.dirY}
+                >
+                  <Image
+                    class="his-collage-image"
+                    src={item.image}
+                    alt={item.label}
+                    width={300}
+                    height={300}
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
+              ))
+            }
+          </div>
+          <div class="his-collage-row his-collage-row--bottom">
+            {
+              bottomRow.map((item) => (
+                <div
+                  class="his-collage-item"
+                  data-dir-x={item.dirX}
+                  data-dir-y={item.dirY}
+                >
+                  <Image
+                    class="his-collage-image"
+                    src={item.image}
+                    alt={item.label}
+                    width={300}
+                    height={300}
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="his-mouse-btn" aria-hidden="true">
+          <span class="his-mouse-scroll"></span>
+        </div>
+      </div>
+
+      <!-- Escenario Presentación -->
+      <div class="his-pres-scene">
+        <div class="his-pres-header">
+          <h2 class="his-pres-title">
+            <span class="his-pres-title-part1">Yo te ayudo a</span>
+            <em class="his-pres-title-part2">entenderla</em>
+          </h2>
+        </div>
+
+        <div class="his-pres-visual">
+          <Image
+            src={draPresentation}
+            alt="Dra. Estefanía Borges con dermatoscopio"
+            width={600}
+            height={900}
+            densities={[1, 2]}
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </div>
+
+        <div class="his-pres-signature">
+          <span class="his-pres-name" data-signature="Dra. Estefanía Borges">
+            Dra. Estefanía Borges
+          </span>
+          <div class="his-pres-row">
+            <span class="his-pres-role">DERMATÓLOGA</span>
+            <span class="his-pres-location">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>Mérida</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="his-pres-menu">
+          <PillMenu variant="presentation" items={menuItems} ariaLabel="Acciones principales" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-intro-scroll-mobile {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .home-intro-scroll-mobile {
+      display: block;
+      position: relative;
+      z-index: 1;
+      overflow: clip visible !important;
+    }
+
+    .his-track {
+      position: relative;
+      height: 300vh;
+    }
+
+    .his-stage {
+      position: sticky;
+      top: var(--header-height, 56px);
+      height: calc(100dvh - var(--header-height, 56px));
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .his-stage-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .his-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: #041322;
+    }
+
+    /* ===== Escenario Hero ===== */
+    .his-hero-scene {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-4);
+    }
+
+    .his-hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(3.5rem, 15vw, 6.5rem);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      text-align: center;
+      margin: 0;
+      color: var(--color-text-on-dark);
+      pointer-events: none;
+    }
+
+    .his-hero-line {
+      display: block;
+    }
+
+    .his-hero-line--accent {
+      font-style: italic;
+      color: var(--color-accent);
+    }
+
+    .his-hero-word {
+      display: inline-block;
+      opacity: 0;
+      filter: blur(10px);
+      transform: scale(1.02);
+    }
+
+    html.is-loaded .his-hero-word {
+      animation: his-hero-blur-in 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    }
+
+    html.is-loaded .his-hero-line:nth-child(1) .his-hero-word:nth-child(1) { animation-delay: 0.2s; }
+    html.is-loaded .his-hero-line:nth-child(1) .his-hero-word:nth-child(2) { animation-delay: 0.35s; }
+    html.is-loaded .his-hero-line:nth-child(2) .his-hero-word:nth-child(1) { animation-delay: 1.0s; }
+    html.is-loaded .his-hero-line:nth-child(2) .his-hero-word:nth-child(2) { animation-delay: 1.15s; }
+
+    @keyframes his-hero-blur-in {
+      from {
+        opacity: 0;
+        filter: blur(10px);
+        transform: scale(1.02);
+      }
+      to {
+        opacity: 1;
+        filter: blur(0);
+        transform: scale(1);
+      }
+    }
+
+    .his-collage {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(3rem, 14vh, 7rem);
+      padding: 0 var(--space-4);
+      pointer-events: none;
+    }
+
+    .his-collage-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .his-collage-item {
+      position: relative;
+      width: 29vmin;
+      height: 29vmin;
+      min-width: 110px;
+      min-height: 110px;
+      max-width: 170px;
+      max-height: 170px;
+      flex: none;
+      border-radius: 50%;
+      will-change: transform, opacity;
+    }
+
+    .his-collage-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      transform: scale(0.88);
+    }
+
+    html.is-loaded .his-collage-image {
+      animation: his-collage-image-enter 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    }
+
+    @keyframes his-collage-image-enter {
+      from {
+        opacity: 0;
+        transform: scale(0.88);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    html.is-loaded .his-collage-row--top .his-collage-item:nth-child(2) .his-collage-image { animation-delay: 1.35s; }
+    html.is-loaded .his-collage-row--bottom .his-collage-item:nth-child(2) .his-collage-image { animation-delay: 1.45s; }
+    html.is-loaded .his-collage-row--top .his-collage-item:nth-child(1) .his-collage-image,
+    html.is-loaded .his-collage-row--top .his-collage-item:nth-child(3) .his-collage-image { animation-delay: 1.55s; }
+    html.is-loaded .his-collage-row--bottom .his-collage-item:nth-child(1) .his-collage-image,
+    html.is-loaded .his-collage-row--bottom .his-collage-item:nth-child(3) .his-collage-image { animation-delay: 1.65s; }
+
+    /* Semiluna */
+    .his-collage-row--top .his-collage-item:nth-child(2) {
+      transform: translateY(-2.75rem);
+    }
+
+    .his-collage-row--top .his-collage-item:nth-child(1),
+    .his-collage-row--top .his-collage-item:nth-child(3) {
+      transform: translateY(-1rem);
+    }
+
+    .his-collage-row--bottom .his-collage-item:nth-child(2) {
+      transform: translateY(2.75rem);
+    }
+
+    .his-collage-row--bottom .his-collage-item:nth-child(1),
+    .his-collage-row--bottom .his-collage-item:nth-child(3) {
+      transform: translateY(1rem);
+    }
+
+    .his-mouse-btn {
+      position: absolute;
+      bottom: var(--space-6);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      width: 32px;
+      height: 64px;
+      border: 2px solid rgba(245, 245, 240, 0.55);
+      border-radius: 16px;
+      display: flex;
+      opacity: 0;
+    }
+
+    html.is-loaded .his-mouse-btn {
+      opacity: 1;
+      transition: opacity 0.6s ease;
+      transition-delay: 3s;
+    }
+
+    .his-mouse-scroll {
+      display: block;
+      width: 16px;
+      height: 16px;
+      background: linear-gradient(170deg, rgba(245, 245, 240, 0.7), rgba(245, 245, 240, 0.9));
+      border-radius: 50%;
+      margin: auto;
+      animation: his-scrolling13 2.5s linear infinite;
+    }
+
+    @keyframes his-scrolling13 {
+      0% {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(16px);
+      }
+    }
+
+    /* ===== Escenario Presentación ===== */
+    .his-pres-scene {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: var(--space-6);
+    }
+
+    .his-pres-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 25%;
+      min-height: 130px;
+      background: #041322;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-4);
+      z-index: 4;
+    }
+
+    .his-pres-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 11vw, 4rem);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      text-align: center;
+      margin: 0;
+      color: #3A3A3A;
+      will-change: transform, opacity;
+    }
+
+    .his-pres-title-part1 {
+      display: block;
+      color: #3A3A3A;
+    }
+
+    .his-pres-title-part2 {
+      display: block;
+      font-style: normal;
+      color: #CCB775;
+    }
+
+    .his-pres-visual {
+      position: absolute;
+      inset: auto 0 0 0;
+      top: 25%;
+      z-index: 2;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .his-pres-visual img {
+      height: 100%;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: bottom center;
+      display: block;
+      will-change: transform, opacity;
+    }
+
+    .his-pres-signature {
+      position: absolute;
+      top: var(--space-4);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      pointer-events: none;
+      padding-top: var(--space-2);
+    }
+
+    .his-pres-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2rem, 10vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: #F8E9A1;
+      background: linear-gradient(
+        135deg,
+        #F8E9A1 0%,
+        #FFF8D6 30%,
+        #F8E9A1 50%,
+        #E6D48A 70%,
+        #F8E9A1 100%
+      );
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter:
+        drop-shadow(0 2px 2px rgba(0, 0, 0, 0.35))
+        drop-shadow(0 0 18px rgba(0, 0, 0, 0.25));
+      animation: his-metal-shine 4s ease-in-out infinite;
+      will-change: transform, opacity;
+    }
+
+    @keyframes his-metal-shine {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .his-pres-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-top: 2px;
+    }
+
+    .his-pres-role {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: clamp(0.75rem, 3.5vw, 1.125rem);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #F8E9A1;
+      background: linear-gradient(
+        135deg,
+        #F8E9A1 0%,
+        #FFF8D6 30%,
+        #F8E9A1 50%,
+        #E6D48A 70%,
+        #F8E9A1 100%
+      );
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: his-metal-shine 4s ease-in-out infinite;
+      will-change: transform, opacity;
+    }
+
+    .his-pres-location {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      color: #2D5E46;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      will-change: transform, opacity;
+    }
+
+    .his-pres-location svg {
+      flex-shrink: 0;
+    }
+
+    .his-pres-menu {
+      position: relative;
+      z-index: 6;
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 0 var(--space-4);
+      will-change: transform, opacity;
+    }
+
+    /* Estado final para reduced motion / fallback */
+    .home-intro-scroll-mobile.is-static .his-hero-scene,
+    .home-intro-scroll-mobile.is-static .his-collage-item,
+    .home-intro-scroll-mobile.is-static .his-hero-title {
+      opacity: 0 !important;
+      transform: none !important;
+    }
+
+    .home-intro-scroll-mobile.is-static .his-bg {
+      background: #fafafa !important;
+    }
+
+    .home-intro-scroll-mobile.is-static .his-pres-visual img,
+    .home-intro-scroll-mobile.is-static .his-pres-title,
+    .home-intro-scroll-mobile.is-static .his-pres-header,
+    .home-intro-scroll-mobile.is-static .his-pres-signature,
+    .home-intro-scroll-mobile.is-static .his-pres-menu {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .home-intro-scroll-mobile.is-static .his-pres-title-part1 {
+      color: #E6C875 !important;
+    }
+
+    .home-intro-scroll-mobile.is-static .his-pres-title-part2 {
+      color: #2D5E46 !important;
+    }
+
+    .home-intro-scroll-mobile.is-static .his-pres-title {
+      transform: translateY(var(--his-title-final-offset, 0)) !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .his-collage-item,
+    .his-hero-title,
+    .his-pres-visual img,
+    .his-pres-title,
+    .his-pres-header,
+    .his-pres-signature,
+    .his-pres-menu {
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  import { initHomeIntroScrollMobile } from "../utils/homeIntroScrollMobile.js";
+  initHomeIntroScrollMobile();
+</script>

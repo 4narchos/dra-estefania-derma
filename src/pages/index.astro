@@ -6,6 +6,7 @@ import Presentation from "../components/Presentation.astro";
 import Credentials from "../components/Credentials.astro";
 import ServicesSection from "../components/ServicesSection.astro";
 // import Philosophy from "../components/_archive/Philosophy.astro"; // archived section
+import HomeIntroScrollMobile from "../components/HomeIntroScrollMobile.astro";
 import ValueProposition from "../components/ValueProposition.astro";
 import ReviewsSection from "../components/ReviewsSection.astro";
 import ContactSection from "../components/ContactSection.astro";
@@ -61,8 +62,11 @@ const criticalPreloads = [
 
 <Layout title={title} description={description} pageSchema="home" criticalPreloads={criticalPreloads}>
   <div class="page-home">
-    <Hero />
-    <Presentation />
+    <div class="home-intro-desktop">
+      <Hero />
+      <Presentation />
+    </div>
+    <HomeIntroScrollMobile />
     <Credentials />
     <ServicesSection />
     {/* <Philosophy /> */}
@@ -75,5 +79,17 @@ const criticalPreloads = [
 <style is:global>
   .page-home :is(h1, h2, h3, h4, h5, h6) {
     font-family: 'Junicode', Georgia, serif !important;
+  }
+
+  @media (max-width: 768px) {
+    .home-intro-desktop {
+      display: none;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .home-intro-scroll-mobile {
+      display: none !important;
+    }
   }
 </style>
