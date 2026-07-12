@@ -360,7 +360,6 @@ async function loadAndInit(section) {
         opacity: 1,
         y: 0,
         duration: 0.08,
-        stagger: 0.02,
         ease: "none",
       },
       0.79
