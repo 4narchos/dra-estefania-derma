@@ -77,6 +77,13 @@ async function loadAndInit(section) {
   const presMenu = section.querySelector(".his-pres-menu");
   const mouseBtn = section.querySelector(".his-mouse-btn");
 
+  // Altura del header fijo para que el pin y el timeline comiencen justo cuando
+  // el track está debajo del header, no tapado por él.
+  const siteHeaderHeight = parseFloat(
+    getComputedStyle(document.documentElement).getPropertyValue("--header-height")
+  ) || 56;
+  const scrollStart = `top ${siteHeaderHeight}px`;
+
   // Medidas necesarias para posicionar el título de presentación en el centro
   // del stage y luego deslizarlo hasta el header. Se toman una sola vez antes
   // de construir el timeline.
@@ -119,7 +126,7 @@ async function loadAndInit(section) {
     // cuando el scroll con momentum rebota.
     ScrollTrigger.create({
       trigger: track,
-      start: "top top",
+      start: scrollStart,
       end: "bottom bottom",
       pin: stage,
       pinSpacing: false,
@@ -129,7 +136,7 @@ async function loadAndInit(section) {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: track,
-        start: "top top",
+        start: scrollStart,
         end: "bottom bottom",
         scrub: 0.5,
         fastScrollEnd: true,
