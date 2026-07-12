@@ -185,7 +185,8 @@ const bottomRow = [
 
     .his-stage {
       position: relative;
-      height: var(--his-stage-height, calc(100svh - var(--header-height, 56px)));
+      height: calc(100dvh - var(--header-height, 56px));
+      min-height: calc(100dvh - var(--header-height, 56px));
       overflow: hidden;
       isolation: isolate;
     }
