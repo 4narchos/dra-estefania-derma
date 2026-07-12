@@ -83,6 +83,25 @@ async function loadAndInit(section) {
   ) || 56;
   const scrollStart = `top ${siteHeaderHeight}px`;
 
+  // Altura estable del stage: usamos el mayor valor que observemos del viewport
+  // para evitar que la barra de direcciones de Safari/Chrome aparezca u oculte
+  // al scrollear y deje una franja blanca debajo de la imagen de la Dra.
+  let maxStageHeight = 0;
+  const updateStageHeight = () => {
+    const vv = window.visualViewport;
+    const viewportHeight = vv ? vv.height : window.innerHeight;
+    const nextStageHeight = Math.max(viewportHeight - siteHeaderHeight, 0);
+    if (nextStageHeight > maxStageHeight) {
+      maxStageHeight = nextStageHeight;
+      stage.style.setProperty("--his-stage-height", `${nextStageHeight}px`);
+      ScrollTrigger.refresh();
+    }
+  };
+  updateStageHeight();
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", updateStageHeight);
+  }
+
   // Medidas necesarias para posicionar el título de presentación en el centro
   // del stage y luego deslizarlo hasta el header. Se toman una sola vez antes
   // de construir el timeline.
@@ -343,11 +362,19 @@ async function loadAndInit(section) {
   }, section);
 
   // Refrescar cálculos si el usuario rota el dispositivo.
-  window.addEventListener("orientationchange", () => {
-    setTimeout(() => ScrollTrigger.refresh(), 100);
-  });
+  const handleOrientationChange = () => {
+    maxStageHeight = 0;
+    updateStageHeight();
+  };
+  window.addEventListener("orientationchange", handleOrientationChange);
 
   // Limpieza si el componente se desmonta (poco común en sitios estáticos,
   // pero buena práctica).
-  return () => ctx.revert();
+  return () => {
+    if (window.visualViewport) {
+      window.visualViewport.removeEventListener("resize", updateStageHeight);
+    }
+    window.removeEventListener("orientationchange", handleOrientationChange);
+    ctx.revert();
+  };
 }
