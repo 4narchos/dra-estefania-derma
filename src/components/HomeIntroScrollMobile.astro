@@ -249,8 +249,8 @@ const bottomRow = [
 
     html.is-loaded .his-hero-line:nth-child(1) .his-hero-word:nth-child(1) { animation-delay: 0.2s; }
     html.is-loaded .his-hero-line:nth-child(1) .his-hero-word:nth-child(2) { animation-delay: 0.35s; }
-    html.is-loaded .his-hero-line:nth-child(2) .his-hero-word:nth-child(1) { animation-delay: 1.0s; }
-    html.is-loaded .his-hero-line:nth-child(2) .his-hero-word:nth-child(2) { animation-delay: 1.15s; }
+    html.is-loaded .his-hero-line:nth-child(2) .his-hero-word:nth-child(1) { animation-delay: 0.55s; }
+    html.is-loaded .his-hero-line:nth-child(2) .his-hero-word:nth-child(2) { animation-delay: 0.70s; }
 
     @keyframes his-hero-blur-in {
       from {
@@ -323,12 +323,12 @@ const bottomRow = [
       }
     }
 
-    html.is-loaded .his-collage-row--top .his-collage-item:nth-child(2) .his-collage-image { animation-delay: 1.35s; }
-    html.is-loaded .his-collage-row--bottom .his-collage-item:nth-child(2) .his-collage-image { animation-delay: 1.45s; }
+    html.is-loaded .his-collage-row--top .his-collage-item:nth-child(2) .his-collage-image { animation-delay: 0.85s; }
+    html.is-loaded .his-collage-row--bottom .his-collage-item:nth-child(2) .his-collage-image { animation-delay: 0.95s; }
     html.is-loaded .his-collage-row--top .his-collage-item:nth-child(1) .his-collage-image,
-    html.is-loaded .his-collage-row--top .his-collage-item:nth-child(3) .his-collage-image { animation-delay: 1.55s; }
+    html.is-loaded .his-collage-row--top .his-collage-item:nth-child(3) .his-collage-image { animation-delay: 1.05s; }
     html.is-loaded .his-collage-row--bottom .his-collage-item:nth-child(1) .his-collage-image,
-    html.is-loaded .his-collage-row--bottom .his-collage-item:nth-child(3) .his-collage-image { animation-delay: 1.65s; }
+    html.is-loaded .his-collage-row--bottom .his-collage-item:nth-child(3) .his-collage-image { animation-delay: 1.15s; }
 
     /* Semiluna */
     .his-collage-row--top .his-collage-item:nth-child(2) {
@@ -366,7 +366,7 @@ const bottomRow = [
     html.is-loaded .his-mouse-btn {
       opacity: 1;
       transition: opacity 0.6s ease;
-      transition-delay: 3s;
+      transition-delay: 1.6s;
     }
 
     .his-mouse-scroll {
@@ -434,6 +434,7 @@ const bottomRow = [
       text-align: center;
       margin: 0;
       color: #F5F5F0;
+      opacity: 0;
       will-change: transform, opacity;
     }
 
@@ -466,6 +467,7 @@ const bottomRow = [
       object-fit: contain;
       object-position: bottom center;
       display: block;
+      opacity: 0;
       will-change: transform, opacity;
     }
 
@@ -550,6 +552,7 @@ const bottomRow = [
       width: 100%;
       max-width: var(--max-width);
       padding: 0 var(--space-4);
+      opacity: 0;
       will-change: transform, opacity;
     }
 
