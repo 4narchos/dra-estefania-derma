@@ -30,3 +30,5 @@ yarn-error.log*
 
 # Source photos (copies are in public/images/)
 Fotos/
+screenshots/
+scripts/
