@@ -50,17 +50,7 @@ export function initHomeIntroScrollMobile() {
     loadAndInit(section);
   };
 
-  if (html.classList.contains("is-loaded")) {
-    start();
-  } else {
-    const observer = new MutationObserver(() => {
-      if (html.classList.contains("is-loaded")) {
-        observer.disconnect();
-        start();
-      }
-    });
-    observer.observe(html, { attributes: true, attributeFilter: ["class"] });
-  }
+  start();
 }
 
 async function loadAndInit(section) {
