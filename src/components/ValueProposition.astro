@@ -2,7 +2,6 @@
 import { Image } from "astro:assets";
 import draDesk from "../assets/images/dra-estefania-desk-square.webp";
 import { getBaseUrl } from "../utils/baseUrl.js";
-import TopicMarquee from "./TopicMarquee.astro";
 const base = getBaseUrl();
 
 const accordionItems = [
@@ -35,8 +34,6 @@ const accordionItems = [
 ---
 
 <section class="value-proposition" id="valor">
-  <TopicMarquee />
-
   <div class="container">
     <div class="value-visual">
       <Image

@@ -15,7 +15,7 @@ export const mainAddressShort = "C.20 #251 Frac. Altabrisa, Mérida";
 export const emailMain = "estefaniaborges.derma@gmail.com";
 
 export const googleProfile = "https://share.google/HfPkNGvUKMkqxHdiu";
-export const mapsLinkMain = "https://maps.app.goo.gl/aGnKcnuMojufXUo38";
+export const mapsLinkMain = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
 
 export const whatsappMessage =
   "Hola, vi su página web y quisiera agendar una consulta dermatológica.";

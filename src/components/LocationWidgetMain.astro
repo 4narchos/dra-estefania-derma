@@ -22,7 +22,15 @@ const {
 ---
 
 <div class:list={["location-widget-main", { "location-widget-main--dark": dark }]}>
-  <p class="location-widget-address">{address}</p>
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Ver dirección en Google Maps"
+    class="location-widget-address-link"
+  >
+    <p class="location-widget-address">{address}</p>
+  </a>
   <a
     href={href}
     target="_blank"
@@ -45,6 +53,16 @@ const {
     color: inherit;
     margin: 0 0 var(--space-3);
     text-align: center;
+  }
+
+  .location-widget-address-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .location-widget-address-link:hover .location-widget-address {
+    text-decoration: underline;
   }
 
   .location-widget-main--dark .location-widget-address {
