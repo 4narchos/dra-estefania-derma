@@ -254,6 +254,31 @@ const menuItems = [
     display: none;
   }
 
+  @media (min-width: 641px) {
+    .presentation-visual {
+      padding-top: 5vh;
+    }
+
+    .presentation-location {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      color: #ffffff;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0;
+    }
+
+    .presentation-location svg {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+    }
+  }
+
   @media (max-width: 900px) {
     .signature-block {
       position: relative;
@@ -561,7 +586,7 @@ const menuItems = [
             { opacity: 1, y: 0, duration: 0.05, stagger: 0.06, ease: "power1.out" },
             "-=0.4"
           ).fromTo(
-            titleEl,
+            [titleEl, ".presentation-location"],
             { opacity: 0, y: 8 },
             { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
             "+=0.2"
