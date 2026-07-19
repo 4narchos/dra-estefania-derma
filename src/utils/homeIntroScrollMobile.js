@@ -384,9 +384,12 @@ async function loadAndInit(section) {
     "-=0.2"
   );
 
-  // Fallback: si alguna imagen llega tarde (después del timeout del preloader),
-  // aseguramos que aparezca suavemente en cuanto se complete la descarga.
-  [...heroImages, presVisual].forEach((img) => {
+  // Fallback: si alguna imagen del collage llega tarde (después del timeout del
+  // preloader), aseguramos que aparezca suavemente en cuanto se complete la
+  // descarga. La foto de la Dra. NO entra aquí: su visibilidad está controlada
+  // exclusivamente por el timeline de scroll para evitar que se superponga al
+  // hero antes de tiempo.
+  heroImages.forEach((img) => {
     if (!img) return;
     if (img.complete && img.naturalHeight > 0) return;
     const fadeIn = () => {
