@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getWhatsAppUrl, doctoraliaUrl, consultationPrice } from "../data/site.js";
+import { getWhatsAppUrl, agendaUrl, consultationPrice } from "../data/site.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
 import PillMenu from "../components/PillMenu.astro";
 import LocationWidgetMain from "../components/LocationWidgetMain.astro";
@@ -80,7 +80,7 @@ const faqItems = [
 
 const menuItems = [
   { label: "Ubicaciones", href: `${base}ubicaciones` },
-  { label: "Reservar cita", href: doctoraliaUrl, external: true, highlighted: true },
+  { label: "Reservar cita", href: agendaUrl, external: true, highlighted: true },
   { label: "Enviar mensaje", href: getWhatsAppUrl({ medium: "faqs_bottom", campaign: "faqs" }), external: true },
 ];
 ---

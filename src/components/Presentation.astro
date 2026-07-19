@@ -1,14 +1,14 @@
 ---
 import { Image } from "astro:assets";
 import draPresentation from "../assets/images/dra-estefania-pijama-azul-sin-fondo.webp";
-import { getWhatsAppUrl, doctoraliaUrl } from "../data/site.js";
+import { getWhatsAppUrl, agendaUrl } from "../data/site.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
 import PillMenu from "./PillMenu.astro";
 const base = getBaseUrl();
 
 const menuItems = [
   { label: "Ubicaciones", href: `${base}contacto` },
-  { label: "Reservar cita", href: doctoraliaUrl, external: true, highlighted: true },
+  { label: "Reservar cita", href: agendaUrl, external: true, highlighted: true },
   { label: "Enviar mensaje", href: getWhatsAppUrl({ medium: "presentation_button", campaign: "inicio" }), external: true },
 ];
 ---
