@@ -410,6 +410,16 @@ async function loadAndInit(section) {
   };
   window.addEventListener("orientationchange", handleOrientationChange);
 
+  // Al volver de una pestaña inactiva los navegadores suelen acumular
+  // cambios de layout/scroll; refrescamos ScrollTrigger para evitar que
+  // los elementos del scrolly aparezcan superpuestos o descuadrados.
+  const handleVisibilityChange = () => {
+    if (!document.hidden && ScrollTrigger) {
+      ScrollTrigger.refresh();
+    }
+  };
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+
   // Limpieza si el componente se desmonta (poco común en sitios estáticos,
   // pero buena práctica).
   return () => {
@@ -417,6 +427,7 @@ async function loadAndInit(section) {
       window.visualViewport.removeEventListener("resize", updateStageHeight);
     }
     window.removeEventListener("orientationchange", handleOrientationChange);
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
     ctx.revert();
   };
 }
