@@ -1,7 +1,7 @@
 ---
 import SectionHeader from "./SectionHeader.astro";
 import StarIcon from "./StarIcon.astro";
-import { doctoraliaUrl } from "../data/site.js";
+import { doctoraliaReviewsUrl } from "../data/site.js";
 
 const reviews = [
   {
@@ -134,11 +134,11 @@ const displayReviews = reviews.slice(0, 4);
 
     <p class="reviews-source">
       <a
-        href={doctoraliaUrl}
+        href={doctoraliaReviewsUrl}
         target="_blank"
         rel="noopener noreferrer"
       >
-        Ver todas las opiniones en Doctoralia →
+        Ver todas las opiniones →
       </a>
     </p>
   </div>
