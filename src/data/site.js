@@ -3,6 +3,10 @@
  *
  * Do not hardcode phone, address, email, WhatsApp, Doctoralia, Google Profile,
  * Maps, or price anywhere else. Import from this file instead.
+ *
+ * WhatsApp links: never use whatsappLinkMain directly in components/pages.
+ * Always use getWhatsAppUrl(whatsappPresets.<preset>) so every click carries
+ * UTM tracking and we can tell which entry point generated the contact.
  */
 
 export const numberMain = "999 221 3021";
@@ -19,6 +23,9 @@ export const mapsLinkMain = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
 
 export const whatsappMessage =
   "Hola, vi su página web y quisiera agendar una consulta dermatológica.";
+
+// Base WhatsApp URL. Do not import this directly in UI components.
+// Use getWhatsAppUrl(whatsappPresets.<name>) so UTM parameters are included.
 export const whatsappLinkMain = `https://api.whatsapp.com/send?phone=${numberMainRaw}&text=${encodeURIComponent(
   whatsappMessage
 )}`;
@@ -57,10 +64,17 @@ export const whatsappPresets = {
 
 /**
  * Build a WhatsApp URL with UTM parameters.
+ *
+ * In components and pages, always pass a preset from whatsappPresets instead of
+ * an inline object. This keeps tracking consistent and makes it easy to update
+ * UTM values from a single location.
+ *
  * @param {Object} params
  * @param {string} params.medium — required UTM medium (e.g. "header", "footer")
  * @param {string} [params.source="web"]
  * @param {string} [params.campaign="agendar"]
+ * @example
+ *   getWhatsAppUrl(whatsappPresets.webHeader)
  */
 export function getWhatsAppUrl({ medium, source = "web", campaign = "agendar" }) {
   return `${whatsappLinkMain}&utm_source=${source}&utm_medium=${medium}&utm_campaign=${campaign}`;

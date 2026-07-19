@@ -8,6 +8,9 @@ import {
   doctoraliaUrl,
 } from "./site.js";
 
+// NOTE: All WhatsApp URLs must be built with getWhatsAppUrl(whatsappPresets.<preset>)
+// so every entry point carries UTM tracking. Never use whatsappLinkMain directly here.
+
 const instagramLink = socialLinks.find((s) => s.icon === "instagram");
 
 export const linkCategories = {

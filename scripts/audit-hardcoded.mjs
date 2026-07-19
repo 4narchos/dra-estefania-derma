@@ -25,6 +25,8 @@ const PATTERNS = [
   { name: "phone formatted", regex: /999\s?221\s?3021/g },
   { name: "phone raw", regex: /529992213021/g },
   { name: "whatsapp api url", regex: /api\.whatsapp\.com\/send\?phone=/g },
+  // whatsappLinkMain should only be used inside data files; components must use getWhatsAppUrl(preset).
+  { name: "whatsapp base url import", regex: /whatsappLinkMain/g },
   { name: "doctoralia profile url", regex: /doctoralia\.com\.mx\/mariana-estefania-garcia-borges-2/g },
   { name: "doctoralia short url", regex: /doctoralia\.com\.mx\/z\/DUNvsn/g },
   { name: "instagram url", regex: /instagram\.com\/dra\.estefaniaderma/g },
