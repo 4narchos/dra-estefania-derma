@@ -5,6 +5,7 @@ import {
   numberMain,
   getTelUrl,
   getWhatsAppUrl,
+  whatsappPresets,
   mainAddress,
 } from "../data/site.js";
 
@@ -89,7 +90,7 @@ const description = "Aviso de privacidad del consultorio de dermatología de la 
         <h2>Contacto</h2>
         <p>
           Si tiene alguna duda sobre este aviso de privacidad, puede contactarnos a través de WhatsApp al
-          <a href={getWhatsAppUrl({ medium: "aviso" })} target="_blank" rel="noopener noreferrer">{numberMain}</a>.
+          <a href={getWhatsAppUrl(whatsappPresets.webAviso)} target="_blank" rel="noopener noreferrer">{numberMain}</a>.
         </p>
       </div>
     </div>

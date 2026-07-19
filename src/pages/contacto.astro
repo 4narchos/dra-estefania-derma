@@ -4,6 +4,7 @@ import QuickSocials from "../components/QuickSocials.astro";
 import LocationWidgetMain from "../components/LocationWidgetMain.astro";
 import {
   getWhatsAppUrl,
+  whatsappPresets,
   getTelUrl,
   mapsLinkMain,
   googleProfile,
@@ -22,7 +23,7 @@ const mainLocation = locations[0];
 const title = "Dermatóloga en Mérida · Tu piel te habla, y yo te ayudo a entenderla ✨";
 const description = "Enfermedades de la piel, el pelo y las uñas, dermatología estética y cirugía dermatológica menor";
 
-const whatsappUrl = getWhatsAppUrl({ medium: "contacto_page" });
+const whatsappUrl = getWhatsAppUrl(whatsappPresets.webContactoPage);
 const instagramLink = socialLinks.find((s) => s.icon === "instagram");
 ---
 

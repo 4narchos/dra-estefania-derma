@@ -1,9 +1,9 @@
 ---
-import { getWhatsAppUrl } from "../data/site.js";
+import { getWhatsAppUrl, whatsappPresets } from "../data/site.js";
 ---
 
 <a
-  href={getWhatsAppUrl({ medium: "sticky" })}
+  href={getWhatsAppUrl(whatsappPresets.webSticky)}
   class="whatsapp-sticky"
   target="_blank"
   rel="noopener noreferrer"

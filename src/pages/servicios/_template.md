@@ -19,10 +19,10 @@ Usa este documento como referencia para crear nuevas subpáginas de servicios in
 import Layout from "../../layouts/Layout.astro";
 import SectionHeader from "../../components/SectionHeader.astro";
 import { getBaseUrl } from "../../utils/baseUrl.js";
-import { getWhatsAppUrl } from "../../data/site.js";
+import { getWhatsAppUrl, whatsappPresets } from "../../data/site.js";
 
 const base = getBaseUrl();
-const whatsappUrl = getWhatsAppUrl({ medium: "servicio" });
+const whatsappUrl = getWhatsAppUrl(whatsappPresets.webServicio);
 
 const title = "{Nombre del servicio} | Dra. Estefanía";
 const description = "{Descripción SEO de 150-160 caracteres}";

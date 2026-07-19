@@ -2,7 +2,8 @@ import { socialLinks } from "./socialLinks.js";
 import {
   numberMain,
   numberMainRaw,
-  whatsappLinkMain,
+  getWhatsAppUrl,
+  whatsappPresets,
   getTelUrl,
   doctoraliaUrl,
 } from "./site.js";
@@ -19,7 +20,7 @@ export const linkCategories = {
 export const links = [
   {
     title: "WhatsApp",
-    url: `${whatsappLinkMain}&utm_source=web&utm_medium=linktree&utm_campaign=contacto`,
+    url: getWhatsAppUrl(whatsappPresets.webLinktree),
     icon: "💬",
     category: linkCategories.CONTACT,
     highlighted: true,

@@ -37,6 +37,25 @@ export const googleMapsEmbedSrc =
 export const consultationPrice = "$1,100 MXN";
 
 /**
+ * Predefined UTM combinations for every WhatsApp entry point.
+ * Using these keeps the base URL (whatsappLinkMain) in one place and makes
+ * it easy to change tracking per location without touching each component.
+ */
+export const whatsappPresets = {
+  webHeader: { source: "web", medium: "header", campaign: "agendar" },
+  webFooter: { source: "web", medium: "footer", campaign: "agendar" },
+  webSticky: { source: "web", medium: "sticky", campaign: "agendar" },
+  webContactSection: { source: "web", medium: "contact_section", campaign: "agendar" },
+  webPresentationButton: { source: "web", medium: "presentation_button", campaign: "inicio" },
+  webFaqsTratamiento: { source: "web", medium: "faqs_tratamiento", campaign: "faqs" },
+  webFaqsBottom: { source: "web", medium: "faqs_bottom", campaign: "faqs" },
+  webContactoPage: { source: "web", medium: "contacto_page", campaign: "agendar" },
+  webServicio: { source: "web", medium: "servicio", campaign: "agendar" },
+  webAviso: { source: "web", medium: "aviso", campaign: "agendar" },
+  webLinktree: { source: "web", medium: "linktree", campaign: "contacto" },
+};
+
+/**
  * Build a WhatsApp URL with UTM parameters.
  * @param {Object} params
  * @param {string} params.medium — required UTM medium (e.g. "header", "footer")

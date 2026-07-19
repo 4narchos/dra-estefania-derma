@@ -1,6 +1,6 @@
 ---
 import LocationWidgetMain from "./LocationWidgetMain.astro";
-import { getWhatsAppUrl, getTelUrl, credentialUrl, mapsLinkMain, agendaUrl } from "../data/site.js";
+import { getWhatsAppUrl, whatsappPresets, getTelUrl, credentialUrl, mapsLinkMain, agendaUrl } from "../data/site.js";
 import { locations } from "../data/locations.js";
 import { socialLinks } from "../data/socialLinks.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
@@ -46,7 +46,7 @@ const credentialLink = {
         <ul class="footer-link-list footer-link-list--inline footer-link-list--contact">
           <li>
             <a
-              href={getWhatsAppUrl({ medium: "footer" })}
+              href={getWhatsAppUrl(whatsappPresets.webFooter)}
               class="footer-contact-link"
               target="_blank"
               rel="noopener noreferrer"

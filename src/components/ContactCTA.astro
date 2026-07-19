@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import clinicImg from "../assets/images/clinic-2.webp";
-import { getWhatsAppUrl, mapsLinkMain, doctoraliaUrl } from "../data/site.js";
+import { getWhatsAppUrl, whatsappPresets, mapsLinkMain, doctoraliaUrl } from "../data/site.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
 import CTACard from "./CTACard.astro";
 import PillMenu from "./PillMenu.astro";
@@ -9,7 +9,7 @@ const base = getBaseUrl();
 
 const menuItems = [
   { label: "Más ubicaciones", href: `${base}ubicaciones` },
-  { label: "Enviar mensaje", href: getWhatsAppUrl({ medium: "contact_section" }), external: true },
+  { label: "Enviar mensaje", href: getWhatsAppUrl(whatsappPresets.webContactSection), external: true },
   { label: "Preguntas", href: `${base}faqs` },
 ];
 ---
