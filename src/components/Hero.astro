@@ -327,9 +327,15 @@ const mobileBottom = [
 
   @media (min-width: 769px) {
     .hero-title-wrapper {
-      margin-bottom: 0;
-      margin-top: -6vh;
+      position: absolute;
+      top: 14%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: none;
+      margin: 0;
       padding-bottom: var(--space-6);
+      z-index: 10;
     }
   }
 
