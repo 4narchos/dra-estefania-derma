@@ -1,0 +1,22 @@
+---
+import { agendaUrl } from "../data/site.js";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agenda tu cita · Dra. Estefanía Borges</title>
+    <meta http-equiv="refresh" content={`0; url=${agendaUrl}`} />
+  </head>
+  <body>
+    <p>
+      Redirigiendo a la agenda… Si no ocurre automáticamente,
+      <a href={agendaUrl}>haz clic aquí</a>.
+    </p>
+    <script define:vars={{ agendaUrl }}>
+      window.location.replace(agendaUrl);
+    </script>
+  </body>
+</html>
