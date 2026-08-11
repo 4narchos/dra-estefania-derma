@@ -34,7 +34,7 @@ Página web estática promocional para la **Dra. Mariana Estefanía García Borg
 
 ### Servicios
 
-Primera visita dermatológica, Botox / toxina botulínica, peeling, microdermoabrasión, hydrafacial, limpieza facial, depilación láser, dermatoscopía, crioterapia, biopsia cutánea, extirpación de lunares, cirugía de uña encarnada, tumores cutáneos, tratamiento de acné, tratamiento para pérdida de cabello, electrocoagulación de verrugas, eliminación de acrocordones.
+Primera visita dermatológica, Infiltración Antiarrugas, peeling, microdermoabrasión, hydrafacial, limpieza facial, depilación láser, dermatoscopía, crioterapia, biopsia cutánea, extirpación de lunares, cirugía de uña encarnada, tumores cutáneos, tratamiento de acné, tratamiento para pérdida de cabello, electrocoagulación de verrugas, eliminación de acrocordones.
 
 ---
 
@@ -49,9 +49,9 @@ Primera visita dermatológica, Botox / toxina botulínica, peeling, microdermoab
 - [x] Implementado en `src/layouts/Layout.astro` con JSON-LD
 - [x] Schema `Physician` con datos completos (dirección, teléfono, formación, especialidad)
 - [x] Schema `Physician` con `@id` y `sameAs` (Doctoralia, Instagram)
-- [x] Schema `Physician` con `medicalCondition` y `availableService` (botox, hydrafacial, etc.)
+- [x] Schema `Physician` con `medicalCondition` y `availableService` (infiltración antiarrugas, hydrafacial, etc.)
 - [x] Schema `LocalBusiness` + `MedicalBusiness` separado con `@id`, geo coordenadas, `employee` cross-reference
-- [x] Schema `FAQPage` expandido de 3 a 10 preguntas (acné, melasma, rosácea, queratosis pilar, alopecia, botox, hydrafacial, inglés)
+- [x] Schema `FAQPage` expandido de 3 a 10 preguntas (acné, melasma, rosácea, queratosis pilar, alopecia, infiltración antiarrugas, hydrafacial, inglés)
 - [ ] Validar con [Google Rich Results Test](https://search.google.com/test/rich-results)
 
 ### 3. "Tu primer filtro no es Google, es ChatGPT" — optimizar para LLMs

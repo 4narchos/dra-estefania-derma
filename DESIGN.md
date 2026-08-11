@@ -363,7 +363,7 @@ Réplica directa del carrusel "Meet the new standard" de Affinity (extraído de 
 
 ### Value Proposition
 - Dark section.
-- Top marquee/cinta deslizable with conditions and procedures (Acné, Caspa, Manchas, Alopecia, Arrugas, Skincare, Bótox, Peelings, Bioestimulantes, Microneedling, Biopsias, Crioterapia, Electrocirugía, Quistes, Lipomas) separated by middots.
+- Top marquee/cinta deslizable with conditions and procedures (Acné, Caspa, Manchas, Alopecia, Arrugas, Skincare, Infiltración Antiarrugas, Peelings, Bioestimulantes, Microneedling, Biopsias, Crioterapia, Electrocirugía, Quistes, Lipomas) separated by middots.
 - Marquee loops infinitely with CSS and pauses under `prefers-reduced-motion`.
 - Below the marquee: bulleted consultation process + highlighted clarity box.
 - Doctor photo on the side.
