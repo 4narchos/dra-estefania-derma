@@ -18,9 +18,9 @@ export const services = [
     description: "Procedimientos no invasivos para mejorar textura, luminosidad y firmeza de la piel del rostro.",
   },
   {
-    name: "Botox / Toxina botulínica",
+    name: "Toxina botulínica",
     icon: "💉",
-    slug: "botox-toxina-botulinica",
+    slug: "toxina-botulinica",
     description: "Aplicación de toxina botulínica con protocolos actualizados para resultados naturales y seguros.",
   },
   {

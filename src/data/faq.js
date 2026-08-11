@@ -18,8 +18,8 @@ export const faqs = [
     answer: "La queratosis pilar es una condición común donde la piel produce demasiada queratina, formando pequeños bultos ásperos. En el clima de Yucatán, la humedad puede agravarla. La Dra. García Borges ofrece tratamientos personalizados en Mérida para suavizar la textura de la piel.",
   },
   {
-    question: "¿Es seguro ponerse Botox en Mérida?",
-    answer: "Sí, la aplicación de Botox (toxina botulínica) es segura cuando la realiza un dermatólogo especialista. La Dra. García Borges, recién graduada del Instituto Dermatológico de Jalisco (2026), aplica los protocolos más actualizados en su consultorio de Mérida.",
+    question: "¿Es seguro ponerse toxina botulínica en Mérida?",
+    answer: "Sí, la aplicación de toxina botulínica es segura cuando la realiza un dermatólogo especialista. La Dra. García Borges, recién graduada del Instituto Dermatológico de Jalisco (2026), aplica los protocolos más actualizados en su consultorio de Mérida.",
   },
   {
     question: "¿Cómo tratar el melasma en clima tropical como el de Yucatán?",
