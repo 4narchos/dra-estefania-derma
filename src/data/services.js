@@ -18,10 +18,10 @@ export const services = [
     description: "Procedimientos no invasivos para mejorar textura, luminosidad y firmeza de la piel del rostro.",
   },
   {
-    name: "Toxina botulínica",
+    name: "Infiltración Antiarrugas",
     icon: "💉",
-    slug: "toxina-botulinica",
-    description: "Aplicación de toxina botulínica con protocolos actualizados para resultados naturales y seguros.",
+    slug: "infiltracion-antiarrugas",
+    description: "Infiltración Antiarrugas con protocolos actualizados para resultados naturales y seguros.",
   },
   {
     name: "Peeling químico",
