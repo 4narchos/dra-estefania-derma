@@ -1,16 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import DoctoraliaCalendarWidget from "../components/DoctoraliaCalendarWidget.astro";
+import { getWhatsAppUrl, whatsappPresets } from "../data/site.js";
 
 const title = "Agenda tu cita · Dra. Estefanía Borges";
 const description = "Reserva tu consulta dermatológica con la Dra. Estefanía Borges en Mérida, Yucatán.";
+const whatsappUrl = getWhatsAppUrl(whatsappPresets.webAgenda);
 ---
 
 <Layout title={title} description={description} pageSchema="contact" showWhatsApp={false}>
   <section class="agenda-page">
     <div class="agenda-container">
       <h1 class="agenda-title">Agenda tu cita</h1>
-      <p class="agenda-subtitle">Seleccione el horario que prefiera.<br><br>Si tiene alguna duda o requiere asistencia adicional, no dude en enviarnos un mensaje.</p>
+      <p class="agenda-subtitle">Selecciona el horario que prefieras.<br><br>Si tienes alguna duda o requieres asistencia adicional, no dudes en enviarnos un <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="agenda-link">mensaje</a>.</p>
       <div class="agenda-widget">
         <DoctoraliaCalendarWidget />
       </div>
@@ -53,6 +55,17 @@ const description = "Reserva tu consulta dermatológica con la Dra. Estefanía B
     text-align: center;
     margin: 0;
     line-height: var(--leading-relaxed);
+  }
+
+  .agenda-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color var(--transition-fast);
+  }
+
+  .agenda-link:hover {
+    color: var(--color-primary-hover);
   }
 
   .agenda-widget {

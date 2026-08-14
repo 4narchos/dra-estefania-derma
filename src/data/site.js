@@ -61,6 +61,7 @@ export const whatsappPresets = {
   webContactoPage: { source: "web", medium: "contacto_page", campaign: "agendar" },
   webServicio: { source: "web", medium: "servicio", campaign: "agendar" },
   webAviso: { source: "web", medium: "aviso", campaign: "agendar" },
+  webAgenda: { source: "web", medium: "agenda", campaign: "agendar" },
   webLinktree: { source: "web", medium: "linktree", campaign: "contacto" },
 };
 
