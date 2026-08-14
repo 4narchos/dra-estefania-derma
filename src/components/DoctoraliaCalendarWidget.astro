@@ -23,15 +23,6 @@ const { href = doctoraliaUrl, id = "zl-url" } = Astro.props;
 >
   Reserve una cita
 </a>
-<style>
-  /* Ocultar la leyenda "Médico general" que el widget de Doctoralia inyecta
-     debajo del nombre. Se usa aria-label/title para no depender de clases
-     genéricas de Bootstrap que podrían cambiar. */
-  .zl-url [aria-label="Médico general"],
-  .zl-url [title="Médico general"] {
-    display: none !important;
-  }
-</style>
 <script>
   !function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");
 </script>

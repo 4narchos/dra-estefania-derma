@@ -1,0 +1,30 @@
+---
+import Layout from "../layouts/Layout.astro";
+import MapWidget from "../components/MapWidget.astro";
+import { googleMapsEmbedSrc } from "../data/site.js";
+
+const title = "Ubicación · Dra. Estefanía Borges";
+const description = "Ubicación del consultorio de la Dra. Estefanía Borges en Mérida, Yucatán.";
+---
+
+<Layout title={title} description={description} pageSchema="none">
+  <section class="ubicacion-page">
+    <MapWidget src={googleMapsEmbedSrc} title="Ubicación del consultorio" />
+  </section>
+</Layout>
+
+<style>
+  .ubicacion-page {
+    min-height: var(--viewport-minus-header);
+    padding: var(--space-6) var(--space-4);
+    background: var(--color-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ubicacion-page .map-widget {
+    width: 100%;
+    max-width: 960px;
+  }
+</style>
