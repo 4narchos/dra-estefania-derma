@@ -1,22 +1,64 @@
 ---
-import { agendaUrl } from "../data/site.js";
+import Layout from "../layouts/Layout.astro";
+import DoctoraliaCalendarWidget from "../components/DoctoraliaCalendarWidget.astro";
+
+const title = "Agenda tu cita · Dra. Estefanía Borges";
+const description = "Reserva tu consulta dermatológica con la Dra. Estefanía Borges en Mérida, Yucatán.";
 ---
 
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agenda tu cita · Dra. Estefanía Borges</title>
-    <meta http-equiv="refresh" content={`0; url=${agendaUrl}`} />
-  </head>
-  <body>
-    <p>
-      Redirigiendo a la agenda… Si no ocurre automáticamente,
-      <a href={agendaUrl}>haz clic aquí</a>.
-    </p>
-    <script define:vars={{ agendaUrl }}>
-      window.location.replace(agendaUrl);
-    </script>
-  </body>
-</html>
+<Layout title={title} description={description} pageSchema="contact" showWhatsApp={false}>
+  <section class="agenda-page">
+    <div class="agenda-container">
+      <h1 class="agenda-title">Agenda tu cita</h1>
+      <p class="agenda-subtitle">Selecciona el horario que prefieras directamente en el calendario.</p>
+      <div class="agenda-widget">
+        <DoctoraliaCalendarWidget />
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .agenda-page {
+    min-height: var(--viewport-minus-header);
+    padding: var(--space-10) var(--space-4);
+    background: var(--color-background);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .agenda-container {
+    width: 100%;
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .agenda-title {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(var(--text-2xl), 5vw, var(--text-3xl));
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    color: var(--color-text-primary);
+    margin: 0;
+    text-align: center;
+  }
+
+  .agenda-subtitle {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin: 0;
+    line-height: var(--leading-relaxed);
+  }
+
+  .agenda-widget {
+    width: 100%;
+    margin-top: var(--space-4);
+    display: flex;
+    justify-content: center;
+  }
+</style>
