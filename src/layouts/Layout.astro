@@ -665,6 +665,24 @@ const servicesListSchema = {
         });
       })();
     </script>
+
+    <!-- Google Ads conversion tracking para enlaces de WhatsApp -->
+    <script is:inline>
+      document.addEventListener('click', function (e) {
+        const link = e.target.closest('a[href*="api.whatsapp.com/send"]');
+        if (!link) return;
+
+        e.preventDefault();
+        const url = link.href;
+
+        gtag('event', 'conversion', {
+          'send_to': 'AW-18382685612/UEnnCLeC8-EcEKyLxr1E',
+          'event_callback': function () {
+            window.open(url, '_blank');
+          }
+        });
+      });
+    </script>
   </head>
   <body>
     {showPreloader && (
