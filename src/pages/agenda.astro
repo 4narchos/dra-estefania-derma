@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import DoctoraliaCalendarWidget from "../components/DoctoraliaCalendarWidget.astro";
-import { getWhatsAppUrl, whatsappPresets, numberMainRaw, whatsappMessage } from "../data/site.js";
+import { getWhatsAppUrl, whatsappPresets, numberMainRaw, consultationPrice, mainAddress } from "../data/site.js";
 
 const title = "Agenda tu cita · Dra. Estefanía Borges";
 const description = "Reserva tu consulta dermatológica con la Dra. Estefanía Borges en Mérida, Yucatán.";
@@ -12,75 +12,234 @@ const whatsappUrl = getWhatsAppUrl(whatsappPresets.webAgenda);
   <section class="agenda-page">
     <div class="agenda-container">
       <h1 class="agenda-title">Agenda tu cita</h1>
-      <p class="agenda-subtitle">Selecciona el horario que prefieras. Si tienes alguna duda o requieres asistencia, no dudes en enviarnos un <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="agenda-link">mensaje</a>.</p>
 
-      <form class="agenda-form" id="agenda-form">
-        <div class="agenda-form-group">
-          <label for="nombre" class="agenda-form-label">Nombre del paciente</label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            class="agenda-form-input"
-            placeholder="Tu nombre completo"
-            required
-          />
-        </div>
-
-        <div class="agenda-form-group">
-          <label for="fecha" class="agenda-form-label">Fecha de interés</label>
-          <input
-            type="date"
-            id="fecha"
-            name="fecha"
-            class="agenda-form-input"
-            required
-          />
-        </div>
-
-        <button type="submit" class="agenda-form-button">
-          Solicitar cita
+      <!-- Selector de opciones -->
+      <div class="agenda-options" role="tablist" aria-label="Opciones de agenda">
+        <button
+          type="button"
+          class="agenda-option is-active"
+          data-option="agendar"
+          role="tab"
+          aria-selected="true"
+          aria-controls="panel-agendar"
+          id="tab-agendar"
+        >
+          Quiero agendar yo
         </button>
-      </form>
+        <button
+          type="button"
+          class="agenda-option"
+          data-option="ayuda"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-ayuda"
+          id="tab-ayuda"
+        >
+          Quiero que me ayuden
+        </button>
+        <button
+          type="button"
+          class="agenda-option"
+          data-option="duda"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-duda"
+          id="tab-duda"
+        >
+          Tengo una duda
+        </button>
+      </div>
 
-      <div class="agenda-widget">
-        <DoctoraliaCalendarWidget />
+      <!-- Panel: Quiero agendar yo -->
+      <div
+        class="agenda-panel is-active"
+        id="panel-agendar"
+        role="tabpanel"
+        aria-labelledby="tab-agendar"
+      >
+        <p class="agenda-subtitle">Selecciona el horario que prefieras. Si tienes alguna duda o requieres asistencia, no dudes en enviarnos un <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="agenda-link">mensaje</a>.</p>
+        <div class="agenda-widget">
+          <DoctoraliaCalendarWidget />
+        </div>
+      </div>
+
+      <!-- Panel: Quiero que me ayuden -->
+      <div
+        class="agenda-panel"
+        id="panel-ayuda"
+        role="tabpanel"
+        aria-labelledby="tab-ayuda"
+        hidden
+      >
+        <p class="agenda-subtitle">Déjanos tus datos y te contactamos para confirmar tu cita.</p>
+        <form class="agenda-form" id="form-ayuda">
+          <div class="agenda-form-group">
+            <label for="nombre" class="agenda-form-label">Nombre del paciente</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              class="agenda-form-input"
+              placeholder="Tu nombre completo"
+              required
+            />
+          </div>
+
+          <div class="agenda-form-group">
+            <label for="fecha" class="agenda-form-label">Fecha de interés</label>
+            <input
+              type="date"
+              id="fecha"
+              name="fecha"
+              class="agenda-form-input"
+              required
+            />
+          </div>
+
+          <button type="submit" class="agenda-form-button">
+            Solicitar cita
+          </button>
+        </form>
+      </div>
+
+      <!-- Panel: Tengo una duda -->
+      <div
+        class="agenda-panel"
+        id="panel-duda"
+        role="tabpanel"
+        aria-labelledby="tab-duda"
+        hidden
+      >
+        <div class="agenda-faqs">
+          <details class="agenda-faq" open>
+            <summary>¿Qué incluye la consulta?</summary>
+            <p>La consulta incluye una valoración dermatológica especializada en donde identificamos las causas y factores desencadenantes de tu padecimiento e indicamos un tratamiento personalizado acorde a tus necesidades.</p>
+          </details>
+
+          <details class="agenda-faq">
+            <summary>¿Cuál es el costo de la consulta?</summary>
+            <p>La valoración de especialidad tiene un costo de {consultationPrice}.</p>
+          </details>
+
+          <details class="agenda-faq">
+            <summary>¿Dónde está el consultorio?</summary>
+            <p>{mainAddress}</p>
+          </details>
+        </div>
+
+        <div class="agenda-duda-divider">
+          <span>¿Más dudas?</span>
+        </div>
+
+        <form class="agenda-form" id="form-duda">
+          <div class="agenda-form-group">
+            <label for="nombre-duda" class="agenda-form-label">Tu nombre</label>
+            <input
+              type="text"
+              id="nombre-duda"
+              name="nombre-duda"
+              class="agenda-form-input"
+              placeholder="Tu nombre completo"
+              required
+            />
+          </div>
+
+          <div class="agenda-form-group">
+            <label for="mensaje-duda" class="agenda-form-label">Tu duda</label>
+            <textarea
+              id="mensaje-duda"
+              name="mensaje-duda"
+              class="agenda-form-input agenda-form-textarea"
+              placeholder="Escribe tu pregunta aquí..."
+              rows="4"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="agenda-form-button">
+            Enviar mensaje
+          </button>
+        </form>
       </div>
     </div>
   </section>
 </Layout>
 
-<script is:inline define:vars={{ numberMainRaw, whatsappMessage }}>
+<script is:inline define:vars={{ numberMainRaw }}>
   (function () {
-    const form = document.getElementById('agenda-form');
-    if (!form) return;
+    // Tabs
+    const tabs = document.querySelectorAll('.agenda-option');
+    const panels = document.querySelectorAll('.agenda-panel');
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.option;
 
-      const nombre = document.getElementById('nombre').value.trim();
-      const fecha = document.getElementById('fecha').value;
+        tabs.forEach((t) => {
+          t.classList.remove('is-active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        panels.forEach((p) => {
+          p.classList.remove('is-active');
+          p.hidden = true;
+        });
 
-      if (!nombre || !fecha) return;
-
-      // Formatear fecha para que se lea bien en WhatsApp
-      const fechaObj = new Date(fecha + 'T00:00:00');
-      const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
-      const fechaLegible = fechaObj.toLocaleDateString('es-MX', opciones);
-
-      const mensaje = `Hola, soy ${nombre} y me gustaría agendar una consulta dermatológica para el ${fechaLegible}.`;
-
-      const url = `https://api.whatsapp.com/send?phone=${numberMainRaw}&text=${encodeURIComponent(mensaje)}&utm_source=web&utm_medium=agenda_form&utm_campaign=agendar`;
-
-      window.open(url, '_blank');
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-selected', 'true');
+        const panel = document.getElementById(`panel-${target}`);
+        if (panel) {
+          panel.classList.add('is-active');
+          panel.hidden = false;
+        }
+      });
     });
+
+    // Form: ayuda para agendar
+    const formAyuda = document.getElementById('form-ayuda');
+    if (formAyuda) {
+      formAyuda.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const nombre = document.getElementById('nombre').value.trim();
+        const fecha = document.getElementById('fecha').value;
+
+        if (!nombre || !fecha) return;
+
+        const fechaObj = new Date(fecha + 'T00:00:00');
+        const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+        const fechaLegible = fechaObj.toLocaleDateString('es-MX', opciones);
+
+        const mensaje = `Hola, soy ${nombre} y me gustaría agendar una consulta dermatológica para el ${fechaLegible}.`;
+        const url = `https://api.whatsapp.com/send?phone=${numberMainRaw}&text=${encodeURIComponent(mensaje)}&utm_source=web&utm_medium=agenda_form&utm_campaign=agendar`;
+
+        window.open(url, '_blank');
+      });
+    }
+
+    // Form: duda
+    const formDuda = document.getElementById('form-duda');
+    if (formDuda) {
+      formDuda.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const nombre = document.getElementById('nombre-duda').value.trim();
+        const duda = document.getElementById('mensaje-duda').value.trim();
+
+        if (!nombre || !duda) return;
+
+        const mensaje = `Hola, soy ${nombre} y tengo una duda: ${duda}`;
+        const url = `https://api.whatsapp.com/send?phone=${numberMainRaw}&text=${encodeURIComponent(mensaje)}&utm_source=web&utm_medium=agenda_duda&utm_campaign=agendar`;
+
+        window.open(url, '_blank');
+      });
+    }
   })();
 </script>
 
 <style>
   .agenda-page {
     min-height: var(--viewport-minus-header);
-    padding: var(--space-10) var(--space-4);
+    padding: var(--space-6) var(--space-4);
     background: var(--color-background);
     display: flex;
     justify-content: center;
@@ -89,16 +248,16 @@ const whatsappUrl = getWhatsAppUrl(whatsappPresets.webAgenda);
 
   .agenda-container {
     width: 100%;
-    max-width: 720px;
+    max-width: 520px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-5);
   }
 
   .agenda-title {
     font-family: "Junicode", Georgia, serif;
-    font-size: clamp(var(--text-2xl), 5vw, var(--text-3xl));
+    font-size: clamp(var(--text-2xl), 6vw, var(--text-3xl));
     font-weight: 600;
     line-height: var(--leading-tight);
     color: var(--color-text-primary);
@@ -125,21 +284,68 @@ const whatsappUrl = getWhatsAppUrl(whatsappPresets.webAgenda);
     color: var(--color-primary-hover);
   }
 
+  /* Selector de opciones */
+  .agenda-options {
+    display: flex;
+    width: 100%;
+    background: #F0EBE0;
+    border-radius: 999px;
+    padding: 4px;
+    gap: 4px;
+  }
+
+  .agenda-option {
+    flex: 1;
+    padding: var(--space-3) var(--space-2);
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    cursor: pointer;
+    transition: background var(--transition-fast), color var(--transition-fast);
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .agenda-option:hover {
+    color: var(--color-text-primary);
+  }
+
+  .agenda-option.is-active {
+    background: #fff;
+    color: var(--color-text-primary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Paneles */
+  .agenda-panel {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .agenda-panel.is-active {
+    display: flex;
+  }
+
   .agenda-widget {
     width: 100%;
-    margin-top: var(--space-4);
+    margin-top: var(--space-2);
     display: flex;
     justify-content: center;
   }
 
+  /* Formularios */
   .agenda-form {
     width: 100%;
-    max-width: 420px;
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
-    margin-top: var(--space-4);
-    padding: var(--space-6);
+    padding: var(--space-5);
     background: #fff;
     border: 1px solid #E6E3DB;
     border-radius: 12px;
@@ -176,6 +382,11 @@ const whatsappUrl = getWhatsAppUrl(whatsappPresets.webAgenda);
     box-shadow: 0 0 0 3px rgba(45, 94, 70, 0.1);
   }
 
+  .agenda-form-textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
   .agenda-form-button {
     width: 100%;
     padding: var(--space-3) var(--space-6);
@@ -192,5 +403,80 @@ const whatsappUrl = getWhatsAppUrl(whatsappPresets.webAgenda);
 
   .agenda-form-button:hover {
     background: var(--color-primary-hover);
+  }
+
+  /* FAQs acortadas */
+  .agenda-faqs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .agenda-faq {
+    background: #fff;
+    border: 1px solid #E6E3DB;
+    border-radius: 8px;
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .agenda-faq summary {
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+    font-size: var(--text-base);
+  }
+
+  .agenda-faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .agenda-faq p {
+    margin-top: var(--space-2);
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+  }
+
+  .agenda-duda-divider {
+    width: 100%;
+    text-align: center;
+    margin: var(--space-2) 0;
+    position: relative;
+  }
+
+  .agenda-duda-divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #E6E3DB;
+  }
+
+  .agenda-duda-divider span {
+    position: relative;
+    background: var(--color-background);
+    padding: 0 var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 641px) {
+    .agenda-page {
+      padding: var(--space-10) var(--space-6);
+    }
+
+    .agenda-container {
+      max-width: 640px;
+    }
+
+    .agenda-option {
+      font-size: var(--text-base);
+      padding: var(--space-3) var(--space-4);
+    }
   }
 </style>
