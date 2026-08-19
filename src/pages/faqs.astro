@@ -3,29 +3,11 @@ import Layout from "../layouts/Layout.astro";
 import { getWhatsAppUrl, whatsappPresets, agendaUrl, consultationPrice } from "../data/site.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
 import PillMenu from "../components/PillMenu.astro";
-import LocationWidgetMain from "../components/LocationWidgetMain.astro";
+import FAQsPreview from "../components/FAQsPreview.astro";
 
 const base = getBaseUrl();
 
-const faqItems = [
-  {
-    title: "¿Qué incluye la consulta?",
-    content: [
-      "La consulta incluye una valoración dermatológica especializada en donde identificamos las causas y factores desencadenantes de tu padecimiento e indicamos un tratamiento personalizado acorde a tus necesidades.",
-    ],
-  },
-  {
-    title: "¿Dónde está el consultorio?",
-    content: [],
-    widget: "location",
-  },
-  {
-    title: "¿Dónde puedo surtir mi receta?",
-    content: [
-      "Puedes surtir tu receta donde prefieras.",
-      "En la clínica también contamos con una farmacia, por si decides surtirla en ese momento.",
-    ],
-  },
+const moreFaqItems = [
   {
     title: "¿Cómo debo prepararme para la consulta?",
     content: [
@@ -36,13 +18,6 @@ const faqItems = [
       "Lleva una lista de productos o medicamentos que uses o hayas usado.",
       "Anota tus preguntas para asegurar que todas tus inquietudes sean abordadas durante la consulta.",
       "Llega a la hora programada. Tenemos un margen máximo de tolerancia de 15 minutos para asegurar la calidad de atención de todos los pacientes.",
-    ],
-  },
-  {
-    title: "¿Cuáles son los horarios de atención?",
-    content: [
-      "Atendemos de lunes a viernes, de 10:00 a. m. a 7:00 p. m.",
-      "Es necesario agendar una cita previamente.",
     ],
   },
   {
@@ -95,61 +70,74 @@ const menuItems = [
       <div class="faqs-content">
         <h1 class="faqs-headline">Resuelve tus dudas antes de la consulta</h1>
 
-        <div class="faqs-accordion">
-          {
-            faqItems.map((item, index) => (
-              <div class={`faqs-accordion-item ${index === 0 ? "is-open" : ""}`}>
-                <h3 class="faqs-accordion-heading">
-                  <button
-                    type="button"
-                    class="faqs-accordion-trigger"
-                    aria-expanded={index === 0 ? "true" : "false"}
-                    aria-controls={`faqs-panel-${index}`}
-                    id={`faqs-trigger-${index}`}
-                  >
-                    <span>{item.title}</span>
-                    <span class="faqs-accordion-icon" aria-hidden="true">
-                      <span class="icon-bar icon-bar-h" />
-                      <span class="icon-bar icon-bar-v" />
-                    </span>
-                  </button>
-                </h3>
-                <div
-                  class="faqs-accordion-panel"
-                  id={`faqs-panel-${index}`}
-                  role="region"
-                  aria-labelledby={`faqs-trigger-${index}`}
-                >
-                  <div class="faqs-accordion-body">
-                    {item.content.map((paragraph) => (
-                      <p>{paragraph}</p>
-                    ))}
-                    {item.bullets && (
-                      <ul class="faqs-bullets">
-                        {item.bullets.map((bullet) => (
-                          <li>{bullet}</li>
+        <FAQsPreview />
+
+        <details class="faqs-more">
+          <summary class="faqs-more-summary">
+            <span>Más preguntas</span>
+            <span class="faqs-more-icon" aria-hidden="true">
+              <span class="icon-bar icon-bar-h" />
+              <span class="icon-bar icon-bar-v" />
+            </span>
+          </summary>
+
+          <div class="faqs-more-content">
+            <div class="faqs-accordion">
+              {
+                moreFaqItems.map((item, index) => (
+                  <div class={`faqs-accordion-item ${index === 0 ? "is-open" : ""}`}>
+                    <h3 class="faqs-accordion-heading">
+                      <button
+                        type="button"
+                        class="faqs-accordion-trigger"
+                        aria-expanded={index === 0 ? "true" : "false"}
+                        aria-controls={`faqs-more-panel-${index}`}
+                        id={`faqs-more-trigger-${index}`}
+                      >
+                        <span>{item.title}</span>
+                        <span class="faqs-accordion-icon" aria-hidden="true">
+                          <span class="icon-bar icon-bar-h" />
+                          <span class="icon-bar icon-bar-v" />
+                        </span>
+                      </button>
+                    </h3>
+                    <div
+                      class="faqs-accordion-panel"
+                      id={`faqs-more-panel-${index}`}
+                      role="region"
+                      aria-labelledby={`faqs-more-trigger-${index}`}
+                    >
+                      <div class="faqs-accordion-body">
+                        {item.content.map((paragraph) => (
+                          <p>{paragraph}</p>
                         ))}
-                      </ul>
-                    )}
-                    {item.widget === "location" && <LocationWidgetMain dark />}
-                    {item.cta && (
-                      <p>
-                        <a
-                          href={item.cta.href}
-                          class="faqs-body-link"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {item.cta.label}
-                        </a>
-                      </p>
-                    )}
+                        {item.bullets && (
+                          <ul class="faqs-bullets">
+                            {item.bullets.map((bullet) => (
+                              <li>{bullet}</li>
+                            ))}
+                          </ul>
+                        )}
+                        {item.cta && (
+                          <p>
+                            <a
+                              href={item.cta.href}
+                              class="faqs-body-link"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {item.cta.label}
+                            </a>
+                          </p>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
+                ))
+              }
+            </div>
+          </div>
+        </details>
 
         <div class="faqs-menu">
           <PillMenu variant="contact" items={menuItems} ariaLabel="Acciones principales" />
@@ -160,44 +148,47 @@ const menuItems = [
 </Layout>
 
 <script>
-  const items = document.querySelectorAll(
-    ".faqs-accordion-item"
-  ) as NodeListOf<HTMLElement>;
+  (function () {
+    // Accordion para "Más preguntas"
+    const moreItems = document.querySelectorAll(
+      ".faqs-more-content .faqs-accordion-item"
+    ) as NodeListOf<HTMLElement>;
 
-  const openItem = (target: HTMLElement) => {
-    items.forEach((i) => {
-      i.classList.remove("is-open");
-      const btn = i.querySelector(
+    const openMoreItem = (target: HTMLElement) => {
+      moreItems.forEach((i) => {
+        i.classList.remove("is-open");
+        const btn = i.querySelector(
+          ".faqs-accordion-trigger"
+        ) as HTMLButtonElement;
+        btn.setAttribute("aria-expanded", "false");
+      });
+
+      target.classList.add("is-open");
+      const trigger = target.querySelector(
         ".faqs-accordion-trigger"
       ) as HTMLButtonElement;
-      btn.setAttribute("aria-expanded", "false");
-    });
+      trigger.setAttribute("aria-expanded", "true");
+    };
 
-    target.classList.add("is-open");
-    const trigger = target.querySelector(
-      ".faqs-accordion-trigger"
-    ) as HTMLButtonElement;
-    trigger.setAttribute("aria-expanded", "true");
-  };
+    moreItems.forEach((item) => {
+      const trigger = item.querySelector(
+        ".faqs-accordion-trigger"
+      ) as HTMLButtonElement;
 
-  items.forEach((item) => {
-    const trigger = item.querySelector(
-      ".faqs-accordion-trigger"
-    ) as HTMLButtonElement;
+      trigger.addEventListener("click", () => {
+        if (item.classList.contains("is-open")) {
+          item.classList.remove("is-open");
+          trigger.setAttribute("aria-expanded", "false");
+        } else {
+          openMoreItem(item);
+        }
+      });
 
-    trigger.addEventListener("click", () => {
-      if (item.classList.contains("is-open")) {
-        item.classList.remove("is-open");
-        trigger.setAttribute("aria-expanded", "false");
-      } else {
-        openItem(item);
+      if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        item.addEventListener("mouseenter", () => openMoreItem(item));
       }
     });
-
-    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-      item.addEventListener("mouseenter", () => openItem(item));
-    }
-  });
+  })();
 </script>
 
 <style>
@@ -230,22 +221,93 @@ const menuItems = [
     text-align: center;
   }
 
-  .faqs-accordion {
+  /* Más preguntas */
+  .faqs-more {
+    margin-top: var(--space-8);
     border-top: 1px solid var(--color-border-inverse);
-    margin-bottom: var(--space-8);
   }
 
-  .faqs-accordion-item {
+  .faqs-more-summary {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-5) 0;
+    background: transparent;
+    border: none;
+    color: var(--color-text-on-dark);
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-tight);
+    text-align: left;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+    list-style: none;
+  }
+
+  .faqs-more-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faqs-more-summary:hover {
+    color: var(--color-accent);
+  }
+
+  .faqs-more-icon {
+    position: relative;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .faqs-more-icon .icon-bar {
+    position: absolute;
+    background: currentColor;
+    transition: transform var(--transition-base);
+  }
+
+  .faqs-more-icon .icon-bar-h {
+    width: 100%;
+    height: 2px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  .faqs-more-icon .icon-bar-v {
+    width: 2px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .faqs-more[open] .faqs-more-icon .icon-bar-v {
+    transform: translateX(-50%) scaleY(0);
+  }
+
+  .faqs-more-content {
+    padding-top: var(--space-2);
+  }
+
+  /* Accordion dentro de Más preguntas */
+  .faqs-more-content .faqs-accordion {
+    border-top: 1px solid var(--color-border-inverse);
+  }
+
+  .faqs-more-content .faqs-accordion-item {
     border-bottom: 1px solid var(--color-border-inverse);
   }
 
-  .faqs-accordion-heading {
+  .faqs-more-content .faqs-accordion-heading {
     margin: 0;
     font-size: inherit;
     font-weight: inherit;
   }
 
-  .faqs-accordion-trigger {
+  .faqs-more-content .faqs-accordion-trigger {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -264,30 +326,30 @@ const menuItems = [
     transition: color var(--transition-fast);
   }
 
-  .faqs-accordion-trigger:hover {
+  .faqs-more-content .faqs-accordion-trigger:hover {
     color: var(--color-accent);
   }
 
-  .faqs-accordion-trigger:focus-visible {
+  .faqs-more-content .faqs-accordion-trigger:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
     border-radius: var(--radius-md);
   }
 
-  .faqs-accordion-icon {
+  .faqs-more-content .faqs-accordion-icon {
     position: relative;
     width: 1.25rem;
     height: 1.25rem;
     flex-shrink: 0;
   }
 
-  .icon-bar {
+  .faqs-more-content .icon-bar {
     position: absolute;
     background: currentColor;
     transition: transform var(--transition-base);
   }
 
-  .icon-bar-h {
+  .faqs-more-content .icon-bar-h {
     width: 100%;
     height: 2px;
     top: 50%;
@@ -295,7 +357,7 @@ const menuItems = [
     transform: translateY(-50%);
   }
 
-  .icon-bar-v {
+  .faqs-more-content .icon-bar-v {
     width: 2px;
     height: 100%;
     top: 0;
@@ -303,36 +365,36 @@ const menuItems = [
     transform: translateX(-50%);
   }
 
-  .faqs-accordion-item.is-open .icon-bar-v {
+  .faqs-more-content .faqs-accordion-item.is-open .icon-bar-v {
     transform: translateX(-50%) scaleY(0);
   }
 
-  .faqs-accordion-panel {
+  .faqs-more-content .faqs-accordion-panel {
     display: grid;
     grid-template-rows: 0fr;
     transition: grid-template-rows var(--transition-base);
   }
 
-  .faqs-accordion-item.is-open .faqs-accordion-panel {
+  .faqs-more-content .faqs-accordion-item.is-open .faqs-accordion-panel {
     grid-template-rows: 1fr;
   }
 
-  .faqs-accordion-body {
+  .faqs-more-content .faqs-accordion-body {
     overflow: hidden;
   }
 
-  .faqs-accordion-body p {
+  .faqs-more-content .faqs-accordion-body p {
     padding-bottom: var(--space-5);
     color: rgba(245, 245, 240, 0.8);
     line-height: var(--leading-relaxed);
     min-height: 1.5em;
   }
 
-  .faqs-accordion-body p:last-child {
+  .faqs-more-content .faqs-accordion-body p:last-child {
     padding-bottom: 0;
   }
 
-  .faqs-bullets {
+  .faqs-more-content .faqs-bullets {
     list-style: disc;
     padding-left: var(--space-6);
     margin: 0 0 var(--space-5);
@@ -340,26 +402,27 @@ const menuItems = [
     line-height: var(--leading-relaxed);
   }
 
-  .faqs-bullets li {
+  .faqs-more-content .faqs-bullets li {
     padding-bottom: var(--space-3);
   }
 
-  .faqs-bullets li:last-child {
+  .faqs-more-content .faqs-bullets li:last-child {
     padding-bottom: 0;
   }
 
-  .faqs-body-link {
+  .faqs-more-content .faqs-body-link {
     color: var(--color-accent);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
 
-  .faqs-body-link:hover {
+  .faqs-more-content .faqs-body-link:hover {
     color: #fff;
   }
 
   .faqs-menu {
     align-self: center;
+    margin-top: var(--space-8);
   }
 
   @media (max-width: 640px) {
@@ -367,16 +430,18 @@ const menuItems = [
       font-size: var(--text-2xl);
     }
 
-    .faqs-accordion-trigger {
+    .faqs-more-summary,
+    .faqs-more-content .faqs-accordion-trigger {
       font-size: var(--text-base);
       padding: var(--space-4) 0;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .faqs-accordion-panel,
-    .icon-bar,
-    .faqs-accordion-trigger {
+    .faqs-more-content .faqs-accordion-panel,
+    .faqs-more-content .icon-bar,
+    .faqs-more-content .faqs-accordion-trigger,
+    .faqs-more-icon .icon-bar {
       transition: none;
     }
   }
