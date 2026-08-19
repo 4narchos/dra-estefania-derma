@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import DoctoraliaCalendarWidget from "../components/DoctoraliaCalendarWidget.astro";
-import { getWhatsAppUrl, whatsappPresets } from "../data/site.js";
+import { getWhatsAppUrl, whatsappPresets, numberMainRaw, whatsappMessage } from "../data/site.js";
 
 const title = "Agenda tu cita · Dra. Estefanía Borges";
 const description = "Reserva tu consulta dermatológica con la Dra. Estefanía Borges en Mérida, Yucatán.";
@@ -13,12 +13,69 @@ const whatsappUrl = getWhatsAppUrl(whatsappPresets.webAgenda);
     <div class="agenda-container">
       <h1 class="agenda-title">Agenda tu cita</h1>
       <p class="agenda-subtitle">Selecciona el horario que prefieras. Si tienes alguna duda o requieres asistencia, no dudes en enviarnos un <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="agenda-link">mensaje</a>.</p>
+
+      <form class="agenda-form" id="agenda-form">
+        <div class="agenda-form-group">
+          <label for="nombre" class="agenda-form-label">Nombre del paciente</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            class="agenda-form-input"
+            placeholder="Tu nombre completo"
+            required
+          />
+        </div>
+
+        <div class="agenda-form-group">
+          <label for="fecha" class="agenda-form-label">Fecha de interés</label>
+          <input
+            type="date"
+            id="fecha"
+            name="fecha"
+            class="agenda-form-input"
+            required
+          />
+        </div>
+
+        <button type="submit" class="agenda-form-button">
+          Solicitar cita
+        </button>
+      </form>
+
       <div class="agenda-widget">
         <DoctoraliaCalendarWidget />
       </div>
     </div>
   </section>
 </Layout>
+
+<script is:inline define:vars={{ numberMainRaw, whatsappMessage }}>
+  (function () {
+    const form = document.getElementById('agenda-form');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const nombre = document.getElementById('nombre').value.trim();
+      const fecha = document.getElementById('fecha').value;
+
+      if (!nombre || !fecha) return;
+
+      // Formatear fecha para que se lea bien en WhatsApp
+      const fechaObj = new Date(fecha + 'T00:00:00');
+      const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+      const fechaLegible = fechaObj.toLocaleDateString('es-MX', opciones);
+
+      const mensaje = `Hola, soy ${nombre} y me gustaría agendar una consulta dermatológica para el ${fechaLegible}.`;
+
+      const url = `https://api.whatsapp.com/send?phone=${numberMainRaw}&text=${encodeURIComponent(mensaje)}&utm_source=web&utm_medium=agenda_form&utm_campaign=agendar`;
+
+      window.open(url, '_blank');
+    });
+  })();
+</script>
 
 <style>
   .agenda-page {
@@ -73,5 +130,67 @@ const whatsappUrl = getWhatsAppUrl(whatsappPresets.webAgenda);
     margin-top: var(--space-4);
     display: flex;
     justify-content: center;
+  }
+
+  .agenda-form {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+    padding: var(--space-6);
+    background: #fff;
+    border: 1px solid #E6E3DB;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .agenda-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .agenda-form-label {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+  }
+
+  .agenda-form-input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid #DACE97;
+    border-radius: 8px;
+    font-size: var(--text-base);
+    font-family: inherit;
+    color: var(--color-text-primary);
+    background: #fff;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .agenda-form-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(45, 94, 70, 0.1);
+  }
+
+  .agenda-form-button {
+    width: 100%;
+    padding: var(--space-3) var(--space-6);
+    border-radius: 999px;
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    border: none;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+    margin-top: var(--space-2);
+  }
+
+  .agenda-form-button:hover {
+    background: var(--color-primary-hover);
   }
 </style>
