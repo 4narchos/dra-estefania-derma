@@ -121,8 +121,9 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
         </div>
 
         <div class="agenda-duda-divider">
-          <span>¿Más dudas?</span>
+          <span>¿Otra pregunta?</span>
         </div>
+        <p class="agenda-duda-hint">Escríbenos tu pregunta y te responderemos en seguida.</p>
 
         <form class="agenda-form" id="form-duda">
           <div class="agenda-form-group">
@@ -428,6 +429,14 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     font-size: var(--text-sm);
     font-weight: var(--weight-semibold);
     color: var(--color-text-muted);
+  }
+
+  .agenda-duda-hint {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin: 0;
+    line-height: var(--leading-relaxed);
   }
 
   /* Formularios */

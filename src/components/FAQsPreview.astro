@@ -1,26 +1,28 @@
 ---
 import LocationWidgetMain from "./LocationWidgetMain.astro";
 import { consultationPrice } from "../data/site.js";
+import { getBaseUrl } from "../utils/baseUrl.js";
 
 interface Props {
   dark?: boolean;
 }
 
 const { dark = true } = Astro.props;
+const base = getBaseUrl();
 ---
 
 <div class:list={["faqs-preview", { "faqs-preview--light": !dark }]}>
   <div class="faqs-accordion">
-    <div class="faqs-accordion-item is-open">
+    <div class="faqs-accordion-item">
       <h3 class="faqs-accordion-heading">
         <button
           type="button"
           class="faqs-accordion-trigger"
-          aria-expanded="true"
+          aria-expanded="false"
           aria-controls="faqs-preview-panel-0"
           id="faqs-preview-trigger-0"
         >
-          <span>¿Qué incluye la consulta?</span>
+          <span>¿Cuáles son los horarios de atención?</span>
           <span class="faqs-accordion-icon" aria-hidden="true">
             <span class="icon-bar icon-bar-h" />
             <span class="icon-bar icon-bar-v" />
@@ -34,7 +36,8 @@ const { dark = true } = Astro.props;
         aria-labelledby="faqs-preview-trigger-0"
       >
         <div class="faqs-accordion-body">
-          <p>La consulta incluye una valoración dermatológica especializada en donde identificamos las causas y factores desencadenantes de tu padecimiento e indicamos un tratamiento personalizado acorde a tus necesidades.</p>
+          <p>Atendemos de lunes a viernes, de 10:00 a. m. a 7:00 p. m.</p>
+          <p>Es necesario agendar una cita previamente.</p>
         </div>
       </div>
     </div>
@@ -76,7 +79,7 @@ const { dark = true } = Astro.props;
           aria-controls="faqs-preview-panel-2"
           id="faqs-preview-trigger-2"
         >
-          <span>¿Cuáles son los horarios de atención?</span>
+          <span>¿Qué incluye la consulta?</span>
           <span class="faqs-accordion-icon" aria-hidden="true">
             <span class="icon-bar icon-bar-h" />
             <span class="icon-bar icon-bar-v" />
@@ -90,8 +93,7 @@ const { dark = true } = Astro.props;
         aria-labelledby="faqs-preview-trigger-2"
       >
         <div class="faqs-accordion-body">
-          <p>Atendemos de lunes a viernes, de 10:00 a. m. a 7:00 p. m.</p>
-          <p>Es necesario agendar una cita previamente.</p>
+          <p>La consulta incluye una valoración dermatológica especializada en donde identificamos las causas y factores desencadenantes de tu padecimiento e indicamos un tratamiento personalizado acorde a tus necesidades.</p>
         </div>
       </div>
     </div>
@@ -120,6 +122,37 @@ const { dark = true } = Astro.props;
       >
         <div class="faqs-accordion-body">
           <p>La valoración de especialidad tiene un costo de {consultationPrice}.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faqs-accordion-item">
+      <h3 class="faqs-accordion-heading">
+        <button
+          type="button"
+          class="faqs-accordion-trigger"
+          aria-expanded="false"
+          aria-controls="faqs-preview-panel-4"
+          id="faqs-preview-trigger-4"
+        >
+          <span>¿Qué servicios manejan?</span>
+          <span class="faqs-accordion-icon" aria-hidden="true">
+            <span class="icon-bar icon-bar-h" />
+            <span class="icon-bar icon-bar-v" />
+          </span>
+        </button>
+      </h3>
+      <div
+        class="faqs-accordion-panel"
+        id="faqs-preview-panel-4"
+        role="region"
+        aria-labelledby="faqs-preview-trigger-4"
+      >
+        <div class="faqs-accordion-body">
+          <p>Contamos con servicio de dermatología clínica, tricología, dermatología estética, aparatología y dermatología quirúrgica.</p>
+          <p>
+            <a href={`${base}servicios`} class="faqs-body-link">Ver todos los servicios</a>
+          </p>
         </div>
       </div>
     </div>
@@ -266,6 +299,16 @@ const { dark = true } = Astro.props;
     padding-bottom: 0;
   }
 
+  .faqs-preview .faqs-body-link {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .faqs-preview .faqs-body-link:hover {
+    color: #fff;
+  }
+
   @media (max-width: 640px) {
     .faqs-preview .faqs-accordion-trigger {
       font-size: var(--text-base);
@@ -292,6 +335,14 @@ const { dark = true } = Astro.props;
 
   .faqs-preview--light .faqs-accordion-body p {
     color: var(--color-text-secondary);
+  }
+
+  .faqs-preview--light .faqs-body-link {
+    color: var(--color-primary);
+  }
+
+  .faqs-preview--light .faqs-body-link:hover {
+    color: var(--color-primary-hover);
   }
 
   @media (prefers-reduced-motion: reduce) {
