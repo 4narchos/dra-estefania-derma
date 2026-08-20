@@ -429,15 +429,25 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     gap: 6px;
   }
 
-  .agenda-tab-icon,
-  .agenda-tab-icon svg {
+  .agenda-tab-icon {
     width: 16px;
     height: 16px;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #25D366;
+  }
+
+  .agenda-tab-icon svg {
+    width: 14px;
+    height: 14px;
     display: block;
   }
 
   .agenda-tab-icon--doctoralia {
+    width: 16px;
+    height: 16px;
     object-fit: contain;
   }
 
