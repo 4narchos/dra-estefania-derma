@@ -179,7 +179,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
   </section>
 </Layout>
 
-<script is:inline define:vars={{ numberMainRaw, whatsappIcon }}>
+<script is:inline define:vars={{ numberMainRaw }}>
   (function () {
     const tabs = document.querySelectorAll('.agenda-tab');
     const panels = document.querySelectorAll('.agenda-panel');
@@ -243,7 +243,6 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     const fechaTipoInputs = document.querySelectorAll('input[name="fecha-tipo"]');
     const fechaElegirGroup = document.getElementById('fecha-elegir-group');
     const fechaInput = document.getElementById('fecha');
-    const btnAyuda = document.getElementById('btn-ayuda');
 
     function isValidClinicDay(dateString) {
       const date = new Date(dateString + 'T00:00:00');
@@ -258,17 +257,10 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
       if (tipo === 'elegir') {
         fechaElegirGroup.hidden = false;
         fechaInput.required = true;
-        if (btnAyuda) btnAyuda.innerHTML = `<span>${whatsappIcon}</span> Solicitar una fecha específica`;
-      } else if (tipo === 'proxima') {
-        fechaElegirGroup.hidden = true;
-        fechaInput.required = false;
-        fechaInput.value = '';
-        if (btnAyuda) btnAyuda.innerHTML = `<span>${whatsappIcon}</span> Solicitar la cita más próxima`;
       } else {
         fechaElegirGroup.hidden = true;
         fechaInput.required = false;
         fechaInput.value = '';
-        if (btnAyuda) btnAyuda.innerHTML = `<span>${whatsappIcon}</span> Solicitar cita`;
       }
     }
 
@@ -276,7 +268,6 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
       fechaTipoInputs.forEach((input) => {
         input.addEventListener('change', updateAyudaFormState);
       });
-      updateAyudaFormState();
     }
 
     if (formAyuda) {
@@ -554,6 +545,14 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   }
 
+  .agenda-form-input[type="date"] {
+    -webkit-appearance: none;
+    appearance: none;
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+    min-height: 44px;
+  }
+
   .agenda-form-input:focus {
     outline: none;
     border-color: var(--color-primary);
@@ -563,6 +562,16 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
   .agenda-form-textarea {
     resize: vertical;
     min-height: 100px;
+  }
+
+  @media (max-width: 640px) {
+    .agenda-form {
+      padding: var(--space-5) var(--space-4);
+    }
+
+    .agenda-form-input {
+      font-size: 16px;
+    }
   }
 
   .agenda-form-button {
