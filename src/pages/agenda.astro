@@ -2,11 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 import DoctoraliaCalendarWidget from "../components/DoctoraliaCalendarWidget.astro";
 import FAQsPreview from "../components/FAQsPreview.astro";
-import { getWhatsAppUrl, whatsappPresets, numberMainRaw } from "../data/site.js";
+import { numberMainRaw } from "../data/site.js";
 
 const title = "Agenda tu cita · Dra. Estefanía Borges";
 const description = "Reserva tu consulta dermatológica con la Dra. Estefanía Borges en Mérida, Yucatán.";
-const whatsappUrl = getWhatsAppUrl(whatsappPresets.webAgenda);
 
 const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
 ---
@@ -16,34 +15,33 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     <div class="agenda-card">
       <h1 class="agenda-title">¿Cómo quieres agendar?</h1>
 
-      <!-- Tabs con indicador animado -->
       <div class="agenda-tabs" role="tablist" aria-label="Opciones de agenda">
         <button
           type="button"
-          class="agenda-tab agenda-tab--1 is-active"
-          data-option="agendar"
+          class="agenda-tab is-active"
+          data-panel="agendar"
           role="tab"
           aria-selected="true"
           aria-controls="panel-agendar"
           id="tab-agendar"
         >
-          Agendar
+          Doctoralia
         </button>
         <button
           type="button"
-          class="agenda-tab agenda-tab--2"
-          data-option="ayuda"
+          class="agenda-tab"
+          data-panel="ayuda"
           role="tab"
           aria-selected="false"
           aria-controls="panel-ayuda"
           id="tab-ayuda"
         >
-          Agendar por Whats
+          WhatsApp
         </button>
         <button
           type="button"
-          class="agenda-tab agenda-tab--3"
-          data-option="duda"
+          class="agenda-tab"
+          data-panel="duda"
           role="tab"
           aria-selected="false"
           aria-controls="panel-duda"
@@ -54,7 +52,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
         <div class="agenda-tab-indicator" aria-hidden="true"></div>
       </div>
 
-      <!-- Panel: Quiero agendar yo -->
+      <!-- Panel: Doctoralia -->
       <div
         class="agenda-panel is-active"
         id="panel-agendar"
@@ -66,7 +64,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
         </div>
       </div>
 
-      <!-- Panel: Quiero que me ayuden -->
+      <!-- Panel: WhatsApp -->
       <div
         class="agenda-panel"
         id="panel-ayuda"
@@ -89,28 +87,20 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
           </div>
 
           <div class="agenda-form-group">
-            <span class="agenda-form-label">¿Cuándo te gustaría?</span>
+            <span class="agenda-form-label">¿Cuándo te gustaría? (Entre Martes y Sábado)</span>
             <div class="agenda-date-options" role="radiogroup" aria-label="Opciones de fecha">
               <label class="agenda-date-option">
-                <input
-                  type="radio"
-                  name="fecha-tipo"
-                  value="elegir"
-                />
+                <input type="radio" name="fecha-tipo" value="elegir" />
                 <span>Elegir fecha</span>
               </label>
               <label class="agenda-date-option">
-                <input
-                  type="radio"
-                  name="fecha-tipo"
-                  value="proxima"
-                />
-                <span>Quiero la cita más próxima</span>
+                <input type="radio" name="fecha-tipo" value="proxima" />
+                <span>Cita más próxima</span>
               </label>
             </div>
           </div>
 
-          <div class="agenda-form-group" id="fecha-elegir-group" hidden>
+          <div class="agenda-form-group is-hidden" id="fecha-elegir-group">
             <label for="fecha" class="agenda-form-label">Fecha de interés (Martes a sábado)</label>
             <input
               type="date"
@@ -120,14 +110,14 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
             />
           </div>
 
-          <button type="submit" class="agenda-form-button" id="btn-ayuda">
+          <button type="submit" class="agenda-form-button">
             <span set:html={whatsappIcon} />
             Solicitar cita
           </button>
         </form>
       </div>
 
-      <!-- Panel: Tengo una duda -->
+      <!-- Panel: Resolver duda -->
       <div
         class="agenda-panel"
         id="panel-duda"
@@ -192,53 +182,42 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
       indicator.style.width = `${rect.width}px`;
     }
 
+    function activateTab(targetTab) {
+      const targetPanel = targetTab.dataset.panel;
+
+      tabs.forEach((t) => {
+        t.classList.remove('is-active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      panels.forEach((p) => {
+        p.classList.remove('is-active');
+        p.hidden = true;
+      });
+
+      targetTab.classList.add('is-active');
+      targetTab.setAttribute('aria-selected', 'true');
+      updateIndicator(targetTab);
+
+      const panel = document.getElementById(`panel-${targetPanel}`);
+      if (panel) {
+        panel.classList.add('is-active');
+        panel.hidden = false;
+      }
+    }
+
     tabs.forEach((tab) => {
-      tab.addEventListener('click', () => {
-        const target = tab.dataset.option;
-
-        tabs.forEach((t) => {
-          t.classList.remove('is-active');
-          t.setAttribute('aria-selected', 'false');
-        });
-        panels.forEach((p) => {
-          p.classList.remove('is-active');
-          p.hidden = true;
-        });
-
-        tab.classList.add('is-active');
-        tab.setAttribute('aria-selected', 'true');
-        updateIndicator(tab);
-
-        const panel = document.getElementById(`panel-${target}`);
-        if (panel) {
-          panel.classList.add('is-active');
-          panel.hidden = false;
-        }
-      });
-
-      tab.addEventListener('mouseenter', () => {
-        if (!tab.classList.contains('is-active')) {
-          updateIndicator(tab);
-        }
-      });
+      tab.addEventListener('click', () => activateTab(tab));
     });
 
-    document.querySelector('.agenda-tabs').addEventListener('mouseleave', () => {
-      const active = document.querySelector('.agenda-tab.is-active');
-      if (active) updateIndicator(active);
-    });
-
-    // Inicializar indicador
     const activeTab = document.querySelector('.agenda-tab.is-active');
     if (activeTab) updateIndicator(activeTab);
 
-    // Recalcular en resize
     window.addEventListener('resize', () => {
       const active = document.querySelector('.agenda-tab.is-active');
       if (active) updateIndicator(active);
     });
 
-    // Form: ayuda para agendar
+    // Form: WhatsApp
     const formAyuda = document.getElementById('form-ayuda');
     const fechaTipoInputs = document.querySelectorAll('input[name="fecha-tipo"]');
     const fechaElegirGroup = document.getElementById('fecha-elegir-group');
@@ -247,7 +226,6 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     function isValidClinicDay(dateString) {
       const date = new Date(dateString + 'T00:00:00');
       const day = date.getDay();
-      // 2 = martes, 3 = miércoles, 4 = jueves, 5 = viernes, 6 = sábado
       return day >= 2 && day <= 6;
     }
 
@@ -255,20 +233,18 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
       const tipo = document.querySelector('input[name="fecha-tipo"]:checked')?.value;
 
       if (tipo === 'elegir') {
-        fechaElegirGroup.hidden = false;
+        fechaElegirGroup.classList.remove('is-hidden');
         fechaInput.required = true;
       } else {
-        fechaElegirGroup.hidden = true;
+        fechaElegirGroup.classList.add('is-hidden');
         fechaInput.required = false;
         fechaInput.value = '';
       }
     }
 
-    if (fechaTipoInputs.length && fechaElegirGroup && fechaInput) {
-      fechaTipoInputs.forEach((input) => {
-        input.addEventListener('change', updateAyudaFormState);
-      });
-    }
+    fechaTipoInputs.forEach((input) => {
+      input.addEventListener('change', updateAyudaFormState);
+    });
 
     if (formAyuda) {
       formAyuda.addEventListener('submit', function (e) {
@@ -365,16 +341,6 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     text-align: center;
   }
 
-  .agenda-description {
-    font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-    color: var(--color-text-muted);
-    text-align: center;
-    margin: 0;
-    line-height: var(--leading-normal);
-  }
-
-  /* Tabs con indicador animado */
   .agenda-tabs {
     display: flex;
     width: 100%;
@@ -425,7 +391,6 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     transition: left 0.2s ease-out, width 0.2s ease-out;
   }
 
-  /* Paneles */
   .agenda-panel {
     width: 100%;
     display: none;
@@ -439,23 +404,17 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     display: flex;
   }
 
+  [hidden],
+  .is-hidden {
+    display: none !important;
+  }
+
   .agenda-panel-text {
     font-size: var(--text-sm);
     color: var(--color-text-secondary);
     text-align: center;
     margin: 0;
     line-height: var(--leading-relaxed);
-  }
-
-  .agenda-link {
-    color: var(--color-primary);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    transition: color var(--transition-fast);
-  }
-
-  .agenda-link:hover {
-    color: var(--color-primary-hover);
   }
 
   .agenda-widget {
@@ -465,12 +424,10 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     justify-content: center;
   }
 
-  /* FAQs wrapper */
   .agenda-faqs-wrapper {
     width: 100%;
   }
 
-  /* Divisor */
   .agenda-duda-divider {
     width: 100%;
     text-align: center;
@@ -505,7 +462,6 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     line-height: var(--leading-relaxed);
   }
 
-  /* Formularios */
   .agenda-form {
     width: 100%;
     display: flex;
@@ -564,16 +520,6 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     min-height: 100px;
   }
 
-  @media (max-width: 640px) {
-    .agenda-form {
-      padding: var(--space-5) var(--space-4);
-    }
-
-    .agenda-form-input {
-      font-size: 16px;
-    }
-  }
-
   .agenda-form-button {
     width: 100%;
     padding: var(--space-3) var(--space-6);
@@ -602,7 +548,6 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     flex-shrink: 0;
   }
 
-  /* Opciones de fecha */
   .agenda-date-options {
     display: flex;
     gap: var(--space-3);
@@ -615,7 +560,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     align-items: center;
     justify-content: center;
     gap: var(--space-2);
-    padding: var(--space-3) var(--space-3);
+    padding: var(--space-3);
     border: 1px solid #DACE97;
     border-radius: 8px;
     cursor: pointer;
@@ -640,10 +585,14 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     color: var(--color-primary);
   }
 
-  .agenda-form-hint {
-    font-size: var(--text-xs);
-    color: var(--color-text-muted);
-    margin: 0;
+  @media (max-width: 640px) {
+    .agenda-form {
+      padding: var(--space-5) var(--space-4);
+    }
+
+    .agenda-form-input {
+      font-size: 16px;
+    }
   }
 
   @media (min-width: 641px) {
