@@ -38,10 +38,12 @@ const base = getBaseUrl();
         aria-labelledby="faqs-preview-trigger-0"
       >
         <div class="faqs-accordion-body">
-          <p>Atendemos de Martes a Sábado con cita previa, en los siguientes horarios:</p>
-          <p>Martes, Jueves y Viernes 3:30 a 7:30 p. m.</p>
-          <p>Miércoles de 10:00 a. m. a 1:30 p. m.</p>
-          <p>Sábados 10:30 a. m. a 12:30 p. m.</p>
+          <p class="faqs-hours">
+            Atendemos de Martes a Sábado con cita previa, en los siguientes horarios:<br />
+            Martes, Jueves y Viernes 3:30 a 7:30 p. m.<br />
+            Miércoles de 10:00 a. m. a 1:30 p. m.<br />
+            Sábados 10:30 a. m. a 12:30 p. m.
+          </p>
         </div>
       </div>
     </div>
@@ -340,6 +342,11 @@ const base = getBaseUrl();
 
   .faqs-preview .faqs-accordion-body p:last-child {
     padding-bottom: 0;
+  }
+
+  .faqs-preview .faqs-hours {
+    padding-bottom: 0;
+    line-height: normal;
   }
 
   .faqs-preview .faqs-body-link {
