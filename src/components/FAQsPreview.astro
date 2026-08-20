@@ -1,8 +1,14 @@
 ---
 import LocationWidgetMain from "./LocationWidgetMain.astro";
+
+interface Props {
+  dark?: boolean;
+}
+
+const { dark = true } = Astro.props;
 ---
 
-<div class="faqs-preview">
+<div class:list={["faqs-preview", { "faqs-preview--light": !dark }]}>
   <div class="faqs-accordion">
     <div class="faqs-accordion-item is-open">
       <h3 class="faqs-accordion-heading">
@@ -265,6 +271,27 @@ import LocationWidgetMain from "./LocationWidgetMain.astro";
       font-size: var(--text-base);
       padding: var(--space-4) 0;
     }
+  }
+
+  /* Light variant for light backgrounds */
+  .faqs-preview--light .faqs-accordion {
+    border-top-color: #E6E3DB;
+  }
+
+  .faqs-preview--light .faqs-accordion-item {
+    border-bottom-color: #E6E3DB;
+  }
+
+  .faqs-preview--light .faqs-accordion-trigger {
+    color: var(--color-text-primary);
+  }
+
+  .faqs-preview--light .faqs-accordion-trigger:hover {
+    color: var(--color-primary);
+  }
+
+  .faqs-preview--light .faqs-accordion-body p {
+    color: var(--color-text-secondary);
   }
 
   @media (prefers-reduced-motion: reduce) {
