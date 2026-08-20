@@ -1,11 +1,13 @@
 ---
 import { Image } from "astro:assets";
-import { doctoraliaUrl } from "../data/site.js";
+import { getBaseUrl } from "../utils/baseUrl.js";
 
 import clinicaImg from "../assets/images/clinica.webp";
 import tricoImg from "../assets/images/trico.webp";
 import esteticaImg from "../assets/images/estetica.webp";
 import cirugiaImg from "../assets/images/cirugia.webp";
+
+const base = getBaseUrl();
 
 const services = [
   {
@@ -167,9 +169,7 @@ const services = [
                 </div>
               </div>
               <a
-                href={doctoraliaUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`${base}agenda`}
                 class="service-card-button"
               >
                 Agendar
