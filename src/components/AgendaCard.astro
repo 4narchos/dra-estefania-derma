@@ -24,7 +24,7 @@ const questionIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height=
       aria-controls="panel-ayuda"
       id="tab-ayuda"
     >
-      <span class="agenda-tab-icon" set:html={whatsappIcon} />
+      <span class="agenda-tab-icon agenda-tab-icon--whatsapp" set:html={whatsappIcon} />
       <span>WhatsApp</span>
     </button>
     <button
@@ -56,8 +56,8 @@ const questionIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height=
       aria-controls="panel-duda"
       id="tab-duda"
     >
-      <span class="agenda-tab-icon" set:html={questionIcon} />
-      <span>Solamente dudas</span>
+      <span class="agenda-tab-icon agenda-tab-icon--question" set:html={questionIcon} />
+      <span>Dudas</span>
     </button>
     <div class="agenda-tab-indicator" aria-hidden="true"></div>
   </div>
@@ -438,6 +438,10 @@ const questionIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height=
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--color-primary);
+  }
+
+  .agenda-tab-icon--whatsapp {
     color: #25D366;
   }
 
