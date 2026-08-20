@@ -284,16 +284,16 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
           return;
         }
 
-        let mensaje = `Hola, soy ${nombre} y me gustaría`;
+        let mensaje = `Hola, me gustaría`;
 
         if (tipo === 'elegir') {
           if (selectedDays.length === 0) {
             alert('Por favor selecciona al menos un día.');
             return;
           }
-          mensaje += ` ver disponibilidad ${formatDaysList(selectedDays)}.`;
+          mensaje += ` ver disponibilidad ${formatDaysList(selectedDays)} para ${nombre}.`;
         } else {
-          mensaje += ` agendar una consulta dermatológica en la fecha más próxima disponible.`;
+          mensaje += ` agendar una consulta dermatológica en la fecha más próxima disponible para ${nombre}.`;
         }
 
         const url = `https://api.whatsapp.com/send?phone=${numberMainRaw}&text=${encodeURIComponent(mensaje)}&utm_source=web&utm_medium=agenda_form&utm_campaign=agendar`;
@@ -313,7 +313,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
 
         if (!nombre || !duda) return;
 
-        const mensaje = `Hola, soy ${nombre} y tengo una duda: ${duda}`;
+        const mensaje = `Hola, tengo una duda para ${nombre}: ${duda}`;
         const url = `https://api.whatsapp.com/send?phone=${numberMainRaw}&text=${encodeURIComponent(mensaje)}&utm_source=web&utm_medium=agenda_duda&utm_campaign=agendar`;
 
         window.trackWhatsAppConversion(url, () => window.open(url, '_blank'));
