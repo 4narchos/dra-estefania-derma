@@ -90,24 +90,26 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
             <span class="agenda-form-label">¿Cuándo te gustaría? (Entre Martes y Sábado)</span>
             <div class="agenda-date-options" role="radiogroup" aria-label="Opciones de fecha">
               <label class="agenda-date-option">
-                <input type="radio" name="fecha-tipo" value="elegir" />
-                <span>Elegir fecha</span>
+                <input type="radio" name="fecha-tipo" value="proxima" checked />
+                <span>Cita más próxima</span>
               </label>
               <label class="agenda-date-option">
-                <input type="radio" name="fecha-tipo" value="proxima" />
-                <span>Cita más próxima</span>
+                <input type="radio" name="fecha-tipo" value="elegir" />
+                <span>Elegir día</span>
               </label>
             </div>
           </div>
 
-          <div class="agenda-form-group is-hidden" id="fecha-elegir-group">
-            <label for="fecha" class="agenda-form-label">Fecha de interés (Martes a sábado)</label>
-            <input
-              type="date"
-              id="fecha"
-              name="fecha"
-              class="agenda-form-input"
-            />
+          <div class="agenda-form-group is-hidden" id="dia-elegir-group">
+            <label for="dia" class="agenda-form-label">Día preferido</label>
+            <select id="dia" name="dia" class="agenda-form-input agenda-form-select">
+              <option value="" disabled selected>Selecciona un día</option>
+              <option value="martes">Un Martes</option>
+              <option value="miércoles">Un Miércoles</option>
+              <option value="jueves">Un Jueves</option>
+              <option value="viernes">Un Viernes</option>
+              <option value="sábado">Un Sábado</option>
+            </select>
           </div>
 
           <button type="submit" class="agenda-form-button">
@@ -220,25 +222,19 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     // Form: WhatsApp
     const formAyuda = document.getElementById('form-ayuda');
     const fechaTipoInputs = document.querySelectorAll('input[name="fecha-tipo"]');
-    const fechaElegirGroup = document.getElementById('fecha-elegir-group');
-    const fechaInput = document.getElementById('fecha');
-
-    function isValidClinicDay(dateString) {
-      const date = new Date(dateString + 'T00:00:00');
-      const day = date.getDay();
-      return day >= 2 && day <= 6;
-    }
+    const diaElegirGroup = document.getElementById('dia-elegir-group');
+    const diaSelect = document.getElementById('dia');
 
     function updateAyudaFormState() {
       const tipo = document.querySelector('input[name="fecha-tipo"]:checked')?.value;
 
       if (tipo === 'elegir') {
-        fechaElegirGroup.classList.remove('is-hidden');
-        fechaInput.required = true;
+        diaElegirGroup.classList.remove('is-hidden');
+        diaSelect.required = true;
       } else {
-        fechaElegirGroup.classList.add('is-hidden');
-        fechaInput.required = false;
-        fechaInput.value = '';
+        diaElegirGroup.classList.add('is-hidden');
+        diaSelect.required = false;
+        diaSelect.value = '';
       }
     }
 
@@ -252,7 +248,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
 
         const nombre = document.getElementById('nombre').value.trim();
         const tipo = document.querySelector('input[name="fecha-tipo"]:checked')?.value;
-        const fecha = document.getElementById('fecha').value;
+        const dia = document.getElementById('dia').value;
 
         if (!nombre) return;
 
@@ -264,15 +260,8 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
         let mensaje = `Hola, soy ${nombre} y me gustaría agendar una consulta dermatológica`;
 
         if (tipo === 'elegir') {
-          if (!fecha) return;
-          if (!isValidClinicDay(fecha)) {
-            alert('Por favor elige una fecha de martes a sábado.');
-            return;
-          }
-          const fechaObj = new Date(fecha + 'T00:00:00');
-          const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
-          const fechaLegible = fechaObj.toLocaleDateString('es-MX', opciones);
-          mensaje += ` para el ${fechaLegible}.`;
+          if (!dia) return;
+          mensaje += ` para ${dia}.`;
         } else {
           mensaje += ` lo más pronto posible.`;
         }
@@ -501,12 +490,20 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   }
 
-  .agenda-form-input[type="date"] {
+  .agenda-form-select {
     -webkit-appearance: none;
     appearance: none;
     padding-left: var(--space-3);
     padding-right: var(--space-3);
     min-height: 44px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232D5E46' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--space-3) center;
+    background-size: 16px;
+  }
+
+  .agenda-form-select option {
+    color: var(--color-text-primary);
   }
 
   .agenda-form-input:focus {
