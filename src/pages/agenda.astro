@@ -14,8 +14,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
 <Layout title={title} description={description} pageSchema="contact" showWhatsApp={false}>
   <section class="agenda-page">
     <div class="agenda-card">
-      <h1 class="agenda-title">Agenda tu cita</h1>
-      <p class="agenda-description">Elige cómo prefieres continuar</p>
+      <h1 class="agenda-title">¿Cómo quieres agendar?</h1>
 
       <!-- Tabs con indicador animado -->
       <div class="agenda-tabs" role="tablist" aria-label="Opciones de agenda">
@@ -28,7 +27,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
           aria-controls="panel-agendar"
           id="tab-agendar"
         >
-          Quiero agendar yo
+          Agendar
         </button>
         <button
           type="button"
@@ -39,7 +38,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
           aria-controls="panel-ayuda"
           id="tab-ayuda"
         >
-          Quiero que me ayuden
+          Agendar por Whats
         </button>
         <button
           type="button"
@@ -50,7 +49,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
           aria-controls="panel-duda"
           id="tab-duda"
         >
-          Tengo una duda
+          Resolver duda
         </button>
         <div class="agenda-tab-indicator" aria-hidden="true"></div>
       </div>
@@ -62,7 +61,6 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
         role="tabpanel"
         aria-labelledby="tab-agendar"
       >
-        <p class="agenda-panel-text">Selecciona el horario que prefieras. Si tienes alguna duda o requieres asistencia, no dudes en enviarnos un <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="agenda-link">mensaje</a>.</p>
         <div class="agenda-widget">
           <DoctoraliaCalendarWidget />
         </div>
@@ -76,7 +74,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
         aria-labelledby="tab-ayuda"
         hidden
       >
-        <p class="agenda-panel-text">Déjanos tus datos y te contactamos para confirmar tu cita.</p>
+        <p class="agenda-panel-text">Cuéntanos tus datos y te ayudamos a agendar tu cita.</p>
         <form class="agenda-form" id="form-ayuda">
           <div class="agenda-form-group">
             <label for="nombre" class="agenda-form-label">Nombre del paciente</label>
@@ -85,12 +83,35 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
               id="nombre"
               name="nombre"
               class="agenda-form-input"
-              placeholder="Tu nombre completo"
+              placeholder="Ej. Regina George"
               required
             />
           </div>
 
           <div class="agenda-form-group">
+            <span class="agenda-form-label">¿Cuándo te gustaría?</span>
+            <div class="agenda-date-options" role="radiogroup" aria-label="Opciones de fecha">
+              <label class="agenda-date-option">
+                <input
+                  type="radio"
+                  name="fecha-tipo"
+                  value="elegir"
+                  checked
+                />
+                <span>Elegir fecha</span>
+              </label>
+              <label class="agenda-date-option">
+                <input
+                  type="radio"
+                  name="fecha-tipo"
+                  value="proxima"
+                />
+                <span>Quiero la cita más próxima</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="agenda-form-group" id="fecha-elegir-group">
             <label for="fecha" class="agenda-form-label">Fecha de interés</label>
             <input
               type="date"
@@ -99,6 +120,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
               class="agenda-form-input"
               required
             />
+            <p class="agenda-form-hint">Atendemos de martes a sábado.</p>
           </div>
 
           <button type="submit" class="agenda-form-button">
@@ -221,20 +243,58 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
 
     // Form: ayuda para agendar
     const formAyuda = document.getElementById('form-ayuda');
+    const fechaTipoInputs = document.querySelectorAll('input[name="fecha-tipo"]');
+    const fechaElegirGroup = document.getElementById('fecha-elegir-group');
+    const fechaInput = document.getElementById('fecha');
+
+    function isValidClinicDay(dateString) {
+      const date = new Date(dateString + 'T00:00:00');
+      const day = date.getDay();
+      // 2 = martes, 3 = miércoles, 4 = jueves, 5 = viernes, 6 = sábado
+      return day >= 2 && day <= 6;
+    }
+
+    if (fechaTipoInputs.length && fechaElegirGroup && fechaInput) {
+      fechaTipoInputs.forEach((input) => {
+        input.addEventListener('change', () => {
+          if (input.value === 'elegir') {
+            fechaElegirGroup.hidden = false;
+            fechaInput.required = true;
+          } else {
+            fechaElegirGroup.hidden = true;
+            fechaInput.required = false;
+            fechaInput.value = '';
+          }
+        });
+      });
+    }
+
     if (formAyuda) {
       formAyuda.addEventListener('submit', function (e) {
         e.preventDefault();
 
         const nombre = document.getElementById('nombre').value.trim();
+        const tipo = document.querySelector('input[name="fecha-tipo"]:checked')?.value;
         const fecha = document.getElementById('fecha').value;
 
-        if (!nombre || !fecha) return;
+        if (!nombre) return;
 
-        const fechaObj = new Date(fecha + 'T00:00:00');
-        const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
-        const fechaLegible = fechaObj.toLocaleDateString('es-MX', opciones);
+        let mensaje = `Hola, soy ${nombre} y me gustaría agendar una consulta dermatológica`;
 
-        const mensaje = `Hola, soy ${nombre} y me gustaría agendar una consulta dermatológica para el ${fechaLegible}.`;
+        if (tipo === 'elegir') {
+          if (!fecha) return;
+          if (!isValidClinicDay(fecha)) {
+            alert('Por favor elige una fecha de martes a sábado.');
+            return;
+          }
+          const fechaObj = new Date(fecha + 'T00:00:00');
+          const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+          const fechaLegible = fechaObj.toLocaleDateString('es-MX', opciones);
+          mensaje += ` para el ${fechaLegible}.`;
+        } else {
+          mensaje += ` lo más pronto posible.`;
+        }
+
         const url = `https://api.whatsapp.com/send?phone=${numberMainRaw}&text=${encodeURIComponent(mensaje)}&utm_source=web&utm_medium=agenda_form&utm_campaign=agendar`;
 
         window.open(url, '_blank');
@@ -513,6 +573,50 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     width: 20px;
     height: 20px;
     flex-shrink: 0;
+  }
+
+  /* Opciones de fecha */
+  .agenda-date-options {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .agenda-date-option {
+    flex: 1 1 calc(50% - var(--space-3));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-3);
+    border: 1px solid #DACE97;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-secondary);
+    background: #fff;
+    transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+    text-align: center;
+  }
+
+  .agenda-date-option input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .agenda-date-option:has(input:checked) {
+    border-color: var(--color-primary);
+    background: rgba(45, 94, 70, 0.08);
+    color: var(--color-primary);
+  }
+
+  .agenda-form-hint {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin: 0;
   }
 
   @media (min-width: 641px) {

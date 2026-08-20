@@ -1,7 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import LocationWidgetMain from "./LocationWidgetMain.astro";
 import { consultationPrice } from "../data/site.js";
 import { getBaseUrl } from "../utils/baseUrl.js";
+import evoeImg from "../assets/images/evoe.jpg";
 
 interface Props {
   dark?: boolean;
@@ -36,8 +38,10 @@ const base = getBaseUrl();
         aria-labelledby="faqs-preview-trigger-0"
       >
         <div class="faqs-accordion-body">
-          <p>Atendemos de lunes a viernes, de 10:00 a. m. a 7:00 p. m.</p>
-          <p>Es necesario agendar una cita previamente.</p>
+          <p>Martes, Jueves y Viernes 3:30 a 7:30 p. m.</p>
+          <p>Miércoles de 10:00 a. m. a 1:30 p. m.</p>
+          <p>Sábados 10:30 a. m. a 12:30 p. m.</p>
+          <p>Bajo cita previa.</p>
         </div>
       </div>
     </div>
@@ -65,7 +69,7 @@ const base = getBaseUrl();
         aria-labelledby="faqs-preview-trigger-1"
       >
         <div class="faqs-accordion-body">
-          <LocationWidgetMain dark />
+          <LocationWidgetMain dark={dark} />
         </div>
       </div>
     </div>
@@ -107,7 +111,7 @@ const base = getBaseUrl();
           aria-controls="faqs-preview-panel-3"
           id="faqs-preview-trigger-3"
         >
-          <span>¿Cuál es el costo de la consulta?</span>
+          <span>¿Cuánto vale la consulta?</span>
           <span class="faqs-accordion-icon" aria-hidden="true">
             <span class="icon-bar icon-bar-h" />
             <span class="icon-bar icon-bar-v" />
@@ -121,7 +125,7 @@ const base = getBaseUrl();
         aria-labelledby="faqs-preview-trigger-3"
       >
         <div class="faqs-accordion-body">
-          <p>La valoración de especialidad tiene un costo de {consultationPrice}.</p>
+          <p>La consulta dermatológica tiene un valor de {consultationPrice}.</p>
         </div>
       </div>
     </div>
@@ -153,6 +157,45 @@ const base = getBaseUrl();
           <p>
             <a href={`${base}servicios`} class="faqs-body-link">Ver todos los servicios</a>
           </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faqs-accordion-item">
+      <h3 class="faqs-accordion-heading">
+        <button
+          type="button"
+          class="faqs-accordion-trigger"
+          aria-expanded="false"
+          aria-controls="faqs-preview-panel-5"
+          id="faqs-preview-trigger-5"
+        >
+          <span>¿Cómo es la clínica?</span>
+          <span class="faqs-accordion-icon" aria-hidden="true">
+            <span class="icon-bar icon-bar-h" />
+            <span class="icon-bar icon-bar-v" />
+          </span>
+        </button>
+      </h3>
+      <div
+        class="faqs-accordion-panel"
+        id="faqs-preview-panel-5"
+        role="region"
+        aria-labelledby="faqs-preview-trigger-5"
+      >
+        <div class="faqs-accordion-body">
+          <div class="faqs-clinic-image">
+            <Image
+              src={evoeImg}
+              alt="Clínica especializada en Dermatología"
+              width={600}
+              height={400}
+              densities={[1, 2]}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <p>Clínica especializada en Dermatología, con instalaciones modernas y aparatos de vanguardia.</p>
         </div>
       </div>
     </div>
@@ -307,6 +350,18 @@ const base = getBaseUrl();
 
   .faqs-preview .faqs-body-link:hover {
     color: #fff;
+  }
+
+  .faqs-clinic-image {
+    margin-bottom: var(--space-3);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faqs-clinic-image img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   @media (max-width: 640px) {
