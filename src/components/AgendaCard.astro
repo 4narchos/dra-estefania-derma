@@ -116,7 +116,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
 
   <!-- Panel: Doctoralia -->
   <div
-    class="agenda-panel"
+    class="agenda-panel agenda-panel--widget"
     id="panel-agendar"
     role="tabpanel"
     aria-labelledby="tab-agendar"
@@ -424,6 +424,13 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     display: flex;
   }
 
+  .agenda-panel--widget {
+    margin-left: calc(-1 * var(--space-4));
+    margin-right: calc(-1 * var(--space-4));
+    width: calc(100% + 2 * var(--space-4));
+    padding: 0;
+  }
+
   [hidden],
   .is-hidden {
     display: none !important;
@@ -667,6 +674,12 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     .agenda-card {
       max-width: 560px;
       padding: var(--space-8) var(--space-6);
+    }
+
+    .agenda-panel--widget {
+      margin-left: calc(-1 * var(--space-6));
+      margin-right: calc(-1 * var(--space-6));
+      width: calc(100% + 2 * var(--space-6));
     }
 
     .agenda-tab {
