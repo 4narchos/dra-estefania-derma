@@ -83,7 +83,7 @@ const base = getBaseUrl();
           aria-controls="faqs-preview-panel-2"
           id="faqs-preview-trigger-2"
         >
-          <span>¿Qué incluye la consulta?</span>
+          <span>¿Cómo es la clínica?</span>
           <span class="faqs-accordion-icon" aria-hidden="true">
             <span class="icon-bar icon-bar-h" />
             <span class="icon-bar icon-bar-v" />
@@ -95,93 +95,6 @@ const base = getBaseUrl();
         id="faqs-preview-panel-2"
         role="region"
         aria-labelledby="faqs-preview-trigger-2"
-      >
-        <div class="faqs-accordion-body">
-          <p>La consulta incluye una valoración dermatológica especializada en donde identificamos las causas y factores desencadenantes de tu padecimiento e indicamos un tratamiento personalizado acorde a tus necesidades.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faqs-accordion-item">
-      <h3 class="faqs-accordion-heading">
-        <button
-          type="button"
-          class="faqs-accordion-trigger"
-          aria-expanded="false"
-          aria-controls="faqs-preview-panel-3"
-          id="faqs-preview-trigger-3"
-        >
-          <span>¿Cuánto vale la consulta?</span>
-          <span class="faqs-accordion-icon" aria-hidden="true">
-            <span class="icon-bar icon-bar-h" />
-            <span class="icon-bar icon-bar-v" />
-          </span>
-        </button>
-      </h3>
-      <div
-        class="faqs-accordion-panel"
-        id="faqs-preview-panel-3"
-        role="region"
-        aria-labelledby="faqs-preview-trigger-3"
-      >
-        <div class="faqs-accordion-body">
-          <p>La consulta dermatológica tiene un valor de {consultationPrice}.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faqs-accordion-item">
-      <h3 class="faqs-accordion-heading">
-        <button
-          type="button"
-          class="faqs-accordion-trigger"
-          aria-expanded="false"
-          aria-controls="faqs-preview-panel-4"
-          id="faqs-preview-trigger-4"
-        >
-          <span>¿Qué servicios manejan?</span>
-          <span class="faqs-accordion-icon" aria-hidden="true">
-            <span class="icon-bar icon-bar-h" />
-            <span class="icon-bar icon-bar-v" />
-          </span>
-        </button>
-      </h3>
-      <div
-        class="faqs-accordion-panel"
-        id="faqs-preview-panel-4"
-        role="region"
-        aria-labelledby="faqs-preview-trigger-4"
-      >
-        <div class="faqs-accordion-body">
-          <p>Contamos con servicio de dermatología clínica, tricología, dermatología estética, aparatología y dermatología quirúrgica.</p>
-          <p>
-            <a href={`${base}servicios`} class="faqs-body-link">Ver todos los servicios</a>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faqs-accordion-item">
-      <h3 class="faqs-accordion-heading">
-        <button
-          type="button"
-          class="faqs-accordion-trigger"
-          aria-expanded="false"
-          aria-controls="faqs-preview-panel-5"
-          id="faqs-preview-trigger-5"
-        >
-          <span>¿Cómo es la clínica?</span>
-          <span class="faqs-accordion-icon" aria-hidden="true">
-            <span class="icon-bar icon-bar-h" />
-            <span class="icon-bar icon-bar-v" />
-          </span>
-        </button>
-      </h3>
-      <div
-        class="faqs-accordion-panel"
-        id="faqs-preview-panel-5"
-        role="region"
-        aria-labelledby="faqs-preview-trigger-5"
       >
         <div class="faqs-accordion-body">
           <div class="faqs-clinic-image">
@@ -196,6 +109,93 @@ const base = getBaseUrl();
             />
           </div>
           <p>Clínica especializada en Dermatología, con instalaciones modernas y aparatos de vanguardia.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faqs-accordion-item">
+      <h3 class="faqs-accordion-heading">
+        <button
+          type="button"
+          class="faqs-accordion-trigger"
+          aria-expanded="false"
+          aria-controls="faqs-preview-panel-3"
+          id="faqs-preview-trigger-3"
+        >
+          <span>¿Qué incluye la consulta?</span>
+          <span class="faqs-accordion-icon" aria-hidden="true">
+            <span class="icon-bar icon-bar-h" />
+            <span class="icon-bar icon-bar-v" />
+          </span>
+        </button>
+      </h3>
+      <div
+        class="faqs-accordion-panel"
+        id="faqs-preview-panel-3"
+        role="region"
+        aria-labelledby="faqs-preview-trigger-3"
+      >
+        <div class="faqs-accordion-body">
+          <p>La consulta incluye una valoración dermatológica especializada en donde identificamos las causas y factores desencadenantes de tu padecimiento e indicamos un tratamiento personalizado acorde a tus necesidades.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faqs-accordion-item">
+      <h3 class="faqs-accordion-heading">
+        <button
+          type="button"
+          class="faqs-accordion-trigger"
+          aria-expanded="false"
+          aria-controls="faqs-preview-panel-4"
+          id="faqs-preview-trigger-4"
+        >
+          <span>¿Cuál es el precio de la consulta?</span>
+          <span class="faqs-accordion-icon" aria-hidden="true">
+            <span class="icon-bar icon-bar-h" />
+            <span class="icon-bar icon-bar-v" />
+          </span>
+        </button>
+      </h3>
+      <div
+        class="faqs-accordion-panel"
+        id="faqs-preview-panel-4"
+        role="region"
+        aria-labelledby="faqs-preview-trigger-4"
+      >
+        <div class="faqs-accordion-body">
+          <p>La consulta dermatológica tiene un valor de {consultationPrice}.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faqs-accordion-item">
+      <h3 class="faqs-accordion-heading">
+        <button
+          type="button"
+          class="faqs-accordion-trigger"
+          aria-expanded="false"
+          aria-controls="faqs-preview-panel-5"
+          id="faqs-preview-trigger-5"
+        >
+          <span>¿Qué otros servicios manejan?</span>
+          <span class="faqs-accordion-icon" aria-hidden="true">
+            <span class="icon-bar icon-bar-h" />
+            <span class="icon-bar icon-bar-v" />
+          </span>
+        </button>
+      </h3>
+      <div
+        class="faqs-accordion-panel"
+        id="faqs-preview-panel-5"
+        role="region"
+        aria-labelledby="faqs-preview-trigger-5"
+      >
+        <div class="faqs-accordion-body">
+          <p>Contamos con servicio de dermatología clínica, tricología, dermatología estética, aparatología y dermatología quirúrgica.</p>
+          <p>
+            <a href={`${base}servicios`} class="faqs-body-link">Ver todos los servicios</a>
+          </p>
         </div>
       </div>
     </div>
