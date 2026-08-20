@@ -68,7 +68,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
               id="nombre"
               name="nombre"
               class="agenda-form-input"
-              placeholder="Ej. Regina George"
+              placeholder="Ej. Rubí Pérez"
               required
             />
           </div>
@@ -88,7 +88,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
           </div>
 
           <div class="agenda-form-group is-hidden" id="dias-elegir-group">
-            <span class="agenda-form-label">Días que te funcionan</span>
+            <span class="agenda-form-label">¿Qué día(s) prefieres?</span>
             <div class="agenda-days-checkboxes" role="group" aria-label="Días de preferencia">
               <label class="agenda-day-checkbox">
                 <input type="checkbox" name="dias" value="martes" />
@@ -158,7 +158,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
               id="nombre-duda"
               name="nombre-duda"
               class="agenda-form-input"
-              placeholder="Ej. Regina George"
+              placeholder="Ej. Rubí Pérez"
               required
             />
           </div>
@@ -295,7 +295,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
           }
           mensaje += ` ver disponibilidad ${formatDaysList(selectedDays)}.`;
         } else {
-          mensaje += ` agendar una consulta dermatológica para la cita más próxima disponible.`;
+          mensaje += ` agendar una consulta dermatológica en la fecha más próxima disponible.`;
         }
 
         const url = `https://api.whatsapp.com/send?phone=${numberMainRaw}&text=${encodeURIComponent(mensaje)}&utm_source=web&utm_medium=agenda_form&utm_campaign=agendar`;
@@ -513,7 +513,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     min-width: 0;
     box-sizing: border-box;
     padding: var(--space-3) var(--space-4);
-    border: 1px solid #DACE97;
+    border: 1px solid #C4B26A;
     border-radius: 8px;
     font-size: var(--text-base);
     font-family: inherit;
@@ -535,7 +535,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     justify-content: center;
     gap: var(--space-2);
     padding: var(--space-2) var(--space-3);
-    border: 1px solid #DACE97;
+    border: 1px solid #C4B26A;
     border-radius: 8px;
     cursor: pointer;
     font-size: var(--text-sm);
@@ -611,7 +611,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     justify-content: center;
     gap: var(--space-2);
     padding: var(--space-3);
-    border: 1px solid #DACE97;
+    border: 1px solid #C4B26A;
     border-radius: 8px;
     cursor: pointer;
     font-size: var(--text-sm);
