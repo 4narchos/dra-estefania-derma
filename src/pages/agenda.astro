@@ -300,7 +300,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
 
         const url = `https://api.whatsapp.com/send?phone=${numberMainRaw}&text=${encodeURIComponent(mensaje)}&utm_source=web&utm_medium=agenda_form&utm_campaign=agendar`;
 
-        window.open(url, '_blank');
+        window.trackWhatsAppConversion(url, () => window.open(url, '_blank'));
       });
     }
 
@@ -318,7 +318,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
         const mensaje = `Hola, soy ${nombre} y tengo una duda: ${duda}`;
         const url = `https://api.whatsapp.com/send?phone=${numberMainRaw}&text=${encodeURIComponent(mensaje)}&utm_source=web&utm_medium=agenda_duda&utm_campaign=agendar`;
 
-        window.open(url, '_blank');
+        window.trackWhatsAppConversion(url, () => window.open(url, '_blank'));
       });
     }
 
