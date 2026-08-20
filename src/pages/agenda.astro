@@ -74,7 +74,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
         aria-labelledby="tab-ayuda"
         hidden
       >
-        <p class="agenda-panel-text">Cuéntanos tus datos y te ayudamos a agendar tu cita.</p>
+        <p class="agenda-panel-text">Envíanos un mensaje y te ayudamos a agendar tu cita.</p>
         <form class="agenda-form" id="form-ayuda">
           <div class="agenda-form-group">
             <label for="nombre" class="agenda-form-label">Nombre del paciente</label>
@@ -96,7 +96,6 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
                   type="radio"
                   name="fecha-tipo"
                   value="elegir"
-                  checked
                 />
                 <span>Elegir fecha</span>
               </label>
@@ -111,19 +110,17 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
             </div>
           </div>
 
-          <div class="agenda-form-group" id="fecha-elegir-group">
-            <label for="fecha" class="agenda-form-label">Fecha de interés</label>
+          <div class="agenda-form-group" id="fecha-elegir-group" hidden>
+            <label for="fecha" class="agenda-form-label">Fecha de interés (Martes a sábado)</label>
             <input
               type="date"
               id="fecha"
               name="fecha"
               class="agenda-form-input"
-              required
             />
-            <p class="agenda-form-hint">Atendemos de martes a sábado.</p>
           </div>
 
-          <button type="submit" class="agenda-form-button">
+          <button type="submit" class="agenda-form-button" id="btn-ayuda">
             <span set:html={whatsappIcon} />
             Solicitar cita
           </button>
@@ -155,7 +152,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
               id="nombre-duda"
               name="nombre-duda"
               class="agenda-form-input"
-              placeholder="Tu nombre completo"
+              placeholder="Ej. Regina George"
               required
             />
           </div>
@@ -182,7 +179,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
   </section>
 </Layout>
 
-<script is:inline define:vars={{ numberMainRaw }}>
+<script is:inline define:vars={{ numberMainRaw, whatsappIcon }}>
   (function () {
     const tabs = document.querySelectorAll('.agenda-tab');
     const panels = document.querySelectorAll('.agenda-panel');
@@ -246,6 +243,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     const fechaTipoInputs = document.querySelectorAll('input[name="fecha-tipo"]');
     const fechaElegirGroup = document.getElementById('fecha-elegir-group');
     const fechaInput = document.getElementById('fecha');
+    const btnAyuda = document.getElementById('btn-ayuda');
 
     function isValidClinicDay(dateString) {
       const date = new Date(dateString + 'T00:00:00');
@@ -254,19 +252,31 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
       return day >= 2 && day <= 6;
     }
 
+    function updateAyudaFormState() {
+      const tipo = document.querySelector('input[name="fecha-tipo"]:checked')?.value;
+
+      if (tipo === 'elegir') {
+        fechaElegirGroup.hidden = false;
+        fechaInput.required = true;
+        if (btnAyuda) btnAyuda.innerHTML = `<span>${whatsappIcon}</span> Solicitar una fecha específica`;
+      } else if (tipo === 'proxima') {
+        fechaElegirGroup.hidden = true;
+        fechaInput.required = false;
+        fechaInput.value = '';
+        if (btnAyuda) btnAyuda.innerHTML = `<span>${whatsappIcon}</span> Solicitar la cita más próxima`;
+      } else {
+        fechaElegirGroup.hidden = true;
+        fechaInput.required = false;
+        fechaInput.value = '';
+        if (btnAyuda) btnAyuda.innerHTML = `<span>${whatsappIcon}</span> Solicitar cita`;
+      }
+    }
+
     if (fechaTipoInputs.length && fechaElegirGroup && fechaInput) {
       fechaTipoInputs.forEach((input) => {
-        input.addEventListener('change', () => {
-          if (input.value === 'elegir') {
-            fechaElegirGroup.hidden = false;
-            fechaInput.required = true;
-          } else {
-            fechaElegirGroup.hidden = true;
-            fechaInput.required = false;
-            fechaInput.value = '';
-          }
-        });
+        input.addEventListener('change', updateAyudaFormState);
       });
+      updateAyudaFormState();
     }
 
     if (formAyuda) {
@@ -278,6 +288,11 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
         const fecha = document.getElementById('fecha').value;
 
         if (!nombre) return;
+
+        if (!tipo) {
+          alert('Por favor elige una opción de fecha.');
+          return;
+        }
 
         let mensaje = `Hola, soy ${nombre} y me gustaría agendar una consulta dermatológica`;
 
@@ -526,6 +541,9 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
 
   .agenda-form-input {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
     padding: var(--space-3) var(--space-4);
     border: 1px solid #DACE97;
     border-radius: 8px;
