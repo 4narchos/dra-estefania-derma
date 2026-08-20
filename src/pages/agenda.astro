@@ -321,6 +321,16 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
         window.open(url, '_blank');
       });
     }
+
+    // Mensajes de validación nativos en español
+    document.querySelectorAll('input[required], textarea[required], select[required]').forEach((field) => {
+      field.addEventListener('invalid', () => {
+        if (field.validity.valueMissing) {
+          field.setCustomValidity('Por favor completa este campo.');
+        }
+      });
+      field.addEventListener('input', () => field.setCustomValidity(''));
+    });
   })();
 </script>
 
