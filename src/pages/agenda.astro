@@ -19,24 +19,24 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
         <button
           type="button"
           class="agenda-tab is-active"
-          data-panel="agendar"
-          role="tab"
-          aria-selected="true"
-          aria-controls="panel-agendar"
-          id="tab-agendar"
-        >
-          Doctoralia
-        </button>
-        <button
-          type="button"
-          class="agenda-tab"
           data-panel="ayuda"
           role="tab"
-          aria-selected="false"
+          aria-selected="true"
           aria-controls="panel-ayuda"
           id="tab-ayuda"
         >
           WhatsApp
+        </button>
+        <button
+          type="button"
+          class="agenda-tab"
+          data-panel="agendar"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-agendar"
+          id="tab-agendar"
+        >
+          Doctoralia
         </button>
         <button
           type="button"
@@ -52,25 +52,12 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
         <div class="agenda-tab-indicator" aria-hidden="true"></div>
       </div>
 
-      <!-- Panel: Doctoralia -->
-      <div
-        class="agenda-panel is-active"
-        id="panel-agendar"
-        role="tabpanel"
-        aria-labelledby="tab-agendar"
-      >
-        <div class="agenda-widget">
-          <DoctoraliaCalendarWidget />
-        </div>
-      </div>
-
       <!-- Panel: WhatsApp -->
       <div
-        class="agenda-panel"
+        class="agenda-panel is-active"
         id="panel-ayuda"
         role="tabpanel"
         aria-labelledby="tab-ayuda"
-        hidden
       >
         <p class="agenda-panel-text">Envíanos un mensaje y te ayudamos a agendar tu cita.</p>
         <form class="agenda-form" id="form-ayuda">
@@ -91,25 +78,39 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
             <div class="agenda-date-options" role="radiogroup" aria-label="Opciones de fecha">
               <label class="agenda-date-option">
                 <input type="radio" name="fecha-tipo" value="proxima" checked />
-                <span>Cita más próxima</span>
+                <span>La cita más próxima disponible</span>
               </label>
               <label class="agenda-date-option">
                 <input type="radio" name="fecha-tipo" value="elegir" />
-                <span>Elegir día</span>
+                <span>Elegir día(s)</span>
               </label>
             </div>
           </div>
 
-          <div class="agenda-form-group is-hidden" id="dia-elegir-group">
-            <label for="dia" class="agenda-form-label">Día preferido</label>
-            <select id="dia" name="dia" class="agenda-form-input agenda-form-select">
-              <option value="" disabled selected>Selecciona un día</option>
-              <option value="martes">Un Martes</option>
-              <option value="miércoles">Un Miércoles</option>
-              <option value="jueves">Un Jueves</option>
-              <option value="viernes">Un Viernes</option>
-              <option value="sábado">Un Sábado</option>
-            </select>
+          <div class="agenda-form-group is-hidden" id="dias-elegir-group">
+            <span class="agenda-form-label">Días que te funcionan</span>
+            <div class="agenda-days-checkboxes" role="group" aria-label="Días de preferencia">
+              <label class="agenda-day-checkbox">
+                <input type="checkbox" name="dias" value="martes" />
+                <span>Martes</span>
+              </label>
+              <label class="agenda-day-checkbox">
+                <input type="checkbox" name="dias" value="miércoles" />
+                <span>Miércoles</span>
+              </label>
+              <label class="agenda-day-checkbox">
+                <input type="checkbox" name="dias" value="jueves" />
+                <span>Jueves</span>
+              </label>
+              <label class="agenda-day-checkbox">
+                <input type="checkbox" name="dias" value="viernes" />
+                <span>Viernes</span>
+              </label>
+              <label class="agenda-day-checkbox">
+                <input type="checkbox" name="dias" value="sábado" />
+                <span>Sábado</span>
+              </label>
+            </div>
           </div>
 
           <button type="submit" class="agenda-form-button">
@@ -117,6 +118,19 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
             Solicitar cita
           </button>
         </form>
+      </div>
+
+      <!-- Panel: Doctoralia -->
+      <div
+        class="agenda-panel"
+        id="panel-agendar"
+        role="tabpanel"
+        aria-labelledby="tab-agendar"
+        hidden
+      >
+        <div class="agenda-widget">
+          <DoctoraliaCalendarWidget />
+        </div>
       </div>
 
       <!-- Panel: Resolver duda -->
@@ -222,19 +236,34 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     // Form: WhatsApp
     const formAyuda = document.getElementById('form-ayuda');
     const fechaTipoInputs = document.querySelectorAll('input[name="fecha-tipo"]');
-    const diaElegirGroup = document.getElementById('dia-elegir-group');
-    const diaSelect = document.getElementById('dia');
+    const diasElegirGroup = document.getElementById('dias-elegir-group');
+    const diasCheckboxes = document.querySelectorAll('input[name="dias"]');
+
+    function getSelectedDays() {
+      return Array.from(diasCheckboxes)
+        .filter((cb) => cb.checked)
+        .map((cb) => cb.value);
+    }
+
+    function formatDaysList(days) {
+      if (days.length === 0) return '';
+      if (days.length === 1) return `un ${days[0]}`;
+      if (days.length === 2) return `un ${days[0]} o un ${days[1]}`;
+      const allButLast = days.slice(0, -1).map((d) => `un ${d}`).join(', ');
+      const last = days[days.length - 1];
+      return `${allButLast} o un ${last}`;
+    }
 
     function updateAyudaFormState() {
       const tipo = document.querySelector('input[name="fecha-tipo"]:checked')?.value;
 
       if (tipo === 'elegir') {
-        diaElegirGroup.classList.remove('is-hidden');
-        diaSelect.required = true;
+        diasElegirGroup.classList.remove('is-hidden');
       } else {
-        diaElegirGroup.classList.add('is-hidden');
-        diaSelect.required = false;
-        diaSelect.value = '';
+        diasElegirGroup.classList.add('is-hidden');
+        diasCheckboxes.forEach((cb) => {
+          cb.checked = false;
+        });
       }
     }
 
@@ -248,7 +277,7 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
 
         const nombre = document.getElementById('nombre').value.trim();
         const tipo = document.querySelector('input[name="fecha-tipo"]:checked')?.value;
-        const dia = document.getElementById('dia').value;
+        const selectedDays = getSelectedDays();
 
         if (!nombre) return;
 
@@ -257,13 +286,16 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
           return;
         }
 
-        let mensaje = `Hola, soy ${nombre} y me gustaría agendar una consulta dermatológica`;
+        let mensaje = `Hola, soy ${nombre} y me gustaría`;
 
         if (tipo === 'elegir') {
-          if (!dia) return;
-          mensaje += ` para ${dia}.`;
+          if (selectedDays.length === 0) {
+            alert('Por favor selecciona al menos un día.');
+            return;
+          }
+          mensaje += ` ver disponibilidad ${formatDaysList(selectedDays)}.`;
         } else {
-          mensaje += ` lo más pronto posible.`;
+          mensaje += ` agendar una consulta dermatológica para la cita más próxima disponible.`;
         }
 
         const url = `https://api.whatsapp.com/send?phone=${numberMainRaw}&text=${encodeURIComponent(mensaje)}&utm_source=web&utm_medium=agenda_form&utm_campaign=agendar`;
@@ -490,20 +522,41 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   }
 
-  .agenda-form-select {
-    -webkit-appearance: none;
-    appearance: none;
-    padding-left: var(--space-3);
-    padding-right: var(--space-3);
-    min-height: 44px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232D5E46' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right var(--space-3) center;
-    background-size: 16px;
+  .agenda-days-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
   }
 
-  .agenda-form-select option {
-    color: var(--color-text-primary);
+  .agenda-day-checkbox {
+    flex: 1 1 calc(33.333% - var(--space-2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid #DACE97;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-secondary);
+    background: #fff;
+    transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+    text-align: center;
+  }
+
+  .agenda-day-checkbox input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .agenda-day-checkbox:has(input:checked) {
+    border-color: var(--color-primary);
+    background: rgba(45, 94, 70, 0.08);
+    color: var(--color-primary);
   }
 
   .agenda-form-input:focus {
@@ -589,6 +642,10 @@ const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height=
 
     .agenda-form-input {
       font-size: 16px;
+    }
+
+    .agenda-day-checkbox {
+      flex: 1 1 calc(50% - var(--space-2));
     }
   }
 
