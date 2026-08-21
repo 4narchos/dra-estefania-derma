@@ -22,7 +22,7 @@ export const googleProfile = "https://share.google/HfPkNGvUKMkqxHdiu";
 export const mapsLinkMain = "https://maps.app.goo.gl/CgXjBPPt1AfNMSLG7";
 
 export const whatsappMessage =
-  "Hola, vi su página web y quisiera agendar una consulta dermatológica.";
+  "Vi su web. Quisiera agendar una cita\nA nombre de";
 
 // Base WhatsApp URL. Do not import this directly in UI components.
 // Use getWhatsAppUrl(whatsappPresets.<name>) so UTM parameters are included.
