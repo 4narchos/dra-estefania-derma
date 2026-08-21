@@ -92,7 +92,7 @@ const questionIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height=
           </label>
           <label class="agenda-date-option">
             <input type="radio" name="fecha-tipo" value="elegir" />
-            <span>Elegir día(s)</span>
+            <span>Opciones de día(s)</span>
           </label>
         </div>
       </div>
@@ -158,7 +158,7 @@ const questionIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height=
     <div class="agenda-duda-divider">
       <span>¿Otra pregunta?</span>
     </div>
-    <p class="agenda-duda-hint">Escríbenos tu pregunta y te responderemos en seguida.</p>
+    <p class="agenda-duda-hint">Escríbenos y te responderemos enseguida.</p>
 
     <form class="agenda-form" id="form-duda">
       <div class="agenda-form-group">
@@ -392,12 +392,13 @@ const questionIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height=
 
   .agenda-title {
     font-family: "Junicode", Georgia, serif;
-    font-size: clamp(var(--text-2xl), 6vw, var(--text-3xl));
+    font-size: clamp(var(--text-2xl), 7vw, var(--text-4xl));
     font-weight: 600;
     line-height: var(--leading-tight);
     color: var(--color-text-primary);
     margin: 0;
     text-align: center;
+    white-space: nowrap;
   }
 
   .agenda-tabs {
@@ -570,9 +571,9 @@ const questionIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height=
     position: relative;
     background: #fff;
     padding: 0 var(--space-3);
-    font-size: var(--text-sm);
+    font-size: var(--text-lg);
     font-weight: var(--weight-semibold);
-    color: var(--color-text-muted);
+    color: var(--color-text-primary);
   }
 
   .agenda-duda-hint {
@@ -705,6 +706,7 @@ const questionIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height=
     align-items: center;
     justify-content: center;
     gap: var(--space-2);
+    white-space: nowrap;
   }
 
   .agenda-form-button:hover {
