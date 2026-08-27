@@ -1,5 +1,17 @@
 # Agent Notes — Dra. Estefanía Dermatología
 
+## Git sync workflow
+
+Before making any changes, always sync with the remote repository so the local copy is up to date.
+
+1. Run `git pull` to fetch and merge the latest changes from `origin/main`.
+2. Make the requested edits.
+3. Run `npm run build` and fix any errors before committing.
+4. Stage, commit, and push to `main`.
+5. Do not leave changes uncommitted or unpushed unless the user explicitly asks to stop.
+
+This workflow keeps both development machines aligned and prevents merge conflicts.
+
 ## Deploy workflow
 
 After making any code changes that affect the site, always:
