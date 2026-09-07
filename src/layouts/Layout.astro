@@ -696,7 +696,7 @@ const servicesListSchema = {
       });
     </script>
 
-    <!-- Google Ads conversion tracking para enlaces de agenda (Doctoralia) -->
+    <!-- Google Ads conversion tracking para botones/widget de Doctoralia -->
     <script is:inline define:vars={{ agendaUrl }}>
       window.trackReservarConversion = function (url, callback) {
         if (typeof gtag !== 'function') {
@@ -713,22 +713,27 @@ const servicesListSchema = {
       };
 
       document.addEventListener('click', function (e) {
+        const trigger = e.target.closest('[data-doctoralia-trigger]');
         const link = e.target.closest('a');
-        if (!link) return;
 
-        const href = link.href || '';
-        const isAgendaLink =
-          href === agendaUrl ||
-          href.includes('doctoralia.com.mx/mariana-estefania-garcia-borges-2/dermatologo/yucatan') ||
-          href.includes('doctoralia.com.mx/z/bUrQZH');
+        let href = '';
 
-        if (!isAgendaLink) return;
+        if (trigger) {
+          href = trigger.href || agendaUrl;
+        } else if (link && link.href === agendaUrl) {
+          href = link.href;
+        } else {
+          return;
+        }
 
-        e.preventDefault();
-
-        window.trackReservarConversion(href, function () {
-          window.open(href, '_blank');
-        });
+        if (link) {
+          e.preventDefault();
+          window.trackReservarConversion(href, function () {
+            window.open(href, '_blank');
+          });
+        } else {
+          window.trackReservarConversion(href);
+        }
       });
     </script>
   </head>
