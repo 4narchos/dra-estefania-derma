@@ -687,11 +687,18 @@ const servicesListSchema = {
         const link = e.target.closest('a[href*="api.whatsapp.com/send"]');
         if (!link) return;
 
-        e.preventDefault();
         const url = link.href;
 
+        // Si el enlace abre en nueva pestaña, no bloqueamos la navegación;
+        // solo registramos la conversión y dejamos que el browser abra WhatsApp.
+        if (link.target === '_blank') {
+          window.trackWhatsAppConversion(url);
+          return;
+        }
+
+        e.preventDefault();
         window.trackWhatsAppConversion(url, function () {
-          window.open(url, '_blank');
+          window.location.href = url;
         });
       });
     </script>
@@ -727,9 +734,15 @@ const servicesListSchema = {
         }
 
         if (link) {
+          // Igual que WhatsApp: si abre en nueva pestaña, no prevenimos default.
+          if (link.target === '_blank') {
+            window.trackReservarConversion(href);
+            return;
+          }
+
           e.preventDefault();
           window.trackReservarConversion(href, function () {
-            window.open(href, '_blank');
+            window.location.href = href;
           });
         } else {
           window.trackReservarConversion(href);
