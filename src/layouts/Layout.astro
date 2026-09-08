@@ -705,49 +705,63 @@ const servicesListSchema = {
 
     <!-- Google Ads conversion tracking para botones/widget de Doctoralia -->
     <script is:inline define:vars={{ agendaUrl }}>
-      window.trackReservarConversion = function (url, callback) {
-        if (typeof gtag !== 'function') {
-          if (callback) callback();
-          return;
-        }
+      (function () {
+        var conversionId = 'AW-18382685612/elC7CPOOgeAcEKyLxr1E';
 
-        gtag('event', 'conversion', {
-          'send_to': 'AW-18382685612/elC7CPOOgeAcEKyLxr1E',
-          'event_callback': function () {
+        window.trackReservarConversion = function (url, callback) {
+          var gtagFn = window.gtag;
+          if (typeof gtagFn !== 'function') {
+            if (callback) callback();
+            return;
+          }
+
+          var called = false;
+          function done() {
+            if (called) return;
+            called = true;
             if (callback) callback();
           }
-        });
-      };
 
-      document.addEventListener('click', function (e) {
-        const trigger = e.target.closest('[data-doctoralia-trigger]');
-        const link = e.target.closest('a');
+          gtagFn('event', 'conversion', {
+            'send_to': conversionId,
+            'event_callback': done
+          });
 
-        let href = '';
+          // Fallback: si el callback no responde en 800ms, abrir igual
+          setTimeout(done, 800);
+        };
 
-        if (trigger) {
-          href = trigger.href || agendaUrl;
-        } else if (link && link.href === agendaUrl) {
-          href = link.href;
-        } else {
-          return;
-        }
+        document.addEventListener('click', function (e) {
+          var trigger = e.target.closest('[data-doctoralia-trigger]');
+          var link = e.target.closest('a');
 
-        if (link) {
-          // Igual que WhatsApp: si abre en nueva pestaña, no prevenimos default.
-          if (link.target === '_blank') {
+          var href = '';
+
+          if (trigger) {
+            href = trigger.href || agendaUrl;
+          } else if (link && link.href === agendaUrl) {
+            href = link.href;
+          } else {
+            return;
+          }
+
+          // Si el enlace abre en nueva pestaña, no bloqueamos la navegación;
+          // solo registramos la conversión en paralelo.
+          if (link && link.target === '_blank') {
             window.trackReservarConversion(href);
             return;
           }
 
-          e.preventDefault();
-          window.trackReservarConversion(href, function () {
-            window.location.href = href;
-          });
-        } else {
-          window.trackReservarConversion(href);
-        }
-      });
+          if (link) {
+            e.preventDefault();
+            window.trackReservarConversion(href, function () {
+              window.location.href = href;
+            });
+          } else {
+            window.trackReservarConversion(href);
+          }
+        });
+      })();
     </script>
   </head>
   <body>
