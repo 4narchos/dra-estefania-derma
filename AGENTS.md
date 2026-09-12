@@ -22,6 +22,15 @@ After making any code changes that affect the site, always:
 
 Do not leave changes uncommitted or unpushed unless the user explicitly asks you to stop.
 
+## Branch workflow
+
+The user may ask to work on a feature branch (e.g. `/branch <name>`). In that case:
+
+1. Create the branch if it doesn't exist, or switch to it if it does.
+2. Make the edits, build, commit, and push to that branch.
+3. **Always merge the branch back into `main` and push `main`** once the work is done, unless the user explicitly says not to. Never leave finished work stranded on a side branch — `main` is what deploys.
+4. If more work is expected on the same branch, return to it after merging.
+
 ## Reusable components and data (read this first)
 
 This project uses a single source of truth for contact info and reusable UI elements.
