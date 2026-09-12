@@ -41,7 +41,14 @@ const faqItems = [
   {
     title: "¿Cuáles son los horarios de atención?",
     content: [
-      "Atendemos de lunes a viernes, de 10:00 a. m. a 7:00 p. m.",
+      "Atendemos de lunes a sábado en los siguientes horarios:",
+    ],
+    bullets: [
+      "Lunes y miércoles de 10:00 a 13:30 h.",
+      "Martes, jueves y viernes de 14:30 a 19:30 h.",
+      "Sábado de 10:30 a 13:00 h.",
+    ],
+    extraContent: [
       "Es necesario agendar una cita previamente.",
     ],
   },
@@ -131,6 +138,9 @@ const menuItems = [
                         ))}
                       </ul>
                     )}
+                    {item.extraContent && item.extraContent.map((paragraph) => (
+                      <p>{paragraph}</p>
+                    ))}
                     {item.widget === "location" && <LocationWidgetMain dark />}
                     {item.cta && (
                       <p>
