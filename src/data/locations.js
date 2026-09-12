@@ -5,7 +5,7 @@ export const locations = [
     name: "Evoke Aging Journey & Dermatology",
     city: "Mérida",
     address: mainAddress,
-    hours: "Lunes a domingo\n9:00 a.m.–7:00 p.m.",
+    hours: "Lun y Mié 10:00–13:30\nMa, Jue y Vie 14:30–19:30\nSáb 10:30–13:00",
     phone: numberMain,
   },
   {
