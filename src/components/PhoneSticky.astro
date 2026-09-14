@@ -30,9 +30,9 @@ import { callNumber, getCallTelUrl } from "../data/site.js";
     --phone-bg-hover: #a07f26;
 
     position: fixed;
-    /* Apilado sobre el botón .whatsapp-sticky para no superponerse */
-    bottom: calc(var(--space-6) + 56px + var(--space-3));
-    right: var(--space-6);
+    /* Esquina inferior izquierda, espejo de .whatsapp-sticky (inferior derecha) */
+    bottom: var(--space-6);
+    left: var(--space-6);
     z-index: 200;
     width: 56px;
     height: 56px;
@@ -66,8 +66,8 @@ import { callNumber, getCallTelUrl } from "../data/site.js";
     .phone-sticky {
       width: 48px;
       height: 48px;
-      bottom: calc(var(--space-4) + 48px + var(--space-3));
-      right: var(--space-4);
+      bottom: var(--space-4);
+      left: var(--space-4);
     }
 
     .phone-icon {
