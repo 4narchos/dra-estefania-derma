@@ -12,6 +12,10 @@
 export const numberMain = "999 221 3021";
 export const numberMainRaw = "529992213021"; // lada 52 + número sin espacios
 
+// Número exclusivo para llamadas (botón sticky de teléfono). Es distinto al
+// número de WhatsApp por el momento; si cambia, actualizar solo aquí.
+export const callNumber = "999 450 2778";
+
 export const mainAddress =
   "C. 20 251-Local 9, entre 10 y 15, Fraccionamiento Altabrisa, 97130 Mérida, Yuc.";
 export const mainAddressShort = "C.20 #251 Frac. Altabrisa, Mérida";
@@ -84,9 +88,35 @@ export function getWhatsAppUrl({ medium, source = "web", campaign = "agendar" })
 }
 
 /**
+ * Parts to build a WhatsApp URL whose message is composed at runtime
+ * (e.g. form values), plus UTM tracking. Inline scripts that cannot import
+ * modules should receive these via data-* attributes rendered by Astro and
+ * join them as: urlPrefix + encodeURIComponent(message) + utmSuffix.
+ *
+ * @param {Object} params
+ * @param {string} params.medium — required UTM medium
+ * @param {string} [params.source="web"]
+ * @param {string} [params.campaign="agendar"]
+ */
+export function getWhatsAppCustomUrlParts({ medium, source = "web", campaign = "agendar" }) {
+  return {
+    urlPrefix: `https://api.whatsapp.com/send?phone=${numberMainRaw}&text=`,
+    utmSuffix: `&utm_source=${source}&utm_medium=${medium}&utm_campaign=${campaign}`,
+  };
+}
+
+/**
  * Build a tel: URL from a formatted Mexican number.
  * @param {string} [number=numberMain]
  */
 export function getTelUrl(number = numberMain) {
   return `tel:+52-${number.replace(/\s/g, "")}`;
+}
+
+/**
+ * Build the tel: URL for the dedicated call number (callNumber).
+ * Use this for the sticky call button; do not hardcode the number elsewhere.
+ */
+export function getCallTelUrl() {
+  return getTelUrl(callNumber);
 }

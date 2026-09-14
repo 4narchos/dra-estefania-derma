@@ -44,6 +44,8 @@ This project uses a single source of truth for contact info and reusable UI elem
 - `src/components/PillMenu.astro` — pill/tab menu used in `Presentation` and `ContactCTA`.
 - `src/components/LocationWidgetMain.astro` — footer/location map widget.
 - `src/components/QuickSocials.astro` — social handle tooltip with click/tap toggle.
+- `src/components/WhatsAppSticky.astro` — floating WhatsApp button (bottom-right). URL built with `getWhatsAppUrl(whatsappPresets.webSticky)`.
+- `src/components/PhoneSticky.astro` — floating call button (bottom-right, stacked above WhatsAppSticky). Uses `getCallTelUrl()` and the dedicated `callNumber` in `src/data/site.js` (separate from the WhatsApp number). Controlled by the `showPhone` prop in `Layout.astro`.
 
 When updating phone, address, email, WhatsApp link, Doctoralia URL, Google Profile, Maps link, or price, change `src/data/site.js` only. All components and pages consume from there.
 

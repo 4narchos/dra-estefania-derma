@@ -2,6 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import WhatsAppSticky from "../components/WhatsAppSticky.astro";
+import PhoneSticky from "../components/PhoneSticky.astro";
 import ShareSticky from "../components/ShareSticky.astro";
 import DoctoraliaModal from "../components/DoctoraliaModal.astro";
 import { faqs } from "../data/faq.js";
@@ -26,6 +27,7 @@ interface Props {
   showHeader?: boolean;
   showFooter?: boolean;
   showWhatsApp?: boolean;
+  showPhone?: boolean;
   showShare?: boolean;
   showPreloader?: boolean;
   pageSchema?: "home" | "about" | "services" | "contact" | "none";
@@ -46,6 +48,7 @@ const {
   showHeader = true,
   showFooter = true,
   showWhatsApp = true,
+  showPhone = true,
   showShare = true,
   showPreloader = false,
   pageSchema = "none",
@@ -778,6 +781,7 @@ const servicesListSchema = {
       </main>
       {showFooter && <Footer />}
       {showWhatsApp && <WhatsAppSticky />}
+      {showPhone && <PhoneSticky />}
       {showShare && <ShareSticky />}
       <DoctoraliaModal />
     </div>
