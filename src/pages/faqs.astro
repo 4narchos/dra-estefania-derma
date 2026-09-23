@@ -10,6 +10,7 @@ const base = getBaseUrl();
 const moreFaqItems = [
   {
     title: "¿Cómo debo prepararme para la consulta?",
+    anchor: "tips",
     content: [
       "Para aprovechar tu consulta al máximo, sugerimos seguir estas indicaciones:",
     ],
@@ -85,7 +86,9 @@ const menuItems = [
             <div class="faqs-accordion">
               {
                 moreFaqItems.map((item, index) => (
-                  <div class={`faqs-accordion-item ${index === 0 ? "is-open" : ""}`}>
+                  <div
+                    id={item.anchor}
+                    class={`faqs-accordion-item ${index === 0 ? "is-open" : ""}`}>
                     <h3 class="faqs-accordion-heading">
                       <button
                         type="button"
@@ -188,6 +191,26 @@ const menuItems = [
         item.addEventListener("mouseenter", () => openMoreItem(item));
       }
     });
+
+    // Deep-link: /faqs#tips enfoca "¿Cómo debo prepararme para la consulta?"
+    if (window.location.hash === "#tips") {
+      const details = document.querySelector(
+        ".faqs-more"
+      ) as HTMLDetailsElement | null;
+      if (details) details.open = true;
+
+      const target = document.getElementById("tips");
+      if (target) {
+        openMoreItem(target);
+        const reduced = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+        target.scrollIntoView({
+          behavior: reduced ? "auto" : "smooth",
+          block: "start",
+        });
+      }
+    }
   })();
 </script>
 
@@ -299,6 +322,10 @@ const menuItems = [
 
   .faqs-more-content .faqs-accordion-item {
     border-bottom: 1px solid var(--color-border-inverse);
+  }
+
+  .faqs-more-content .faqs-accordion-item[id] {
+    scroll-margin-top: var(--space-6);
   }
 
   .faqs-more-content .faqs-accordion-heading {
